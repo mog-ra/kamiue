@@ -102,11 +102,37 @@
             }
         }
         
+        @keyframes pulse-slow {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(251, 146, 60, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 20px rgba(251, 146, 60, 0);
+            }
+        }
+        
+        @keyframes bounce-slow {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
         .fade-in-up {
             animation: fadeInUp 0.8s ease-out;
         }
+        
+        .animate-pulse-slow {
+            animation: pulse-slow 3s ease-in-out infinite;
+        }
+        
+        .animate-bounce-slow {
+            animation: bounce-slow 2s ease-in-out infinite;
+        }
     </style>
-    <meta name="google-site-verification" content="CzQ1gV_RKAq7_NziXejLsGk4pVfp99mz1Lw8mmEbXUg" />
+     <meta name="google-site-verification" content="CzQ1gV_RKAq7_NziXejLsGk4pVfp99mz1Lw8mmEbXUg" />
 </head>
 <body class="bg-gray-50">
 
@@ -242,6 +268,127 @@
                             <button onclick="showSolution('startup')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">🏢 会社設立サポート</button>
                             <button onclick="showSolution('it')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">💻 勤怠管理DX支援</button>
                             <button onclick="showSolution('employment')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">📝 就業規則を整備したい</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 新規顧問契約特典 - 超目立つ吹き出し -->
+            <div class="container mx-auto px-4 mb-20 relative">
+                <div class="max-w-5xl mx-auto">
+                    <!-- メガホンアイコン -->
+                    <div class="text-center mb-6 animate-bounce">
+                        <div class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-900 to-blue-700 text-white px-8 py-4 rounded-full shadow-2xl font-black text-lg border-4 border-blue-300">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"/>
+                            </svg>
+                            <span>今だけの特別キャンペーン！</span>
+                        </div>
+                    </div>
+                    
+                    <div class="relative bg-gradient-to-br from-red-500 via-orange-500 to-yellow-500 rounded-[2.5rem] shadow-[0_20px_60px_rgba(234,88,12,0.5)] p-1 animate-pulse-slow">
+                        <div class="bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 rounded-[2.3rem] p-8 md:p-12 relative overflow-hidden">
+                            <!-- キラキラ装飾 -->
+                            <div class="absolute top-4 right-4 text-yellow-300 text-4xl animate-ping">✨</div>
+                            <div class="absolute top-8 left-8 text-yellow-300 text-3xl animate-ping" style="animation-delay: 0.5s;">⭐</div>
+                            <div class="absolute bottom-8 right-12 text-yellow-300 text-5xl animate-ping" style="animation-delay: 1s;">🎁</div>
+                            
+                            <!-- Background Patterns -->
+                            <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48"></div>
+                            <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -ml-32 -mb-32"></div>
+                            
+                            <!-- 吹き出しの三角形（より大きく） -->
+                            <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[32px] border-r-[32px] border-t-[32px] border-l-transparent border-r-transparent border-t-pink-600"></div>
+                            
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-center mb-8">
+                                    <div class="bg-white px-8 py-4 rounded-2xl font-black text-xl shadow-2xl border-4 border-yellow-400">
+                                        <div class="flex items-center gap-3">
+                                            <span class="text-4xl">🎉</span>
+                                            <span class="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">期間限定！新規顧問契約特典</span>
+                                            <span class="text-4xl">🎉</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center mb-10">
+                                    <div class="inline-block bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full mb-4">
+                                        <p class="text-yellow-300 font-bold text-sm">顧問契約締結企業様限定プレゼント</p>
+                                    </div>
+                                    <h3 class="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
+                                        簡易出退勤アプリを<br class="md:hidden">
+                                        <span class="text-yellow-300 text-5xl md:text-7xl">完全無料</span>で提供！
+                                    </h3>
+                                    <p class="text-white text-xl md:text-2xl leading-relaxed font-bold drop-shadow-lg">
+                                        「タイムカード管理が面倒」「Excelでは不安」<br class="hidden md:block">
+                                        そんなお悩みを<span class="bg-yellow-300 text-orange-600 px-3 py-1 rounded-lg">ゼロ円</span>で解決します！
+                                    </p>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                                    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl transform hover:scale-105 transition border-4 border-yellow-300">
+                                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xl">
+                                            <svg class="w-11 h-11 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </div>
+                                        <h4 class="font-black text-xl mb-3 text-gray-800">ワンタッチ打刻</h4>
+                                        <p class="text-gray-600 font-medium">スマホ・PCから<br>簡単に出退勤を記録</p>
+                                    </div>
+                                    
+                                    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl transform hover:scale-105 transition border-4 border-yellow-300">
+                                        <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-700 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xl">
+                                            <svg class="w-11 h-11 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                            </svg>
+                                        </div>
+                                        <h4 class="font-black text-xl mb-3 text-gray-800">自動集計</h4>
+                                        <p class="text-gray-600 font-medium">勤怠データを自動集計<br>CSV出力も可能</p>
+                                    </div>
+                                    
+                                    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl transform hover:scale-105 transition border-4 border-yellow-300">
+                                        <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xl">
+                                            <svg class="w-11 h-11 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </div>
+                                        <h4 class="font-black text-xl mb-3 text-gray-800">ずっと0円</h4>
+                                        <p class="text-gray-600 font-medium">初期費用・月額費用<br>すべて無料</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-yellow-300 rounded-3xl p-8 mb-10 border-4 border-yellow-500 shadow-2xl">
+                                    <div class="flex items-start gap-5 text-gray-900">
+                                        <svg class="w-12 h-12 flex-shrink-0 mt-1 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                        </svg>
+                                        <div>
+                                            <h5 class="font-black text-2xl mb-3 text-red-600">💡 こんな企業様におすすめ</h5>
+                                            <p class="text-lg leading-relaxed font-bold text-gray-900">
+                                                タイムカードの手作業集計から解放されたい／Excelでの管理ミスをなくしたい／従業員の勤怠を正確に把握したい／低コストで勤怠管理を始めたい
+                                            </p>
+                                            <p class="text-lg mt-4 leading-relaxed font-black text-red-700">
+                                                ⚡ 顧問契約期間中は<span class="text-2xl underline">永久無料</span>でご利用いただけます！
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center">
+                                    <button onclick="showPage('contact')" class="bg-white text-orange-600 hover:bg-yellow-50 font-black py-8 px-16 md:px-20 rounded-[2rem] transition shadow-[0_10px_40px_rgba(0,0,0,0.3)] text-2xl md:text-3xl transform hover:scale-110 inline-flex items-center gap-4 border-4 border-yellow-300 animate-bounce-slow">
+                                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                        </svg>
+                                        <span>今すぐ無料相談</span>
+                                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                                        </svg>
+                                    </button>
+                                    <p class="text-white text-lg mt-6 font-bold drop-shadow-lg">
+                                        ※ まずはお気軽にお問い合わせください　相談は完全無料です
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1019,7 +1166,7 @@
                                     </div>
                                     <div>
                                         <p class="font-bold text-sm text-gray-500 mb-1">メール</p>
-                                        <p class="text-gray-800 font-medium"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="166564387d777b7f637356717b777f7a3875797b">[email&#160;protected]</a></p>
+                                        <p class="text-gray-800 font-medium"><a href="mailto:sr.kamiue@gmail.com" class="hover:text-blue-600 transition">sr.kamiue@gmail.com</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -1319,7 +1466,7 @@
                         </a>
 
                         <!-- 宮城県社会保険労務士会 -->
-                        <a href="https://www.sharo-miyagi.com/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-2xl p-6 md:p-8 border-2 border-gray-200 hover:border-indigo-500 hover:shadow-xl transition group">
+                        <a href="https://www.miyagi-sr.or.jp/" target="_blank" rel="noopener noreferrer" class="bg-white rounded-2xl p-6 md:p-8 border-2 border-gray-200 hover:border-indigo-500 hover:shadow-xl transition group">
                             <div class="flex items-start gap-4">
                                 <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-teal-100 to-teal-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition">
                                     <svg class="w-8 h-8 text-teal-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1588,7 +1735,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Solution Data
         const solutions = {
             'subsidy': {
