@@ -177,7 +177,7 @@
                 <button id="nav-about" onclick="showPage('about')" class="pb-1 transition hover:text-blue-900">事務所紹介</button>
                 <button id="nav-links" onclick="showPage('links')" class="pb-1 transition hover:text-blue-900">関連リンク</button>
                 <button id="nav-faq" onclick="showPage('faq')" class="pb-1 transition hover:text-blue-900">よくある質問</button>
-                <button onclick="showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2.5 rounded-lg hover:from-orange-600 hover:to-orange-700 transition shadow-md font-bold">お問い合わせ</button>
+                <button id="nav-contact" onclick="showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2.5 rounded-lg hover:from-orange-600 hover:to-orange-700 transition shadow-md font-bold">お問い合わせ</button>
             </nav>
             <div class="md:hidden">
                 <button class="text-blue-900 p-2" onclick="toggleMobileMenu()">
@@ -202,7 +202,7 @@
     <div id="content">
 
         <!-- HOME PAGE -->
-        <section id="page-home" class="">
+        <section id="page-home">
             
             <!-- Hero -->
             <section class="hero-gradient text-white py-20 md:py-32 px-4 text-center relative">
@@ -1894,4 +1894,20 @@
                 }
             }
 
-            document.getElementById('mobile-menu').classList.add(
+            document.getElementById('mobile-menu').classList.add('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Initialize - ホームページを表示
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('home');
+        });
+    </script>
+
+</body>
+</html>
