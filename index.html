@@ -175,6 +175,19 @@
                 <button id="nav-home" onclick="showPage('home')" class="active-tab pb-1 transition hover:text-blue-900">ホーム</button>
                 <button id="nav-services" onclick="showPage('services')" class="pb-1 transition hover:text-blue-900">サービス</button>
                 <button id="nav-about" onclick="showPage('about')" class="pb-1 transition hover:text-blue-900">事務所紹介</button>
+                <div class="relative group">
+                    <button class="pb-1 transition hover:text-blue-900 flex items-center gap-1">
+                        お役立ちコンテンツ
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="hidden group-hover:block absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                        <button onclick="showPage('blog')" class="w-full text-left px-4 py-3 hover:bg-blue-50 transition text-sm">📝 労務管理コラム</button>
+                        <button onclick="showPage('checkup')" class="w-full text-left px-4 py-3 hover:bg-blue-50 transition text-sm">✅ 労務リスク診断</button>
+                        <button onclick="showPage('subsidy-sim')" class="w-full text-left px-4 py-3 hover:bg-blue-50 transition text-sm">💰 助成金診断</button>
+                    </div>
+                </div>
                 <button id="nav-links" onclick="showPage('links')" class="pb-1 transition hover:text-blue-900">関連リンク</button>
                 <button id="nav-faq" onclick="showPage('faq')" class="pb-1 transition hover:text-blue-900">よくある質問</button>
                 <button id="nav-contact" onclick="showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2.5 rounded-lg hover:from-orange-600 hover:to-orange-700 transition shadow-md font-bold">お問い合わせ</button>
@@ -192,6 +205,12 @@
             <button onclick="showPage('home')" class="block w-full py-3 text-left font-medium hover:bg-gray-50 rounded px-3">ホーム</button>
             <button onclick="showPage('services')" class="block w-full py-3 text-left font-medium hover:bg-gray-50 rounded px-3">サービス・料金</button>
             <button onclick="showPage('about')" class="block w-full py-3 text-left font-medium hover:bg-gray-50 rounded px-3">事務所紹介</button>
+            <div class="pl-3">
+                <p class="text-xs text-gray-500 font-bold py-2">お役立ちコンテンツ</p>
+                <button onclick="showPage('blog')" class="block w-full py-2 text-left text-sm hover:bg-gray-50 rounded px-3">📝 労務管理コラム</button>
+                <button onclick="showPage('checkup')" class="block w-full py-2 text-left text-sm hover:bg-gray-50 rounded px-3">✅ 労務リスク診断</button>
+                <button onclick="showPage('subsidy-sim')" class="block w-full py-2 text-left text-sm hover:bg-gray-50 rounded px-3">💰 助成金診断</button>
+            </div>
             <button onclick="showPage('links')" class="block w-full py-3 text-left font-medium hover:bg-gray-50 rounded px-3">関連リンク</button>
             <button onclick="showPage('faq')" class="block w-full py-3 text-left font-medium hover:bg-gray-50 rounded px-3">よくある質問</button>
             <button onclick="showPage('contact')" class="block w-full py-3 text-left font-bold text-orange-600 hover:bg-gray-50 rounded px-3">お問い合わせ</button>
@@ -1074,7 +1093,7 @@
                             <div class="md:col-span-2 bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center p-8 md:p-12">
                                 <div class="text-center">
                                     <div class="w-56 h-56 mx-auto mb-6 rounded-full overflow-hidden shadow-2xl border-4 border-white">
-                                        <img src="kamiue-photo.png" alt="神植功行" class="w-full h-full object-cover">
+                                        <img src="kamiue-photo.png" alt="神植功行" class="w-full h-full object-cover object-top">
                                     </div>
                                     <h3 class="text-2xl font-bold text-blue-900 mb-2">神植 功行</h3>
                                     <p class="text-sm text-gray-600 mb-1">Kamiue Katsuyuki</p>
@@ -1601,6 +1620,292 @@
             </div>
         </section>
 
+        <!-- BLOG PAGE (労務管理コラム) -->
+        <section id="page-blog" class="hidden py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-6">労務管理コラム</h2>
+                    <p class="text-gray-600 text-lg">経営者・労務担当者の方に役立つ情報をお届けします</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Article 1 -->
+                    <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                        <div class="bg-gradient-to-r from-blue-900 to-blue-700 h-48 flex items-center justify-center">
+                            <span class="text-6xl">💰</span>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+                                <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full font-medium">助成金</span>
+                                <span>2025年2月更新</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-blue-900 mb-4">2025年版 中小企業が活用すべき助成金トップ5</h3>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                2025年に中小企業が申請できる助成金の中から、特に活用しやすく受給額も大きい5つをピックアップ。キャリアアップ助成金、業務改善助成金、両立支援等助成金など、具体的な要件と申請のポイントを解説します。
+                            </p>
+                            <div class="border-t pt-4">
+                                <h4 class="font-bold text-sm text-blue-900 mb-3">この記事のポイント</h4>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-600 mt-0.5">✓</span>
+                                        <span>キャリアアップ助成金（正社員化コース）: 最大80万円/人</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-600 mt-0.5">✓</span>
+                                        <span>業務改善助成金: 最大600万円（賃上げ+設備投資）</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-blue-600 mt-0.5">✓</span>
+                                        <span>申請のタイミングと必要書類の準備方法</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button onclick="showPage('contact')" class="mt-6 w-full bg-blue-900 text-white py-3 rounded-lg hover:bg-blue-800 transition font-bold">
+                                助成金申請をサポート依頼
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Article 2 -->
+                    <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                        <div class="bg-gradient-to-r from-orange-500 to-red-500 h-48 flex items-center justify-center">
+                            <span class="text-6xl">⚠️</span>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+                                <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full font-medium">リスク管理</span>
+                                <span>2025年2月更新</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-blue-900 mb-4">残業代計算の落とし穴 - よくある3つのミス</h3>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                残業代の計算ミスは、未払い賃金として後から請求されるリスクがあります。「固定残業代制度の運用ミス」「休日労働の割増率間違い」「管理監督者の誤認定」など、実際の事例を基に解説します。
+                            </p>
+                            <div class="border-t pt-4">
+                                <h4 class="font-bold text-sm text-blue-900 mb-3">チェックポイント</h4>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-red-600 mt-0.5">✗</span>
+                                        <span>固定残業代が基本給と分離されていない</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-red-600 mt-0.5">✗</span>
+                                        <span>法定休日と所定休日の割増率を混同</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-red-600 mt-0.5">✗</span>
+                                        <span>名ばかり管理職に残業代を支払っていない</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button onclick="showPage('checkup')" class="mt-6 w-full bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 transition font-bold">
+                                労務リスク診断を受ける
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Article 3 -->
+                    <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                        <div class="bg-gradient-to-r from-green-600 to-green-500 h-48 flex items-center justify-center">
+                            <span class="text-6xl">📋</span>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+                                <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full font-medium">法令遵守</span>
+                                <span>2025年2月更新</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-blue-900 mb-4">36協定の正しい届出方法【チェックリスト付】</h3>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                時間外労働・休日労働を行わせる場合に必須の36協定。届出漏れは法令違反となり、罰則の対象になります。特別条項の要否、過半数代表者の選出方法、労働基準監督署への提出方法を詳しく解説。
+                            </p>
+                            <div class="border-t pt-4">
+                                <h4 class="font-bold text-sm text-blue-900 mb-3">必須チェック項目</h4>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-green-600 mt-0.5">□</span>
+                                        <span>過半数代表者を適切な方法で選出している</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-green-600 mt-0.5">□</span>
+                                        <span>時間外労働の上限（月45時間・年360時間）を遵守</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-green-600 mt-0.5">□</span>
+                                        <span>有効期限内に毎年更新している</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button onclick="showPage('contact')" class="mt-6 w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-bold">
+                                36協定作成を依頼
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Article 4 -->
+                    <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                        <div class="bg-gradient-to-r from-purple-600 to-purple-500 h-48 flex items-center justify-center">
+                            <span class="text-6xl">📱</span>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+                                <span class="bg-purple-100 text-purple-600 px-3 py-1 rounded-full font-medium">DX推進</span>
+                                <span>2025年1月更新</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-blue-900 mb-4">中小企業のためのクラウド勤怠管理導入ガイド</h3>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                タイムカードからの脱却で業務効率が劇的に向上。ジョブカン、マネーフォワード、キングオブタイムなど主要サービスの比較、導入時の注意点、従業員への説明方法まで実践的にアドバイスします。
+                            </p>
+                            <div class="border-t pt-4">
+                                <h4 class="font-bold text-sm text-blue-900 mb-3">導入メリット</h4>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-purple-600 mt-0.5">●</span>
+                                        <span>集計作業の時間が90%削減（実績例）</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-purple-600 mt-0.5">●</span>
+                                        <span>リアルタイムでの残業状況把握が可能</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-purple-600 mt-0.5">●</span>
+                                        <span>給与計算ソフトとの自動連携</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button onclick="showPage('contact')" class="mt-6 w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition font-bold">
+                                導入支援を相談
+                            </button>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="mt-16 text-center bg-white rounded-2xl p-12 shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-4">個別のご相談も承ります</h3>
+                    <p class="text-gray-600 mb-6">コラムの内容について、貴社の状況に合わせた具体的なアドバイスが可能です</p>
+                    <button onclick="showPage('contact')" class="bg-gradient-to-r from-blue-900 to-blue-700 text-white font-bold py-4 px-10 rounded-xl hover:from-blue-800 hover:to-blue-600 transition shadow-lg">
+                        無料相談を申し込む
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHECKUP PAGE (労務リスク診断) -->
+        <section id="page-checkup" class="hidden py-16 md:py-24 bg-gradient-to-br from-blue-50 to-white">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-6">労務リスク診断</h2>
+                    <p class="text-gray-600 text-lg">20の質問で貴社の労務管理状況をチェック</p>
+                </div>
+
+                <div id="checkup-quiz" class="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+                    <div id="quiz-content">
+                        <p class="text-gray-600 mb-8 leading-relaxed">
+                            このチェックリストは、貴社の労務管理における潜在的なリスクを発見するためのツールです。<br>
+                            各質問に正直にお答えいただくことで、改善が必要な項目が明確になります。
+                        </p>
+                        
+                        <div class="space-y-6" id="questions-container">
+                            <!-- Questions will be dynamically loaded -->
+                        </div>
+
+                        <div class="text-center mt-8">
+                            <button onclick="startCheckup()" class="bg-gradient-to-r from-blue-900 to-blue-700 text-white font-bold py-5 px-12 rounded-xl hover:from-blue-800 hover:to-blue-600 transition shadow-lg text-lg">
+                                診断を開始する
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="quiz-result" class="hidden">
+                        <!-- Result will be shown here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUBSIDY SIMULATOR PAGE (助成金診断) -->
+        <section id="page-subsidy-sim" class="hidden py-16 md:py-24 bg-gradient-to-br from-orange-50 to-white">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-6">助成金診断ツール</h2>
+                    <p class="text-gray-600 text-lg">あなたの会社が申請できる助成金を診断</p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+                    <div id="subsidy-form">
+                        <form id="subsidy-diagnostic-form" class="space-y-8">
+                            <!-- 業種 -->
+                            <div>
+                                <label class="block text-lg font-bold text-blue-900 mb-4">1. 業種を選択してください</label>
+                                <select name="industry" class="w-full border-2 border-gray-300 rounded-xl p-4 focus:border-blue-500 focus:outline-none text-lg" required>
+                                    <option value="">選択してください</option>
+                                    <option value="construction">建設業</option>
+                                    <option value="manufacturing">製造業</option>
+                                    <option value="retail">小売業</option>
+                                    <option value="restaurant">飲食業</option>
+                                    <option value="it">IT・情報サービス業</option>
+                                    <option value="medical">医療・福祉</option>
+                                    <option value="other">その他</option>
+                                </select>
+                            </div>
+
+                            <!-- 従業員数 -->
+                            <div>
+                                <label class="block text-lg font-bold text-blue-900 mb-4">2. 従業員数を選択してください</label>
+                                <select name="employees" class="w-full border-2 border-gray-300 rounded-xl p-4 focus:border-blue-500 focus:outline-none text-lg" required>
+                                    <option value="">選択してください</option>
+                                    <option value="1-5">1〜5名</option>
+                                    <option value="6-20">6〜20名</option>
+                                    <option value="21-50">21〜50名</option>
+                                    <option value="51-100">51〜100名</option>
+                                    <option value="100+">100名以上</option>
+                                </select>
+                            </div>
+
+                            <!-- 実施予定の施策 -->
+                            <div>
+                                <label class="block text-lg font-bold text-blue-900 mb-4">3. 実施予定の施策（複数選択可）</label>
+                                <div class="space-y-3">
+                                    <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer transition">
+                                        <input type="checkbox" name="plan" value="hiring" class="w-5 h-5 text-blue-600">
+                                        <span class="text-gray-700">新規採用を検討している</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer transition">
+                                        <input type="checkbox" name="plan" value="regular" class="w-5 h-5 text-blue-600">
+                                        <span class="text-gray-700">非正規社員の正社員化を検討している</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer transition">
+                                        <input type="checkbox" name="plan" value="training" class="w-5 h-5 text-blue-600">
+                                        <span class="text-gray-700">従業員の研修・教育を実施予定</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer transition">
+                                        <input type="checkbox" name="plan" value="wage" class="w-5 h-5 text-blue-600">
+                                        <span class="text-gray-700">賃上げを検討している</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer transition">
+                                        <input type="checkbox" name="plan" value="equipment" class="w-5 h-5 text-blue-600">
+                                        <span class="text-gray-700">設備投資を予定している</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer transition">
+                                        <input type="checkbox" name="plan" value="worklife" class="w-5 h-5 text-blue-600">
+                                        <span class="text-gray-700">育児・介護との両立支援を充実させたい</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="text-center pt-6">
+                                <button type="submit" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-5 px-12 rounded-xl hover:from-orange-600 hover:to-orange-700 transition shadow-lg text-lg">
+                                    診断結果を見る
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="subsidy-result" class="hidden">
+                        <!-- Result will be shown here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- SOLUTIONS PAGE (Dynamic) -->
         <section id="page-solutions" class="py-16 md:py-24 bg-white min-h-[60vh] hidden">
             <div class="container mx-auto px-4 max-w-4xl">
@@ -1854,7 +2159,7 @@
 
         // Page Switching Logic
         function showPage(pageId) {
-            const pages = ['home', 'services', 'about', 'links', 'faq', 'contact', 'solutions'];
+            const pages = ['home', 'services', 'about', 'links', 'faq', 'contact', 'solutions', 'blog', 'checkup', 'subsidy-sim'];
             
             pages.forEach(id => {
                 const section = document.getElementById('page-' + id);
@@ -1893,7 +2198,343 @@
         // Initialize - ホームページを表示
         document.addEventListener('DOMContentLoaded', function() {
             showPage('home');
+            initializeSubsidySimulator();
         });
+
+        // 労務リスク診断機能
+        const checkupQuestions = [
+            { q: "就業規則を作成し、労働基準監督署に届出していますか？", cat: "規則" },
+            { q: "就業規則を従業員に周知していますか？", cat: "規則" },
+            { q: "36協定（時間外労働・休日労働に関する協定）を締結し、届出していますか？", cat: "労使協定" },
+            { q: "36協定は毎年更新していますか？", cat: "労使協定" },
+            { q: "過半数代表者を適切な方法で選出していますか？", cat: "労使協定" },
+            { q: "時間外労働の上限規制（月45時間・年360時間）を遵守していますか？", cat: "労働時間" },
+            { q: "労働時間を適切に管理（記録）していますか？", cat: "労働時間" },
+            { q: "残業代を正確に計算し、支払っていますか？", cat: "賃金" },
+            { q: "固定残業代制度を採用している場合、適切に運用していますか？", cat: "賃金" },
+            { q: "最低賃金を遵守していますか？", cat: "賃金" },
+            { q: "有給休暇を年5日取得させていますか？", cat: "休暇" },
+            { q: "有給休暇の管理簿を作成していますか？", cat: "休暇" },
+            { q: "雇用契約書（労働条件通知書）を全従業員と締結していますか？", cat: "契約" },
+            { q: "社会保険（健康保険・厚生年金）に加入していますか？", cat: "保険" },
+            { q: "雇用保険・労災保険に加入していますか？", cat: "保険" },
+            { q: "ハラスメント防止措置を講じていますか？", cat: "ハラスメント" },
+            { q: "育児・介護休業規程を整備していますか？", cat: "両立支援" },
+            { q: "定期健康診断を実施していますか？", cat: "安全衛生" },
+            { q: "労働者名簿を作成していますか？", cat: "帳簿" },
+            { q: "賃金台帳を作成していますか？", cat: "帳簿" }
+        ];
+
+        function startCheckup() {
+            const container = document.getElementById('questions-container');
+            const content = document.getElementById('quiz-content');
+            
+            let html = '<form id="checkup-form" class="space-y-4">';
+            
+            checkupQuestions.forEach((item, index) => {
+                html += `
+                    <div class="p-4 border-2 border-gray-200 rounded-xl hover:border-blue-300 transition">
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-8 h-8 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">${index + 1}</span>
+                            <div class="flex-1">
+                                <p class="text-gray-800 font-medium mb-3">${item.q}</p>
+                                <div class="flex gap-4">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="q${index}" value="yes" class="w-4 h-4 text-blue-600" required>
+                                        <span class="text-sm text-green-600 font-medium">はい</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="q${index}" value="no" class="w-4 h-4 text-blue-600" required>
+                                        <span class="text-sm text-red-600 font-medium">いいえ</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="q${index}" value="unknown" class="w-4 h-4 text-blue-600" required>
+                                        <span class="text-sm text-gray-500 font-medium">わからない</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                <div class="text-center pt-8">
+                    <button type="submit" class="bg-gradient-to-r from-blue-900 to-blue-700 text-white font-bold py-5 px-12 rounded-xl hover:from-blue-800 hover:to-blue-600 transition shadow-lg text-lg">
+                        診断結果を見る
+                    </button>
+                </div>
+            </form>`;
+            
+            container.innerHTML = html;
+            content.querySelector('p').classList.add('hidden');
+            content.querySelector('.text-center').classList.add('hidden');
+            
+            document.getElementById('checkup-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                showCheckupResult();
+            });
+        }
+
+        function showCheckupResult() {
+            const form = document.getElementById('checkup-form');
+            const formData = new FormData(form);
+            
+            let yesCount = 0;
+            let noCount = 0;
+            let unknownCount = 0;
+            const issues = [];
+            
+            checkupQuestions.forEach((item, index) => {
+                const answer = formData.get(`q${index}`);
+                if (answer === 'yes') yesCount++;
+                else if (answer === 'no') {
+                    noCount++;
+                    issues.push({ q: item.q, cat: item.cat });
+                } else if (answer === 'unknown') {
+                    unknownCount++;
+                    issues.push({ q: item.q, cat: item.cat });
+                }
+            });
+            
+            const score = Math.round((yesCount / checkupQuestions.length) * 100);
+            
+            let riskLevel, riskColor, riskBg, riskMessage;
+            if (score >= 90) {
+                riskLevel = "優良";
+                riskColor = "text-green-600";
+                riskBg = "bg-green-50";
+                riskMessage = "労務管理が非常に良好です。引き続き、法改正への対応を継続してください。";
+            } else if (score >= 70) {
+                riskLevel = "良好";
+                riskColor = "text-blue-600";
+                riskBg = "bg-blue-50";
+                riskMessage = "基本的な労務管理はできていますが、いくつか改善の余地があります。";
+            } else if (score >= 50) {
+                riskLevel = "要注意";
+                riskColor = "text-orange-600";
+                riskBg = "bg-orange-50";
+                riskMessage = "労務リスクがあります。早めの対策をおすすめします。";
+            } else {
+                riskLevel = "危険";
+                riskColor = "text-red-600";
+                riskBg = "bg-red-50";
+                riskMessage = "重大な労務リスクがあります。至急、専門家にご相談ください。";
+            }
+            
+            const resultHtml = `
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-bold text-blue-900 mb-6">診断結果</h3>
+                    <div class="${riskBg} rounded-2xl p-8 mb-6">
+                        <p class="text-lg text-gray-600 mb-4">労務管理レベル</p>
+                        <div class="text-6xl font-black ${riskColor} mb-4">${score}点</div>
+                        <p class="text-2xl font-bold ${riskColor}">${riskLevel}</p>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">${riskMessage}</p>
+                </div>
+                
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold text-blue-900 mb-4">診断内訳</h4>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="bg-green-50 rounded-xl p-4 text-center">
+                            <p class="text-sm text-gray-600 mb-2">遵守できている</p>
+                            <p class="text-3xl font-bold text-green-600">${yesCount}</p>
+                        </div>
+                        <div class="bg-red-50 rounded-xl p-4 text-center">
+                            <p class="text-sm text-gray-600 mb-2">未対応</p>
+                            <p class="text-3xl font-bold text-red-600">${noCount}</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-4 text-center">
+                            <p class="text-sm text-gray-600 mb-2">不明</p>
+                            <p class="text-3xl font-bold text-gray-600">${unknownCount}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                ${issues.length > 0 ? `
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold text-blue-900 mb-4">改善が必要な項目</h4>
+                    <div class="space-y-3">
+                        ${issues.map(issue => `
+                            <div class="flex items-start gap-3 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
+                                <svg class="w-5 h-5 text-yellow-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                </svg>
+                                <div class="flex-1">
+                                    <span class="text-xs font-bold text-yellow-700">[${issue.cat}]</span>
+                                    <p class="text-sm text-gray-700">${issue.q}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+                
+                <div class="bg-gradient-to-r from-blue-900 to-blue-700 rounded-2xl p-8 text-white text-center">
+                    <h4 class="text-2xl font-bold mb-4">専門家による無料相談を承ります</h4>
+                    <p class="mb-6 opacity-90">診断結果を基に、貴社に最適な改善プランをご提案いたします</p>
+                    <button onclick="showPage('contact')" class="bg-white text-blue-900 font-bold py-4 px-10 rounded-xl hover:bg-blue-50 transition shadow-lg">
+                        今すぐ無料相談を申し込む
+                    </button>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <button onclick="location.reload()" class="text-blue-600 hover:text-blue-800 font-medium">
+                        もう一度診断する
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('quiz-content').classList.add('hidden');
+            document.getElementById('quiz-result').innerHTML = resultHtml;
+            document.getElementById('quiz-result').classList.remove('hidden');
+        }
+
+        // 助成金シミュレーター機能
+        function initializeSubsidySimulator() {
+            const form = document.getElementById('subsidy-diagnostic-form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    showSubsidyResult();
+                });
+            }
+        }
+
+        function showSubsidyResult() {
+            const form = document.getElementById('subsidy-diagnostic-form');
+            const formData = new FormData(form);
+            
+            const industry = formData.get('industry');
+            const employees = formData.get('employees');
+            const plans = formData.getAll('plan');
+            
+            const subsidies = [];
+            
+            // キャリアアップ助成金
+            if (plans.includes('regular')) {
+                subsidies.push({
+                    name: 'キャリアアップ助成金（正社員化コース）',
+                    amount: '最大80万円/人',
+                    detail: '有期雇用労働者等を正規雇用労働者に転換した場合に助成',
+                    requirements: ['6ヶ月以上の有期契約労働者がいる', '正社員化後6ヶ月の賃金が転換前より5%以上増額'],
+                    level: 'high'
+                });
+            }
+            
+            // 業務改善助成金
+            if (plans.includes('wage') && plans.includes('equipment')) {
+                subsidies.push({
+                    name: '業務改善助成金',
+                    amount: '最大600万円',
+                    detail: '事業場内最低賃金を引き上げ、設備投資等を行った場合に助成',
+                    requirements: ['事業場内最低賃金と地域別最低賃金の差額が50円以内', '生産性向上に資する設備投資を実施'],
+                    level: 'high'
+                });
+            }
+            
+            // 人材開発支援助成金
+            if (plans.includes('training')) {
+                subsidies.push({
+                    name: '人材開発支援助成金',
+                    amount: '最大100万円',
+                    detail: '従業員の職業訓練を実施した場合の訓練経費や訓練期間中の賃金を助成',
+                    requirements: ['訓練実施計画を作成し提出', '10時間以上の訓練を実施'],
+                    level: 'medium'
+                });
+            }
+            
+            // 両立支援等助成金
+            if (plans.includes('worklife')) {
+                subsidies.push({
+                    name: '両立支援等助成金（育児休業等支援コース）',
+                    amount: '最大72万円',
+                    detail: '育児休業の円滑な取得・職場復帰のための取組を実施した場合に助成',
+                    requirements: ['育児休業取得者がいる', '育児休業復帰支援プランを作成'],
+                    level: 'medium'
+                });
+            }
+            
+            // 特定求職者雇用開発助成金
+            if (plans.includes('hiring')) {
+                subsidies.push({
+                    name: '特定求職者雇用開発助成金',
+                    amount: '最大240万円',
+                    detail: '高年齢者や障害者等の就職困難者を雇い入れた場合に助成',
+                    requirements: ['ハローワーク等の紹介により雇い入れ', '60歳以上や障害者等を雇用'],
+                    level: 'medium'
+                });
+            }
+            
+            // 結果がない場合のデフォルト助成金
+            if (subsidies.length === 0) {
+                subsidies.push({
+                    name: '雇用調整助成金',
+                    amount: '変動',
+                    detail: '経済上の理由により事業活動の縮小を余儀なくされた場合の雇用維持を支援',
+                    requirements: ['売上高等が減少', '休業を実施'],
+                    level: 'low'
+                });
+            }
+            
+            const totalAmount = subsidies.reduce((sum, s) => {
+                const match = s.amount.match(/(\d+)/);
+                return sum + (match ? parseInt(match[1]) : 0);
+            }, 0);
+            
+            const resultHtml = `
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-bold text-blue-900 mb-6">診断結果</h3>
+                    <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-8 text-white mb-6">
+                        <p class="text-lg mb-4">申請可能な助成金</p>
+                        <div class="text-5xl font-black mb-4">${subsidies.length}件</div>
+                        <p class="text-xl">受給見込額 最大 <span class="font-bold">${totalAmount.toLocaleString()}万円</span></p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4 mb-8">
+                    ${subsidies.map((s, i) => `
+                        <div class="border-2 ${s.level === 'high' ? 'border-orange-300 bg-orange-50' : s.level === 'medium' ? 'border-blue-300 bg-blue-50' : 'border-gray-300 bg-gray-50'} rounded-2xl p-6">
+                            <div class="flex items-start justify-between mb-3">
+                                <h4 class="text-lg font-bold text-blue-900 flex-1">${s.name}</h4>
+                                <span class="bg-orange-600 text-white px-4 py-1 rounded-full text-sm font-bold ml-4">${s.amount}</span>
+                            </div>
+                            <p class="text-gray-700 mb-4">${s.detail}</p>
+                            <div class="bg-white rounded-xl p-4">
+                                <p class="text-xs font-bold text-gray-600 mb-2">主な要件</p>
+                                <ul class="space-y-1">
+                                    ${s.requirements.map(req => `
+                                        <li class="text-sm text-gray-700 flex items-start gap-2">
+                                            <span class="text-orange-600 mt-0.5">✓</span>
+                                            <span>${req}</span>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="bg-gradient-to-r from-blue-900 to-blue-700 rounded-2xl p-8 text-white text-center mb-6">
+                    <h4 class="text-2xl font-bold mb-4">助成金申請をサポートいたします</h4>
+                    <p class="mb-6 opacity-90">複雑な申請手続きから受給後のフォローまで、社労士が完全サポート<br>
+                    成功報酬型なので、受給できなければ費用は発生しません</p>
+                    <button onclick="showPage('contact')" class="bg-white text-blue-900 font-bold py-4 px-10 rounded-xl hover:bg-blue-50 transition shadow-lg">
+                        助成金申請サポートを依頼
+                    </button>
+                </div>
+                
+                <div class="text-center">
+                    <button onclick="location.reload()" class="text-blue-600 hover:text-blue-800 font-medium">
+                        もう一度診断する
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('subsidy-form').classList.add('hidden');
+            document.getElementById('subsidy-result').innerHTML = resultHtml;
+            document.getElementById('subsidy-result').classList.remove('hidden');
+        }
     </script>
 
 </body>
