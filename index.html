@@ -132,7 +132,7 @@
             animation: bounce-slow 2s ease-in-out infinite;
         }
     </style>
-     <meta name="google-site-verification" content="CzQ1gV_RKAq7_NziXejLsGk4pVfp99mz1Lw8mmEbXUg" />
+    <meta name="google-site-verification" content="CzQ1gV_RKAq7_NziXejLsGk4pVfp99mz1Lw8mmEbXUg" />
 </head>
 <body class="bg-gray-50">
 
@@ -1559,8 +1559,7 @@
                             <span class="font-bold text-blue-900 mt-2 inline-block">初回60分は完全無料です。</span>
                         </p>
                     </div>
-                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSffEFqDLZqJdA_u8jF2ulLQHHf1X56YFfqyu-bygYCn4QTThg/viewform?embedded=true" width="800" height="1000" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
-                        
+                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSffEFqDLZqJdA_u8jF2ulLQHHf1X56YFfqyu-bygYCn4QTThg/viewform?embedded=true" width="800" height="1000" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>   
                         <div class="bg-blue-50 border-l-4 border-blue-900 p-6 rounded-r-xl">
                             <p class="text-sm text-gray-700 leading-relaxed">
                                 <span class="font-bold text-blue-900">📞 お急ぎの方へ</span><br>
@@ -1749,26 +1748,28 @@
                     <p class="text-gray-600 text-lg">20の質問で貴社の労務管理状況をチェック</p>
                 </div>
 
-                <div id="checkup-quiz" class="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
-                    <div id="quiz-content">
+                <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+                    <!-- 初期画面 -->
+                    <div id="checkup-intro">
                         <p class="text-gray-600 mb-8 leading-relaxed">
                             このチェックリストは、貴社の労務管理における潜在的なリスクを発見するためのツールです。<br>
                             各質問に正直にお答えいただくことで、改善が必要な項目が明確になります。
                         </p>
-                        
-                        <div class="space-y-6" id="questions-container">
-                            <!-- Questions will be dynamically loaded -->
-                        </div>
-
                         <div class="text-center mt-8">
-                            <button onclick="startCheckup()" class="bg-gradient-to-r from-blue-900 to-blue-700 text-white font-bold py-5 px-12 rounded-xl hover:from-blue-800 hover:to-blue-600 transition shadow-lg text-lg">
+                            <button onclick="window.startCheckup()" class="bg-gradient-to-r from-blue-900 to-blue-700 text-white font-bold py-5 px-12 rounded-xl hover:from-blue-800 hover:to-blue-600 transition shadow-lg text-lg">
                                 診断を開始する
                             </button>
                         </div>
                     </div>
 
-                    <div id="quiz-result" class="hidden">
-                        <!-- Result will be shown here -->
+                    <!-- 質問画面 -->
+                    <div id="checkup-questions" style="display: none;">
+                        <!-- JavaScript で動的生成 -->
+                    </div>
+
+                    <!-- 結果画面 -->
+                    <div id="checkup-result" style="display: none;">
+                        <!-- JavaScript で動的生成 -->
                     </div>
                 </div>
             </div>
@@ -2155,7 +2156,7 @@
         });
 
         // 労務リスク診断機能
-        const checkupQuestions = [
+        window.checkupQuestions = [
             { q: "就業規則を作成し、労働基準監督署に届出していますか？", cat: "規則" },
             { q: "就業規則を従業員に周知していますか？", cat: "規則" },
             { q: "36協定（時間外労働・休日労働に関する協定）を締結し、届出していますか？", cat: "労使協定" },
@@ -2178,30 +2179,32 @@
             { q: "賃金台帳を作成していますか？", cat: "帳簿" }
         ];
 
-        function startCheckup() {
-            const container = document.getElementById('questions-container');
-            const content = document.getElementById('quiz-content');
+        window.startCheckup = function() {
+            const intro = document.getElementById('checkup-intro');
+            const questions = document.getElementById('checkup-questions');
+            
+            if (intro) intro.style.display = 'none';
             
             let html = '<form id="checkup-form" class="space-y-4">';
             
-            checkupQuestions.forEach((item, index) => {
+            window.checkupQuestions.forEach((item, index) => {
                 html += `
                     <div class="p-4 border-2 border-gray-200 rounded-xl hover:border-blue-300 transition">
                         <div class="flex items-start gap-3">
                             <span class="flex-shrink-0 w-8 h-8 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">${index + 1}</span>
                             <div class="flex-1">
                                 <p class="text-gray-800 font-medium mb-3">${item.q}</p>
-                                <div class="flex gap-4">
+                                <div class="flex gap-4 flex-wrap">
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="radio" name="q${index}" value="yes" class="w-4 h-4 text-blue-600" required>
+                                        <input type="radio" name="q${index}" value="yes" class="w-4 h-4" required>
                                         <span class="text-sm text-green-600 font-medium">はい</span>
                                     </label>
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="radio" name="q${index}" value="no" class="w-4 h-4 text-blue-600" required>
+                                        <input type="radio" name="q${index}" value="no" class="w-4 h-4" required>
                                         <span class="text-sm text-red-600 font-medium">いいえ</span>
                                     </label>
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="radio" name="q${index}" value="unknown" class="w-4 h-4 text-blue-600" required>
+                                        <input type="radio" name="q${index}" value="unknown" class="w-4 h-4" required>
                                         <span class="text-sm text-gray-500 font-medium">わからない</span>
                                     </label>
                                 </div>
@@ -2219,18 +2222,26 @@
                 </div>
             </form>`;
             
-            container.innerHTML = html;
-            content.querySelector('p').classList.add('hidden');
-            content.querySelector('.text-center').classList.add('hidden');
+            if (questions) {
+                questions.innerHTML = html;
+                questions.style.display = 'block';
+                
+                const form = document.getElementById('checkup-form');
+                if (form) {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        window.showCheckupResult();
+                    });
+                }
+            }
             
-            document.getElementById('checkup-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                showCheckupResult();
-            });
-        }
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        };
 
-        function showCheckupResult() {
+        window.showCheckupResult = function() {
             const form = document.getElementById('checkup-form');
+            const questions = document.getElementById('checkup-questions');
+            const result = document.getElementById('checkup-result');
             const formData = new FormData(form);
             
             let yesCount = 0;
@@ -2238,7 +2249,7 @@
             let unknownCount = 0;
             const issues = [];
             
-            checkupQuestions.forEach((item, index) => {
+            window.checkupQuestions.forEach((item, index) => {
                 const answer = formData.get(`q${index}`);
                 if (answer === 'yes') yesCount++;
                 else if (answer === 'no') {
@@ -2250,7 +2261,7 @@
                 }
             });
             
-            const score = Math.round((yesCount / checkupQuestions.length) * 100);
+            const score = Math.round((yesCount / window.checkupQuestions.length) * 100);
             
             let riskLevel, riskColor, riskBg, riskMessage;
             if (score >= 90) {
@@ -2332,17 +2343,42 @@
                 </div>
                 
                 <div class="text-center mt-8">
-                    <button onclick="location.reload()" class="text-blue-600 hover:text-blue-800 font-medium">
+                    <button onclick="window.resetCheckup()" class="text-blue-600 hover:text-blue-800 font-medium underline">
                         もう一度診断する
                     </button>
                 </div>
             `;
             
-            document.getElementById('quiz-content').classList.add('hidden');
-            document.getElementById('quiz-result').innerHTML = resultHtml;
-            document.getElementById('quiz-result').classList.remove('hidden');
-        }
+            if (questions) questions.style.display = 'none';
+            if (result) {
+                result.innerHTML = resultHtml;
+                result.style.display = 'block';
+            }
+            
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        };
 
+        window.resetCheckup = function() {
+            const intro = document.getElementById('checkup-intro');
+            const questions = document.getElementById('checkup-questions');
+            const result = document.getElementById('checkup-result');
+            
+            if (questions) {
+                questions.innerHTML = '';
+                questions.style.display = 'none';
+            }
+            if (result) {
+                result.innerHTML = '';
+                result.style.display = 'none';
+            }
+            if (intro) {
+                intro.style.display = 'block';
+            }
+            
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        };
+
+        // 助成金シミュレーター機能
         // 助成金シミュレーター機能
         function initializeSubsidySimulator() {
             const form = document.getElementById('subsidy-diagnostic-form');
