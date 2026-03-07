@@ -392,6 +392,7 @@ const DL_PDF_DATA = [
                     </div>
                 </div>
                 <button id="nav-links" onclick="showPage('links')" class="pb-1 transition hover:text-blue-900">関連リンク</button>
+                <button id="nav-spot" onclick="showPage('spot')" class="pb-1 transition hover:text-blue-900 text-orange-600 font-bold">手続き依頼</button>
                 <button id="nav-faq" onclick="showPage('faq')" class="pb-1 transition hover:text-blue-900">よくある質問</button>
                 <button id="nav-contact" onclick="showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2.5 rounded-lg hover:from-orange-600 hover:to-orange-700 transition shadow-md font-bold">お問い合わせ</button>
             </nav>
@@ -418,6 +419,7 @@ const DL_PDF_DATA = [
                 <button onclick="showPage('download')" class="block w-full py-2 text-left text-sm hover:bg-indigo-50 rounded px-3 font-semibold text-indigo-700">📥 無料資料ダウンロード</button>
             </div>
             <button onclick="showPage('links')" class="block w-full py-3 text-left font-medium hover:bg-gray-50 rounded px-3">関連リンク</button>
+            <button onclick="showPage('spot')" class="block w-full py-3 text-left font-bold text-orange-600 hover:bg-orange-50 rounded px-3">📋 手続き依頼</button>
             <button onclick="showPage('faq')" class="block w-full py-3 text-left font-medium hover:bg-gray-50 rounded px-3">よくある質問</button>
             <button onclick="showPage('contact')" class="block w-full py-3 text-left font-bold text-orange-600 hover:bg-gray-50 rounded px-3">お問い合わせ</button>
         </div>
@@ -904,7 +906,7 @@ const DL_PDF_DATA = [
                         <div class="text-center mb-6 mt-4">
                             <h4 class="font-bold text-2xl mb-3 text-blue-900">フルサポート契約</h4>
                             <div class="flex items-end justify-center gap-2 mb-4">
-                                <span class="text-blue-900 font-bold text-4xl">40,000</span>
+                                <span class="text-blue-900 font-bold text-4xl">37,000</span>
                                 <span class="text-gray-700 text-lg mb-1">円/月〜</span>
                             </div>
                             <p class="text-xs text-gray-600">※従業員数により変動</p>
@@ -922,7 +924,7 @@ const DL_PDF_DATA = [
                         <div class="text-center mb-6">
                             <h4 class="font-bold text-2xl mb-3 text-gray-800">スポット対応</h4>
                             <div class="flex items-end justify-center gap-2 mb-4">
-                                <span class="text-blue-900 font-bold text-4xl">150,000</span>
+                                <span class="text-blue-900 font-bold text-4xl">80,000</span>
                                 <span class="text-gray-500 text-lg mb-1">円〜</span>
                             </div>
                             <p class="text-xs text-gray-500">※内容により変動</p>
@@ -953,7 +955,7 @@ const DL_PDF_DATA = [
                             </p>
                             <div class="text-center mb-8">
                                 <div class="flex items-end justify-center gap-2 mb-2">
-                                    <span class="text-5xl md:text-6xl font-black text-blue-900">200,000</span>
+                                    <span class="text-5xl md:text-6xl font-black text-blue-900">180,000</span>
                                     <span class="text-2xl text-gray-600 mb-2">円〜</span>
                                 </div>
                                 <p class="text-sm text-gray-500">※初期費用込み・6ヶ月契約</p>
@@ -2441,28 +2443,28 @@ const DL_PDF_DATA = [
                                             <input type="checkbox" value="rules_new" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
                                             <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
                                                 <span class="font-bold text-gray-800 text-sm">就業規則 新規作成</span>
-                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="100000" data-mid="130000" data-large="160000">100,000円〜</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="80000" data-mid="110000" data-large="150000">80,000円〜</span>
                                             </div>
                                         </label>
                                         <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="rules_rev">
                                             <input type="checkbox" value="rules_rev" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
                                             <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
                                                 <span class="font-bold text-gray-800 text-sm">就業規則 改定・見直し</span>
-                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="50000" data-mid="70000" data-large="90000">50,000円〜</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="40000" data-mid="60000" data-large="80000">40,000円〜</span>
                                             </div>
                                         </label>
                                         <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="contract">
                                             <input type="checkbox" value="contract" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
                                             <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
                                                 <span class="font-bold text-gray-800 text-sm">雇用契約書・労働条件通知書 作成</span>
-                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="30000" data-mid="40000" data-large="50000">30,000円〜</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="25000" data-mid="35000" data-large="45000">25,000円〜</span>
                                             </div>
                                         </label>
                                         <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="agreement36">
                                             <input type="checkbox" value="agreement36" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
                                             <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
                                                 <span class="font-bold text-gray-800 text-sm">36協定 作成・届出</span>
-                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="20000" data-mid="25000" data-large="30000">20,000円〜</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="15000" data-mid="20000" data-large="25000">15,000円〜</span>
                                             </div>
                                         </label>
                                     </div>
@@ -2478,21 +2480,21 @@ const DL_PDF_DATA = [
                                             <input type="checkbox" value="si_new" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
                                             <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
                                                 <span class="font-bold text-gray-800 text-sm">社会保険 新規適用手続き</span>
-                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="50000" data-mid="60000" data-large="80000">50,000円〜</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="30000" data-mid="40000" data-large="55000">30,000円〜</span>
                                             </div>
                                         </label>
                                         <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="si_entry">
                                             <input type="checkbox" value="si_entry" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
                                             <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
                                                 <span class="font-bold text-gray-800 text-sm">入退社手続き代行（スポット）</span>
-                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="10000" data-mid="12000" data-large="15000">10,000円〜/件</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="8000" data-mid="11000" data-large="15000">10,000円〜/件</span>
                                             </div>
                                         </label>
                                         <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="si_count">
                                             <input type="checkbox" value="si_count" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
                                             <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
                                                 <span class="font-bold text-gray-800 text-sm">算定基礎届・月額変更届</span>
-                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="20000" data-mid="30000" data-large="40000">20,000円〜</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="20000" data-mid="28000" data-large="38000">20,000円〜</span>
                                             </div>
                                         </label>
                                     </div>
@@ -2508,14 +2510,14 @@ const DL_PDF_DATA = [
                                             <input type="checkbox" value="payroll_spot" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
                                             <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
                                                 <span class="font-bold text-gray-800 text-sm">給与計算代行（単月スポット）</span>
-                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="15000" data-mid="20000" data-large="30000">15,000円〜</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="15000" data-mid="20000" data-large="28000">15,000円〜</span>
                                             </div>
                                         </label>
                                         <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="yearend_spot">
                                             <input type="checkbox" value="yearend_spot" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
                                             <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
                                                 <span class="font-bold text-gray-800 text-sm">年末調整代行（スポット）</span>
-                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="30000" data-mid="50000" data-large="80000">30,000円〜</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="15000" data-mid="20000" data-large="30000">15,000円〜</span>
                                             </div>
                                         </label>
                                     </div>
@@ -2545,14 +2547,14 @@ const DL_PDF_DATA = [
                                             <input type="checkbox" value="attendance_impl" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
                                             <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
                                                 <span class="font-bold text-gray-800 text-sm">クラウド勤怠システム導入支援</span>
-                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="50000" data-mid="70000" data-large="90000">50,000円〜</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="50000" data-mid="65000" data-large="85000">50,000円〜</span>
                                             </div>
                                         </label>
                                         <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="training">
                                             <input type="checkbox" value="training" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
                                             <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
                                                 <span class="font-bold text-gray-800 text-sm">従業員研修（ハラスメント・労務リスク等）</span>
-                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="50000" data-mid="60000" data-large="80000">50,000円〜/回</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="45000" data-mid="55000" data-large="70000">50,000円〜/回</span>
                                             </div>
                                         </label>
                                     </div>
@@ -2793,8 +2795,20 @@ const DL_PDF_DATA = [
                             <div class="flex items-center gap-3 mb-8">
                                 <div class="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">📤</div>
                                 <div>
-                                    <h3 class="text-xl font-bold text-blue-900">雇用保険被保険者資格喪失届・離職票</h3>
+                                    <h3 class="text-xl font-bold text-blue-900">雇用保険被保険者資格喪失届</h3>
                                     <p class="text-sm text-gray-500">退職・解雇時に必要な届出です（退職翌日から10日以内）</p>
+                                    <div class="mt-3 flex items-center gap-6">
+                                        <span class="text-sm font-bold text-gray-700">離職票：</span>
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" name="rikokuhyo" value="nashi" checked onchange="updateRikokuhyoFee()" class="accent-orange-500">
+                                            <span class="text-sm">不要（5,000円〜）</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" name="rikokuhyo" value="ari" onchange="updateRikokuhyoFee()" class="accent-orange-500">
+                                            <span class="text-sm">要（10,000円〜）</span>
+                                        </label>
+                                        <span id="rikokuhyo-fee" class="ml-2 text-orange-600 font-black text-sm">5,000円〜</span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -3167,19 +3181,23 @@ const DL_PDF_DATA = [
                         <div class="space-y-3 text-sm">
                             <div class="flex justify-between items-center py-2 border-b border-gray-100">
                                 <span class="text-gray-700">雇用保険 資格取得届</span>
-                                <span class="font-bold text-blue-900">5,500円〜</span>
+                                <span class="font-bold text-blue-900">5,000円〜</span>
                             </div>
                             <div class="flex justify-between items-center py-2 border-b border-gray-100">
-                                <span class="text-gray-700">雇用保険 資格喪失届・離職票</span>
-                                <span class="font-bold text-blue-900">11,000円〜</span>
+                                <span class="text-gray-700">雇用保険 資格喪失届（離職票なし）</span>
+                                <span class="font-bold text-blue-900">5,000円〜</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-gray-700">雇用保険 資格喪失届（離職票あり）</span>
+                                <span class="font-bold text-blue-900">10,000円〜</span>
                             </div>
                             <div class="flex justify-between items-center py-2 border-b border-gray-100">
                                 <span class="text-gray-700">社会保険 資格取得届</span>
-                                <span class="font-bold text-blue-900">5,500円〜</span>
+                                <span class="font-bold text-blue-900">5,000円〜</span>
                             </div>
                             <div class="flex justify-between items-center py-2">
                                 <span class="text-gray-700">社会保険 資格喪失届</span>
-                                <span class="font-bold text-blue-900">5,500円〜</span>
+                                <span class="font-bold text-blue-900">5,000円〜</span>
                             </div>
                         </div>
                         <p class="text-xs text-gray-400 mt-4">※税込価格。複数件同時依頼の場合は割引があります。詳細はお見積もりいたします。</p>
@@ -3521,11 +3539,11 @@ const DL_PDF_DATA = [
             rules_rev:       { name: '就業規則 改定・見直し',               small:40000,  mid:60000,  large:80000  },
             contract:        { name: '雇用契約書・労働条件通知書 作成',     small:25000,  mid:35000,  large:45000  },
             agreement36:     { name: '36協定 作成・届出',                   small:15000,  mid:20000,  large:25000  },
-            si_new:          { name: '社会保険 新規適用手続き',             small:40000,  mid:55000,  large:70000  },
+            si_new:          { name: '社会保険 新規適用手続き',             small:30000,  mid:40000,  large:55000  },
             si_entry:        { name: '入退社手続き代行（スポット）',        small:8000,   mid:11000,  large:15000  },
             si_count:        { name: '算定基礎届・月額変更届',              small:20000,  mid:28000,  large:38000  },
             payroll_spot:    { name: '給与計算代行（単月スポット）',        small:15000,  mid:20000,  large:28000  },
-            yearend_spot:    { name: '年末調整代行（スポット）',            small:25000,  mid:40000,  large:60000  },
+            yearend_spot:    { name: '年末調整代行（スポット）',            small:15000,  mid:20000,  large:30000  },
             subsidy_app:     { name: '助成金申請代行',                      fixed: '着手金20,000円＋成功報酬20%' },
             labor_audit:     { name: '労務監査・リスク診断',                small:80000,  mid:100000, large:130000 },
             attendance_impl: { name: 'クラウド勤怠システム導入支援',        small:50000,  mid:65000,  large:85000  },
@@ -4280,7 +4298,12 @@ const DL_PDF_DATA = [
     // =============================================
     // スポット手続き依頼フォーム
     // =============================================
-    function spotSwitchTab(idx) {
+    function updateRikokuhyoFee() {
+            const val = document.querySelector('input[name="rikokuhyo"]:checked')?.value;
+            const el = document.getElementById('rikokuhyo-fee');
+            if (el) el.textContent = val === 'ari' ? '10,000円〜' : '5,000円〜';
+        }
+        function spotSwitchTab(idx) {
         for (let i = 0; i < 4; i++) {
             const tab = document.getElementById('spot-tab-' + i);
             const form = document.getElementById('spot-form-' + i);
