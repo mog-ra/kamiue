@@ -230,7 +230,113 @@
         }
         .spot-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(30,58,138,0.4); }
         .spot-tab-btn.active { border-bottom-color: #1e40af !important; color: #1e40af !important; background-color: #eff6ff !important; }
-    </style>
+    
+    /* ===== 料金シミュレーター ===== */
+    .sim-tab-active {
+        background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+        color: white;
+        box-shadow: 0 4px 14px rgba(30,58,138,0.25);
+    }
+    .sim-slider {
+        background: linear-gradient(to right, #1e3a8a 0%, #1e3a8a var(--val,5%), #e5e7eb var(--val,5%), #e5e7eb 100%);
+    }
+    .sim-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 22px; height: 22px;
+        border-radius: 50%;
+        background: #1e3a8a;
+        border: 3px solid white;
+        box-shadow: 0 2px 8px rgba(30,58,138,0.4);
+        cursor: pointer;
+    }
+    .sim-slider::-moz-range-thumb {
+        width: 22px; height: 22px;
+        border-radius: 50%;
+        background: #1e3a8a;
+        border: 3px solid white;
+        box-shadow: 0 2px 8px rgba(30,58,138,0.4);
+        cursor: pointer;
+    }
+    .sim-chip {
+        background: white;
+        border-color: #e5e7eb;
+        color: #6b7280;
+    }
+    .sim-chip:hover, .sim-chip.active {
+        background: #eff6ff;
+        border-color: #1e3a8a;
+        color: #1e3a8a;
+    }
+    .sim-chip-spot {
+        background: white;
+        border-color: #e5e7eb;
+        color: #6b7280;
+    }
+    .sim-chip-spot:hover, .sim-chip-spot.active {
+        background: #fff7ed;
+        border-color: #f97316;
+        color: #c2410c;
+    }
+    .sim-plan-card {
+        border-color: #e5e7eb;
+        background: white;
+        transition: all 0.15s;
+    }
+    .sim-plan-card:has(input:checked) {
+        border-color: #1e3a8a;
+        background: #eff6ff;
+    }
+    .sim-plan-card:hover {
+        border-color: #93c5fd;
+        background: #f8faff;
+    }
+    .sim-opt-card {
+        border-color: #e5e7eb;
+        background: white;
+    }
+    .sim-opt-card:has(input:checked) {
+        border-color: #1d4ed8;
+        background: #eff6ff;
+    }
+    .sim-opt-card:has(input:checked:disabled) {
+        border-color: #bbf7d0 !important;
+        background: #f0fdf4 !important;
+        opacity: 0.75;
+        pointer-events: none;
+    }
+    .sim-opt-card:hover {
+        border-color: #93c5fd;
+    }
+    .sim-opt-spot {
+        border-color: #e5e7eb;
+        background: white;
+    }
+    .sim-opt-spot:has(input:checked) {
+        border-color: #f97316;
+        background: #fff7ed;
+    }
+    .sim-opt-spot:hover {
+        border-color: #fdba74;
+    }
+    .sim-breakdown-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        color: rgba(255,255,255,0.75);
+        padding: 0.25rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .sim-breakdown-row:last-child { border-bottom: none; }
+    .sim-breakdown-row .label { flex: 1; line-height: 1.4; }
+    .sim-breakdown-row .amount { font-weight: 800; color: #fcd34d; white-space: nowrap; }
+    @media print {
+        .hidden { display: none !important; }
+        #sim-print-area { display: block !important; }
+        body > *:not(#sim-print-area) { display: none; }
+    }
+</style>
     <meta name="google-site-verification" content="CzQ1gV_RKAq7_NziXejLsGk4pVfp99mz1Lw8mmEbXUg" />
 <script>
 const DL_PDF_DATA = [
@@ -279,6 +385,7 @@ const DL_PDF_DATA = [
                         <button onclick="showPage('checkup')" class="w-full text-left px-4 py-3 hover:bg-blue-50 transition text-sm">✅ 労務リスク診断</button>
                         <button onclick="showPage('subsidy-sim')" class="w-full text-left px-4 py-3 hover:bg-blue-50 transition text-sm">💰 助成金診断</button>
                         <button onclick="showPage('salary-calc')" class="w-full text-left px-4 py-3 hover:bg-blue-50 transition text-sm">🧮 給与計算ツール</button>
+                        <button onclick="showPage('price-sim')" class="w-full text-left px-4 py-3 hover:bg-amber-50 transition text-sm font-semibold text-amber-700">🧮 料金シミュレーター</button>
                         <button onclick="showPage('download')" class="w-full text-left px-4 py-3 hover:bg-indigo-50 transition text-sm font-semibold text-indigo-700">📥 無料資料ダウンロード</button>
                         <hr class="my-1 border-gray-100">
                         <button onclick="showPage('spot')" class="w-full text-left px-4 py-3 hover:bg-orange-50 transition text-sm font-bold text-orange-700">📋 手続き代行依頼</button>
@@ -307,6 +414,7 @@ const DL_PDF_DATA = [
                 <button onclick="showPage('checkup')" class="block w-full py-2 text-left text-sm hover:bg-gray-50 rounded px-3">✅ 労務リスク診断</button>
                 <button onclick="showPage('subsidy-sim')" class="block w-full py-2 text-left text-sm hover:bg-gray-50 rounded px-3">💰 助成金診断</button>
                 <button onclick="showPage('salary-calc')" class="block w-full py-2 text-left text-sm hover:bg-gray-50 rounded px-3">🧮 給与計算ツール</button>
+                <button onclick="showPage('price-sim')" class="block w-full py-2 text-left text-sm hover:bg-amber-50 rounded px-3 font-semibold text-amber-700">🧮 料金シミュレーター</button>
                 <button onclick="showPage('download')" class="block w-full py-2 text-left text-sm hover:bg-indigo-50 rounded px-3 font-semibold text-indigo-700">📥 無料資料ダウンロード</button>
             </div>
             <button onclick="showPage('links')" class="block w-full py-3 text-left font-medium hover:bg-gray-50 rounded px-3">関連リンク</button>
@@ -912,6 +1020,30 @@ const DL_PDF_DATA = [
                         <div class="flex gap-4"><div class="flex-shrink-0 w-12 h-12"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#DBEAFE" rx="8"/><circle cx="32" cy="24" r="8" fill="#1E40AF"/><circle cx="20" cy="24" r="6" fill="#3B82F6"/><circle cx="44" cy="24" r="6" fill="#3B82F6"/><path d="M 32 32 Q 20 32 16 42 L 16 48 L 48 48 L 48 42 Q 44 32 32 32 Z" fill="#1E40AF"/><circle cx="32" cy="44" r="4" fill="#F97316"/></svg></div><div><h4 class="font-bold text-gray-800 mb-1">人事評価制度設計</h4><p class="text-sm text-gray-600">従業員のモチベーション向上につながる制度構築</p></div></div>
                         <div class="flex gap-4"><div class="flex-shrink-0 w-12 h-12"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#DBEAFE" rx="8"/><path d="M 32 16 Q 24 16 20 22 L 20 38 Q 20 44 26 48 L 32 52 L 38 48 Q 44 44 44 38 L 44 22 Q 40 16 32 16 Z" fill="#1E40AF"/><path d="M 28 30 L 30 32 L 36 26" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><h4 class="font-bold text-gray-800 mb-1">メンタルヘルス対策</h4><p class="text-sm text-gray-600">ストレスチェック実施、職場環境改善提案</p></div></div>
                         <div class="flex gap-4"><div class="flex-shrink-0 w-12 h-12"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#DBEAFE" rx="8"/><circle cx="32" cy="28" r="10" fill="#1E40AF"/><circle cx="32" cy="28" r="6" fill="#F97316"/><path d="M 18 42 L 18 48 L 46 48 L 46 42 L 40 38 L 32 42 L 24 38 Z" fill="#1E40AF"/></svg></div><div><h4 class="font-bold text-gray-800 mb-1">人材採用支援</h4><p class="text-sm text-gray-600">求人票作成、採用プロセス設計のアドバイス</p></div></div>
+                    </div>
+                </div>
+
+                <!-- シミュレーター誘導バナー -->
+                <div class="max-w-4xl mx-auto mt-12">
+                    <div class="relative overflow-hidden rounded-3xl shadow-xl" style="background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 60%,#7c3aed 100%);">
+                        <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(circle at 20% 50%, white 1px, transparent 1px),radial-gradient(circle at 80% 20%, white 1px, transparent 1px); background-size:30px 30px;"></div>
+                        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 p-8 md:p-10">
+                            <div>
+                                <div class="inline-flex items-center gap-2 text-yellow-300 text-sm font-bold mb-3">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+                                    料金シミュレーター
+                                </div>
+                                <h3 class="text-2xl md:text-3xl font-black text-white mb-2">月額費用の概算を<br class="md:hidden">今すぐ確認</h3>
+                                <p class="text-blue-200 text-sm leading-relaxed">従業員数とサービスを選ぶだけ。<br>顧問契約・スポット手続きどちらも対応。</p>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <button onclick="showPage('price-sim')"
+                                    class="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-400 text-white font-black py-5 px-10 rounded-2xl transition shadow-2xl transform hover:scale-105 text-base">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+                                    シミュレーターを試す
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2007,6 +2139,482 @@ const DL_PDF_DATA = [
             </div>
         </section>
 
+
+        <!-- ===================================================
+             PRICE SIMULATOR PAGE  料金シミュレーター
+             =================================================== -->
+        <section id="page-price-sim" class="hidden" style="background:linear-gradient(160deg,#f8faff 0%,#eef2ff 40%,#fffbf0 100%); min-height:80vh; padding: 4rem 0 6rem;">
+            <div class="container mx-auto px-4 max-w-5xl">
+
+                <!-- ヘッダー -->
+                <div class="text-center mb-12">
+                    <span class="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-amber-600 bg-amber-50 border border-amber-200 px-4 py-1.5 rounded-full mb-5">
+                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+                        概算見積もり作成ツール
+                    </span>
+                    <h2 class="text-4xl md:text-5xl font-black text-blue-900 mb-4" style="letter-spacing:-0.02em">料金シミュレーター</h2>
+                    <p class="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">従業員数・ご希望のサービスを選択すると、月額顧問料の概算をリアルタイムで確認できます。</p>
+                    <p class="text-xs text-gray-400 mt-2">※ 表示金額はすべて税抜き概算です。正式なお見積もりは無料相談にてご提示いたします。</p>
+                </div>
+
+                <!-- タブ切替 -->
+                <div class="flex rounded-2xl bg-white shadow-md border border-gray-100 p-1.5 mb-10 max-w-lg mx-auto">
+                    <button id="sim-tab-advisor" onclick="simSwitchTab('advisor')"
+                        class="flex-1 py-3.5 rounded-xl font-black text-sm transition-all duration-200 sim-tab-active">
+                        🤝 顧問契約（継続）
+                    </button>
+                    <button id="sim-tab-spot" onclick="simSwitchTab('spot')"
+                        class="flex-1 py-3.5 rounded-xl font-bold text-sm transition-all duration-200 text-gray-400">
+                        ⚡ スポット手続き（個別）
+                    </button>
+                </div>
+
+                <!-- ===================== 顧問契約シミュレーター ===================== -->
+                <div id="sim-panel-advisor" class="sim-panel">
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+
+                        <!-- 左：入力パネル -->
+                        <div class="lg:col-span-3 space-y-7">
+
+                            <!-- STEP 1: 従業員数 -->
+                            <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-7">
+                                <div class="flex items-center gap-3 mb-5">
+                                    <span class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-sm font-black flex-shrink-0">1</span>
+                                    <h3 class="font-black text-blue-900 text-lg">従業員数を選択</h3>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="flex justify-between items-end mb-2">
+                                        <span class="text-gray-500 text-sm">従業員数（役員除く）</span>
+                                        <span class="text-3xl font-black text-blue-900" id="adv-emp-display">5</span>
+                                        <span class="text-gray-500 text-sm mb-1">名</span>
+                                    </div>
+                                    <input type="range" id="adv-emp-slider" min="1" max="100" value="5" step="1"
+                                        oninput="simCalc()"
+                                        class="w-full h-2 rounded-full appearance-none cursor-pointer sim-slider">
+                                    <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                        <span>1名</span><span>25名</span><span>50名</span><span>75名</span><span>100名</span>
+                                    </div>
+                                </div>
+                                <!-- 従業員帯の早見 -->
+                                <div class="grid grid-cols-4 gap-2 mt-4" id="adv-emp-chips">
+                                    <button onclick="simSetEmp(5)"  class="sim-chip py-2 text-sm font-bold rounded-xl border-2 transition">〜5名</button>
+                                    <button onclick="simSetEmp(10)" class="sim-chip py-2 text-sm font-bold rounded-xl border-2 transition">〜10名</button>
+                                    <button onclick="simSetEmp(20)" class="sim-chip py-2 text-sm font-bold rounded-xl border-2 transition">〜20名</button>
+                                    <button onclick="simSetEmp(30)" class="sim-chip py-2 text-sm font-bold rounded-xl border-2 transition">30名〜</button>
+                                </div>
+                            </div>
+
+                            <!-- STEP 2: ベースプラン -->
+                            <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-7">
+                                <div class="flex items-center gap-3 mb-5">
+                                    <span class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-sm font-black flex-shrink-0">2</span>
+                                    <h3 class="font-black text-blue-900 text-lg">ベースプランを選択</h3>
+                                </div>
+                                <div class="space-y-3" id="adv-base-plans">
+                                    <label class="sim-plan-card flex items-start gap-4 p-5 rounded-2xl border-2 cursor-pointer transition" data-plan="standard">
+                                        <input type="radio" name="adv-base" value="standard" checked onchange="simCalc()" class="mt-1 accent-blue-800 w-4 h-4 flex-shrink-0">
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-black text-blue-900">顧問契約（スタンダード）</span>
+                                                <span class="text-amber-600 font-black text-sm" id="adv-std-price">25,000円〜/月</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500 mt-1">随時相談・法改正情報提供・社会保険手続き代行・36協定作成届出</p>
+                                        </div>
+                                    </label>
+                                    <label class="sim-plan-card flex items-start gap-4 p-5 rounded-2xl border-2 cursor-pointer transition" data-plan="full">
+                                        <input type="radio" name="adv-base" value="full" onchange="simCalc()" class="mt-1 accent-blue-800 w-4 h-4 flex-shrink-0">
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between flex-wrap gap-2">
+                                                <div class="flex items-center gap-2">
+                                                    <span class="font-black text-blue-900">フルサポート契約</span>
+                                                    <span class="bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">おすすめ</span>
+                                                </div>
+                                                <span class="text-amber-600 font-black text-sm" id="adv-full-price">37,000円〜/月</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500 mt-1">スタンダード全内容＋給与計算代行・WEB給与明細</p>
+                                            <p class="text-xs text-green-600 font-bold mt-1">✓ 給与計算代行はプランに含まれます</p>
+                                            <p class="text-xs text-gray-400 mt-0.5">※年末調整は別途オプション（全プラン共通）</p>
+                                        </div>
+                                    </label>
+                                    <label class="sim-plan-card flex items-start gap-4 p-5 rounded-2xl border-2 cursor-pointer transition" data-plan="startup">
+                                        <input type="radio" name="adv-base" value="startup" onchange="simCalc()" class="mt-1 accent-blue-800 w-4 h-4 flex-shrink-0">
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between flex-wrap gap-2">
+                                                <div class="flex items-center gap-2">
+                                                    <span class="font-black text-blue-900">創業パックプラン</span>
+                                                    <span class="bg-blue-700 text-white text-xs px-2 py-0.5 rounded-full font-bold">6か月</span>
+                                                </div>
+                                                <span class="text-amber-600 font-black text-sm">180,000円〜/6か月</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500 mt-1">就業規則作成・社会保険新規適用・給与計算代行・助成金コンサル込み</p>
+                                            <p class="text-xs text-green-600 font-bold mt-1">✓ 給与計算はプランに含まれます</p>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- STEP 3: オプション -->
+                            <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-7">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-sm font-black flex-shrink-0">3</span>
+                                    <h3 class="font-black text-blue-900 text-lg">オプションを追加</h3>
+                                    <span class="text-xs text-gray-400">複数選択可</span>
+                                </div>
+                                <div class="flex items-center gap-2 mb-4 px-3 py-2 bg-blue-50 rounded-xl border border-blue-100">
+                                    <svg class="w-4 h-4 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                                    <p class="text-xs text-blue-700">フルサポート・創業パックで選択済みのオプションはプラン料金に含まれています。追加費用はかかりません。</p>
+                                </div>
+                                <div class="space-y-3" id="adv-options">
+                                    <!-- 給与計算 -->
+                                    <label class="sim-opt-card flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-key="payroll">
+                                        <input type="checkbox" value="payroll" onchange="simCalc()" class="w-4 h-4 accent-blue-800 flex-shrink-0">
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">給与計算代行</span>
+                                                <span class="text-blue-700 font-black text-sm" id="opt-payroll-price">+12,000円〜/月</span>
+                                            </div>
+                                            <p class="text-xs text-gray-400 mt-0.5">毎月の給与計算・振込データ作成。従業員数によって変動。</p>
+                                        </div>
+                                    </label>
+                                    <!-- 年末調整 -->
+                                    <label class="sim-opt-card flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-key="yearend">
+                                        <input type="checkbox" value="yearend" onchange="simCalc()" class="w-4 h-4 accent-blue-800 flex-shrink-0">
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">年末調整代行</span>
+                                                <span class="text-blue-700 font-black text-sm" id="opt-yearend-price">+15,000円〜/回</span>
+                                            </div>
+                                            <p class="text-xs text-gray-400 mt-0.5">年1回。法定調書・源泉徴収票の作成も含む。</p>
+                                        </div>
+                                    </label>
+                                    <!-- 就業規則 -->
+                                    <label class="sim-opt-card flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-key="rules">
+                                        <input type="checkbox" value="rules" onchange="simCalc()" class="w-4 h-4 accent-blue-800 flex-shrink-0">
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">就業規則 作成・見直し</span>
+                                                <span class="text-blue-700 font-black text-sm">+80,000円〜/回</span>
+                                            </div>
+                                            <p class="text-xs text-gray-400 mt-0.5">新規作成または現行規則の全面見直し・届出対応。</p>
+                                        </div>
+                                    </label>
+                                    <!-- 助成金申請 -->
+                                    <label class="sim-opt-card flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-key="subsidy">
+                                        <input type="checkbox" value="subsidy" onchange="simCalc()" class="w-4 h-4 accent-blue-800 flex-shrink-0">
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">助成金申請代行</span>
+                                                <span class="text-blue-700 font-black text-sm">成功報酬 受給額の20%</span>
+                                            </div>
+                                            <p class="text-xs text-gray-400 mt-0.5">キャリアアップ・業務改善・両立支援等の各種助成金に対応。</p>
+                                        </div>
+                                    </label>
+                                    <!-- 勤怠システム導入 -->
+                                    <label class="sim-opt-card flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-key="attendance">
+                                        <input type="checkbox" value="attendance" onchange="simCalc()" class="w-4 h-4 accent-blue-800 flex-shrink-0">
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">クラウド勤怠システム導入支援</span>
+                                                <span class="text-blue-700 font-black text-sm">+50,000円〜/回</span>
+                                            </div>
+                                            <p class="text-xs text-gray-400 mt-0.5">システム選定・初期設定・運用マニュアル作成まで対応。</p>
+                                        </div>
+                                    </label>
+                                    <!-- 人事評価制度 -->
+                                    <label class="sim-opt-card flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-key="evaluation">
+                                        <input type="checkbox" value="evaluation" onchange="simCalc()" class="w-4 h-4 accent-blue-800 flex-shrink-0">
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">人事評価制度設計</span>
+                                                <span class="text-blue-700 font-black text-sm">+150,000円〜/回</span>
+                                            </div>
+                                            <p class="text-xs text-gray-400 mt-0.5">評価基準・等級制度・フィードバック体制の設計構築。</p>
+                                        </div>
+                                    </label>
+                                    <!-- 労務監査 -->
+                                    <label class="sim-opt-card flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-key="audit">
+                                        <input type="checkbox" value="audit" onchange="simCalc()" class="w-4 h-4 accent-blue-800 flex-shrink-0">
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">労務監査（労基署対応）</span>
+                                                <span class="text-blue-700 font-black text-sm">+80,000円〜/回</span>
+                                            </div>
+                                            <p class="text-xs text-gray-400 mt-0.5">定期監査・是正指導への対応・リスク洗い出しレポート付き。</p>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 右：見積もり結果パネル（sticky） -->
+                        <div class="lg:col-span-2" style="position: sticky; top: 100px;">
+                            <div class="bg-gradient-to-b from-blue-900 to-blue-800 rounded-3xl shadow-2xl overflow-hidden" id="sim-result-advisor">
+                                <div class="px-7 pt-7 pb-5 border-b border-white/10">
+                                    <p class="text-blue-200 text-xs font-bold tracking-widest uppercase mb-1">概算お見積もり</p>
+                                    <div class="flex items-end gap-2">
+                                        <span class="text-white font-black" style="font-size:2.5rem; line-height:1" id="adv-total-monthly">¥25,000</span>
+                                        <span class="text-blue-200 text-sm mb-1" id="adv-total-unit">/月（税抜）</span>
+                                    </div>
+                                    <div id="adv-startup-note" class="hidden mt-2 text-yellow-200 text-xs font-bold">＋ 初期一括費用あり（6か月プラン）</div>
+                                </div>
+
+                                <!-- 内訳 -->
+                                <div class="px-7 py-5 space-y-2 border-b border-white/10" id="adv-breakdown">
+                                    <!-- JSで動的生成 -->
+                                </div>
+
+                                <!-- 従業員数バッジ -->
+                                <div class="px-7 py-4 bg-white/5 border-b border-white/10">
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="text-blue-200">従業員数</span>
+                                        <span class="text-white font-bold" id="adv-emp-badge">5名</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm mt-1">
+                                        <span class="text-blue-200">月額合計（概算）</span>
+                                        <span class="text-yellow-300 font-black" id="adv-monthly-total-sub">¥25,000〜</span>
+                                    </div>
+                                </div>
+
+                                <!-- 年間コスト -->
+                                <div class="px-7 py-4 bg-white/5 border-b border-white/10">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-blue-200 text-sm">年間概算コスト</span>
+                                        <span class="text-white font-black text-lg" id="adv-annual-cost">¥300,000〜</span>
+                                    </div>
+                                </div>
+
+                                <!-- CTA -->
+                                <div class="px-7 py-6 space-y-3">
+                                    <button onclick="simOpenContact('advisor')"
+                                        class="w-full bg-orange-500 hover:bg-orange-400 text-white font-black py-4 rounded-2xl transition shadow-xl text-sm">
+                                        この内容で無料相談を申し込む
+                                    </button>
+                                    <button onclick="simPrint('advisor')"
+                                        class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-3 rounded-xl transition text-sm border border-white/20">
+                                        🖨 見積もりを印刷する
+                                    </button>
+                                </div>
+                                <p class="text-center text-blue-300/60 text-xs pb-4">※概算です。正式見積りは無料相談にて</p>
+                            </div>
+                        </div>
+                    </div><!-- /grid -->
+                </div><!-- /sim-panel-advisor -->
+
+                <!-- ===================== スポット手続きシミュレーター ===================== -->
+                <div id="sim-panel-spot" class="sim-panel hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+
+                        <!-- 左：選択パネル -->
+                        <div class="lg:col-span-3 space-y-7">
+
+                            <!-- 規模 -->
+                            <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-7">
+                                <div class="flex items-center gap-3 mb-5">
+                                    <span class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-sm font-black flex-shrink-0">1</span>
+                                    <h3 class="font-black text-orange-900 text-lg">従業員規模（参考）</h3>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2" id="spot-scale-btns">
+                                    <button onclick="simSpotSetScale('small')" id="spot-sc-small"
+                                        class="sim-chip-spot py-3 text-sm font-bold rounded-xl border-2 transition active">〜10名</button>
+                                    <button onclick="simSpotSetScale('mid')" id="spot-sc-mid"
+                                        class="sim-chip-spot py-3 text-sm font-bold rounded-xl border-2 transition">11〜30名</button>
+                                    <button onclick="simSpotSetScale('large')" id="spot-sc-large"
+                                        class="sim-chip-spot py-3 text-sm font-bold rounded-xl border-2 transition">31名以上</button>
+                                </div>
+                            </div>
+
+                            <!-- スポットメニュー選択 -->
+                            <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-7">
+                                <div class="flex items-center gap-3 mb-5">
+                                    <span class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-sm font-black flex-shrink-0">2</span>
+                                    <h3 class="font-black text-orange-900 text-lg">ご依頼の手続きを選択</h3>
+                                    <span class="text-xs text-gray-400">複数選択可</span>
+                                </div>
+
+                                <!-- カテゴリ：書類・規程整備 -->
+                                <div class="mb-5">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="text-xs font-black uppercase tracking-wider text-blue-900 bg-blue-50 px-3 py-1 rounded-full">📄 書類・規程整備</span>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="rules_new">
+                                            <input type="checkbox" value="rules_new" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
+                                            <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">就業規則 新規作成</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="100000" data-mid="130000" data-large="160000">100,000円〜</span>
+                                            </div>
+                                        </label>
+                                        <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="rules_rev">
+                                            <input type="checkbox" value="rules_rev" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
+                                            <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">就業規則 改定・見直し</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="50000" data-mid="70000" data-large="90000">50,000円〜</span>
+                                            </div>
+                                        </label>
+                                        <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="contract">
+                                            <input type="checkbox" value="contract" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
+                                            <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">雇用契約書・労働条件通知書 作成</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="30000" data-mid="40000" data-large="50000">30,000円〜</span>
+                                            </div>
+                                        </label>
+                                        <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="agreement36">
+                                            <input type="checkbox" value="agreement36" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
+                                            <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">36協定 作成・届出</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="20000" data-mid="25000" data-large="30000">20,000円〜</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- カテゴリ：社会保険手続き -->
+                                <div class="mb-5">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="text-xs font-black uppercase tracking-wider text-green-800 bg-green-50 px-3 py-1 rounded-full">🏥 社会保険手続き</span>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="si_new">
+                                            <input type="checkbox" value="si_new" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
+                                            <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">社会保険 新規適用手続き</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="50000" data-mid="60000" data-large="80000">50,000円〜</span>
+                                            </div>
+                                        </label>
+                                        <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="si_entry">
+                                            <input type="checkbox" value="si_entry" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
+                                            <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">入退社手続き代行（スポット）</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="10000" data-mid="12000" data-large="15000">10,000円〜/件</span>
+                                            </div>
+                                        </label>
+                                        <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="si_count">
+                                            <input type="checkbox" value="si_count" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
+                                            <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">算定基礎届・月額変更届</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="20000" data-mid="30000" data-large="40000">20,000円〜</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- カテゴリ：給与・税務 -->
+                                <div class="mb-5">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="text-xs font-black uppercase tracking-wider text-purple-800 bg-purple-50 px-3 py-1 rounded-full">💴 給与・税務</span>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="payroll_spot">
+                                            <input type="checkbox" value="payroll_spot" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
+                                            <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">給与計算代行（単月スポット）</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="15000" data-mid="20000" data-large="30000">15,000円〜</span>
+                                            </div>
+                                        </label>
+                                        <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="yearend_spot">
+                                            <input type="checkbox" value="yearend_spot" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
+                                            <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">年末調整代行（スポット）</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="30000" data-mid="50000" data-large="80000">30,000円〜</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- カテゴリ：助成金・コンサル -->
+                                <div>
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="text-xs font-black uppercase tracking-wider text-amber-800 bg-amber-50 px-3 py-1 rounded-full">🏆 助成金・コンサル</span>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="subsidy_app">
+                                            <input type="checkbox" value="subsidy_app" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
+                                            <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">助成金申請代行</span>
+                                                <span class="text-orange-600 font-black text-sm">着手金30,000円＋成功報酬20%</span>
+                                            </div>
+                                        </label>
+                                        <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="labor_audit">
+                                            <input type="checkbox" value="labor_audit" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
+                                            <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">労務監査・リスク診断</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="80000" data-mid="100000" data-large="130000">80,000円〜</span>
+                                            </div>
+                                        </label>
+                                        <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="attendance_impl">
+                                            <input type="checkbox" value="attendance_impl" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
+                                            <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">クラウド勤怠システム導入支援</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="50000" data-mid="70000" data-large="90000">50,000円〜</span>
+                                            </div>
+                                        </label>
+                                        <label class="sim-opt-spot flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition" data-spot="training">
+                                            <input type="checkbox" value="training" onchange="simSpotCalc()" class="w-4 h-4 accent-orange-500">
+                                            <div class="flex-1 flex items-center justify-between flex-wrap gap-2">
+                                                <span class="font-bold text-gray-800 text-sm">従業員研修（ハラスメント・労務リスク等）</span>
+                                                <span class="text-orange-600 font-black text-sm spot-price" data-small="50000" data-mid="60000" data-large="80000">50,000円〜/回</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /left -->
+
+                        <!-- 右：結果 -->
+                        <div class="lg:col-span-2" style="position: sticky; top: 100px;">
+                            <div class="bg-gradient-to-b from-orange-600 to-orange-700 rounded-3xl shadow-2xl overflow-hidden" id="sim-result-spot">
+                                <div class="px-7 pt-7 pb-5 border-b border-white/10">
+                                    <p class="text-orange-100 text-xs font-bold tracking-widest uppercase mb-1">スポット概算見積もり</p>
+                                    <div class="flex items-end gap-2">
+                                        <span class="text-white font-black" style="font-size:2.5rem; line-height:1" id="spot-total-price">¥0</span>
+                                        <span class="text-orange-100 text-sm mb-1">〜（税抜）</span>
+                                    </div>
+                                    <p class="text-orange-200 text-xs mt-1">選択した手続きの合計概算</p>
+                                </div>
+
+                                <!-- 内訳 -->
+                                <div class="px-7 py-5 space-y-2 border-b border-white/10 min-h-[80px]" id="spot-breakdown">
+                                    <p class="text-orange-200 text-xs text-center">手続きを選択してください</p>
+                                </div>
+
+                                <!-- 規模バッジ -->
+                                <div class="px-7 py-4 bg-white/5 border-b border-white/10">
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="text-orange-100">従業員規模</span>
+                                        <span class="text-white font-bold" id="spot-scale-badge">〜10名</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm mt-1">
+                                        <span class="text-orange-100">選択項目数</span>
+                                        <span class="text-white font-bold" id="spot-count-badge">0件</span>
+                                    </div>
+                                </div>
+
+                                <!-- 顧問契約比較 -->
+                                <div class="px-7 py-4 bg-white/5 border-b border-white/10">
+                                    <p class="text-orange-100 text-xs mb-2">💡 月1回以上ご依頼なら顧問契約がお得</p>
+                                    <button onclick="simSwitchTab('advisor')" class="text-white underline text-xs font-bold hover:text-yellow-200 transition">→ 顧問契約のシミュレーションへ</button>
+                                </div>
+
+                                <!-- CTA -->
+                                <div class="px-7 py-6 space-y-3">
+                                    <button onclick="simOpenContact('spot')"
+                                        class="w-full bg-white text-orange-600 hover:bg-orange-50 font-black py-4 rounded-2xl transition shadow-xl text-sm">
+                                        この内容で相談を申し込む
+                                    </button>
+                                    <button onclick="simPrint('spot')"
+                                        class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-3 rounded-xl transition text-sm border border-white/20">
+                                        🖨 見積もりを印刷する
+                                    </button>
+                                </div>
+                                <p class="text-center text-orange-200/60 text-xs pb-4">※概算です。正式見積りは無料相談にて</p>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /sim-panel-spot -->
+
+            </div><!-- /container -->
+        </section>
+
         <!-- SOLUTIONS PAGE (Dynamic) -->
         <section id="page-solutions" class="py-16 md:py-24 bg-white min-h-[60vh] hidden">
             <div class="container mx-auto px-4 max-w-4xl">
@@ -2644,6 +3252,7 @@ const DL_PDF_DATA = [
                         <li><button onclick="showPage('checkup')" class="hover:text-white transition">✅ 労務リスク診断</button></li>
                         <li><button onclick="showPage('subsidy-sim')" class="hover:text-white transition">💰 助成金診断</button></li>
                         <li><button onclick="showPage('salary-calc')" class="hover:text-white transition">🧮 給与計算ツール</button></li>
+                        <li><button onclick="showPage('price-sim')" class="hover:text-white transition text-amber-200 font-semibold">🧮 料金シミュレーター</button></li>
                         <li><button onclick="showPage('download')" class="hover:text-white transition text-indigo-200 font-semibold">📥 無料資料ダウンロード</button></li>
                         <li><button onclick="showPage('spot')" class="hover:text-white transition font-bold text-orange-300">📋 手続きを依頼する</button></li>
                     </ul>
@@ -2652,7 +3261,7 @@ const DL_PDF_DATA = [
                     <h4 class="font-bold mb-4 text-lg">お問い合わせ</h4>
                     <ul class="space-y-3 text-sm text-blue-100">
                         <li class="flex items-center gap-2"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg><a href="tel:07010471625" class="hover:text-white transition">070-1047-1625</a></li>
-                        <li class="flex items-center gap-2"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7300015d18121e1a061633141e121a1f5d101c1e"><span class="__cf_email__" data-cfemail="681b1a46030905011d0d280f05090104460b0705">sr.kamiue@gmail.com</span></a></span></li>
+                        <li class="flex items-center gap-2"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7300015d18121e1a061633141e121a1f5d101c1e"><span class="__cf_email__" data-cfemail="681b1a46030905011d0d280f05090104460b0705">[email&#160;protected]</span></a></span></li>
                         <li class="flex items-start gap-2"><svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg><span>〒983-0005<br>宮城県仙台市宮城野区<br>福室字田中東二番25-6</span></li>
                         <li class="flex items-center gap-2"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg><span>平日 9:00〜17:00</span></li>
                     </ul>
@@ -2880,8 +3489,453 @@ const DL_PDF_DATA = [
     })();
 
 
+
+    // =============================================
+    // 料金シミュレーター JS
+    // =============================================
+    (function() {
+
+        // ---- 料金テーブル（仙台市・地方都市相場中央値ベース）----
+        // スタンダード: 相場中央値 5名=25,000 / 10名=28,000 / 20名=34,000 / 30名=40,000
+        // フルサポート: スタンダード + 給与計算オプション相当（差額ゼロ設計）
+        // 顧問契約: base + per_emp * max(0, emp - included)
+        const ADV_PLANS = {
+            standard: { name: '顧問契約（スタンダード）', base: 25000, per_emp: 600,  included: 5,  unit: '/月' },
+            full:     { name: 'フルサポート契約',         base: 37000, per_emp: 1400, included: 5,  unit: '/月' },
+            startup:  { name: '創業パックプラン',         base: 180000,per_emp: 4000, included: 3,  unit: '/6か月', isLump: true },
+        };
+        // オプション給与計算: base=12,000 + 800/人(5名超) ← フルとスタンダードの差額と一致
+        const ADV_OPTIONS = {
+            payroll:    { name: '給与計算代行',               base: 12000, per_emp: 800,  included: 5  },
+            yearend:    { name: '年末調整代行',               base: 15000, per_emp: 500,  included: 5, isAnnual: true },
+            rules:      { name: '就業規則 作成・見直し',      fixed: 80000 },
+            subsidy:    { name: '助成金申請代行',             fixed: 0,    note: '成功報酬20%' },
+            attendance: { name: 'クラウド勤怠導入支援',       fixed: 50000 },
+            evaluation: { name: '人事評価制度設計',           fixed: 150000 },
+            audit:      { name: '労務監査',                   fixed: 80000 },
+        };
+
+        // スポット料金: scale = 'small'|'mid'|'large'（仙台市相場中央値ベース）
+        const SPOT_ITEMS = {
+            rules_new:       { name: '就業規則 新規作成',                   small:80000,  mid:110000, large:150000 },
+            rules_rev:       { name: '就業規則 改定・見直し',               small:40000,  mid:60000,  large:80000  },
+            contract:        { name: '雇用契約書・労働条件通知書 作成',     small:25000,  mid:35000,  large:45000  },
+            agreement36:     { name: '36協定 作成・届出',                   small:15000,  mid:20000,  large:25000  },
+            si_new:          { name: '社会保険 新規適用手続き',             small:40000,  mid:55000,  large:70000  },
+            si_entry:        { name: '入退社手続き代行（スポット）',        small:8000,   mid:11000,  large:15000  },
+            si_count:        { name: '算定基礎届・月額変更届',              small:20000,  mid:28000,  large:38000  },
+            payroll_spot:    { name: '給与計算代行（単月スポット）',        small:15000,  mid:20000,  large:28000  },
+            yearend_spot:    { name: '年末調整代行（スポット）',            small:25000,  mid:40000,  large:60000  },
+            subsidy_app:     { name: '助成金申請代行',                      fixed: '着手金20,000円＋成功報酬20%' },
+            labor_audit:     { name: '労務監査・リスク診断',                small:80000,  mid:100000, large:130000 },
+            attendance_impl: { name: 'クラウド勤怠システム導入支援',        small:50000,  mid:65000,  large:85000  },
+            training:        { name: '従業員研修',                          small:45000,  mid:55000,  large:70000  },
+        };
+
+        let spotScale = 'small';
+
+        // ---- フォーマット ----
+        const fmt = n => n.toLocaleString('ja-JP');
+
+        // ---- スライダーの色更新 ----
+        function updateSliderColor() {
+            const sl = document.getElementById('adv-emp-slider');
+            if (!sl) return;
+            const pct = ((sl.value - sl.min) / (sl.max - sl.min)) * 100;
+            sl.style.background = `linear-gradient(to right, #1e3a8a 0%, #1e3a8a ${pct}%, #e5e7eb ${pct}%, #e5e7eb 100%)`;
+        }
+
+        // ---- 顧問契約計算 ----
+        window.simCalc = function() {
+            const empEl = document.getElementById('adv-emp-slider');
+            if (!empEl) return;
+            const emp = parseInt(empEl.value);
+            document.getElementById('adv-emp-display').textContent = emp;
+            document.getElementById('adv-emp-badge').textContent = emp + '名';
+            updateSliderColor();
+            updateEmpChips(emp);
+
+            // ベースプラン
+            const planKey = document.querySelector('input[name="adv-base"]:checked')?.value || 'standard';
+            const plan    = ADV_PLANS[planKey];
+            const extraEmp = Math.max(0, emp - plan.included);
+            const baseAmt  = plan.base + extraEmp * plan.per_emp;
+
+            // ---- プランに含まれるオプションを制御 ----
+            // full: 給与計算・年末調整 を含む
+            // startup: 給与計算 を含む
+            const PLAN_INCLUDED_OPTS = {
+                standard: [],
+                full:     ['payroll'],           // 年末調整は月額換算のためオプション実費扱い
+                startup:  ['payroll'],
+            };
+            const includedOpts = PLAN_INCLUDED_OPTS[planKey] || [];
+
+            document.querySelectorAll('#adv-options .sim-opt-card').forEach(card => {
+                const cb  = card.querySelector('input[type="checkbox"]');
+                if (!cb) return;
+                const key = cb.value;
+                const isIncluded = includedOpts.includes(key);
+
+                if (isIncluded) {
+                    // プランに含まれる → チェック済み・操作不可・バッジ表示
+                    cb.checked  = true;
+                    cb.disabled = true;
+                    card.style.opacity = '0.7';
+                    card.style.cursor  = 'default';
+                    card.style.background = '#f0fdf4';
+                    card.style.borderColor = '#bbf7d0';
+                    // バッジが未追加なら追加
+                    if (!card.querySelector('.plan-included-badge')) {
+                        const badge = document.createElement('span');
+                        badge.className = 'plan-included-badge text-xs font-black px-2 py-0.5 rounded-full bg-green-100 text-green-700 border border-green-300 ml-1 flex-shrink-0';
+                        badge.textContent = 'プランに含む';
+                        const labelEl = card.querySelector('.font-bold.text-gray-800');
+                        if (labelEl) labelEl.parentNode.insertBefore(badge, labelEl.nextSibling);
+                    }
+                } else {
+                    // プランに含まれない → 通常状態に戻す
+                    cb.disabled = false;
+                    card.style.opacity = '';
+                    card.style.cursor  = 'pointer';
+                    if (!cb.checked) {
+                        card.style.background = '';
+                        card.style.borderColor = '';
+                    }
+                    const badge = card.querySelector('.plan-included-badge');
+                    if (badge) badge.remove();
+                }
+            });
+
+            // プランカード価格更新
+            Object.keys(ADV_PLANS).forEach(k => {
+                const p = ADV_PLANS[k];
+                const ea = Math.max(0, emp - p.included);
+                const amt = p.base + ea * p.per_emp;
+                const el = document.getElementById('adv-' + (k==='standard'?'std':k) + '-price');
+                if (el) {
+                    if (k === 'startup') {
+                        el.textContent = fmt(amt) + '円〜/6か月';
+                    } else {
+                        el.textContent = fmt(amt) + '円〜/月';
+                    }
+                }
+            });
+
+            // オプション
+            let monthlyOptions = 0;
+            let annualOptions  = 0;
+            let fixedOptions   = 0;
+            const breakdown = [];
+            breakdown.push({ label: plan.name, amount: baseAmt, unit: plan.isLump ? '/6か月' : '/月' });
+
+            const optPayroll = document.querySelector('#adv-options input[value="payroll"]');
+            if (optPayroll?.checked) {
+                if (includedOpts.includes('payroll')) {
+                    // プラン込み → 追加費用なし、内訳に「プラン込み」表示
+                    breakdown.push({ label: ADV_OPTIONS.payroll.name, amount: null, note: 'プランに含む', noteColor: '#86efac' });
+                    const el = document.getElementById('opt-payroll-price');
+                    if (el) { el.textContent = 'プランに含む'; el.style.color = '#16a34a'; }
+                } else {
+                    const p = ADV_OPTIONS.payroll;
+                    const a = p.base + Math.max(0, emp - p.included) * p.per_emp;
+                    monthlyOptions += a;
+                    breakdown.push({ label: p.name, amount: a, unit: '/月' });
+                    const el = document.getElementById('opt-payroll-price');
+                    if (el) { el.textContent = '+' + fmt(a) + '円〜/月'; el.style.color = ''; }
+                }
+            }
+            const optYearend = document.querySelector('#adv-options input[value="yearend"]');
+            if (optYearend?.checked) {
+                if (includedOpts.includes('yearend')) {
+                    breakdown.push({ label: ADV_OPTIONS.yearend.name, amount: null, note: 'プランに含む', noteColor: '#86efac' });
+                    const el = document.getElementById('opt-yearend-price');
+                    if (el) { el.textContent = 'プランに含む'; el.style.color = '#16a34a'; }
+                } else {
+                    const p = ADV_OPTIONS.yearend;
+                    const a = p.base + Math.max(0, emp - p.included) * p.per_emp;
+                    annualOptions += a;
+                    breakdown.push({ label: p.name, amount: a, unit: '/年' });
+                    const el = document.getElementById('opt-yearend-price');
+                    if (el) { el.textContent = '+' + fmt(a) + '円〜/回'; el.style.color = ''; }
+                }
+            }
+            const optRules = document.querySelector('#adv-options input[value="rules"]');
+            if (optRules?.checked) {
+                fixedOptions += 100000;
+                breakdown.push({ label: ADV_OPTIONS.rules.name, amount: 100000, unit: '/回' });
+            }
+            const optSubsidy = document.querySelector('#adv-options input[value="subsidy"]');
+            if (optSubsidy?.checked) {
+                breakdown.push({ label: ADV_OPTIONS.subsidy.name, amount: null, note: '成功報酬20%' });
+            }
+            const optAttend = document.querySelector('#adv-options input[value="attendance"]');
+            if (optAttend?.checked) {
+                fixedOptions += 50000;
+                breakdown.push({ label: ADV_OPTIONS.attendance.name, amount: 50000, unit: '/回' });
+            }
+            const optEval = document.querySelector('#adv-options input[value="evaluation"]');
+            if (optEval?.checked) {
+                fixedOptions += 200000;
+                breakdown.push({ label: ADV_OPTIONS.evaluation.name, amount: 200000, unit: '/回' });
+            }
+            const optAudit = document.querySelector('#adv-options input[value="audit"]');
+            if (optAudit?.checked) {
+                fixedOptions += 80000;
+                breakdown.push({ label: ADV_OPTIONS.audit.name, amount: 80000, unit: '/回' });
+            }
+
+            // 月額合計（スタートアップ以外）
+            const isStartup   = planKey === 'startup';
+            const monthlyBase = isStartup ? 0 : baseAmt;
+            const monthlyTotal= monthlyBase + monthlyOptions;
+            const annualTotal = isStartup
+                ? baseAmt + monthlyOptions * 6 + annualOptions + fixedOptions
+                : monthlyTotal * 12 + annualOptions + fixedOptions;
+
+            // 表示更新
+            const mainEl = document.getElementById('adv-total-monthly');
+            const unitEl = document.getElementById('adv-total-unit');
+            if (isStartup) {
+                mainEl.textContent = '¥' + fmt(baseAmt);
+                unitEl.textContent = '/6か月（税抜）';
+                document.getElementById('adv-startup-note').classList.remove('hidden');
+            } else {
+                mainEl.textContent = '¥' + fmt(monthlyTotal);
+                unitEl.textContent = '/月（税抜）';
+                document.getElementById('adv-startup-note').classList.add('hidden');
+            }
+            document.getElementById('adv-monthly-total-sub').textContent = '¥' + fmt(isStartup ? baseAmt : monthlyTotal) + '〜';
+            document.getElementById('adv-annual-cost').textContent = '¥' + fmt(annualTotal) + '〜';
+
+            // 内訳HTML
+            const bdEl = document.getElementById('adv-breakdown');
+            bdEl.innerHTML = breakdown.map(r => {
+                const noteColor = r.noteColor || '#86efac';
+                const amtStr = r.amount != null
+                    ? '<span class="amount">¥' + fmt(r.amount) + (r.unit||'') + '</span>'
+                    : '<span class="amount" style="color:' + noteColor + '">' + (r.note||'') + '</span>';
+                return '<div class="sim-breakdown-row"><span class="label">' + r.label + '</span>' + amtStr + '</div>';
+            }).join('');
+        };
+
+        // ---- チップボタンの選択状態更新 ----
+        function updateEmpChips(emp) {
+            const thresholds = [5,10,20,30];
+            const labels     = ['〜5名','〜10名','〜20名','30名〜'];
+            document.querySelectorAll('#adv-emp-chips .sim-chip').forEach((btn, i) => {
+                btn.classList.toggle('active', emp <= thresholds[i] && (i===0 || emp > thresholds[i-1]));
+            });
+        }
+
+        window.simSetEmp = function(n) {
+            const sl = document.getElementById('adv-emp-slider');
+            if (sl) { sl.value = n; simCalc(); }
+        };
+
+        // ---- タブ切替 ----
+        window.simSwitchTab = function(tab) {
+            const tabAdv  = document.getElementById('sim-tab-advisor');
+            const tabSpot = document.getElementById('sim-tab-spot');
+            const panAdv  = document.getElementById('sim-panel-advisor');
+            const panSpot = document.getElementById('sim-panel-spot');
+            if (!tabAdv) return;
+            if (tab === 'advisor') {
+                tabAdv.classList.add('sim-tab-active');
+                tabAdv.classList.remove('text-gray-400');
+                tabSpot.classList.remove('sim-tab-active');
+                tabSpot.classList.add('text-gray-400');
+                panAdv.classList.remove('hidden');
+                panSpot.classList.add('hidden');
+            } else {
+                tabSpot.classList.add('sim-tab-active');
+                tabSpot.classList.remove('text-gray-400');
+                tabAdv.classList.remove('sim-tab-active');
+                tabAdv.classList.add('text-gray-400');
+                panSpot.classList.remove('hidden');
+                panAdv.classList.add('hidden');
+            }
+        };
+
+        // ---- スポット: 規模切替 ----
+        window.simSpotSetScale = function(scale) {
+            spotScale = scale;
+            ['small','mid','large'].forEach(s => {
+                const btn = document.getElementById('spot-sc-' + s);
+                if (btn) btn.classList.toggle('active', s === scale);
+            });
+            // 金額表示を規模に合わせて更新
+            document.querySelectorAll('.spot-price').forEach(el => {
+                const amt = parseInt(el.dataset[scale]);
+                if (amt) el.textContent = fmt(amt) + '円〜';
+            });
+            const labels = { small:'〜10名', mid:'11〜30名', large:'31名以上' };
+            const badge = document.getElementById('spot-scale-badge');
+            if (badge) badge.textContent = labels[scale];
+            simSpotCalc();
+        };
+
+        // ---- スポット計算 ----
+        window.simSpotCalc = function() {
+            let total = 0;
+            const breakdown = [];
+            let count = 0;
+            let hasSpecial = false;
+
+            document.querySelectorAll('#sim-panel-spot input[type="checkbox"]').forEach(cb => {
+                if (!cb.checked) return;
+                const key  = cb.value;
+                const item = SPOT_ITEMS[key];
+                if (!item) return;
+                count++;
+                if (item.fixed && typeof item.fixed === 'string') {
+                    hasSpecial = true;
+                    breakdown.push({ label: item.name, note: item.fixed });
+                } else {
+                    const amt = item.fixed || item[spotScale] || 0;
+                    total += amt;
+                    breakdown.push({ label: item.name, amount: amt });
+                }
+            });
+
+            // 表示更新
+            document.getElementById('spot-total-price').textContent = '¥' + fmt(total);
+            document.getElementById('spot-count-badge').textContent = count + '件';
+
+            const bdEl = document.getElementById('spot-breakdown');
+            if (count === 0) {
+                bdEl.innerHTML = '<p class="text-orange-200 text-xs text-center">手続きを選択してください</p>';
+            } else {
+                bdEl.innerHTML = breakdown.map(r => {
+                    const amtStr = r.amount != null
+                        ? '<span class="amount">¥' + fmt(r.amount) + '〜</span>'
+                        : '<span class="amount" style="color:#fcd34d;font-size:0.7rem">' + (r.note||'') + '</span>';
+                    return '<div class="sim-breakdown-row"><span class="label">' + r.label + '</span>' + amtStr + '</div>';
+                }).join('');
+            }
+        };
+
+        // ---- 問い合わせページへ遷移（見積内容をコピー） ----
+        window.simOpenContact = function(type) {
+            // 見積内容をセッションストレージ的にグローバル変数に保存して contact ページに渡す
+            let summary = '';
+            if (type === 'advisor') {
+                const empEl   = document.getElementById('adv-emp-slider');
+                const emp     = empEl ? empEl.value : '?';
+                const planKey = document.querySelector('input[name="adv-base"]:checked')?.value || 'standard';
+                const plan    = ADV_PLANS[planKey];
+                const total   = document.getElementById('adv-total-monthly')?.textContent || '';
+                const opts    = [];
+                document.querySelectorAll('#adv-options input[type="checkbox"]:checked').forEach(cb => {
+                    const o = ADV_OPTIONS[cb.value];
+                    if (o) opts.push(o.name);
+                });
+                summary = `【料金シミュレーター 見積内容】\n契約種別: 顧問契約\nプラン: ${plan.name}\n従業員数: ${emp}名\n月額概算: ${total}${plan.isLump?'（6か月分）':'/月（税抜）'}`;
+                if (opts.length) summary += `\nオプション: ${opts.join('、')}`;
+            } else {
+                const total = document.getElementById('spot-total-price')?.textContent || '¥0';
+                const items = [];
+                document.querySelectorAll('#sim-panel-spot input[type="checkbox"]:checked').forEach(cb => {
+                    const item = SPOT_ITEMS[cb.value];
+                    if (item) items.push(item.name);
+                });
+                const scaleLabel = { small:'〜10名', mid:'11〜30名', large:'31名以上' };
+                summary = `【料金シミュレーター 見積内容】\n契約種別: スポット手続き\n従業員規模: ${scaleLabel[spotScale]}\n合計概算: ${total}〜（税抜）`;
+                if (items.length) summary += `\n依頼内容: ${items.join('、')}`;
+            }
+            window._simContactNote = summary;
+            showPage('contact');
+            // コンタクトページのテキストエリアに自動入力
+            setTimeout(function() {
+                const ta = document.querySelector('#page-contact textarea, #contact-message, textarea[name="message"]');
+                if (ta && !ta.value) ta.value = summary;
+                else if (ta) ta.value = summary + '\n\n' + ta.value;
+            }, 300);
+        };
+
+        // ---- 印刷 ----
+        window.simPrint = function(type) {
+            let content = '';
+            const now = new Date().toLocaleDateString('ja-JP', {year:'numeric',month:'long',day:'numeric'});
+            if (type === 'advisor') {
+                const empEl   = document.getElementById('adv-emp-slider');
+                const emp     = empEl ? empEl.value : '?';
+                const planKey = document.querySelector('input[name="adv-base"]:checked')?.value || 'standard';
+                const plan    = ADV_PLANS[planKey];
+                const extraEmp = Math.max(0, parseInt(emp) - plan.included);
+                const baseAmt  = plan.base + extraEmp * plan.per_emp;
+                const total   = document.getElementById('adv-total-monthly')?.textContent || '';
+                const annual  = document.getElementById('adv-annual-cost')?.textContent || '';
+                const opts    = [];
+                document.querySelectorAll('#adv-options input[type="checkbox"]:checked').forEach(cb => {
+                    const o = ADV_OPTIONS[cb.value];
+                    if (o) opts.push(o.name);
+                });
+                content = `
+                <h2 style="font-size:1.4rem;font-weight:900;color:#1e3a8a;margin-bottom:0.5rem">顧問契約 概算見積もり</h2>
+                <p style="color:#6b7280;font-size:0.85rem;margin-bottom:1.5rem">作成日: ${now}　※概算です。正式見積りは無料相談にてご提示いたします。</p>
+                <table style="width:100%;border-collapse:collapse;margin-bottom:1rem">
+                  <tr style="background:#eff6ff"><td style="padding:8px 12px;font-weight:700;width:40%">プラン</td><td style="padding:8px 12px">${plan.name}</td></tr>
+                  <tr><td style="padding:8px 12px;font-weight:700;background:#f9fafb">従業員数</td><td style="padding:8px 12px">${emp}名</td></tr>
+                  <tr style="background:#eff6ff"><td style="padding:8px 12px;font-weight:700">月額概算</td><td style="padding:8px 12px;font-weight:900;color:#1e3a8a;font-size:1.2rem">${total}${plan.isLump?'（6か月分）':'/月（税抜）'}</td></tr>
+                  <tr><td style="padding:8px 12px;font-weight:700;background:#f9fafb">年間概算コスト</td><td style="padding:8px 12px;font-weight:900;color:#1e3a8a">${annual}〜（税抜）</td></tr>
+                  ${opts.length?`<tr style="background:#eff6ff"><td style="padding:8px 12px;font-weight:700">追加オプション</td><td style="padding:8px 12px">${opts.join('<br>')}</td></tr>`:''}
+                </table>`;
+            } else {
+                const total = document.getElementById('spot-total-price')?.textContent || '¥0';
+                const scaleLabel = { small:'〜10名', mid:'11〜30名', large:'31名以上' };
+                const rows = [];
+                document.querySelectorAll('#sim-panel-spot input[type="checkbox"]:checked').forEach(cb => {
+                    const item = SPOT_ITEMS[cb.value];
+                    if (!item) return;
+                    if (item.fixed && typeof item.fixed === 'string') {
+                        rows.push(`<tr><td style="padding:8px 12px">${item.name}</td><td style="padding:8px 12px">${item.fixed}</td></tr>`);
+                    } else {
+                        const amt = item.fixed || item[spotScale] || 0;
+                        rows.push(`<tr><td style="padding:8px 12px">${item.name}</td><td style="padding:8px 12px;font-weight:700">¥${fmt(amt)}〜</td></tr>`);
+                    }
+                });
+                content = `
+                <h2 style="font-size:1.4rem;font-weight:900;color:#ea580c;margin-bottom:0.5rem">スポット手続き 概算見積もり</h2>
+                <p style="color:#6b7280;font-size:0.85rem;margin-bottom:1.5rem">作成日: ${now}　※概算です。正式見積りは無料相談にてご提示いたします。</p>
+                <table style="width:100%;border-collapse:collapse;margin-bottom:1rem">
+                  <tr style="background:#fff7ed"><td style="padding:8px 12px;font-weight:700;width:40%">従業員規模</td><td style="padding:8px 12px">${scaleLabel[spotScale]}</td></tr>
+                  <tr><th style="padding:8px 12px;background:#f9fafb;text-align:left">手続き内容</th><th style="padding:8px 12px;background:#f9fafb;text-align:left">概算費用（税抜）</th></tr>
+                  ${rows.join('')}
+                  <tr style="background:#fff7ed"><td style="padding:8px 12px;font-weight:900">合計概算</td><td style="padding:8px 12px;font-weight:900;color:#ea580c;font-size:1.2rem">${total}〜（税抜）</td></tr>
+                </table>`;
+            }
+            const w = window.open('', '_blank', 'width=700,height=800');
+            w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>料金見積もり - カミウエ社会保険労務士事務所</title>
+            <style>body{font-family:'Hiragino Sans','Meiryo',sans-serif;padding:2rem;color:#1f2937;}table{border:1px solid #e5e7eb;}td,th{border:1px solid #e5e7eb;}
+            .footer{margin-top:2rem;padding-top:1rem;border-top:1px solid #e5e7eb;font-size:0.8rem;color:#9ca3af;}</style></head>
+            <body>${content}
+            <div class="footer">カミウエ社会保険労務士事務所　〒983-0005 宮城県仙台市宮城野区福室字田中東二番25-6　TEL: 070-1047-1625　sr.kamiue@gmail.com</div>
+            <script>window.print();<\/script></body></html>`);
+            w.document.close();
+        };
+
+        // ---- ページ表示時に初期計算 ----
+        document.addEventListener('DOMContentLoaded', function() {
+            simCalc();
+            simSpotCalc();
+            updateSliderColor();
+        });
+
+        // showPage 経由でのページ表示時も再計算
+        const _origShowPage = window._origShowPage;
+
+    })();
+
     function showPage(pageId) {
-        const pages = ['home','services','about','links','faq','contact','solutions','blog','checkup','subsidy-sim','salary-calc','download','dl-thankyou'];
+        if (pageId === 'price-sim') {
+            setTimeout(function() {
+                if (typeof simCalc === 'function') { simCalc(); }
+                if (typeof simSpotCalc === 'function') { simSpotCalc(); }
+                if (typeof updateSliderColor === 'function') { updateSliderColor(); }
+            }, 50);
+        }
+        const pages = ['home','services','about','links','faq','contact','solutions','blog','checkup','subsidy-sim','salary-calc','download','dl-thankyou','price-sim'];
         pages.forEach(id => {
             const section = document.getElementById('page-' + id);
             if (section) section.classList.add('hidden');
@@ -3767,7 +4821,7 @@ const DL_PDF_DATA = [
                 ]
             },
             payroll_price: {
-                msg: "給与計算代行を含む**フルサポート契約**は**月額40,000円〜**（従業員数により変動）。\n\n顧問契約（25,000円〜）との組み合わせでコスト最適化も可能です。\n詳細はお気軽にご相談ください。",
+                msg: "給与計算代行を含む**フルサポート契約**は**月額37,000円〜**（従業員数により変動）。\n\n顧問契約（25,000円〜）との組み合わせでコスト最適化も可能です。\n詳細はお気軽にご相談ください。",
                 cta: true
             },
             payroll_calc: {
