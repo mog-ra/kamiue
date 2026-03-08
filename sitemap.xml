@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- ホーム -->
+  <url>
+    <loc>https://kamiue.com/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- サービス・料金 -->
+  <url>
+    <loc>https://kamiue.com/#services</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 手続き依頼 -->
+  <url>
+    <loc>https://kamiue.com/#spot</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 料金シミュレーター -->
+  <url>
+    <loc>https://kamiue.com/#price-sim</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 事務所紹介 -->
+  <url>
+    <loc>https://kamiue.com/#about</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- お問い合わせ -->
+  <url>
+    <loc>https://kamiue.com/#contact</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- よくある質問 -->
+  <url>
+    <loc>https://kamiue.com/#faq</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 労務管理コラム -->
+  <url>
+    <loc>https://kamiue.com/#blog</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 労務リスク診断 -->
+  <url>
+    <loc>https://kamiue.com/#checkup</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 助成金診断 -->
+  <url>
+    <loc>https://kamiue.com/#subsidy-sim</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 給与計算ツール -->
+  <url>
+    <loc>https://kamiue.com/#salary-calc</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- 無料資料ダウンロード -->
+  <url>
+    <loc>https://kamiue.com/#download</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- お役立ちリンク集 -->
+  <url>
+    <loc>https://kamiue.com/#links</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- 課題別ソリューション -->
+  <url>
+    <loc>https://kamiue.com/#solutions</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
