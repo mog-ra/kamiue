@@ -28,7 +28,7 @@
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
+            <button onclick="showPage('home')" class="flex items-center gap-3 hover:opacity-80 transition">
                 <div class="w-16 h-16">
                     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                         <ellipse cx="100" cy="100" rx="95" ry="75" fill="#FDB913"/>
@@ -42,7 +42,7 @@
                     <h1 class="text-lg font-bold text-blue-900 leading-tight">カミウエ社会保険労務士事務所</h1>
                     <p class="text-xs text-gray-500">宮城 仙台 社労士 | KAMIUE SR OFFICE</p>
                 </div>
-            </div>
+            </button>
             <nav class="hidden md:flex gap-8 items-center text-sm font-medium">
                 <button id="nav-home" onclick="showPage('home')" class="active-tab pb-1 transition hover:text-blue-900">ホーム</button>
                 <button id="nav-services" onclick="showPage('services')" class="pb-1 transition hover:text-blue-900">サービス</button>
@@ -156,6 +156,9 @@
                             </button>
                             <button onclick="showPage('services')" class="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-2 border-white/50 font-bold py-5 px-12 rounded-xl transition text-lg">
                                 サービス一覧
+                            </button>
+                            <button onclick="showPage('blog')" class="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-2 border-white/50 font-bold py-5 px-12 rounded-xl transition text-lg flex items-center gap-2">
+                                📝 労務管理コラム
                             </button>
                             <button onclick="showPage('price-sim')" class="bg-amber-400 hover:bg-amber-300 text-amber-900 font-bold py-5 px-12 rounded-xl shadow-lg transition text-lg flex items-center gap-2">
                                 🧮 料金シミュレーター
