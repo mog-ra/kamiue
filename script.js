@@ -1992,6 +1992,449 @@ document.addEventListener('DOMContentLoaded', function() {
   </p>
 </div>
 `
+        },
+        {
+            id: 7,
+            title: '就業規則の見直しポイント2025 ― 必須7項目チェック',
+            excerpt: '就業規則は「作れば終わり」ではありません。法改正のたびに内容が陳腐化し、気づかぬうちに法令違反になるリスクがあります。2025年時点で必ず確認すべき7項目を解説します。',
+            category: '法令遵守',
+            emoji: '📖',
+            date: '2025年4月',
+            isNew: true,
+            readTime: '9分',
+            contact: '就業規則の見直し・作成を依頼する',
+            body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">就業規則は「作ったまま放置」が最も危険です。<strong>法改正に対応できていない就業規則は、会社にとって無効な規定だらけになるリスク</strong>があります。2025年時点で特に重要な7項目を点検しましょう。</p>
+
+<div class="bg-indigo-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-indigo-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">🔍</span> 2025年版 必須チェック7項目
+  </h2>
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 border border-indigo-100 shadow-sm">
+      <p class="font-black text-indigo-800 mb-2 text-base">① 時間外労働の上限規制への対応</p>
+      <p class="text-gray-600 text-sm leading-relaxed">2019年施行の働き方改革により、月45時間・年360時間が法定上限に。就業規則の「時間外労働に関する規定」がこれを超える内容になっていれば<strong>法違反</strong>です。特別条項の記載も合わせて確認してください。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-indigo-100 shadow-sm">
+      <p class="font-black text-indigo-800 mb-2 text-base">② 育児・介護休業規定の最新化</p>
+      <p class="text-gray-600 text-sm leading-relaxed">2022〜2023年の育児・介護休業法改正により、産後パパ育休（出生時育児休業）・育休の分割取得が新設されました。旧規定のまま運用している企業は、従業員から申請があっても対応できない事態になりかねません。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-indigo-100 shadow-sm">
+      <p class="font-black text-indigo-800 mb-2 text-base">③ ハラスメント防止規程の整備</p>
+      <p class="text-gray-600 text-sm leading-relaxed">パワハラ防止措置は2022年4月から中小企業でも義務化。「相談窓口の設置」「再発防止措置」「不利益取扱いの禁止」が就業規則に明記されているか確認が必要です。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-indigo-100 shadow-sm">
+      <p class="font-black text-indigo-800 mb-2 text-base">④ テレワーク・在宅勤務規程の追加</p>
+      <p class="text-gray-600 text-sm leading-relaxed">就業規則にテレワーク関連の規定がない場合、費用負担（通信費・光熱費）の取り扱いや労働時間管理のルールが曖昧になります。トラブル防止のため、テレワーク規程を別規程として整備するか、就業規則に追記することが推奨されます。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-indigo-100 shadow-sm">
+      <p class="font-black text-indigo-800 mb-2 text-base">⑤ 副業・兼業に関する規定の見直し</p>
+      <p class="text-gray-600 text-sm leading-relaxed">厚生労働省の「副業・兼業の促進に関するガイドライン」では、原則として副業・兼業を認める方向が示されています。「一切禁止」の規定は裁判で無効と判断されるケースも出ています。許可制と届出制のどちらが自社に合うか整理しましょう。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-indigo-100 shadow-sm">
+      <p class="font-black text-indigo-800 mb-2 text-base">⑥ 有給休暇の計画的付与・時間単位取得</p>
+      <p class="text-gray-600 text-sm leading-relaxed">年5日の有給休暇取得義務化（2019年〜）に対応するため、計画的付与制度や時間単位年休制度を就業規則に定めている企業が増えています。未整備の場合は労使協定と合わせて整備が必要です。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-indigo-100 shadow-sm">
+      <p class="font-black text-indigo-800 mb-2 text-base">⑦ 懲戒規定の合理性確認</p>
+      <p class="text-gray-600 text-sm leading-relaxed">SNSでの不適切投稿・情報漏洩に対する懲戒規定がない企業が多数あります。また懲戒処分の種類（戒告・減給・出勤停止・諭旨解雇・懲戒解雇）と、それぞれの要件を明確に規定しておかないと、いざ問題社員への対応が必要なときに打つ手がなくなります。</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-red-50 border-l-4 border-red-500 rounded-r-xl p-6 mb-8">
+  <h2 class="text-xl font-black text-red-900 mb-3">⚠️ 就業規則が「ない」「周知されていない」は即アウト</h2>
+  <p class="text-gray-700 text-sm leading-relaxed mb-2">常時10名以上の労働者を雇用する事業場は、<strong>就業規則の作成・労働基準監督署への届出・労働者への周知が法的義務</strong>（労働基準法第89・90・106条）。違反した場合は30万円以下の罰金。</p>
+  <p class="text-gray-700 text-sm leading-relaxed">「引き出しに入っているが従業員は見たことがない」状態では周知義務を果たしていません。<strong>就業規則はすべての従業員がいつでも閲覧できる場所に掲示・備え付けること</strong>が求められます。</p>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    就業規則の見直しは「問題が起きてから」では遅い。特に懲戒解雇やハラスメント対応の場面では、整備された就業規則が会社を守る唯一の盾になります。「最後に見直したのがいつか思い出せない」という場合は、今すぐ点検のタイミングです。現状の就業規則を持参いただければ、無料でチェックします。
+  </p>
+</div>
+`
+        },
+        {
+            id: 8,
+            title: '社会保険料の節減戦略 ― 適法に手取りを増やす4つの方法',
+            excerpt: '社会保険料は給与総額の約30%にのぼる経営コストです。違法な操作は論外ですが、制度を正しく理解して設計すれば、会社・従業員双方の負担を適法に最適化できます。',
+            category: 'リスク管理',
+            emoji: '💴',
+            date: '2025年4月',
+            isNew: true,
+            readTime: '8分',
+            contact: '社会保険の最適化を相談する',
+            body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">社会保険料（健康保険・厚生年金）の会社負担は、給与総額の約15%。従業員負担も合わせると<strong>約30%が社会保険料として消える計算</strong>です。違法・脱法な方法は論外ですが、制度を正しく理解した上で設計すれば、合法的に会社・従業員双方の負担を最適化できます。</p>
+
+<div class="bg-emerald-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-emerald-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">✅</span> 合法的な社会保険料最適化 4つの手法
+  </h2>
+  <div class="space-y-5">
+    <div class="bg-white rounded-xl p-5 border border-emerald-100 shadow-sm">
+      <p class="font-black text-emerald-800 mb-2 text-base">手法1：賞与の分割支給から一括支給への見直し</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-2">賞与の社会保険料は「賞与額 × 保険料率」で算出されますが、<strong>1回の支給額が1万円未満の場合は賞与として扱われません</strong>。また、年4回以上賞与を支給すると「標準報酬月額」の算定に組み込まれ、月々の保険料が上がります。年3回以内の支給設計が基本です。</p>
+      <div class="bg-emerald-50 rounded-lg p-3 text-xs text-emerald-800 font-medium">
+        📌 ポイント：賞与は年1〜3回に集約。年4回以上の少額分割は逆効果になる場合あり
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-emerald-100 shadow-sm">
+      <p class="font-black text-emerald-800 mb-2 text-base">手法2：月額変更届（随月改定）の適切な活用</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-2">給与が固定的賃金変動により2等級以上変動した場合、<strong>随時改定で標準報酬月額を見直すことができます</strong>。昇給時はすぐに改定されますが、降給時も同様に申請すれば保険料を下げることが可能。降給時の随月改定を見落としている企業が多いです。</p>
+      <div class="bg-emerald-50 rounded-lg p-3 text-xs text-emerald-800 font-medium">
+        📌 ポイント：給与引き下げ後は速やかに月額変更届を提出。数ヶ月放置すると差額が積み上がる
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-emerald-100 shadow-sm">
+      <p class="font-black text-emerald-800 mb-2 text-base">手法3：非課税通勤手当の上限活用</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-2">通勤手当は所得税非課税（月15万円まで）かつ<strong>社会保険料の算定基礎に含まれます</strong>。ただし実費相当額を超えた通勤手当は課税対象になります。一方、マイカー通勤者には距離に応じた非課税限度額があり、適切に設定することで手取り増につながります。</p>
+      <div class="bg-emerald-50 rounded-lg p-3 text-xs text-emerald-800 font-medium">
+        📌 ポイント：実費証明書類を取得した上で適正額を設定。過剰支給は課税リスクあり
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-emerald-100 shadow-sm">
+      <p class="font-black text-emerald-800 mb-2 text-base">手法4：選択的福利厚生（カフェテリアプラン）の活用</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-2">健康診断費用・資格取得費用・社員食堂・社宅などの現物給付は、<strong>要件を満たせば社会保険料・所得税の算定対象外</strong>となります。給与の一部を福利厚生に振り替えることで、手取り増と採用力向上を同時に達成できます。</p>
+      <div class="bg-emerald-50 rounded-lg p-3 text-xs text-emerald-800 font-medium">
+        📌 ポイント：現物給付の非課税要件は複雑。社労士・税理士との連携で適切に設計すること
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-red-50 border-l-4 border-red-500 rounded-r-xl p-6 mb-8">
+  <h2 class="text-xl font-black text-red-900 mb-3">🚫 絶対にやってはいけない「偽装」</h2>
+  <p class="text-gray-700 text-sm leading-relaxed">実際の給与を意図的に低く申告して保険料を減らす行為（標準報酬月額の偽装）は<strong>社会保険詐欺</strong>として厳しく罰せられます。年金事務所の調査で発覚した場合、遡及して保険料を徴収されるだけでなく、悪質な場合は詐欺罪での刑事告発も。「節約」のつもりが取り返しのつかない結果になります。</p>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    社会保険料の最適化は「脱法」ではなく「制度の正しい理解と適用」です。特に月額変更届の提出漏れ・賞与支給設計の見直しは、今すぐ着手できる施策です。「毎月の保険料が高すぎる気がする」と感じたら、一度給与明細と標準報酬月額を持参してご相談ください。
+  </p>
+</div>
+`
+        },
+        {
+            id: 9,
+            title: '育児休業・介護休業 取得率を高める職場環境づくり',
+            excerpt: '育休・介護休業の取得を阻む最大の障壁は「職場の雰囲気」です。法令対応だけでなく、取得しやすい環境と業務代替の仕組みを整えることが、人材定着と企業ブランドに直結します。',
+            category: '採用・定着',
+            emoji: '👶',
+            date: '2025年4月',
+            isNew: true,
+            readTime: '7分',
+            contact: '育休・介護休業規程の整備を相談する',
+            body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">育児休業・介護休業の取得を阻む最大の障壁は「法律を知らないこと」ではなく、<strong>「取りにくい職場の雰囲気」</strong>です。法令対応はもちろん必須ですが、実際に取得率を上げるには、仕組みと文化の両輪が不可欠です。</p>
+
+<div class="bg-pink-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-pink-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">📋</span> 企業に求められる法的義務（2025年時点）
+  </h2>
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 border border-pink-100 shadow-sm">
+      <p class="font-black text-pink-800 mb-2 text-base">義務1：妊娠・出産の申し出があった場合の個別周知と意向確認</p>
+      <p class="text-gray-600 text-sm leading-relaxed">従業員本人またはその配偶者が妊娠・出産を申し出た場合、<strong>育児休業制度の個別周知と取得の意向確認が義務</strong>（2022年10月〜）。口頭・書面・電子メール等の方法で実施し、記録を残すことが重要です。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-pink-100 shadow-sm">
+      <p class="font-black text-pink-800 mb-2 text-base">義務2：育児休業取得状況の公表（従業員1,000人超の場合）</p>
+      <p class="text-gray-600 text-sm leading-relaxed">常時雇用1,000人超の企業は、男性の育休取得率または育児目的休暇の取得率を年1回公表する義務があります。1,000人以下でも公表することで採用ブランディングに大きく貢献します。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-pink-100 shadow-sm">
+      <p class="font-black text-pink-800 mb-2 text-base">義務3：ハラスメント防止措置（マタハラ・パタハラ）</p>
+      <p class="text-gray-600 text-sm leading-relaxed">妊娠・出産・育休取得を理由とした不利益取扱い・ハラスメントの防止措置は全企業に義務。「育休を取ったら評価を下げる」「時短の人は昇進させない」等の言動は<strong>育介休法違反</strong>です。管理職への研修が急務です。</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-blue-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-4">🔧 取得率を上げる「仕組みづくり」5ステップ</h2>
+  <div class="space-y-4">
+    <div class="flex gap-4">
+      <span class="bg-blue-700 text-white font-black text-sm w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">1</span>
+      <div>
+        <p class="font-bold text-blue-900 mb-1">休業前の業務棚卸し・引き継ぎ計画の標準化</p>
+        <p class="text-gray-600 text-sm leading-relaxed">「私がいなくなったら困る」という属人化が取得を阻む最大の障壁。業務マニュアルの整備と引き継ぎ計画書の雛形を用意し、休業申請から3ヶ月前に着手するルールを設ける。</p>
+      </div>
+    </div>
+    <div class="flex gap-4">
+      <span class="bg-blue-600 text-white font-black text-sm w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">2</span>
+      <div>
+        <p class="font-bold text-blue-900 mb-1">上長への研修（アンコンシャスバイアス対策）</p>
+        <p class="text-gray-600 text-sm leading-relaxed">「育休を取りたいんだけど、言い出せなくて」という従業員の声は管理職のアンコンシャスバイアスから来ることが多い。年1回の管理職研修に育休・介護休業の対応を組み込む。</p>
+      </div>
+    </div>
+    <div class="flex gap-4">
+      <span class="bg-blue-500 text-white font-black text-sm w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">3</span>
+      <div>
+        <p class="font-bold text-blue-900 mb-1">復職支援プログラムの整備</p>
+        <p class="text-gray-600 text-sm leading-relaxed">復職後の業務内容・勤務形態（時短勤務・テレワーク等）を事前に本人と合意。復職1ヶ月前に面談を実施し、職場変化の情報提供と不安解消を図る。</p>
+      </div>
+    </div>
+    <div class="flex gap-4">
+      <span class="bg-blue-400 text-white font-black text-sm w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">4</span>
+      <div>
+        <p class="font-bold text-blue-900 mb-1">育休取得者の社内表彰・事例共有</p>
+        <p class="text-gray-600 text-sm leading-relaxed">特に男性育休は「自分が最初の事例になりたくない」という心理が取得を阻む。先行取得者の体験談を社内報やミーティングで共有し、「取りやすい雰囲気」を意図的に作る。</p>
+      </div>
+    </div>
+    <div class="flex gap-4">
+      <span class="bg-blue-300 text-white font-black text-sm w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">5</span>
+      <div>
+        <p class="font-bold text-blue-900 mb-1">介護休業の早期周知と相談窓口の設置</p>
+        <p class="text-gray-600 text-sm leading-relaxed">介護は「突然やってくる」ため、事前の制度周知が命綱。全従業員への年1回の制度説明と、匿名で相談できる窓口の設置で「介護離職ゼロ」を目指す。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    育休・介護休業の整備は「コスト」ではなく「採用・定着への投資」です。求人市場で「育休取得実績あり」「男性育休100%」は強力な採用訴求になります。就業規則の整備から取得率向上のコンサルティングまで、一貫してサポートします。
+  </p>
+</div>
+`
+        },
+        {
+            id: 10,
+            title: '労働基準監督署の調査（臨検）を乗り越えるための準備',
+            excerpt: '労働基準監督署の調査は突然やってきます。「うちには来ない」は禁物。定期調査・申告調査それぞれの対応方法と、日頃から整備しておくべき書類一覧を実務視点で解説します。',
+            category: '法令遵守',
+            emoji: '🏛️',
+            date: '2025年3月',
+            isNew: true,
+            readTime: '8分',
+            contact: '労務監査・書類整備を依頼する',
+            body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">労働基準監督署（労基署）の調査は、<strong>事前通知なしに来ることもあります</strong>。「うちは小さい会社だから来ない」は誤解で、従業員数に関わらず調査対象になり得ます。普段から書類を整備し、適切な対応ができる体制を整えておくことが重要です。</p>
+
+<div class="bg-slate-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-slate-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">📂</span> 調査でほぼ必ず確認される書類
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="bg-white rounded-xl p-4 border border-slate-100 shadow-sm">
+      <p class="font-black text-slate-800 mb-3 text-sm border-b pb-2">労働時間・賃金関係</p>
+      <ul class="space-y-2 text-sm text-gray-600">
+        <li class="flex items-start gap-2"><span class="text-slate-500 mt-1">▶</span><span>タイムカード・勤怠記録（直近3年分）</span></li>
+        <li class="flex items-start gap-2"><span class="text-slate-500 mt-1">▶</span><span>賃金台帳（直近3年分）</span></li>
+        <li class="flex items-start gap-2"><span class="text-slate-500 mt-1">▶</span><span>36協定の締結届（有効期間内のもの）</span></li>
+        <li class="flex items-start gap-2"><span class="text-slate-500 mt-1">▶</span><span>時間外・休日労働の命令書または承認記録</span></li>
+      </ul>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-slate-100 shadow-sm">
+      <p class="font-black text-slate-800 mb-3 text-sm border-b pb-2">雇用・就業規則関係</p>
+      <ul class="space-y-2 text-sm text-gray-600">
+        <li class="flex items-start gap-2"><span class="text-slate-500 mt-1">▶</span><span>就業規則（届出控え付き）</span></li>
+        <li class="flex items-start gap-2"><span class="text-slate-500 mt-1">▶</span><span>雇用契約書・労働条件通知書（全従業員分）</span></li>
+        <li class="flex items-start gap-2"><span class="text-slate-500 mt-1">▶</span><span>雇入れ時の安全衛生教育記録</span></li>
+        <li class="flex items-start gap-2"><span class="text-slate-500 mt-1">▶</span><span>年次有給休暇の管理台帳（取得状況含む）</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="bg-blue-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-4">🗂️ 調査の種類と対応方法</h2>
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">定期調査（通知あり）</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-2">労基署が計画的に行う調査。事前通知書（来署依頼書）が届き、指定日に書類を持参して説明する形式が多い。通知が届いたら<strong>まず社労士に連絡し、提出書類の点検を依頼</strong>することが重要。「後から書類を整理する」行為は絶対NG。</p>
+      <div class="bg-blue-50 rounded-lg p-3 text-xs text-blue-800 font-medium">対応のコツ：正直に現状を説明しつつ、改善計画を具体的に示す姿勢が評価される</div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">申告調査（従業員からの通報）</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-2">従業員からの申告（未払い残業代・ハラスメント等）をきっかけに行われる調査。突然の来署もあり得る。<strong>調査官の訪問時は同行を断れない</strong>が、「今は担当者がいない」として後日日程を調整することは可能。即座に主要担当者（社長・総務責任者・社労士）に連絡を。</p>
+      <div class="bg-red-50 rounded-lg p-3 text-xs text-red-800 font-medium">⚠️ 現地での証拠隠滅・書類の後付け修正は厳禁。発覚すれば厳罰</div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-green-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-green-900 mb-4">✅ 平時の整備チェックリスト</h2>
+  <div class="space-y-3">
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-green-100 cursor-pointer hover:border-green-400 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-green-600">
+      <span class="text-sm text-gray-700">36協定を毎年更新し、届出控えを保管している</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-green-100 cursor-pointer hover:border-green-400 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-green-600">
+      <span class="text-sm text-gray-700">全従業員の雇用契約書・労働条件通知書が最新の状態で保管されている</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-green-100 cursor-pointer hover:border-green-400 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-green-600">
+      <span class="text-sm text-gray-700">勤怠データは原則自動記録で、手書き修正には理由と承認者の記録がある</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-green-100 cursor-pointer hover:border-green-400 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-green-600">
+      <span class="text-sm text-gray-700">年次有給休暇の取得状況を個人別に管理し、年5日取得を達成している</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-green-100 cursor-pointer hover:border-green-400 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-green-600">
+      <span class="text-sm text-gray-700">雇入れ時安全衛生教育の実施記録が保管されている（業種問わず）</span>
+    </label>
+  </div>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    「調査が来てから慌てる」のではなく、「普段から整備しておく」ことが最大の対策です。当事務所では年1回の「労務監査」サービスで、労基署調査を想定した書類点検と改善提案を行っています。問題が小さいうちに発見・修正することが、リスクを最小化する唯一の方法です。
+  </p>
+</div>
+`
+        },
+        {
+            id: 11,
+            title: 'テレワーク導入企業が見落とす労務管理の盲点',
+            excerpt: 'テレワークは働き方の自由度を高める一方、労働時間の管理・費用負担・セキュリティ等の課題を生みます。「なんとなく導入」では後からトラブルになる3つの盲点を解説します。',
+            category: 'DX推進',
+            emoji: '🏠',
+            date: '2025年4月',
+            isNew: true,
+            readTime: '8分',
+            contact: 'テレワーク規程・労務整備を相談する',
+            body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">テレワークを「試しに始めた」企業が増える一方、<strong>労務管理の整備が追いつかずトラブルになるケース</strong>が急増しています。「オフィスと同じルールで管理すれば大丈夫」は大きな誤解。テレワーク特有の盲点を確認しましょう。</p>
+
+<div class="bg-violet-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-violet-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">⚠️</span> テレワーク特有の3つの盲点
+  </h2>
+  <div class="space-y-5">
+    <div class="bg-white rounded-xl p-5 border border-violet-100 shadow-sm">
+      <p class="font-black text-violet-800 mb-2 text-base">盲点1：「自己申告制」の労働時間管理では残業代未払いリスクがある</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-3">テレワーク中は従業員が自分で勤務時間を記録するケースが多いですが、<strong>会社が労働時間を把握・確認できる仕組みがない場合、実態と乖離したまま残業代が未払いになるリスク</strong>があります。「申告していない残業時間」が後から請求の対象になった事例が増えています。</p>
+      <div class="bg-violet-50 rounded-lg p-3 text-sm">
+        <p class="font-bold text-violet-800 mb-1">対策：</p>
+        <p class="text-gray-600 text-sm">PCのログイン・ログアウト時間、クラウド勤怠のGPS・打刻機能など、客観的記録手段を導入。就業規則に「テレワーク時の勤怠記録方法」を明記する。</p>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-violet-100 shadow-sm">
+      <p class="font-black text-violet-800 mb-2 text-base">盲点2：通信費・光熱費の費用負担ルールが未整備</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-3">テレワーク中の通信費・電気代は従業員が実質負担することになります。これを会社が補填しない場合、<strong>「最低賃金を下回る」または「費用弁償の未払い」として問題になる</strong>可能性があります。国税庁の計算式に基づいた「テレワーク手当」の支給か、実費精算のルール整備が必要です。</p>
+      <div class="bg-violet-50 rounded-lg p-3 text-sm">
+        <p class="font-bold text-violet-800 mb-1">対策：</p>
+        <p class="text-gray-600 text-sm">テレワーク費用補助の規程を就業規則に追加。月額定額支給（目安：2,000〜5,000円）か実費精算かを決め、支給額・支給条件を明文化する。</p>
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-violet-100 shadow-sm">
+      <p class="font-black text-violet-800 mb-2 text-base">盲点3：「中抜け」「育児しながら勤務」の扱いが曖昧</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-3">テレワーク中の「中抜け」（一時的な業務離脱）の取り扱いが明確でない場合、<strong>後から「あの時間は休憩だったのか労働だったのか」が問題になります</strong>。また、育児と仕事を並行させる状況を黙認すると、労働時間管理が事実上不可能になります。</p>
+      <div class="bg-violet-50 rounded-lg p-3 text-sm">
+        <p class="font-bold text-violet-800 mb-1">対策：</p>
+        <p class="text-gray-600 text-sm">中抜けの申請・記録方法をルール化。育児中の勤務については「保育利用を前提とする」か「時短勤務制度の活用」を原則とし、並行対応を常態化させない。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-gray-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-4">📋 テレワーク規程に盛り込むべき主要事項</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm text-sm text-gray-700">
+      <p class="font-bold text-gray-800 mb-1">対象者・適用条件</p>
+      <p>雇用形態・勤続年数・業務内容による利用可否の基準</p>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm text-sm text-gray-700">
+      <p class="font-bold text-gray-800 mb-1">勤務場所の制限</p>
+      <p>自宅限定か、カフェ等の利用可否。セキュリティ要件</p>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm text-sm text-gray-700">
+      <p class="font-bold text-gray-800 mb-1">労働時間・中抜けの扱い</p>
+      <p>打刻方法、中断・再開の記録方法、休憩の取り方</p>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm text-sm text-gray-700">
+      <p class="font-bold text-gray-800 mb-1">費用補助の条件・金額</p>
+      <p>通信費・光熱費・備品の補助額と支給方法</p>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm text-sm text-gray-700">
+      <p class="font-bold text-gray-800 mb-1">情報セキュリティ義務</p>
+      <p>機器・ネットワークの要件、情報持ち出しルール</p>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm text-sm text-gray-700">
+      <p class="font-bold text-gray-800 mb-1">テレワーク取消し・制限の条件</p>
+      <p>業務上の理由や成果不振による制限の判断基準</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    テレワーク規程の整備は「導入してから」ではなく「導入前」が理想です。後から整備しようとすると、すでに慣習化したルールを変更するのに従業員の抵抗が生まれることも。これからテレワーク導入を検討している企業は、就業規則・テレワーク規程・勤怠システムを同時に整備することをお勧めします。
+  </p>
+</div>
+`
+        },
+        {
+            id: 12,
+            title: '人的資本経営への対応 ― 中小企業でもできる情報開示と組織改善',
+            excerpt: '「人的資本経営」は大企業だけの話ではありません。採用難が続く時代、従業員への投資と情報開示が企業の競争力を左右します。中小企業が今すぐ着手できる施策を解説します。',
+            category: '採用・定着',
+            emoji: '🌱',
+            date: '2025年4月',
+            isNew: true,
+            readTime: '9分',
+            contact: '人事制度・組織改善を相談する',
+            body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">2023年の有価証券報告書から上場企業に義務化された「人的資本情報の開示」。<strong>中小企業には義務はありませんが、採用難・人材定着が経営課題となる今、人的資本経営への取り組みは待ったなし</strong>の状況です。</p>
+
+<div class="bg-teal-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-teal-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">💡</span> 人的資本経営とは何か
+  </h2>
+  <div class="bg-white rounded-xl p-5 border border-teal-100 shadow-sm mb-4">
+    <p class="text-gray-700 text-sm leading-relaxed">従業員を「コスト」ではなく<strong>「企業価値を生み出す資本」として位置づけ、その投資・育成・活用状況を可視化する経営手法</strong>です。具体的には、人材育成への投資額・離職率・従業員エンゲージメント・男女間賃金格差・育休取得率などを測定・開示し、継続的な改善を目指します。</p>
+  </div>
+  <div class="bg-white rounded-xl p-5 border border-teal-100 shadow-sm">
+    <p class="font-black text-teal-800 mb-3 text-sm">中小企業にとっての意義</p>
+    <div class="space-y-2 text-sm text-gray-600">
+      <div class="flex items-start gap-2"><span class="text-teal-600 font-bold mt-0.5">①</span><span><strong>採用力の向上</strong>：求職者が「この会社は従業員を大切にしている」と判断できる根拠になる</span></div>
+      <div class="flex items-start gap-2"><span class="text-teal-600 font-bold mt-0.5">②</span><span><strong>定着率の改善</strong>：取り組みを通じて従業員エンゲージメントが高まり、離職率が下がる</span></div>
+      <div class="flex items-start gap-2"><span class="text-teal-600 font-bold mt-0.5">③</span><span><strong>取引・融資への影響</strong>：ESG評価・サプライチェーン審査で労務環境が問われるようになっている</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-blue-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-4">🚀 中小企業が今すぐ着手できる5つの施策</h2>
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">施策1：離職率・定着率の計測を始める</p>
+      <p class="text-gray-600 text-sm leading-relaxed">「なんとなく最近よく辞めている気がする」ではなく、<strong>年間離職率を数値で把握</strong>することが第一歩。業種平均と比較することで、自社の人材定着力が客観的にわかります。離職理由のアンケートも合わせて実施しましょう。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">施策2：従業員エンゲージメント調査の実施</p>
+      <p class="text-gray-600 text-sm leading-relaxed">年1〜2回の従業員アンケート（匿名可）で、<strong>「この会社で働き続けたいか」「仕事にやりがいを感じているか」</strong>を測定。無料〜低コストのツールも多数あります。重要なのは測定だけでなく、結果を経営に反映し、従業員にフィードバックすること。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">施策3：男女間賃金格差の把握と是正</p>
+      <p class="text-gray-600 text-sm leading-relaxed">常時雇用101人以上の企業は男女間賃金格差の公表が義務化（2023年〜）。100人以下でも早めに現状把握を。<strong>格差が生じている理由（役職比率・勤続年数・雇用形態）を分析</strong>し、合理的な説明ができる状態にしておくことが重要です。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">施策4：人材育成への投資を「見える化」</p>
+      <p class="text-gray-600 text-sm leading-relaxed">研修費用・資格取得支援・OJT時間などを集計し、<strong>「従業員1人あたりの年間育成投資額」を算出</strong>。求人票・会社説明会で数値として開示することで、成長志向の求職者へのアピールになります。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">施策5：評価制度・等級制度の整備</p>
+      <p class="text-gray-600 text-sm leading-relaxed">「頑張っても評価されない」という不満が離職の主因になります。<strong>評価基準の透明化と定期的な1on1面談の制度化</strong>だけで、従業員の働きがい・定着率が大きく改善するケースが多いです。</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    「人的資本経営」は難しく聞こえますが、本質は「従業員を大切にしている事実を、数値と仕組みで証明する」ことです。離職率の計測から始め、就業規則・評価制度・育成制度を少しずつ整えるだけで、採用力・定着力が確実に変わります。どこから手をつければいいか迷ったら、ぜひご相談ください。
+  </p>
+</div>
+`
         }
     ];
 
