@@ -4,7 +4,7 @@
     <!-- ホーム（最重要ページ） -->
     <url>
         <loc>https://kamiue.com/</loc>
-        <lastmod>2026-03-01</lastmod>
+        <lastmod>2026-03-13</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -12,7 +12,7 @@
     <!-- サービス・料金 -->
     <url>
         <loc>https://kamiue.com/services</loc>
-        <lastmod>2026-02-15</lastmod>
+        <lastmod>2026-03-10</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -20,15 +20,15 @@
     <!-- 事務所紹介 -->
     <url>
         <loc>https://kamiue.com/about</loc>
-        <lastmod>2026-01-20</lastmod>
-        <changefreq>quarterly</changefreq>
+        <lastmod>2026-02-20</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <!-- 労務管理コラム一覧 -->
     <url>
         <loc>https://kamiue.com/blog</loc>
-        <lastmod>2026-03-10</lastmod>
+        <lastmod>2026-03-13</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -36,7 +36,7 @@
     <!-- 労務リスク診断 -->
     <url>
         <loc>https://kamiue.com/checkup</loc>
-        <lastmod>2025-12-01</lastmod>
+        <lastmod>2026-02-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -44,7 +44,7 @@
     <!-- 助成金診断 -->
     <url>
         <loc>https://kamiue.com/subsidy-sim</loc>
-        <lastmod>2025-11-15</lastmod>
+        <lastmod>2026-01-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -52,7 +52,7 @@
     <!-- 給与計算ツール -->
     <url>
         <loc>https://kamiue.com/salary-calc</loc>
-        <lastmod>2026-02-20</lastmod>
+        <lastmod>2026-03-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -60,7 +60,7 @@
     <!-- 料金シミュレーター -->
     <url>
         <loc>https://kamiue.com/price-sim</loc>
-        <lastmod>2026-03-05</lastmod>
+        <lastmod>2026-03-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -68,15 +68,15 @@
     <!-- 無料資料ダウンロード -->
     <url>
         <loc>https://kamiue.com/download</loc>
-        <lastmod>2025-10-01</lastmod>
-        <changefreq>quarterly</changefreq>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <!-- 関連リンク -->
     <url>
         <loc>https://kamiue.com/links</loc>
-        <lastmod>2025-09-01</lastmod>
+        <lastmod>2025-12-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
@@ -84,7 +84,7 @@
     <!-- 手続き代行依頼（コンバージョン重視） -->
     <url>
         <loc>https://kamiue.com/spot</loc>
-        <lastmod>2026-03-01</lastmod>
+        <lastmod>2026-03-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -92,33 +92,43 @@
     <!-- よくある質問 -->
     <url>
         <loc>https://kamiue.com/faq</loc>
-        <lastmod>2026-02-10</lastmod>
-        <changefreq>quarterly</changefreq>
+        <lastmod>2026-02-28</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <!-- お問い合わせ -->
     <url>
         <loc>https://kamiue.com/contact</loc>
-        <lastmod>2026-03-01</lastmod>
+        <lastmod>2026-03-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
 
-    <!-- コラム記事例（script.jsのCOLUMNSに基づく想定） -->
-    <!-- 実際の記事数・URLに合わせて追加・更新してください -->
+    <!-- コラム記事例（実際の記事URLに合わせて追加・更新してください） -->
     <url>
         <loc>https://kamiue.com/column/1</loc>
         <lastmod>2026-03-08</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
+
     <url>
         <loc>https://kamiue.com/column/2</loc>
         <lastmod>2026-02-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
-    <!-- … 必要に応じてさらに追加 … -->
+
+    <!-- 必要に応じてさらにコラム記事をここに追加 -->
+    <!-- 例: -->
+    <!-- 
+    <url>
+        <loc>https://kamiue.com/column/3</loc>
+        <lastmod>2026-03-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    -->
 
 </urlset>
