@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kamiue.com/sitemap.xml
