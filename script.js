@@ -2573,3 +2573,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // showPage フックはグローバルの showPage() 本体で処理済み
+
+    
