@@ -638,3 +638,23 @@ function spotSubmitForm(formIdx) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 500);
 }
+
+// 資料ダウンロードフォームの送信処理
+function dlSubmitForm() {
+    const form = document.getElementById('dl-form-data');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    
+    // 入力情報の取得（必要に応じて送信処理を追加）
+    const formData = new FormData(form);
+    console.log("ダウンロードフォーム送信:", Object.fromEntries(formData));
+
+    // 現在選択されている資料のインデックスを使用してダウンロードを実行
+    downloadPDF(_dlCurrentIndex);
+
+    // 完了メッセージを表示してモーダルを閉じる
+    alert("ダウンロードを開始します。");
+    dlCloseModal();
+}
