@@ -120,9 +120,19 @@ function sfmt(n) { return Math.floor(n).toLocaleString() + " 円"; }
 
 function sSwitchTab(target) {
     const isEmp = target === 'employee';
+    
+    // タブのスタイル切り替え
     document.getElementById('stab-employee').classList.toggle('active', isEmp);
     document.getElementById('stab-employer').classList.toggle('active', !isEmp);
-    document.getElementById('sr-employer-card').style.display = isEmp ? 'none' : 'block';
+    
+    // ★ここを修正：事業主負担カードの表示・非表示を切り替え
+    const employerCard = document.getElementById('sr-employer-card');
+    if (employerCard) {
+        employerCard.style.display = isEmp ? 'none' : 'block';
+    }
+    
+    // タブ切り替え時にも再計算を実行して表示を最新にする
+    sCalc();
 }
 
 function sToggleMode(mode) {
