@@ -16,7 +16,7 @@ const DL_PDF_DATA = [
 
 // ダウンロード関数（チャットボット等から直接呼び出す用）
 function downloadPDF(index) {
-    const item = DL_MODAL_ITEMS[index]; // DL_PDF_DATAではなくDL_MODAL_ITEMSを参照
+    const item = DL_PDF_DATA[index];
     if (!item) return;
     
     const link = document.createElement('a');
@@ -625,24 +625,4 @@ function spotSubmitForm(formIdx) {
         if (success) success.classList.remove('hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 500);
-}
-
-// 資料ダウンロードフォームの送信処理
-function dlSubmitForm() {
-    const form = document.getElementById('dl-form-data');
-    if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-    }
-    
-    // 入力情報の取得（必要に応じて送信処理を追加）
-    const formData = new FormData(form);
-    console.log("ダウンロードフォーム送信:", Object.fromEntries(formData));
-
-    // 現在選択されている資料のインデックスを使用してダウンロードを実行
-    downloadPDF(_dlCurrentIndex);
-
-    // 完了メッセージを表示してモーダルを閉じる
-    alert("ダウンロードを開始します。");
-    dlCloseModal();
 }
