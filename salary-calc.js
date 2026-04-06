@@ -119,19 +119,29 @@ function sCalc() {
 function sfmt(n) { return Math.floor(n).toLocaleString() + " 円"; }
 
 function sSwitchTab(target) {
-    const isEmp = target === 'employee';
+    // 引数が 'employee' かどうかを判定
+    const isEmployeeMode = (target === 'employee');
     
-    // タブのスタイル切り替え
-    document.getElementById('stab-employee').classList.toggle('active', isEmp);
-    document.getElementById('stab-employer').classList.toggle('active', !isEmp);
+    // 1. タブボタンの見た目を切り替え
+    const btnEmp = document.getElementById('stab-employee');
+    const btnOwner = document.getElementById('stab-employer');
     
-    // ★ここを修正：事業主負担カードの表示・非表示を切り替え
-    const employerCard = document.getElementById('sr-employer-card');
-    if (employerCard) {
-        employerCard.style.display = isEmp ? 'none' : 'block';
+    if (isEmployeeMode) {
+        btnEmp.classList.add('active');
+        btnOwner.classList.remove('active');
+    } else {
+        btnEmp.classList.remove('active');
+        btnOwner.classList.add('active');
     }
     
-    // タブ切り替え時にも再計算を実行して表示を最新にする
+    // 2. 事業主負担カードの表示・非表示
+    const employerCard = document.getElementById('sr-employer-card');
+    if (employerCard) {
+        // 事業主モードのときだけ 'block' にする
+        employerCard.style.display = isEmployeeMode ? 'none' : 'block';
+    }
+    
+    // 3. 数値を最新状態にするため再計算
     sCalc();
 }
 
