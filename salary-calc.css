@@ -1,36 +1,308 @@
-/* ===== 給与計算ツール専用スタイル ===== */
+/* ===================================================
+   給与計算ツール専用スタイル（アップグレード版）
+   カミウエ社会保険労務士事務所
+   2025年度対応
+   =================================================== */
 
+/* === CSS変数（index.htmlと共有する場合はここで定義） === */
+:root {
+    --sc-navy:    #0f2a5e;
+    --sc-blue:    #1e40af;
+    --sc-accent:  #f97316;
+    --sc-surface: #f8faff;
+    --sc-border:  #dbeafe;
+    --sc-text:    #1e293b;
+    --sc-muted:   #64748b;
+    --sc-green:   #059669;
+}
+
+/* === レイアウト === */
 .salary-tool-bg {
-    background: linear-gradient(135deg, #f0f9ff 0%, #e8f4fd 50%, #f0f4ff 100%);
+    background: var(--sc-surface);
+    min-height: 100vh;
 }
 
-.salary-input-group input,
-.salary-input-group select {
-    transition: all 0.2s ease;
+.salary-main-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+}
+@media (max-width: 900px) {
+    .salary-main-grid { grid-template-columns: 1fr; }
 }
 
+/* === ヒーローバンド === */
+.salary-hero-band {
+    background: linear-gradient(135deg, var(--sc-navy) 0%, var(--sc-blue) 60%, #3b82f6 100%);
+    padding: 28px 0 32px;
+    position: relative;
+    overflow: hidden;
+}
+.salary-hero-band::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+/* === 入力パネル === */
+.salary-input-panel {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(15,42,94,0.08);
+    border: 1px solid var(--sc-border);
+    overflow: hidden;
+}
+
+.salary-input-panel-header {
+    background: linear-gradient(135deg, var(--sc-navy), var(--sc-blue));
+    padding: 18px 24px;
+}
+
+/* === タブバー === */
+.salary-tab-bar {
+    display: flex;
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 3px;
+    gap: 2px;
+}
 .salary-tab-btn {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
     background: transparent;
-    color: #64748b;
+    color: var(--sc-muted);
+    transition: all 0.2s;
 }
-
 .salary-tab-btn.active {
     background: white;
-    color: #1e3a8a;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    color: var(--sc-navy);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.total-card {
-    transition: transform 0.3s ease;
+/* === フィールドラベル === */
+.salary-field-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--sc-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+}
+.salary-field-label .hint {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #94a3b8;
+    font-size: 0.74rem;
 }
 
-.total-card:hover {
-    transform: translateY(-2px);
+/* === テキスト入力 === */
+.salary-field-input {
+    width: 100%;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px 48px 10px 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'DM Mono', monospace;
+    text-align: right;
+    background: #f8fafc;
+    color: var(--sc-text);
+    transition: all 0.2s;
+    -moz-appearance: textfield;
+}
+.salary-field-input::-webkit-outer-spin-button,
+.salary-field-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.salary-field-input:focus {
+    outline: none;
+    border-color: var(--sc-blue);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(30,64,175,0.1);
+}
+.salary-field-wrap { position: relative; }
+.salary-field-suffix {
+    position: absolute; right: 14px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--sc-muted); font-size: 0.82rem; font-weight: 700;
+    pointer-events: none;
 }
 
-/* PDF/印刷用調整 */
+/* === セレクト === */
+.salary-field-select {
+    width: 100%;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px 36px 10px 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: #f8fafc;
+    color: var(--sc-text);
+    transition: all 0.2s;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+}
+.salary-field-select:focus {
+    outline: none;
+    border-color: var(--sc-blue);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(30,64,175,0.1);
+}
+
+/* === ラジオモードトグル === */
+.salary-mode-toggle { display: flex; gap: 8px; }
+.salary-mode-label {
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px;
+    cursor: pointer; transition: all 0.2s; background: #f8fafc;
+    font-size: 0.85rem; font-weight: 700; color: var(--sc-muted);
+}
+.salary-mode-label:has(input:checked) {
+    border-color: var(--sc-blue); background: #eff6ff; color: var(--sc-blue);
+}
+.salary-mode-label input { width: 14px; height: 14px; accent-color: var(--sc-blue); }
+
+/* === チェックボックスラベル === */
+.salary-check-label {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 10px;
+    cursor: pointer; transition: all 0.2s; background: #f8fafc;
+    font-size: 0.85rem; font-weight: 700; color: var(--sc-muted);
+}
+.salary-check-label:has(input:checked) {
+    border-color: #a21caf; background: #fdf4ff; color: #7e22ce;
+}
+.salary-check-label input { width: 16px; height: 16px; accent-color: #a21caf; }
+
+/* === リセットボタン === */
+.salary-btn-reset {
+    width: 100%; padding: 11px;
+    border: 2px solid #e2e8f0; border-radius: 10px;
+    background: white; color: var(--sc-muted);
+    font-weight: 700; font-size: 0.85rem;
+    cursor: pointer; transition: all 0.2s;
+}
+.salary-btn-reset:hover { border-color: var(--sc-accent); color: var(--sc-accent); }
+
+/* === 結果カード（共通） === */
+.salary-result-card {
+    background: white;
+    border-radius: 16px;
+    border: 1.5px solid var(--sc-border);
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(15,42,94,0.05);
+    transition: transform 0.2s;
+}
+.salary-result-card:hover { transform: translateY(-1px); }
+.salary-result-card-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex; align-items: center; justify-content: space-between;
+}
+.salary-result-card-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.78rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.08em;
+}
+.salary-result-badge {
+    width: 22px; height: 22px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 900; color: white;
+}
+.salary-result-total {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.35rem; font-weight: 700;
+}
+.salary-result-card-body { padding: 14px 20px; }
+.salary-result-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 7px 0; border-bottom: 1px solid #f8fafc;
+    font-size: 0.85rem;
+}
+.salary-result-row:last-child { border-bottom: none; }
+.salary-result-row-label { color: var(--sc-muted); }
+.salary-result-row-value {
+    font-family: 'DM Mono', monospace;
+    font-weight: 600; font-size: 0.9rem; color: var(--sc-text);
+}
+
+/* === 手取りカード === */
+.salary-takehome-card {
+    background: linear-gradient(135deg, var(--sc-navy) 0%, #1e40af 100%);
+    border-radius: 16px;
+    border-color: transparent;
+    box-shadow: 0 8px 32px rgba(15,42,94,0.25);
+    transition: transform 0.2s;
+}
+.salary-takehome-card:hover { transform: translateY(-3px); }
+.salary-takehome-inner {
+    padding: 24px 28px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.salary-takehome-amount {
+    font-family: 'DM Mono', monospace;
+    font-size: 2.6rem; font-weight: 700; color: white;
+    text-align: right; white-space: nowrap;
+}
+
+/* === 内訳バー === */
+.salary-breakdown-bar {
+    height: 10px; border-radius: 999px;
+    background: #e2e8f0; overflow: hidden; display: flex;
+}
+.salary-bar-social { background: var(--sc-blue); transition: width 0.4s cubic-bezier(.4,0,.2,1); }
+.salary-bar-tax    { background: var(--sc-accent); transition: width 0.4s cubic-bezier(.4,0,.2,1); }
+.salary-bar-home   { background: #10b981; transition: width 0.4s cubic-bezier(.4,0,.2,1); }
+
+/* === アドバイスボックス === */
+.salary-advice-box {
+    background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+    border: 1.5px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+/* === 注意事項 === */
+.salary-note-box {
+    background: #fffbeb;
+    border: 1.5px solid #fde68a;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 0.78rem;
+    color: #92400e;
+    line-height: 1.8;
+}
+
+/* === 数値フラッシュアニメーション === */
+@keyframes numFlash {
+    0%   { color: inherit; }
+    30%  { color: #3b82f6; }
+    100% { color: inherit; }
+}
+.num-flash { animation: numFlash 0.4s ease-out; }
+
+/* === PDF/印刷用 === */
 @media print {
-    body { background: white; }
-    .salary-tool-bg { background: none; padding: 0; }
-    button { display: none !important; }
+    .salary-hero-band,
+    .salary-input-panel,
+    .salary-btn-pdf,
+    .salary-cta-box,
+    .salary-rate-section { display: none !important; }
+    .salary-main-grid { grid-template-columns: 1fr; }
+    .salary-takehome-card { background: #0f2a5e !important; }
 }

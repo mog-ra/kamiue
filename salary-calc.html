@@ -3,34 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>簡易給与計算ツール | カミウエ社会保険労務士事務所</title>
+    <title>給与計算ツール | カミウエ社会保険労務士事務所</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./salary-calc.css">
-    <style>
-        .tool-header {
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-    </style>
+    <link rel="stylesheet" href="./salary-calc-page.css">
 </head>
-<body class="bg-gray-50" style="font-family: 'Noto Sans JP', sans-serif;">
 
-    <!-- ===================== 上部メインメニュー ===================== -->
+<body class="salary-calc-root">
+
+    <!-- ======= HEADER ======= -->
     <header class="tool-header shadow-sm">
-        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <!-- 事務所ロゴ -->
-                <button onclick="window.location.href='./index.html'" 
-                        class="flex items-center gap-3 hover:opacity-80 transition">
-                    <div class="w-11 h-11">
-                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+        <div style="max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:16px;">
+                <button onclick="window.location.href='./index.html'" style="display:flex;align-items:center;gap:10px;background:none;border:none;cursor:pointer;opacity:1;transition:opacity .2s;" onmouseenter="this.style.opacity='.75'" onmouseleave="this.style.opacity='1'">
+                    <div style="width:40px;height:40px;">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
                             <ellipse cx="100" cy="100" rx="95" ry="75" fill="#FDB913"/>
                             <rect x="50" y="40" width="20" height="120" rx="10" fill="#2E5BA5"/>
                             <path d="M 70 70 L 145 35" stroke="#2E5BA5" stroke-width="20" stroke-linecap="round" fill="none"/>
@@ -38,280 +27,809 @@
                             <circle cx="60" cy="50" r="25" fill="#C8102E"/>
                         </svg>
                     </div>
-                    <div>
-                        <span class="font-bold text-blue-900 text-lg leading-tight">カミウエ社会保険労務士事務所</span>
-                    </div>
+                    <span style="font-weight:800;color:var(--navy);font-size:0.95rem;line-height:1.2;">カミウエ社会保険労務士事務所</span>
                 </button>
-
-                <div class="h-6 w-px bg-gray-300 mx-2"></div>
-
-                <!-- ページタイトル -->
-                <div class="flex items-center gap-2">
-                    <span class="text-2xl">🧮</span>
-                    <h1 class="text-2xl font-black text-blue-900">簡易給与計算ツール</h1>
+                <div style="width:1px;height:24px;background:#e2e8f0;"></div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-size:1.1rem;">🧮</span>
+                    <h1 style="font-size:1.1rem;font-weight:900;color:var(--navy);margin:0;">給与計算ツール</h1>
+                    <span style="background:#dbeafe;color:var(--blue);font-size:0.68rem;font-weight:800;padding:2px 8px;border-radius:999px;letter-spacing:.05em;">2025年度対応</span>
                 </div>
             </div>
-
-            <!-- ホームに戻るボタン -->
-            <button onclick="window.location.href='./index.html'" 
-                    class="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3 rounded-2xl transition shadow-md text-sm md:text-base">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7 7-7"/>
-                </svg>
+            <button onclick="window.location.href='./index.html'"
+                    style="display:flex;align-items:center;gap:6px;background:var(--accent);color:white;font-weight:800;padding:9px 18px;border-radius:12px;border:none;cursor:pointer;font-size:0.84rem;transition:all .2s;box-shadow:0 4px 12px rgba(249,115,22,.3);"
+                    onmouseenter="this.style.background='#ea580c'" onmouseleave="this.style.background='var(--accent)'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7 7-7"/></svg>
                 ホームに戻る
             </button>
         </div>
     </header>
 
-    <!-- ===================== 給与計算ツール本体 ===================== -->
-    <!-- ここから元の salary-calc.html のメインコンテンツをそのまま貼り付け -->
-    <section class="py-16 md:py-24 salary-tool-bg">
-        <div class="container mx-auto px-4 max-w-6xl">
-
-            <div class="text-center mb-12">
-                <div class="inline-flex items-center gap-2 bg-white border-2 border-blue-200 px-6 py-2 rounded-full text-sm font-bold text-blue-900 mb-6 shadow-sm">
-                    <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
-                    個人情報不要・入力データは保存されません
-                </div>
-                <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-4">🧮 簡易給与計算ツール</h2>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">月額給与や賞与のシミュレーション、会社負担額の試算が可能です。</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                <div class="lg:col-span-2">
-                    <div class="bg-white rounded-3xl shadow-xl p-6 md:p-8 border border-blue-100 sticky top-10">
-                        <h3 class="text-xl font-bold text-blue-900 mb-6 flex items-center gap-2">
-                            <span class="w-8 h-8 bg-blue-900 text-white rounded-lg flex items-center justify-center text-sm font-bold">入</span>
-                            入力条件
-                        </h3>
-
-                        <div class="mb-5">
-                            <p class="input-label text-sm font-bold text-gray-500 mb-2">計算対象</p>
-                            <div class="flex gap-2 p-1 bg-gray-100 rounded-xl">
-                                <button id="stab-employee" class="salary-tab-btn active flex-1 py-2 rounded-lg text-sm font-bold transition-all" onclick="sSwitchTab('employee')">従業員負担</button>
-                                <button id="stab-employer" class="salary-tab-btn flex-1 py-2 rounded-lg text-sm font-bold transition-all" onclick="sSwitchTab('employer')">事業主負担</button>
-                            </div>
-                        </div>
-
-                        <div class="mb-5 salary-input-group">
-                            <label class="block text-sm font-bold text-gray-700 mb-2">支給額（額面）</label>
-                            <div class="relative">
-                                <input type="number" id="s-salary" placeholder="300000" min="0" max="9999999" step="1000"
-                                    class="w-full rounded-xl px-4 py-3 text-lg font-bold text-right pr-12 bg-gray-50 focus:bg-white border-2 border-gray-200"
-                                    oninput="sCalc()" value="300000">
-                                <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold">円</span>
-                            </div>
-                        </div>
-
-                        <div class="mb-5">
-                            <label class="block text-sm font-bold text-gray-700 mb-2">計算モード</label>
-                            <div class="flex gap-2">
-                                <label class="flex-1 flex items-center justify-center gap-2 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-400 transition bg-gray-50">
-                                    <input type="radio" name="s-mode" value="monthly" checked onchange="sToggleMode('monthly')" class="w-4 h-4 accent-blue-600">
-                                    <span class="text-sm font-bold">月例給与</span>
-                                </label>
-                                <label class="flex-1 flex items-center justify-center gap-2 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-400 transition bg-gray-50">
-                                    <input type="radio" name="s-mode" value="bonus" onchange="sToggleMode('bonus')" class="w-4 h-4 accent-blue-600">
-                                    <span class="text-sm font-bold">賞与</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div id="s-prev-salary-section" class="mb-5 salary-input-group" style="display:none;">
-                            <label class="block text-sm font-bold text-blue-900 mb-2">
-                                前月の給与（社会保険料控除前）
-                                <span class="tooltip-icon inline-flex items-center justify-center w-4 h-4 bg-blue-400 text-white rounded-full text-[10px]" title="賞与の所得税率を決定するために必要です">?</span>
-                            </label>
-                            <div class="relative">
-                                <input type="number" id="s-prev-salary" placeholder="300000"
-                                    class="w-full rounded-xl px-4 py-3 bg-blue-50 border-2 border-blue-200 focus:bg-white font-medium text-right pr-12"
-                                    oninput="sCalc()" value="300000">
-                                <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold">円</span>
-                            </div>
-                        </div>
-
-                        <div class="mb-5 salary-input-group">
-                            <label class="block text-sm font-bold text-gray-700 mb-2">勤務地</label>
-                            <select id="s-pref" class="w-full rounded-xl px-4 py-3 bg-gray-50 focus:bg-white border-2 border-gray-200 font-medium" onchange="sCalc()">
-                                <option value="miyagi" selected>宮城県 (10.10%)</option>
-                                <option value="tokyo">東京都 (9.94%)</option>
-                                <option value="osaka">大阪府 (10.64%)</option>
-                                <option value="other">その他 (10.00%)</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-5">
-                            <label class="flex items-center gap-3 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-400 transition bg-gray-50">
-                                <input type="checkbox" id="s-kaigo" onchange="sCalc()" class="w-5 h-5 accent-blue-600">
-                                <span class="font-bold text-gray-700 text-sm">40歳以上（介護保険対象）</span>
-                            </label>
-                        </div>
-
-                        <div class="mb-5 salary-input-group" id="s-dep-section">
-                            <label class="block text-sm font-bold text-gray-700 mb-2">扶養親族の人数</label>
-                            <select id="s-deps" class="w-full rounded-xl px-4 py-3 bg-gray-50 focus:bg-white border-2 border-gray-200 font-medium" onchange="sCalc()">
-                                <option value="0">0人（本人のみ）</option>
-                                <option value="1">1人</option>
-                                <option value="2">2人</option>
-                                <option value="3">3人</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-5 salary-input-group" id="s-resident-section">
-                            <label class="block text-sm font-bold text-gray-700 mb-2">住民税（月額）</label>
-                            <div class="relative">
-                                <input type="number" id="s-resident-tax" placeholder="0"
-                                    class="w-full rounded-xl px-4 py-3 bg-gray-50 focus:bg-white border-2 border-gray-200 font-medium text-right pr-12"
-                                    oninput="sCalc()" value="0">
-                                <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold">円</span>
-                            </div>
-                        </div>
-
-                        <div class="mb-6 salary-input-group">
-                            <label class="block text-sm font-bold text-gray-700 mb-2">事業の種類</label>
-                            <select id="s-industry" class="w-full rounded-xl px-4 py-3 bg-gray-50 focus:bg-white border-2 border-gray-200 font-medium" onchange="sCalc()">
-                                <option value="general">一般の事業</option>
-                                <option value="construction">建設業</option>
-                            </select>
-                        </div>
-
-                        <button onclick="sReset()" class="w-full py-3 border-2 border-gray-300 text-gray-500 rounded-xl font-bold hover:border-gray-400 hover:text-gray-700 transition text-sm">🔄 入力をリセット</button>
+    <!-- ======= HERO BAND ======= -->
+    <div class="hero-band">
+        <div style="max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+                <div>
+                    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:4px 12px;border-radius:999px;margin-bottom:12px;">
+                        <svg width="12" height="12" viewBox="0 0 20 20" fill="#fbbf24"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg>
+                        <span style="color:rgba(255,255,255,.85);font-size:.72rem;font-weight:700;letter-spacing:.05em;">個人情報不要・入力データは保存されません</span>
                     </div>
+                    <h2 style="color:white;font-size:1.5rem;font-weight:900;margin:0 0 6px;">月例給与・賞与シミュレーター</h2>
+                    <p style="color:rgba(255,255,255,.65);font-size:.85rem;margin:0;">協会けんぽ2025年度料率対応 ／ 令和6年分源泉徴収税額表（甲欄）</p>
                 </div>
-
-                <div class="lg:col-span-3 space-y-5">
-                    <div id="pdf-content" class="space-y-5 bg-white p-6 rounded-3xl border border-gray-100">
-                        <div class="mb-4 pb-4 border-b border-gray-100 flex justify-between items-end">
-                            <div>
-                                <h3 class="text-blue-900 font-black text-xl">給与試算結果明細</h3>
-                                <p class="text-gray-400 text-xs">カミウエ社会保険労務士事務所 簡易ツール</p>
-                            </div>
-                            <div id="current-date" class="text-gray-400 text-xs"></div>
-                        </div>
-
-                        <div class="result-card bg-gray-50 p-5 rounded-2xl border-2 border-gray-100">
-                            <div class="flex items-center justify-between">
-                                <h4 class="font-bold text-gray-600">① 総支給額（額面）</h4>
-                                <span id="sr-gross" class="text-2xl font-black text-gray-800">300,000 円</span>
-                            </div>
-                        </div>
-
-                        <div class="result-card p-5 rounded-2xl border-2 border-blue-50">
-                            <div class="flex items-center justify-between mb-4 pb-2 border-b border-blue-50">
-                                <h4 class="font-bold text-blue-900 flex items-center gap-2">
-                                    <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                    ② 社会保険料合計
-                                </h4>
-                                <span id="sr-social-total" class="text-2xl font-black text-blue-900">— 円</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-600">
-                                <div class="flex justify-between"><span>健康保険料</span><span id="sr-kenpo" class="font-bold text-gray-800">0 円</span></div>
-                                <div class="flex justify-between" id="sr-row-kaigo" style="display:none;"><span>介護保険料</span><span id="sr-kaigo" class="font-bold text-gray-800">0 円</span></div>
-                                <div class="flex justify-between"><span>厚生年金保険料</span><span id="sr-kousei" class="font-bold text-gray-800">0 円</span></div>
-                                <div class="flex justify-between"><span>雇用保険料</span><span id="sr-koyo" class="font-bold text-gray-800">0 円</span></div>
-                            </div>
-                        </div>
-
-                        <div class="result-card p-5 rounded-2xl border-2 border-orange-50">
-                            <div class="flex items-center justify-between mb-4 pb-2 border-b border-orange-50">
-                                <h4 class="font-bold text-orange-700 flex items-center gap-2">
-                                    <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
-                                    ③ 税金合計
-                                </h4>
-                                <span id="sr-tax-total" class="text-2xl font-black text-orange-700">— 円</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-600">
-                                <div class="flex justify-between"><span>源泉所得税</span><span id="sr-tax" class="font-bold text-gray-800">0 円</span></div>
-                                <div class="flex justify-between" id="sr-row-resident"><span>住民税</span><span id="sr-res-display" class="font-bold text-gray-800">0 円</span></div>
-                            </div>
-                        </div>
-
-                        <div class="result-card total-card p-6 rounded-2xl bg-gradient-to-br from-blue-900 to-blue-700 text-white shadow-lg">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-blue-200 text-xs font-bold mb-1 uppercase tracking-wider">Estimated Take-home</p>
-                                    <h4 class="text-xl font-bold">差引支給額（手取り）</h4>
-                                </div>
-                                <div class="text-right">
-                                    <div id="sr-takehome" class="text-4xl md:text-5xl font-black">0 円</div>
-                                    <div id="sr-takehome-rate" class="text-blue-200 text-sm mt-1 font-bold"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="result-card border-2 border-green-100 p-5 rounded-2xl bg-green-50/30" id="sr-employer-card" style="display:none;">
-                            <h4 class="font-bold text-green-800 mb-4 flex items-center gap-2">
-                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                                事業主負担額（概算）
-                            </h4>
-                            <div class="space-y-2 text-sm">
-                                <div class="flex justify-between text-gray-600"><span>社会保険料（会社負担分）</span><span id="sr-emp-soc-total" class="font-bold text-gray-800 text-right">0 円</span></div>
-                                <div class="flex justify-between text-gray-600"><span>労災保険料</span><span id="sr-rosai-emp" class="font-bold text-gray-800 text-right">0 円</span></div>
-                                <div class="flex justify-between border-t border-green-200 pt-3 mt-2">
-                                    <span class="font-black text-green-900">人件費合計目安</span>
-                                    <span id="sr-total-cost" class="text-xl font-black text-green-700 text-right">0 円</span>
-                                </div>
-                            </div>
-                        </div>
+                <div style="display:flex;gap:20px;">
+                    <div style="text-align:center;">
+                        <div style="font-size:1.6rem;font-weight:900;color:white;font-family:'DM Mono',monospace;">4<span style="font-size:1rem;font-weight:700;color:rgba(255,255,255,.6);">項目</span></div>
+                        <div style="font-size:.7rem;color:rgba(255,255,255,.55);font-weight:600;">控除内訳表示</div>
                     </div>
-
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button onclick="exportToPDF()" class="flex-1 bg-blue-900 text-white font-bold py-4 px-6 rounded-2xl hover:bg-blue-800 transition shadow-lg flex items-center justify-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                            結果をPDFで保存
-                        </button>
+                    <div style="text-align:center;">
+                        <div style="font-size:1.6rem;font-weight:900;color:white;font-family:'DM Mono',monospace;">PDF<span style="font-size:.85rem;font-weight:700;color:rgba(255,255,255,.6);">保存</span></div>
+                        <div style="font-size:.7rem;color:rgba(255,255,255,.55);font-weight:600;">試算結果</div>
                     </div>
-
-                    <div class="bg-blue-50 border-l-4 border-blue-400 p-5 rounded-r-2xl">
-                        <p class="font-bold text-blue-900 mb-1 flex items-center gap-2">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1a1 1 0 10-2 0v1a1 1 0 102 0zM13.657 15.657a1 1 0 001.414-1.414l.707-.707a1 1 0 00-1.414 1.414l-.707.707zM16 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1z"/></svg>
-                            アドバイス
-                        </p>
-                        <p id="advice-text" class="text-blue-800 text-sm leading-relaxed">支給額を入力すると、ここにワンポイントアドバイスが表示されます。</p>
-                    </div>
-                </div>
-
-                <!-- 注意事項 -->
-                <div class="salary-note-box">
-                    <p class="font-bold mb-2">⚠️ ご利用にあたっての注意事項</p>
-                    <ul class="space-y-1">
-                        <li>・本ツールは概算計算です。実際の保険料は標準報酬月額（等級）をもとに決定されます</li>
-                        <li>・健康保険料率は協会けんぽ2025年度の料率を使用しています</li>
-                        <li>・所得税は令和6年分源泉徴収税額表（甲欄）による概算です</li>
-                        <li>・住民税は含まれていません（前年所得をもとに市区町村が決定）</li>
-                        <li>・正確な給与計算・保険料計算は専門家にご相談ください</li>
-                    </ul>
-                </div>
-
-                <!-- CTA -->
-                <div class="bg-gradient-to-r from-blue-900 to-blue-700 rounded-2xl p-6 text-white text-center">
-                    <h4 class="font-bold text-lg mb-2">給与計算を丸ごとお任せ！</h4>
-                    <p class="text-blue-100 text-sm mb-4">毎月の給与計算・社会保険手続きを社労士が代行。ミスなし・法改正対応も自動で。</p>
-                    <button onclick="showPage('contact')" class="bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg">無料相談を予約する</button>
-                </div>
-
-                <!-- 保険料率説明 -->
-                <div class="mt-12 bg-white rounded-3xl shadow-xl p-8 border border-blue-100">
-                    <h3 class="text-2xl font-bold text-blue-900 mb-6 flex items-center gap-3">
-                        <svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        計算の根拠・保険料率について
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-700">
-                        <div class="space-y-3">
-                            <div class="p-4 bg-blue-50 rounded-xl"><p class="font-bold text-blue-900 mb-2">🏥 健康保険料（協会けんぽ 2025年度）</p><p class="leading-relaxed">都道府県ごとに料率が異なります。宮城県は10.10%（従業員・事業主それぞれ5.05%）。標準報酬月額の等級表に基づき計算されます。</p></div>
-                            <div class="p-4 bg-indigo-50 rounded-xl"><p class="font-bold text-indigo-900 mb-2">🏠 介護保険料（40歳以上）</p><p class="leading-relaxed">2025年度は1.80%（従業員・事業主それぞれ0.90%）。</p></div>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="p-4 bg-blue-50 rounded-xl"><p class="font-bold text-blue-900 mb-2">🏛 厚生年金保険料</p><p class="leading-relaxed">全国一律18.30%（従業員・事業主それぞれ9.15%）。標準報酬月額の上限は65万円。</p></div>
-                            <div class="p-4 bg-cyan-50 rounded-xl"><p class="font-bold text-cyan-900 mb-2">📋 雇用保険料（2025年度）</p><p class="leading-relaxed">一般事業：従業員6/1000・事業主9.5/1000<br>農林水産等：従業員7/1000・事業主10.5/1000<br>建設業：従業員7/1000・事業主11.5/1000</p></div>
-                        </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:1.6rem;font-weight:900;color:white;font-family:'DM Mono',monospace;">無料<span style="font-size:.85rem;font-weight:700;color:rgba(255,255,255,.6);">利用</span></div>
+                        <div style="font-size:.7rem;color:rgba(255,255,255,.55);font-weight:600;">登録不要</div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
+    <!-- ======= MAIN ======= -->
+    <main class="main-grid">
 
-    <script src="./salary-calc.js"></script>
+        <!-- ===== INPUT PANEL ===== -->
+        <aside class="input-panel fade-up">
+            <div class="input-panel-header">
+                <h3 style="color:white;font-weight:900;font-size:.95rem;margin:0 0 4px;display:flex;align-items:center;gap:8px;">
+                    <svg width="18" height="18" fill="none" stroke="white" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                    入力条件
+                </h3>
+                <p style="color:rgba(255,255,255,.6);font-size:.72rem;margin:0;">値を変更すると即時に再計算されます</p>
+            </div>
+
+            <div style="padding:20px;display:flex;flex-direction:column;gap:16px;">
+
+                <!-- 計算対象タブ -->
+                <div>
+                    <span class="field-label">計算対象</span>
+                    <div class="tab-bar">
+                        <button id="stab-employee" class="tab-btn active" onclick="sSwitchTab('employee')">従業員負担</button>
+                        <button id="stab-employer" class="tab-btn" onclick="sSwitchTab('employer')">事業主負担</button>
+                    </div>
+                </div>
+
+                <!-- 支給額 -->
+                <div>
+                    <label class="field-label" for="s-salary">支給額（額面）</label>
+                    <div class="field-input-wrap">
+                        <input type="number" id="s-salary" class="field-input" value="300000" min="0" max="9999999" step="1000" oninput="sCalc()">
+                        <span class="field-suffix">円</span>
+                    </div>
+                </div>
+
+                <!-- 計算モード -->
+                <div>
+                    <span class="field-label">計算モード</span>
+                    <div class="mode-toggle">
+                        <label class="mode-label">
+                            <input type="radio" name="s-mode" value="monthly" checked onchange="sToggleMode('monthly')">
+                            <span>月例給与</span>
+                        </label>
+                        <label class="mode-label">
+                            <input type="radio" name="s-mode" value="bonus" onchange="sToggleMode('bonus')">
+                            <span>賞与</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 前月給与（賞与時） -->
+                <div id="s-prev-salary-section" style="display:none;">
+                    <label class="field-label" for="s-prev-salary">
+                        前月の給与（社保控除前）
+                        <span class="hint"> ※賞与税率算定に使用</span>
+                    </label>
+                    <div class="field-input-wrap">
+                        <input type="number" id="s-prev-salary" class="field-input" value="300000" oninput="sCalc()" style="background:#faf5ff;border-color:#e9d5ff;">
+                        <span class="field-suffix">円</span>
+                    </div>
+                </div>
+
+                <!-- 勤務地 -->
+                <div>
+                    <label class="field-label" for="s-pref">勤務地（健康保険料率）</label>
+                    <select id="s-pref" class="field-select" onchange="sCalc()">
+                        <option value="miyagi" selected>宮城県 — 10.10%</option>
+                        <option value="tokyo">東京都 — 9.94%</option>
+                        <option value="osaka">大阪府 — 10.64%</option>
+                        <option value="other">その他 — 10.00%</option>
+                    </select>
+                </div>
+
+                <!-- 介護保険 -->
+                <div>
+                    <label class="check-label">
+                        <input type="checkbox" id="s-kaigo" onchange="sCalc()">
+                        <span>40歳以上（介護保険 1.80%）</span>
+                    </label>
+                </div>
+
+                <!-- 扶養 -->
+                <div>
+                    <label class="field-label" for="s-deps">扶養親族の人数</label>
+                    <select id="s-deps" class="field-select" onchange="sCalc()">
+                        <option value="0">0人（本人のみ）</option>
+                        <option value="1">1人</option>
+                        <option value="2">2人</option>
+                        <option value="3">3人以上</option>
+                    </select>
+                </div>
+
+                <!-- 住民税 -->
+                <div id="s-resident-section">
+                    <label class="field-label" for="s-resident-tax">住民税（月額）<span class="hint"> ※前年所得より市区町村が決定</span></label>
+                    <div class="field-input-wrap">
+                        <input type="number" id="s-resident-tax" class="field-input" value="0" min="0" step="100" oninput="sCalc()">
+                        <span class="field-suffix">円</span>
+                    </div>
+                </div>
+
+                <!-- 事業種類 -->
+                <div>
+                    <label class="field-label" for="s-industry">事業の種類（雇用保険料率）</label>
+                    <select id="s-industry" class="field-select" onchange="sCalc()">
+                        <option value="general">一般の事業 — 従業員 6/1000</option>
+                        <option value="construction">建設業 — 従業員 7/1000</option>
+                    </select>
+                </div>
+
+                <div class="section-divider"></div>
+                <button class="btn-reset" onclick="sReset()">🔄 入力をリセット</button>
+            </div>
+        </aside>
+
+        <!-- ===== RESULT AREA ===== -->
+        <section class="result-area">
+
+            <!-- 内訳バー -->
+            <div style="background:white;border-radius:16px;border:1.5px solid var(--border);padding:18px 24px;box-shadow:0 2px 12px rgba(15,42,94,.05);" class="fade-up delay-1">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                    <span style="font-size:.76rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;">支給額の内訳</span>
+                    <span id="current-date" style="font-size:.72rem;color:#94a3b8;font-weight:600;"></span>
+                </div>
+                <div class="breakdown-bar" id="breakdown-bar">
+                    <div class="bar-social" id="bar-social" style="width:30%"></div>
+                    <div class="bar-tax"    id="bar-tax"    style="width:5%"></div>
+                    <div class="bar-home"   id="bar-home"   style="width:65%"></div>
+                </div>
+                <div class="breakdown-legend">
+                    <span><span class="legend-dot" style="background:var(--blue)"></span>社会保険料 <strong id="leg-social">—</strong></span>
+                    <span><span class="legend-dot" style="background:var(--accent)"></span>税金 <strong id="leg-tax">—</strong></span>
+                    <span><span class="legend-dot" style="background:#10b981"></span>手取り <strong id="leg-home">—</strong></span>
+                </div>
+            </div>
+
+            <!-- ① 総支給額 -->
+            <div class="result-card card-gross fade-up delay-1">
+                <div class="result-card-header">
+                    <div class="result-card-title">
+                        <div class="result-card-badge" style="background:#94a3b8;">①</div>
+                        <span style="color:var(--muted);">総支給額（額面）</span>
+                    </div>
+                    <span id="sr-gross" class="result-card-total" style="color:var(--text);">300,000 円</span>
+                </div>
+            </div>
+
+            <!-- ② 社会保険料 -->
+            <div class="result-card card-social fade-up delay-2">
+                <div class="result-card-header">
+                    <div class="result-card-title">
+                        <div class="result-card-badge">②</div>
+                        <span>社会保険料 合計</span>
+                    </div>
+                    <span id="sr-social-total" class="result-card-total">— 円</span>
+                </div>
+                <div class="result-card-body">
+                    <div class="result-row">
+                        <span class="result-row-label">🏥 健康保険料</span>
+                        <span id="sr-kenpo" class="result-row-value">0 円</span>
+                    </div>
+                    <div class="result-row" id="sr-row-kaigo" style="display:none;">
+                        <span class="result-row-label">🧓 介護保険料</span>
+                        <span id="sr-kaigo" class="result-row-value">0 円</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-row-label">🏛 厚生年金保険料</span>
+                        <span id="sr-kousei" class="result-row-value">0 円</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-row-label">📋 雇用保険料</span>
+                        <span id="sr-koyo" class="result-row-value">0 円</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ③ 税金 -->
+            <div class="result-card card-tax fade-up delay-3">
+                <div class="result-card-header">
+                    <div class="result-card-title">
+                        <div class="result-card-badge" style="background:var(--accent);">③</div>
+                        <span>税金 合計</span>
+                    </div>
+                    <span id="sr-tax-total" class="result-card-total">— 円</span>
+                </div>
+                <div class="result-card-body">
+                    <div class="result-row">
+                        <span class="result-row-label">📄 源泉所得税</span>
+                        <span id="sr-tax" class="result-row-value">0 円</span>
+                    </div>
+                    <div class="result-row" id="sr-row-resident">
+                        <span class="result-row-label">🏙 住民税（入力値）</span>
+                        <span id="sr-res-display" class="result-row-value">0 円</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ④ 手取り -->
+            <div class="result-card card-takehome fade-up delay-4">
+                <div class="card-takehome-inner">
+                    <div>
+                        <div class="card-takehome-label">差引支給額</div>
+                        <div class="card-takehome-title">手取り金額</div>
+                    </div>
+                    <div>
+                        <div id="sr-takehome" class="card-takehome-amount">0 円</div>
+                        <div id="sr-takehome-rate" class="card-takehome-rate"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ⑤ 事業主負担（条件付き表示） -->
+            <div class="result-card card-employer fade-up delay-4" id="sr-employer-card" style="display:none;">
+                <div class="result-card-header">
+                    <div class="result-card-title">
+                        <div class="result-card-badge" style="background:var(--green);">⑤</div>
+                        <span style="color:#166534;">事業主負担額（概算）</span>
+                    </div>
+                    <span id="sr-emp-soc-total" class="result-card-total" style="color:var(--green);">— 円</span>
+                </div>
+                <div class="result-card-body">
+                    <div class="result-row">
+                        <span class="result-row-label">社会保険料（会社負担分）</span>
+                        <span id="sr-emp-soc-display" class="result-row-value">0 円</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-row-label">労災保険料</span>
+                        <span id="sr-rosai-emp" class="result-row-value">0 円</span>
+                    </div>
+                </div>
+                <div class="employer-total-row">
+                    <span class="employer-total-label">👤 人件費合計目安</span>
+                    <span id="sr-total-cost" class="employer-total-value">0 円</span>
+                </div>
+            </div>
+
+            <!-- アドバイス -->
+            <div class="advice-box fade-up delay-4">
+                <div class="advice-title">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                    ワンポイントアドバイス
+                </div>
+                <p id="advice-text" class="advice-text">支給額を入力すると、ここにアドバイスが表示されます。</p>
+            </div>
+
+            <!-- PDF 保存 -->
+            <button class="btn-pdf" onclick="exportToPDF()">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                結果をPDFで保存する
+            </button>
+
+            <!-- CTA -->
+            <div class="cta-box">
+                <h4 style="font-size:1rem;font-weight:900;margin:0 0 6px;">給与計算を丸ごとお任せ！</h4>
+                <p style="color:rgba(255,255,255,.7);font-size:.84rem;margin:0 0 16px;line-height:1.6;">毎月の給与計算・社会保険手続きを社労士が代行。法改正対応も自動で。</p>
+                <button class="btn-cta" onclick="window.location.href='./index.html#contact'">無料相談を予約する →</button>
+            </div>
+
+            <!-- 注意事項 -->
+            <div class="note-box">
+                <strong>⚠️ ご利用にあたっての注意事項</strong><br>
+                本ツールは概算計算です。実際の保険料は標準報酬月額（等級）をもとに決定されます。健康保険料率は協会けんぽ2025年度料率を使用。所得税は令和6年分源泉徴収税額表（甲欄）による概算です。住民税は前年所得をもとに市区町村が決定するため正確な金額は含まれません。正確な給与計算・保険料計算は専門家にご相談ください。
+            </div>
+
+            <!-- 保険料率テーブル -->
+            <div class="rate-section" style="background:white;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;box-shadow:0 2px 12px rgba(15,42,94,.05);">
+                <div style="padding:16px 20px;border-bottom:1px solid #f1f5f9;">
+                    <h3 style="font-size:.85rem;font-weight:900;color:var(--navy);margin:0;display:flex;align-items:center;gap:8px;">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        計算根拠・保険料率（2025年度）
+                    </h3>
+                </div>
+                <div style="padding:16px 20px;">
+                    <table class="rate-table">
+                        <thead>
+                            <tr>
+                                <th>保険種別</th>
+                                <th>従業員負担</th>
+                                <th>事業主負担</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>健康保険（宮城）</strong></td>
+                                <td><span class="rate-pill">5.05%</span></td>
+                                <td><span class="rate-pill">5.05%</span></td>
+                                <td style="color:var(--muted);">協会けんぽ 合計10.10%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>健康保険（東京）</strong></td>
+                                <td><span class="rate-pill">4.97%</span></td>
+                                <td><span class="rate-pill">4.97%</span></td>
+                                <td style="color:var(--muted);">協会けんぽ 合計9.94%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>健康保険（大阪）</strong></td>
+                                <td><span class="rate-pill">5.32%</span></td>
+                                <td><span class="rate-pill">5.32%</span></td>
+                                <td style="color:var(--muted);">協会けんぽ 合計10.64%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>介護保険</strong></td>
+                                <td><span class="rate-pill">0.90%</span></td>
+                                <td><span class="rate-pill">0.90%</span></td>
+                                <td style="color:var(--muted);">40歳以上 合計1.80%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>厚生年金</strong></td>
+                                <td><span class="rate-pill">9.15%</span></td>
+                                <td><span class="rate-pill">9.15%</span></td>
+                                <td style="color:var(--muted);">全国一律 合計18.30%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>雇用保険（一般）</strong></td>
+                                <td><span class="rate-pill">6/1000</span></td>
+                                <td><span class="rate-pill">9.5/1000</span></td>
+                                <td style="color:var(--muted);">合計15.5/1000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>雇用保険（建設）</strong></td>
+                                <td><span class="rate-pill">7/1000</span></td>
+                                <td><span class="rate-pill">11.5/1000</span></td>
+                                <td style="color:var(--muted);">合計17.5/1000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>労災保険（一般）</strong></td>
+                                <td><span class="rate-pill">0%</span></td>
+                                <td><span class="rate-pill">3/1000</span></td>
+                                <td style="color:var(--muted);">全額事業主負担</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- ======= PDF 出力専用レイヤー（非表示） ======= -->
+    <div id="pdf-layer">
+        <!-- ヘッダー -->
+        <div class="pl-header">
+            <div>
+                <div class="pl-office">カミウエ社会保険労務士事務所</div>
+                <h1 class="pl-title">🧮 給与試算結果明細</h1>
+            </div>
+            <div class="pl-date" id="pdf-date"></div>
+        </div>
+
+        <!-- 試算条件サマリー -->
+        <div class="pl-conditions" id="pdf-conditions"></div>
+
+        <!-- 内訳バー -->
+        <div class="pl-bar-wrap">
+            <div class="pl-bar-title">支給額の内訳</div>
+            <div class="pl-bar">
+                <div class="pl-bar-s" id="pdf-bar-s" style="width:30%"></div>
+                <div class="pl-bar-t" id="pdf-bar-t" style="width:5%"></div>
+                <div class="pl-bar-h" id="pdf-bar-h" style="width:65%"></div>
+            </div>
+            <div class="pl-legend">
+                <span><span class="pl-dot" style="background:#1e40af"></span>社会保険料 <strong id="pdf-leg-s">—</strong></span>
+                <span><span class="pl-dot" style="background:#f97316"></span>税金 <strong id="pdf-leg-t">—</strong></span>
+                <span><span class="pl-dot" style="background:#10b981"></span>手取り <strong id="pdf-leg-h">—</strong></span>
+            </div>
+        </div>
+
+        <!-- 手取り（フルワイド） -->
+        <div class="pl-takehome">
+            <div>
+                <div class="pl-takehome-label">差引支給額</div>
+                <div class="pl-takehome-title">手取り金額（概算）</div>
+            </div>
+            <div style="text-align:right">
+                <div id="pdf-takehome" class="pl-takehome-amount">0 円</div>
+                <div id="pdf-takehome-rate" class="pl-takehome-rate"></div>
+            </div>
+        </div>
+
+        <!-- 2カラムグリッド -->
+        <div class="pl-grid">
+
+            <!-- ① 総支給額 -->
+            <div class="pl-card pl-card-gross">
+                <div class="pl-card-head">
+                    <div class="pl-card-head-label">
+                        <span class="pl-badge" style="background:#94a3b8">①</span>
+                        総支給額（額面）
+                    </div>
+                    <span id="pdf-gross" class="pl-card-total">0 円</span>
+                </div>
+            </div>
+
+            <!-- 空欄 or 事業主ラベル -->
+            <div class="pl-card pl-card-gross" id="pdf-employer-cell" style="display:none;">
+                <div class="pl-card-head">
+                    <div class="pl-card-head-label" style="color:#166534">
+                        <span class="pl-badge" style="background:#059669">⑤</span>
+                        事業主負担（概算）
+                    </div>
+                    <span id="pdf-emp-soc-total" class="pl-card-total" style="color:#059669">0 円</span>
+                </div>
+                <div class="pl-card-body">
+                    <div class="pl-row"><span class="pl-row-label">社会保険料（会社負担）</span><span id="pdf-emp-soc-display" class="pl-row-value">0 円</span></div>
+                    <div class="pl-row"><span class="pl-row-label">労災保険料</span><span id="pdf-rosai-emp" class="pl-row-value">0 円</span></div>
+                </div>
+                <div class="pl-employer-foot">
+                    <span class="pl-employer-foot-label">👤 人件費合計目安</span>
+                    <span id="pdf-total-cost" class="pl-employer-foot-val">0 円</span>
+                </div>
+            </div>
+
+            <!-- ② 社会保険料 -->
+            <div class="pl-card pl-card-social">
+                <div class="pl-card-head">
+                    <div class="pl-card-head-label">
+                        <span class="pl-badge" style="background:#1e40af">②</span>
+                        社会保険料 合計
+                    </div>
+                    <span id="pdf-social-total" class="pl-card-total">0 円</span>
+                </div>
+                <div class="pl-card-body">
+                    <div class="pl-row"><span class="pl-row-label">🏥 健康保険料</span><span id="pdf-kenpo" class="pl-row-value">0 円</span></div>
+                    <div class="pl-row" id="pdf-row-kaigo" style="display:none"><span class="pl-row-label">🧓 介護保険料</span><span id="pdf-kaigo" class="pl-row-value">0 円</span></div>
+                    <div class="pl-row"><span class="pl-row-label">🏛 厚生年金保険料</span><span id="pdf-kousei" class="pl-row-value">0 円</span></div>
+                    <div class="pl-row"><span class="pl-row-label">📋 雇用保険料</span><span id="pdf-koyo" class="pl-row-value">0 円</span></div>
+                </div>
+            </div>
+
+            <!-- ③ 税金 -->
+            <div class="pl-card pl-card-tax">
+                <div class="pl-card-head">
+                    <div class="pl-card-head-label">
+                        <span class="pl-badge" style="background:#f97316">③</span>
+                        税金 合計
+                    </div>
+                    <span id="pdf-tax-total" class="pl-card-total">0 円</span>
+                </div>
+                <div class="pl-card-body">
+                    <div class="pl-row"><span class="pl-row-label">📄 源泉所得税</span><span id="pdf-tax" class="pl-row-value">0 円</span></div>
+                    <div class="pl-row" id="pdf-row-resident"><span class="pl-row-label">🏙 住民税（入力値）</span><span id="pdf-resident" class="pl-row-value">0 円</span></div>
+                </div>
+            </div>
+
+        </div><!-- /.pl-grid -->
+
+        <!-- 注意書き -->
+        <div class="pl-note">
+            <strong>⚠️ ご利用にあたっての注意事項：</strong>
+            本ツールは概算計算です。実際の保険料は標準報酬月額（等級）をもとに決定されます。健康保険料率は協会けんぽ2025年度料率を使用。所得税は令和6年分源泉徴収税額表（甲欄）による概算です。住民税は前年所得をもとに市区町村が決定するため正確な金額は含まれません。正確な計算はカミウエ社会保険労務士事務所にご相談ください。
+        </div>
+
+        <!-- フッター -->
+        <div class="pl-footer">
+            <span>カミウエ社会保険労務士事務所 — 給与計算ツール（簡易試算）</span>
+            <span id="pdf-footer-date"></span>
+        </div>
+    </div>
+
+    <script>
+    /* ===== 定数 ===== */
+    const KENPO_RATES = { miyagi:0.0505, tokyo:0.0497, osaka:0.0532, other:0.0500 };
+    const KOYO_EMP   = { general:0.006, construction:0.007 };
+    const KOYO_ALL   = { general:0.0155, construction:0.0175 };
+    const ROSAI_RATE = { general:0.003, construction:0.0095 };
+    const KOUSEI_RATE = 0.0915;
+    const KAIGO_RATE  = 0.009;
+
+    /* ===== 所得税（月例・甲欄簡易） ===== */
+    function sCalcTax(taxable, deps) {
+        if (taxable < 88000) return 0;
+        const d = parseInt(deps);
+        const threshold = taxable - d * 20000;
+        if (threshold < 88000)  return 0;
+        if (threshold < 100000) return Math.floor(threshold * 0.03);
+        if (threshold < 200000) return Math.floor(threshold * 0.05);
+        if (threshold < 300000) return Math.floor(threshold * 0.10);
+        return Math.floor(threshold * 0.20);
+    }
+
+    /* ===== 賞与税率 ===== */
+    function getBonusTaxRate(prevTaxable, deps) {
+        const d = parseInt(deps);
+        const a = prevTaxable;
+        if (d === 0) {
+            if (a < 68000)   return 0;
+            if (a < 252000)  return 0.02042;
+            if (a < 350000)  return 0.04084;
+            if (a < 445000)  return 0.06126;
+            return 0.1021;
+        } else if (d === 1) {
+            if (a < 109000)  return 0;
+            if (a < 294000)  return 0.02042;
+            if (a < 391000)  return 0.04084;
+            return 0.06126;
+        } else {
+            if (a < 151000)  return 0;
+            if (a < 335000)  return 0.02042;
+            return 0.04084;
+        }
+    }
+
+    /* ===== メイン計算 ===== */
+    function sCalc() {
+        const salary     = parseInt(document.getElementById('s-salary').value)      || 0;
+        const isBonus    = document.querySelector('input[name="s-mode"]:checked').value === 'bonus';
+        const pref       = document.getElementById('s-pref').value;
+        const kaigo      = document.getElementById('s-kaigo').checked;
+        const deps       = document.getElementById('s-deps').value;
+        const industry   = document.getElementById('s-industry').value;
+        const residentTax = isBonus ? 0 : (parseInt(document.getElementById('s-resident-tax').value) || 0);
+
+        // 社会保険料（従業員負担）
+        const socKenpo  = Math.floor(salary * KENPO_RATES[pref]);
+        const socKousei = Math.floor(salary * KOUSEI_RATE);
+        const socKaigo  = kaigo ? Math.floor(salary * KAIGO_RATE) : 0;
+        const socKoyo   = Math.floor(salary * KOYO_EMP[industry]);
+        const socTotal  = socKenpo + socKousei + socKaigo + socKoyo;
+
+        const taxableAmount = Math.max(0, salary - socTotal);
+
+        // 所得税
+        let incomeTax = 0;
+        if (isBonus) {
+            const prevSalary   = parseInt(document.getElementById('s-prev-salary').value) || 0;
+            const prevSocRate  = KENPO_RATES[pref] + KOUSEI_RATE + (kaigo ? KAIGO_RATE : 0) + KOYO_EMP[industry];
+            const prevTaxable  = Math.max(0, prevSalary - Math.floor(prevSalary * prevSocRate));
+            const rate         = getBonusTaxRate(prevTaxable, deps);
+            incomeTax          = Math.floor(taxableAmount * rate);
+        } else {
+            incomeTax = sCalcTax(taxableAmount, deps);
+        }
+
+        const taxTotal  = incomeTax + residentTax;
+        const takehome  = salary - socTotal - taxTotal;
+
+        // === DOM 更新（数値フラッシュ付き） ===
+        const upd = (id, val) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const next = sfmt(val);
+            if (el.textContent !== next) {
+                el.textContent = next;
+                el.classList.remove('num-flash');
+                void el.offsetWidth;
+                el.classList.add('num-flash');
+            }
+        };
+
+        upd('sr-gross',        salary);
+        upd('sr-social-total', socTotal);
+        upd('sr-kenpo',        socKenpo);
+        upd('sr-kousei',       socKousei);
+        upd('sr-kaigo',        socKaigo);
+        upd('sr-koyo',         socKoyo);
+        upd('sr-tax-total',    taxTotal);
+        upd('sr-tax',          incomeTax);
+        upd('sr-res-display',  residentTax);
+
+        document.getElementById('sr-row-kaigo').style.display    = kaigo   ? 'flex' : 'none';
+        document.getElementById('sr-row-resident').style.display = isBonus ? 'none' : 'flex';
+
+        // 手取り
+        const takehomeEl = document.getElementById('sr-takehome');
+        const nextTH = sfmt(takehome);
+        if (takehomeEl.textContent !== nextTH) {
+            takehomeEl.textContent = nextTH;
+            takehomeEl.classList.remove('num-flash');
+            void takehomeEl.offsetWidth;
+            takehomeEl.classList.add('num-flash');
+        }
+        const rateText = salary > 0 ? `手取り率 ${(takehome / salary * 100).toFixed(1)}%` : '';
+        document.getElementById('sr-takehome-rate').textContent = rateText;
+
+        // 事業主負担
+        const empSoc  = socTotal + Math.floor(salary * (KOYO_ALL[industry] - KOYO_EMP[industry]));
+        const rosai   = Math.floor(salary * ROSAI_RATE[industry]);
+        const empDisp = document.getElementById('sr-emp-soc-display');
+        if (empDisp) empDisp.textContent = sfmt(empSoc - Math.floor(salary * (KOYO_ALL[industry] - KOYO_EMP[industry])) + Math.floor(salary * (KENPO_RATES[pref] + KOUSEI_RATE + (kaigo ? KAIGO_RATE : 0) + (KOYO_ALL[industry] - KOYO_EMP[industry]))));
+
+        upd('sr-emp-soc-total', empSoc);
+        upd('sr-rosai-emp',     rosai);
+        upd('sr-total-cost',    salary + empSoc + rosai);
+
+        // 内訳バー
+        if (salary > 0) {
+            const pSoc  = (socTotal  / salary * 100).toFixed(1);
+            const pTax  = (taxTotal  / salary * 100).toFixed(1);
+            const pHome = (Math.max(0,takehome) / salary * 100).toFixed(1);
+            document.getElementById('bar-social').style.width = pSoc  + '%';
+            document.getElementById('bar-tax').style.width    = pTax  + '%';
+            document.getElementById('bar-home').style.width   = pHome + '%';
+            document.getElementById('leg-social').textContent = pSoc  + '%';
+            document.getElementById('leg-tax').textContent    = pTax  + '%';
+            document.getElementById('leg-home').textContent   = pHome + '%';
+        }
+
+        updateAdvice(salary, takehome, isBonus, socTotal, taxTotal);
+    }
+
+    /* ===== フォーマット ===== */
+    function sfmt(n) { return Math.floor(n).toLocaleString() + ' 円'; }
+
+    /* ===== タブ切替 ===== */
+    function sSwitchTab(target) {
+        const isEmp = target === 'employee';
+        document.getElementById('stab-employee').classList.toggle('active',  isEmp);
+        document.getElementById('stab-employer').classList.toggle('active', !isEmp);
+        const card = document.getElementById('sr-employer-card');
+        if (card) card.style.display = isEmp ? 'none' : 'block';
+        sCalc();
+    }
+
+    /* ===== モード切替 ===== */
+    function sToggleMode(mode) {
+        const isBonus = mode === 'bonus';
+        document.getElementById('s-prev-salary-section').style.display = isBonus ? 'block' : 'none';
+        document.getElementById('s-resident-section').style.display    = isBonus ? 'none'  : 'block';
+        sCalc();
+    }
+
+    /* ===== リセット ===== */
+    function sReset() {
+        document.getElementById('s-salary').value       = 300000;
+        document.getElementById('s-resident-tax').value = 0;
+        document.getElementById('s-kaigo').checked      = false;
+        document.getElementById('s-deps').value         = '0';
+        document.getElementById('s-pref').value         = 'miyagi';
+        document.getElementById('s-industry').value     = 'general';
+        document.querySelector('input[value="monthly"]').checked = true;
+        sToggleMode('monthly');
+    }
+
+    /* ===== アドバイス更新 ===== */
+    function updateAdvice(salary, takehome, isBonus, socTotal, taxTotal) {
+        const el = document.getElementById('advice-text');
+        if (!el) return;
+        if (salary === 0) { el.textContent = '支給額を入力してください。'; return; }
+
+        const rate = takehome / salary;
+        if (isBonus) {
+            el.textContent = '賞与の所得税率は、前月の給与額（社会保険料控除後）によって決まります。前月給与を正確に入力することでより精度の高い試算が可能です。';
+        } else if (rate < 0.70) {
+            el.textContent = `控除合計が支給額の ${((1 - rate) * 100).toFixed(1)}% を占めています。社会保険料・税金の比率が高い状態です。扶養人数や住民税の入力値をご確認ください。`;
+        } else if (rate >= 0.80) {
+            el.textContent = `手取り率 ${(rate * 100).toFixed(1)}% は良好な水準です。社会保険料 ${sfmt(socTotal)} / 税金 ${sfmt(taxTotal)} が控除されています。`;
+        } else {
+            el.textContent = `この計算結果は概算です。正確な税額は扶養控除等申告書（甲欄）の内容に基づきます。実際の給与明細とお比べください。`;
+        }
+    }
+
+    /* ===== PDF エクスポート ===== */
+    function exportToPDF() {
+        // --- 1. PDF レイヤーに最新値を転記 ---
+        const salary      = parseInt(document.getElementById('s-salary').value, 10) || 0;
+        const isBonus     = document.querySelector('input[name="s-mode"]:checked').value === 'bonus';
+        const kaigo       = document.getElementById('s-kaigo').checked;
+        const isEmployer  = document.getElementById('stab-employer').classList.contains('active');
+
+        // 数値を画面の表示値からそのまま転記
+        const copyText = (srcId, dstId) => {
+            const src = document.getElementById(srcId);
+            const dst = document.getElementById(dstId);
+            if (src && dst) dst.textContent = src.textContent;
+        };
+        copyText('sr-gross',        'pdf-gross');
+        copyText('sr-social-total', 'pdf-social-total');
+        copyText('sr-kenpo',        'pdf-kenpo');
+        copyText('sr-kousei',       'pdf-kousei');
+        copyText('sr-kaigo',        'pdf-kaigo');
+        copyText('sr-koyo',         'pdf-koyo');
+        copyText('sr-tax-total',    'pdf-tax-total');
+        copyText('sr-tax',          'pdf-tax');
+        copyText('sr-res-display',  'pdf-resident');
+        copyText('sr-takehome',     'pdf-takehome');
+        copyText('sr-takehome-rate','pdf-takehome-rate');
+        copyText('sr-emp-soc-total','pdf-emp-soc-total');
+        copyText('sr-emp-soc-display','pdf-emp-soc-display');
+        copyText('sr-rosai-emp',    'pdf-rosai-emp');
+        copyText('sr-total-cost',   'pdf-total-cost');
+
+        // 内訳バー
+        const copyWidth = (srcId, dstId) => {
+            const src = document.getElementById(srcId);
+            const dst = document.getElementById(dstId);
+            if (src && dst) dst.style.width = src.style.width;
+        };
+        copyWidth('bar-social', 'pdf-bar-s');
+        copyWidth('bar-tax',    'pdf-bar-t');
+        copyWidth('bar-home',   'pdf-bar-h');
+        const copyLeg = (srcId, dstId) => {
+            const src = document.getElementById(srcId);
+            const dst = document.getElementById(dstId);
+            if (src && dst) dst.textContent = src.textContent;
+        };
+        copyLeg('leg-social', 'pdf-leg-s');
+        copyLeg('leg-tax',    'pdf-leg-t');
+        copyLeg('leg-home',   'pdf-leg-h');
+
+        // 行の表示切替
+        document.getElementById('pdf-row-kaigo').style.display    = kaigo   ? 'flex' : 'none';
+        document.getElementById('pdf-row-resident').style.display = isBonus ? 'none' : 'flex';
+        document.getElementById('pdf-employer-cell').style.display= isEmployer ? 'block' : 'none';
+
+        // 日付
+        const now = new Date();
+        const dateStr = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
+        const modeLabel = isBonus ? '賞与' : '月例給与';
+        document.getElementById('pdf-date').innerHTML =
+            `${dateStr} 試算<br><span style="color:#f97316;font-weight:800">${modeLabel}</span>`;
+        document.getElementById('pdf-footer-date').textContent = dateStr + ' 現在';
+
+        // 試算条件サマリー
+        const pref  = document.getElementById('s-pref');
+        const deps  = document.getElementById('s-deps');
+        const ind   = document.getElementById('s-industry');
+        const prefTxt = pref ? pref.options[pref.selectedIndex].text.split(' — ')[0] : '';
+        const depsTxt = deps ? deps.options[deps.selectedIndex].text : '';
+        const indTxt  = ind  ? ind.options[ind.selectedIndex].text.split(' — ')[0] : '';
+        document.getElementById('pdf-conditions').innerHTML =
+            `<span class="pl-cond-item"><strong>支給額：</strong>${sfmt(salary)}</span>` +
+            `<span class="pl-cond-item"><strong>計算モード：</strong>${modeLabel}</span>` +
+            `<span class="pl-cond-item"><strong>勤務地：</strong>${prefTxt}</span>` +
+            `<span class="pl-cond-item"><strong>介護保険：</strong>${kaigo ? '対象（40歳以上）' : '非対象'}</span>` +
+            `<span class="pl-cond-item"><strong>扶養人数：</strong>${depsTxt}</span>` +
+            `<span class="pl-cond-item"><strong>事業種別：</strong>${indTxt}</span>`;
+
+        // --- 2. PDF レイヤーを一瞬表示して html2pdf でキャプチャ ---
+        const layer = document.getElementById('pdf-layer');
+        layer.style.display = 'block';
+
+        const filename = `給与試算_カミウエ社労士事務所_${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}.pdf`;
+
+        html2pdf()
+            .set({
+                margin:      0,
+                filename:    filename,
+                image:       { type: 'jpeg', quality: 0.99 },
+                html2canvas: { scale: 2, useCORS: true, logging: false, windowWidth: 794 },
+                jsPDF:       { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak:   { mode: 'avoid-all' },
+            })
+            .from(layer)
+            .save()
+            .then(() => {
+                layer.style.display = 'none';
+            });
+    }
+
+    /* ===== 初期化 ===== */
+    document.addEventListener('DOMContentLoaded', () => {
+        const d = new Date();
+        const el = document.getElementById('current-date');
+        if (el) el.textContent = `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 現在`;
+        sCalc();
+    });
+    </script>
 </body>
 </html>

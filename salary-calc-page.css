@@ -1,0 +1,598 @@
+/* 給与計算ツール共通スタイル — index.html（#page-salary-calc）と salary-calc.html で使用。ロジックは salary-calc.js。 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=DM+Mono:wght@400;500&display=swap");
+
+:root {
+            --navy:    #0f2a5e;
+            --blue:    #1e40af;
+            --accent:  #f97316;
+            --sky:     #38bdf8;
+            --surface: #f8faff;
+            --card:    #ffffff;
+            --border:  #dbeafe;
+            --text:    #1e293b;
+            --muted:   #64748b;
+            --green:   #059669;
+            --red:     #dc2626;
+        }
+
+        /* index 埋め込み（#page-salary-calc）と単体 salary-calc.html（body.salary-calc-root）のみに適用 */
+        #page-salary-calc,
+        body.salary-calc-root {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text);
+            background: var(--surface);
+            margin: 0;
+        }
+        #page-salary-calc *,
+        #page-salary-calc *::before,
+        #page-salary-calc *::after,
+        body.salary-calc-root *,
+        body.salary-calc-root *::before,
+        body.salary-calc-root *::after {
+            box-sizing: border-box;
+        }
+
+        /* === HEADER === */
+        .tool-header {
+            background: white;
+            border-bottom: 2px solid var(--border);
+            position: sticky; top: 0; z-index: 50;
+        }
+
+        /* === HERO BANNER === */
+        .hero-band {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, #3b82f6 100%);
+            padding: 28px 0 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-band::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* === LAYOUT GRID === */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 28px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 20px 64px;
+        }
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+
+        /* === INPUT PANEL === */
+        .input-panel {
+            position: sticky;
+            top: 80px;
+            align-self: start;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 24px rgba(15,42,94,0.08);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .input-panel-header {
+            background: linear-gradient(135deg, var(--navy), var(--blue));
+            padding: 18px 24px;
+        }
+
+        /* === TABS === */
+        .tab-bar {
+            display: flex;
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 3px;
+            gap: 2px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            background: transparent;
+            color: var(--muted);
+            transition: all 0.2s;
+        }
+        .tab-btn.active {
+            background: white;
+            color: var(--navy);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* === FORM INPUTS === */
+        .field-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
+        }
+        .field-label .hint {
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            color: #94a3b8;
+            font-size: 0.74rem;
+        }
+        .field-input {
+            width: 100%;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 10px 48px 10px 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'DM Mono', monospace;
+            text-align: right;
+            background: #f8fafc;
+            color: var(--text);
+            transition: all 0.2s;
+            -moz-appearance: textfield;
+        }
+        .field-input::-webkit-outer-spin-button,
+        .field-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+        .field-input:focus {
+            outline: none;
+            border-color: var(--blue);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(30,64,175,0.1);
+        }
+        .field-input-wrap { position: relative; }
+        .field-suffix {
+            position: absolute; right: 14px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted); font-size: 0.82rem; font-weight: 700;
+            pointer-events: none;
+        }
+        .field-select {
+            width: 100%;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: #f8fafc;
+            color: var(--text);
+            transition: all 0.2s;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+        }
+        .field-select:focus { outline: none; border-color: var(--blue); background-color: white; box-shadow: 0 0 0 3px rgba(30,64,175,0.1); }
+
+        /* radio/mode toggle */
+        .mode-toggle { display: flex; gap: 8px; }
+        .mode-label {
+            flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+            padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px;
+            cursor: pointer; transition: all 0.2s; background: #f8fafc;
+            font-size: 0.85rem; font-weight: 700; color: var(--muted);
+        }
+        .mode-label:has(input:checked) {
+            border-color: var(--blue); background: #eff6ff; color: var(--blue);
+        }
+        .mode-label input { width: 14px; height: 14px; accent-color: var(--blue); }
+
+        /* checkbox toggle */
+        .check-label {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 10px;
+            cursor: pointer; transition: all 0.2s; background: #f8fafc;
+            font-size: 0.85rem; font-weight: 700; color: var(--muted);
+        }
+        .check-label:has(input:checked) {
+            border-color: #a21caf; background: #fdf4ff; color: #7e22ce;
+        }
+        .check-label input { width: 16px; height: 16px; accent-color: #a21caf; }
+
+        /* reset button */
+        .btn-reset {
+            width: 100%; padding: 11px; border: 2px solid #e2e8f0;
+            border-radius: 10px; background: white; color: var(--muted);
+            font-weight: 700; font-size: 0.85rem; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-reset:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* === RESULT AREA === */
+        .result-area { display: flex; flex-direction: column; gap: 16px; }
+
+        /* result section card */
+        .result-card {
+            background: white;
+            border-radius: 16px;
+            border: 1.5px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(15,42,94,0.05);
+            transition: transform 0.2s;
+        }
+        .result-card:hover { transform: translateY(-1px); }
+        .result-card-header {
+            padding: 14px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .result-card-title {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.78rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.08em;
+        }
+        .result-card-badge {
+            width: 22px; height: 22px; border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; font-weight: 900; color: white;
+        }
+        .result-card-total {
+            font-family: 'DM Mono', monospace;
+            font-size: 1.35rem; font-weight: 700;
+        }
+        .result-card-body { padding: 14px 20px; }
+        .result-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 7px 0; border-bottom: 1px solid #f8fafc;
+            font-size: 0.85rem;
+        }
+        .result-row:last-child { border-bottom: none; }
+        .result-row-label { color: var(--muted); }
+        .result-row-value {
+            font-family: 'DM Mono', monospace;
+            font-weight: 600; font-size: 0.9rem; color: var(--text);
+        }
+
+        /* gross card */
+        .card-gross .result-card-header { background: #f8fafc; }
+        .card-gross .result-card-badge { background: #94a3b8; }
+        .card-gross .result-card-title { color: var(--muted); }
+        .card-gross .result-card-total { color: var(--text); }
+
+        /* social insurance card */
+        .card-social .result-card-header { background: #eff6ff; }
+        .card-social .result-card-badge { background: var(--blue); }
+        .card-social .result-card-title { color: var(--blue); }
+        .card-social .result-card-total { color: var(--blue); }
+
+        /* tax card */
+        .card-tax .result-card-header { background: #fff7ed; }
+        .card-tax .result-card-badge { background: var(--accent); }
+        .card-tax .result-card-title { color: #c2410c; }
+        .card-tax .result-card-total { color: #c2410c; }
+
+        /* takehome card */
+        .card-takehome {
+            background: linear-gradient(135deg, var(--navy) 0%, #1e40af 100%);
+            border-color: transparent;
+            box-shadow: 0 8px 32px rgba(15,42,94,0.25);
+        }
+        .card-takehome:hover { transform: translateY(-3px); }
+        .card-takehome-inner { padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .card-takehome-label { color: rgba(255,255,255,0.6); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+        .card-takehome-title { color: white; font-size: 1.1rem; font-weight: 800; }
+        .card-takehome-amount {
+            font-family: 'DM Mono', monospace;
+            font-size: 2.6rem; font-weight: 700; color: white;
+            text-align: right; white-space: nowrap;
+        }
+        .card-takehome-rate { color: rgba(255,255,255,0.55); font-size: 0.78rem; font-weight: 600; text-align: right; margin-top: 4px; }
+
+        /* employer card */
+        .card-employer .result-card-header { background: #f0fdf4; }
+        .card-employer .result-card-badge { background: var(--green); }
+        .card-employer .result-card-title { color: #166534; }
+        .card-employer .result-card-total { color: var(--green); }
+        .employer-total-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 20px;
+            background: #f0fdf4;
+            border-top: 2px solid #bbf7d0;
+        }
+        .employer-total-label { font-weight: 800; color: #166534; font-size: 0.9rem; }
+        .employer-total-value {
+            font-family: 'DM Mono', monospace;
+            font-weight: 700; font-size: 1.3rem; color: var(--green);
+        }
+
+        /* === BREAKDOWN VISUAL === */
+        .breakdown-bar-wrap { margin: 20px 0 4px; }
+        .breakdown-bar {
+            height: 10px; border-radius: 999px;
+            background: #e2e8f0;
+            overflow: hidden;
+            display: flex;
+        }
+        .bar-social { background: var(--blue); transition: width 0.4s cubic-bezier(.4,0,.2,1); }
+        .bar-tax    { background: var(--accent); transition: width 0.4s cubic-bezier(.4,0,.2,1); }
+        .bar-home   { background: #10b981; transition: width 0.4s cubic-bezier(.4,0,.2,1); }
+        .breakdown-legend {
+            display: flex; gap: 16px; flex-wrap: wrap;
+            font-size: 0.72rem; color: var(--muted); font-weight: 600; margin-top: 8px;
+        }
+        .legend-dot {
+            display: inline-block; width: 8px; height: 8px;
+            border-radius: 50%; margin-right: 4px;
+        }
+
+        /* === ADVICE BOX === */
+        .advice-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+            border: 1.5px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 14px 16px;
+        }
+        .advice-title { font-size: 0.76rem; font-weight: 800; color: var(--blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+        .advice-text { font-size: 0.84rem; color: #1e40af; line-height: 1.7; }
+
+        /* === NOTE BOX === */
+        .note-box {
+            background: #fffbeb;
+            border: 1.5px solid #fde68a;
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 0.78rem;
+            color: #92400e;
+            line-height: 1.8;
+        }
+        .note-box strong { font-weight: 800; }
+
+        /* === CTA === */
+        .cta-box {
+            background: linear-gradient(135deg, var(--navy) 0%, #1e40af 100%);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            color: white;
+        }
+        .btn-cta {
+            background: var(--accent);
+            color: white;
+            font-weight: 800;
+            padding: 12px 28px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 16px rgba(249,115,22,0.4);
+        }
+        .btn-cta:hover { background: #ea580c; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(249,115,22,0.4); }
+
+        /* === PDF EXPORT BTN === */
+        .btn-pdf {
+            width: 100%; background: var(--navy); color: white;
+            font-weight: 800; padding: 13px; border-radius: 12px; border: none;
+            cursor: pointer; transition: all 0.2s; font-size: 0.9rem;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            box-shadow: 0 4px 16px rgba(15,42,94,0.25);
+        }
+        .btn-pdf:hover { background: #1e3a8a; transform: translateY(-1px); }
+
+        /* === RATE TABLE === */
+        .rate-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+        .rate-table th {
+            background: var(--navy); color: white;
+            padding: 8px 12px; text-align: left; font-weight: 700; font-size: 0.75rem;
+        }
+        .rate-table td {
+            padding: 9px 12px; border-bottom: 1px solid #f1f5f9; color: var(--text);
+            vertical-align: top;
+        }
+        .rate-table tr:last-child td { border-bottom: none; }
+        .rate-table tr:nth-child(even) td { background: #f8faff; }
+        .rate-pill {
+            display: inline-block; padding: 2px 8px; border-radius: 999px;
+            font-size: 0.72rem; font-weight: 800; font-family: 'DM Mono', monospace;
+            background: #dbeafe; color: var(--blue);
+        }
+
+        /* === DIVIDER === */
+        .section-divider { height: 1px; background: linear-gradient(90deg, transparent, #dbeafe, transparent); margin: 8px 0; }
+
+        /* === PDF LAYER（非表示の出力専用レイヤー） === */
+        #pdf-layer {
+            display: none;
+            position: fixed;
+            left: -9999px;
+            top: 0;
+            width: 794px; /* A4 @ 96dpi */
+            background: white;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #1e293b;
+            padding: 36px 40px 32px;
+            box-sizing: border-box;
+        }
+        /* ヘッダー */
+        #pdf-layer .pl-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #0f2a5e;
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+        }
+        #pdf-layer .pl-office {
+            font-size: 11px;
+            font-weight: 700;
+            color: #0f2a5e;
+        }
+        #pdf-layer .pl-title {
+            font-size: 18px;
+            font-weight: 900;
+            color: #0f2a5e;
+            margin: 0;
+        }
+        #pdf-layer .pl-date {
+            font-size: 10px;
+            color: #64748b;
+            text-align: right;
+        }
+        /* 条件サマリー */
+        #pdf-layer .pl-conditions {
+            background: #f0f6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 20px;
+        }
+        #pdf-layer .pl-cond-item {
+            font-size: 10px;
+            color: #334155;
+        }
+        #pdf-layer .pl-cond-item strong {
+            color: #0f2a5e;
+            font-weight: 800;
+        }
+        /* グリッド（2カラム） */
+        #pdf-layer .pl-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        #pdf-layer .pl-grid-full {
+            grid-column: 1 / -1;
+        }
+        /* カード共通 */
+        #pdf-layer .pl-card {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1.5px solid #e2e8f0;
+        }
+        #pdf-layer .pl-card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 9px 14px;
+        }
+        #pdf-layer .pl-card-head-label {
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        #pdf-layer .pl-badge {
+            width: 18px; height: 18px;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 900;
+            color: white;
+        }
+        #pdf-layer .pl-card-total {
+            font-family: 'DM Mono', monospace;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        #pdf-layer .pl-card-body {
+            padding: 6px 14px 10px;
+        }
+        #pdf-layer .pl-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid #f8fafc;
+            font-size: 10px;
+        }
+        #pdf-layer .pl-row:last-child { border-bottom: none; }
+        #pdf-layer .pl-row-label { color: #64748b; }
+        #pdf-layer .pl-row-value { font-family: 'DM Mono', monospace; font-weight: 600; color: #1e293b; }
+        /* 色別カード */
+        #pdf-layer .pl-card-gross  .pl-card-head { background: #f8fafc; }
+        #pdf-layer .pl-card-gross  .pl-card-head-label { color: #64748b; }
+        #pdf-layer .pl-card-gross  .pl-card-total { color: #1e293b; }
+        #pdf-layer .pl-card-social .pl-card-head { background: #eff6ff; }
+        #pdf-layer .pl-card-social .pl-card-head-label { color: #1e40af; }
+        #pdf-layer .pl-card-social .pl-card-total { color: #1e40af; }
+        #pdf-layer .pl-card-tax    .pl-card-head { background: #fff7ed; }
+        #pdf-layer .pl-card-tax    .pl-card-head-label { color: #c2410c; }
+        #pdf-layer .pl-card-tax    .pl-card-total { color: #c2410c; }
+        /* 手取りカード（フルワイド） */
+        #pdf-layer .pl-takehome {
+            background: #0f2a5e;
+            border-radius: 10px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        #pdf-layer .pl-takehome-label { color: rgba(255,255,255,.6); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 3px; }
+        #pdf-layer .pl-takehome-title { color: white; font-size: 13px; font-weight: 800; }
+        #pdf-layer .pl-takehome-amount { font-family: 'DM Mono', monospace; font-size: 28px; font-weight: 700; color: white; }
+        #pdf-layer .pl-takehome-rate { font-size: 10px; color: rgba(255,255,255,.55); text-align: right; margin-top: 3px; }
+        /* 内訳バー */
+        #pdf-layer .pl-bar-wrap { margin-bottom: 12px; background: white; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 10px 14px; }
+        #pdf-layer .pl-bar-title { font-size: 9px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 7px; }
+        #pdf-layer .pl-bar { height: 10px; border-radius: 999px; background: #e2e8f0; display: flex; overflow: hidden; margin-bottom: 6px; }
+        #pdf-layer .pl-bar-s { background: #1e40af; }
+        #pdf-layer .pl-bar-t { background: #f97316; }
+        #pdf-layer .pl-bar-h { background: #10b981; }
+        #pdf-layer .pl-legend { display: flex; gap: 14px; font-size: 9px; color: #64748b; font-weight: 600; }
+        #pdf-layer .pl-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 3px; }
+        /* 事業主カード */
+        #pdf-layer .pl-card-employer .pl-card-head { background: #f0fdf4; }
+        #pdf-layer .pl-card-employer .pl-card-head-label { color: #166534; }
+        #pdf-layer .pl-card-employer .pl-card-total { color: #059669; }
+        #pdf-layer .pl-employer-foot { display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; background: #f0fdf4; border-top: 1.5px solid #bbf7d0; font-size: 11px; }
+        #pdf-layer .pl-employer-foot-label { font-weight: 800; color: #166534; }
+        #pdf-layer .pl-employer-foot-val { font-family: 'DM Mono', monospace; font-weight: 700; color: #059669; font-size: 14px; }
+        /* 注意書き */
+        #pdf-layer .pl-note {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 9px;
+            color: #92400e;
+            line-height: 1.7;
+            margin-top: 12px;
+        }
+        /* フッター */
+        #pdf-layer .pl-footer {
+            margin-top: 14px;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+            color: #94a3b8;
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up { animation: fadeUp 0.5s ease-out both; }
+        .delay-1 { animation-delay: 0.08s; }
+        .delay-2 { animation-delay: 0.16s; }
+        .delay-3 { animation-delay: 0.24s; }
+        .delay-4 { animation-delay: 0.32s; }
+
+        /* value flash animation */
+        @keyframes numFlash {
+            0%   { color: inherit; }
+            30%  { color: #3b82f6; }
+            100% { color: inherit; }
+        }
+        .num-flash { animation: numFlash 0.4s ease-out; }
+

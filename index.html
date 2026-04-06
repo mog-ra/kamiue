@@ -43,35 +43,37 @@
                     <p class="text-xs text-gray-500">宮城 仙台 社労士 | KAMIUE SR OFFICE</p>
                 </div>
             </button>
-            <nav class="hidden md:flex gap-8 items-center text-sm font-medium">
-                <button id="nav-home" onclick="showPage('home')" class="active-tab pb-1 transition hover:text-blue-900">ホーム</button>
-                <button id="nav-services" onclick="showPage('services')" class="pb-1 transition hover:text-blue-900">サービス</button>
-                <button id="nav-about" onclick="showPage('about')" class="pb-1 transition hover:text-blue-900">事務所紹介</button>
+            <nav class="hidden md:flex gap-2 lg:gap-3 items-center text-sm font-medium">
+                <button type="button" id="nav-home" onclick="showPage('home')" class="nav-main-link active-tab">ホーム</button>
+                <button type="button" id="nav-services" onclick="showPage('services')" class="nav-main-link">サービス</button>
+                <button type="button" id="nav-about" onclick="showPage('about')" class="nav-main-link">事務所紹介</button>
                 <div class="relative group">
-                    <button class="pb-1 transition hover:text-blue-900 flex items-center gap-1">
+                    <button type="button" class="nav-main-link flex items-center gap-1 group-hover:bg-blue-50 group-hover:text-blue-900 group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-blue-600 group-focus-visible:ring-offset-2" aria-haspopup="true" aria-label="お役立ちコンテンツ メニュー">
                         お役立ちコンテンツ
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
-                    <div class="hidden group-hover:block absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
-                        <button onclick="showPage('blog')" class="w-full text-left px-4 py-3 hover:bg-blue-50 transition text-sm">📝 労務管理コラム</button>
-                        <button onclick="showPage('checkup')" class="w-full text-left px-4 py-3 hover:bg-blue-50 transition text-sm">✅ 労務リスク診断</button>
-                        <button onclick="showPage('subsidy-sim')" class="w-full text-left px-4 py-3 hover:bg-blue-50 transition text-sm">💰 助成金診断</button>
-                        <button onclick="showPage('salary-calc')" class="w-full text-left px-4 py-3 hover:bg-blue-50 transition text-sm">🧮 給与計算ツール</button>
-                        <button onclick="showPage('price-sim')" class="w-full text-left px-4 py-3 hover:bg-amber-50 transition text-sm font-semibold text-amber-700">🧮 料金シミュレーター</button>
-                        <button onclick="showPage('download')" class="w-full text-left px-4 py-3 hover:bg-indigo-50 transition text-sm font-semibold text-indigo-700">📥 無料資料ダウンロード</button>
-                        <hr class="my-1 border-gray-100">
-                        <button onclick="showPage('spot')" class="w-full text-left px-4 py-3 hover:bg-orange-50 transition text-sm font-bold text-orange-700">📋 手続き代行依頼</button>
+                    <!-- top-full + 上方向 pt-2: トリガーと白パネルの間にホバー空白ができず、メニューが一瞬で消えにくい -->
+                    <div class="hidden group-hover:block group-focus-within:block absolute top-full left-0 z-50 w-56 pt-2">
+                        <div class="bg-white rounded-lg shadow-xl border border-gray-200 py-2">
+                            <button type="button" onclick="showPage('blog')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">📝 労務管理コラム</button>
+                            <button type="button" onclick="showPage('checkup')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">✅ 労務リスク診断</button>
+                            <button type="button" onclick="showPage('subsidy-sim')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">💰 助成金診断</button>
+                            <button type="button" onclick="showPage('salary-calc')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">🧮 給与計算ツール</button>
+                            <button type="button" onclick="showPage('price-sim')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-semibold text-amber-800">🧮 料金シミュレーター</button>
+                            <button type="button" onclick="showPage('download')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-semibold text-indigo-800">📥 無料資料ダウンロード</button>
+                            <hr class="my-1 border-gray-100">
+                            <button type="button" onclick="showPage('spot')" class="nav-submenu-item nav-submenu-item--accent w-full text-left px-4 py-2.5 text-sm font-bold text-orange-800">📋 手続き代行依頼</button>
+                        </div>
                     </div>
                 </div>
-                <button id="nav-links" onclick="showPage('links')" class="pb-1 transition hover:text-blue-900">関連リンク</button>
-                <button id="nav-spot" onclick="showPage('spot')" class="pb-1 transition hover:text-blue-900 text-orange-600 font-bold">手続き依頼</button>
-                <button id="nav-faq" onclick="showPage('faq')" class="pb-1 transition hover:text-blue-900">よくある質問</button>
-                <button id="nav-contact" onclick="showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2.5 rounded-lg hover:from-orange-600 hover:to-orange-700 transition shadow-md font-bold">お問い合わせ</button>
+                <button type="button" id="nav-links" onclick="showPage('links')" class="nav-main-link">関連リンク</button>
+                <button type="button" id="nav-faq" onclick="showPage('faq')" class="nav-main-link">よくある質問</button>
+                <button type="button" id="nav-contact" onclick="showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2.5 rounded-lg font-bold shadow-md transition duration-200 hover:from-orange-600 hover:to-orange-700 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]">お問い合わせ</button>
             </nav>
             <div class="md:hidden">
-                <button class="text-blue-900 p-2" onclick="toggleMobileMenu()">
+                <button type="button" class="text-blue-900 p-2 rounded-lg transition hover:bg-blue-50 hover:text-blue-950 active:bg-blue-100" onclick="toggleMobileMenu()" aria-label="メニューを開く">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
@@ -79,23 +81,22 @@
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-4 space-y-3 shadow-inner">
-            <button onclick="showPage('home')" class="block w-full py-3 text-left font-medium hover:bg-gray-50 rounded px-3">ホーム</button>
-            <button onclick="showPage('services')" class="block w-full py-3 text-left font-medium hover:bg-gray-50 rounded px-3">サービス・料金</button>
-            <button onclick="showPage('about')" class="block w-full py-3 text-left font-medium hover:bg-gray-50 rounded px-3">事務所紹介</button>
-            <div class="pl-3">
-                <p class="text-xs text-gray-500 font-bold py-2">お役立ちコンテンツ</p>
-                <button onclick="showPage('blog')" class="block w-full py-2 text-left text-sm hover:bg-gray-50 rounded px-3">📝 労務管理コラム</button>
-                <button onclick="showPage('checkup')" class="block w-full py-2 text-left text-sm hover:bg-gray-50 rounded px-3">✅ 労務リスク診断</button>
-                <button onclick="showPage('subsidy-sim')" class="block w-full py-2 text-left text-sm hover:bg-gray-50 rounded px-3">💰 助成金診断</button>
-                <button onclick="showPage('salary-calc')" class="block w-full py-2 text-left text-sm hover:bg-gray-50 rounded px-3">🧮 給与計算ツール</button>
-                <button onclick="showPage('price-sim')" class="block w-full py-2 text-left text-sm hover:bg-amber-50 rounded px-3 font-semibold text-amber-700">🧮 料金シミュレーター</button>
-                <button onclick="showPage('download')" class="block w-full py-2 text-left text-sm hover:bg-indigo-50 rounded px-3 font-semibold text-indigo-700">📥 無料資料ダウンロード</button>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-4 space-y-1 shadow-inner">
+            <button type="button" onclick="showPage('home')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">ホーム</button>
+            <button type="button" onclick="showPage('services')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">サービス・料金</button>
+            <button type="button" onclick="showPage('about')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">事務所紹介</button>
+            <div class="pl-2 pt-1">
+                <p class="text-xs text-gray-500 font-bold py-2 px-3">お役立ちコンテンツ</p>
+                <button type="button" onclick="showPage('blog')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">📝 労務管理コラム</button>
+                <button type="button" onclick="showPage('checkup')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">✅ 労務リスク診断</button>
+                <button type="button" onclick="showPage('subsidy-sim')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">💰 助成金診断</button>
+                <button type="button" onclick="showPage('salary-calc')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">🧮 給与計算ツール</button>
+                <button type="button" onclick="showPage('price-sim')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-semibold text-amber-800">🧮 料金シミュレーター</button>
+                <button type="button" onclick="showPage('download')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-semibold text-indigo-800">📥 無料資料ダウンロード</button>
             </div>
-            <button onclick="showPage('links')" class="block w-full py-3 text-left font-medium hover:bg-gray-50 rounded px-3">関連リンク</button>
-            <button onclick="showPage('spot')" class="block w-full py-3 text-left font-bold text-orange-600 hover:bg-orange-50 rounded px-3">📋 手続き依頼</button>
-            <button onclick="showPage('faq')" class="block w-full py-3 text-left font-medium hover:bg-gray-50 rounded px-3">よくある質問</button>
-            <button onclick="showPage('contact')" class="block w-full py-3 text-left font-bold text-orange-600 hover:bg-gray-50 rounded px-3">お問い合わせ</button>
+            <button type="button" onclick="showPage('links')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">関連リンク</button>
+            <button type="button" onclick="showPage('faq')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">よくある質問</button>
+            <button type="button" onclick="showPage('contact')" class="mobile-nav-item mobile-nav-item--cta block w-full py-3 text-left font-bold rounded-lg px-3 text-orange-700">お問い合わせ</button>
         </div>
     </header>
 
@@ -1248,7 +1249,7 @@
         </section>
 
         <!-- CHECKUP PAGE -->
-        <section id="page-checkup" class="py-20 bg-gray-50">
+        <section id="page-checkup" class="hidden py-20 bg-gray-50">
             <div class="max-w-4xl mx-auto px-4">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold mb-4 text-blue-900">3分でわかる！労務リスク自己診断</h2>
@@ -1276,59 +1277,6 @@
                     </div>
                     <div id="checkup-result" class="w-full hidden">
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SUBSIDY SIMULATOR PAGE -->
-        <section id="page-subsidy-sim" class="hidden py-16 md:py-24 bg-gradient-to-br from-orange-50 to-white">
-            <div class="container mx-auto px-4 max-w-4xl">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-6">助成金診断ツール</h2>
-                    <p class="text-gray-600 text-lg">あなたの会社が申請できる助成金を診断</p>
-                </div>
-                <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
-                    <div id="subsidy-form">
-                        <form id="subsidy-diagnostic-form" class="space-y-8">
-                            <div>
-                                <label class="block text-lg font-bold text-blue-900 mb-4">1. 業種を選択してください</label>
-                                <select name="industry" class="w-full border-2 border-gray-300 rounded-xl p-4 focus:border-blue-500 focus:outline-none text-lg" required>
-                                    <option value="">選択してください</option>
-                                    <option value="construction">建設業</option>
-                                    <option value="manufacturing">製造業</option>
-                                    <option value="retail">小売業</option>
-                                    <option value="restaurant">飲食業</option>
-                                    <option value="it">IT・情報サービス業</option>
-                                    <option value="medical">医療・福祉</option>
-                                    <option value="other">その他</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-lg font-bold text-blue-900 mb-4">2. 従業員数を選択してください</label>
-                                <select name="employees" class="w-full border-2 border-gray-300 rounded-xl p-4 focus:border-blue-500 focus:outline-none text-lg" required>
-                                    <option value="">選択してください</option>
-                                    <option value="1-5">1〜5名</option>
-                                    <option value="6-20">6〜20名</option>
-                                    <option value="21-50">21〜50名</option>
-                                    <option value="51-100">51〜100名</option>
-                                    <option value="100+">100名以上</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-lg font-bold text-blue-900 mb-4">3. 実施予定の施策（複数選択可）</label>
-                                <div class="space-y-3">
-                                    <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer transition"><input type="checkbox" name="plan" value="hiring" class="w-5 h-5 text-blue-600"><span class="text-gray-700">新規採用を検討している</span></label>
-                                    <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer transition"><input type="checkbox" name="plan" value="regular" class="w-5 h-5 text-blue-600"><span class="text-gray-700">非正規社員の正社員化を検討している</span></label>
-                                    <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer transition"><input type="checkbox" name="plan" value="training" class="w-5 h-5 text-blue-600"><span class="text-gray-700">従業員の研修・教育を実施予定</span></label>
-                                    <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer transition"><input type="checkbox" name="plan" value="wage" class="w-5 h-5 text-blue-600"><span class="text-gray-700">賃上げを検討している</span></label>
-                                    <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer transition"><input type="checkbox" name="plan" value="equipment" class="w-5 h-5 text-blue-600"><span class="text-gray-700">設備投資を予定している</span></label>
-                                    <label class="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:bg-blue-50 cursor-pointer transition"><input type="checkbox" name="plan" value="worklife" class="w-5 h-5 text-blue-600"><span class="text-gray-700">育児・介護との両立支援を充実させたい</span></label>
-                                </div>
-                            </div>
-                            <div class="text-center pt-6"><button type="submit" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-5 px-12 rounded-xl hover:from-orange-600 hover:to-orange-700 transition shadow-lg text-lg">診断結果を見る</button></div>
-                        </form>
-                    </div>
-                    <div id="subsidy-result" class="hidden"></div>
                 </div>
             </div>
         </section>
@@ -1594,314 +1542,6 @@
                 </div>
             </div>
         </div>
-
-
-<section id="page-salary-calc" class="hidden" style="background:linear-gradient(135deg,#f0f9ff 0%,#e8f4fd 50%,#f0f4ff 100%); min-height:80vh; padding: 4rem 0 6rem;">
-    <div class="container mx-auto px-4 max-w-5xl">
-
-        
-        <div class="text-center mb-12">
-            <span class="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-blue-700 bg-blue-50 border border-blue-200 px-4 py-1.5 rounded-full mb-5">
-                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
-                </svg>
-                個人情報不要・入力データは保存されません
-            </span>
-            <h2 class="text-4xl md:text-5xl font-black text-blue-900 mb-4" style="letter-spacing:-0.02em">🧮 給与計算ツール</h2>
-            <p class="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">月額給与や賞与を入力するだけで、社会保険料・税金の概算と手取り額をリアルタイムで確認できます。</p>
-            <p class="text-xs text-gray-400 mt-2">※ 表示金額はすべて概算です。正確な計算は専門家にご相談ください。</p>
-        </div>
-
-        
-        <div class="flex rounded-2xl bg-white shadow-md border border-gray-100 p-1.5 mb-10 max-w-lg mx-auto">
-            <button id="stab-employee" onclick="sSwitchTab('employee')"
-                class="flex-1 py-3.5 rounded-xl font-black text-sm transition-all duration-200 sim-tab-active">
-                👤 従業員負担
-            </button>
-            <button id="stab-employer" onclick="sSwitchTab('employer')"
-                class="flex-1 py-3.5 rounded-xl font-bold text-sm transition-all duration-200 text-gray-400">
-                🏢 事業主負担
-            </button>
-        </div>
-
-        
-        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-
-            
-            <div class="lg:col-span-2 space-y-6">
-
-                
-                <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-7">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-sm font-black flex-shrink-0">1</span>
-                        <h3 class="font-black text-blue-900 text-lg">支給額を入力</h3>
-                    </div>
-
-                    
-                    <div class="mb-5">
-                        <p class="text-gray-500 text-sm mb-2">計算モード</p>
-                        <div class="flex gap-2">
-                            <label class="flex-1 flex items-center justify-center gap-2 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-400 transition bg-gray-50">
-                                <input type="radio" name="s-mode" value="monthly" checked onchange="sToggleMode('monthly')" class="w-4 h-4 accent-blue-600">
-                                <span class="text-sm font-bold">月例給与</span>
-                            </label>
-                            <label class="flex-1 flex items-center justify-center gap-2 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-400 transition bg-gray-50">
-                                <input type="radio" name="s-mode" value="bonus" onchange="sToggleMode('bonus')" class="w-4 h-4 accent-blue-600">
-                                <span class="text-sm font-bold">賞与</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    
-                    <div class="mb-4">
-                        <label class="block text-gray-500 text-sm mb-2">支給額（額面）</label>
-                        <div class="relative">
-                            <input type="number" id="s-salary" placeholder="300000" min="0" max="9999999" step="1000"
-                                class="w-full rounded-xl px-4 py-3 text-lg font-black text-right pr-12 bg-gray-50 focus:bg-white border-2 border-gray-200 focus:border-blue-400 outline-none transition"
-                                oninput="sCalc()" value="300000">
-                            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold">円</span>
-                        </div>
-                    </div>
-
-                    
-                    <div id="s-prev-salary-section" class="mb-4" style="display:none;">
-                        <label class="block text-sm font-bold text-blue-900 mb-2">
-                            前月の給与（社会保険料控除前）
-                            <span class="ml-1 inline-flex items-center justify-center w-4 h-4 bg-blue-400 text-white rounded-full text-[10px] cursor-help" title="賞与の所得税率を決定するために必要です">?</span>
-                        </label>
-                        <div class="relative">
-                            <input type="number" id="s-prev-salary" placeholder="300000"
-                                class="w-full rounded-xl px-4 py-3 bg-blue-50 border-2 border-blue-200 focus:bg-white font-medium text-right pr-12 outline-none"
-                                oninput="sCalc()" value="300000">
-                            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold">円</span>
-                        </div>
-                    </div>
-                </div>
-
-                
-                <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-7">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="w-8 h-8 rounded-full bg-blue-900 text-white flex items-center justify-center text-sm font-black flex-shrink-0">2</span>
-                        <h3 class="font-black text-blue-900 text-lg">条件を設定</h3>
-                    </div>
-
-                    
-                    <div class="mb-4">
-                        <label class="block text-gray-500 text-sm mb-2">勤務地（健康保険料率）</label>
-                        <select id="s-pref" class="w-full rounded-xl px-4 py-3 bg-gray-50 focus:bg-white border-2 border-gray-200 font-medium outline-none focus:border-blue-400 transition" onchange="sCalc()">
-                            <option value="miyagi" selected>宮城県 (10.10%)</option>
-                            <option value="tokyo">東京都 (9.94%)</option>
-                            <option value="osaka">大阪府 (10.64%)</option>
-                            <option value="other">その他 (10.00%)</option>
-                        </select>
-                    </div>
-
-                    
-                    <div class="mb-4">
-                        <label class="flex items-center gap-3 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-400 transition bg-gray-50">
-                            <input type="checkbox" id="s-kaigo" onchange="sCalc()" class="w-5 h-5 accent-blue-600">
-                            <div>
-                                <p class="font-bold text-gray-700 text-sm">40歳以上（介護保険対象）</p>
-                                <p class="text-xs text-gray-400">介護保険料（0.90%）が加算されます</p>
-                            </div>
-                        </label>
-                    </div>
-
-                    
-                    <div class="mb-4" id="s-dep-section">
-                        <label class="block text-gray-500 text-sm mb-2">扶養親族の人数</label>
-                        <select id="s-deps" class="w-full rounded-xl px-4 py-3 bg-gray-50 focus:bg-white border-2 border-gray-200 font-medium outline-none focus:border-blue-400 transition" onchange="sCalc()">
-                            <option value="0">0人（本人のみ）</option>
-                            <option value="1">1人</option>
-                            <option value="2">2人</option>
-                            <option value="3">3人</option>
-                        </select>
-                    </div>
-
-                    
-                    <div class="mb-4" id="s-resident-section">
-                        <label class="block text-gray-500 text-sm mb-2">住民税（月額・任意入力）</label>
-                        <div class="relative">
-                            <input type="number" id="s-resident-tax" placeholder="0"
-                                class="w-full rounded-xl px-4 py-3 bg-gray-50 focus:bg-white border-2 border-gray-200 font-medium text-right pr-12 outline-none focus:border-blue-400 transition"
-                                oninput="sCalc()" value="0">
-                            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold">円</span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="mb-2">
-                        <label class="block text-gray-500 text-sm mb-2">事業の種類（雇用保険料率）</label>
-                        <select id="s-industry" class="w-full rounded-xl px-4 py-3 bg-gray-50 focus:bg-white border-2 border-gray-200 font-medium outline-none focus:border-blue-400 transition" onchange="sCalc()">
-                            <option value="general">一般の事業</option>
-                            <option value="construction">建設業</option>
-                        </select>
-                    </div>
-
-                    <button onclick="sReset()" class="mt-5 w-full py-3 border-2 border-gray-200 text-gray-400 rounded-xl font-bold hover:border-gray-400 hover:text-gray-600 transition text-sm">
-                        🔄 入力をリセット
-                    </button>
-                </div>
-            </div>
-
-            
-            <div class="lg:col-span-3">
-
-                
-                <div class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
-
-                    
-                    <div class="bg-gradient-to-r from-blue-900 to-blue-700 px-7 py-5">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h3 class="text-white font-black text-lg">給与試算結果明細</h3>
-                                <p class="text-blue-200 text-xs mt-0.5">カミウエ社会保険労務士事務所 簡易ツール</p>
-                            </div>
-                            <div id="current-date" class="text-blue-200 text-xs text-right"></div>
-                        </div>
-                    </div>
-
-                    
-                    <div id="pdf-content" class="p-7 space-y-4">
-
-                        
-                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl border-2 border-gray-100">
-                            <h4 class="font-bold text-gray-600 text-sm">① 総支給額（額面）</h4>
-                            <span id="sr-gross" class="text-2xl font-black text-gray-800">300,000 円</span>
-                        </div>
-
-                        
-                        <div class="p-4 rounded-2xl border-2 border-blue-50">
-                            <div class="flex items-center justify-between mb-3 pb-2 border-b border-blue-50">
-                                <h4 class="font-bold text-blue-900 flex items-center gap-2 text-sm">
-                                    <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                    ② 社会保険料（従業員負担）
-                                </h4>
-                                <span id="sr-social-total" class="text-xl font-black text-blue-900">— 円</span>
-                            </div>
-                            <div class="space-y-1.5 text-sm text-gray-600">
-                                <div class="sim-breakdown-row" style="color:#374151; border-color:#f1f5f9;">
-                                    <span class="label">健康保険料</span>
-                                    <span id="sr-kenpo" class="font-bold text-gray-800">0 円</span>
-                                </div>
-                                <div class="sim-breakdown-row" id="sr-row-kaigo" style="display:none; color:#374151; border-color:#f1f5f9;">
-                                    <span class="label">介護保険料</span>
-                                    <span id="sr-kaigo" class="font-bold text-gray-800">0 円</span>
-                                </div>
-                                <div class="sim-breakdown-row" style="color:#374151; border-color:#f1f5f9;">
-                                    <span class="label">厚生年金保険料</span>
-                                    <span id="sr-kousei" class="font-bold text-gray-800">0 円</span>
-                                </div>
-                                <div class="sim-breakdown-row" style="color:#374151; border-color:#f1f5f9;">
-                                    <span class="label">雇用保険料</span>
-                                    <span id="sr-koyo" class="font-bold text-gray-800">0 円</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        <div class="p-4 rounded-2xl border-2 border-orange-50">
-                            <div class="flex items-center justify-between mb-3 pb-2 border-b border-orange-50">
-                                <h4 class="font-bold text-orange-700 flex items-center gap-2 text-sm">
-                                    <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
-                                    ③ 税金合計
-                                </h4>
-                                <span id="sr-tax-total" class="text-xl font-black text-orange-700">— 円</span>
-                            </div>
-                            <div class="space-y-1.5 text-sm text-gray-600">
-                                <div class="sim-breakdown-row" style="color:#374151; border-color:#f1f5f9;">
-                                    <span class="label">源泉所得税</span>
-                                    <span id="sr-tax" class="font-bold text-gray-800">0 円</span>
-                                </div>
-                                <div class="sim-breakdown-row" id="sr-row-resident" style="color:#374151; border-color:#f1f5f9;">
-                                    <span class="label">住民税</span>
-                                    <span id="sr-res-display" class="font-bold text-gray-800">0 円</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        <div class="p-6 rounded-2xl bg-gradient-to-br from-blue-900 to-blue-700 text-white shadow-lg">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-blue-200 text-xs font-bold mb-1 uppercase tracking-wider">Estimated Take-home</p>
-                                    <h4 class="font-bold text-lg">差引支給額（手取り）</h4>
-                                </div>
-                                <div class="text-right">
-                                    <div id="sr-takehome" class="text-4xl md:text-5xl font-black">0 円</div>
-                                    <div id="sr-takehome-rate" class="text-blue-200 text-sm mt-1 font-bold"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        <div class="p-4 rounded-2xl border-2 border-green-100 bg-green-50/30" id="sr-employer-card" style="display:none;">
-                            <h4 class="font-bold text-green-800 mb-4 flex items-center gap-2 text-sm">
-                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                                事業主負担額（概算）
-                            </h4>
-                            <div class="space-y-1.5 text-sm">
-                                <div class="sim-breakdown-row" style="color:#374151; border-color:#f1f5f9;">
-                                    <span class="label text-gray-600">社会保険料（会社負担分）</span>
-                                    <span id="sr-emp-soc-total" class="font-bold text-gray-800">0 円</span>
-                                </div>
-                                <div class="sim-breakdown-row" style="color:#374151; border-color:#f1f5f9;">
-                                    <span class="label text-gray-600">労災保険料</span>
-                                    <span id="sr-rosai-emp" class="font-bold text-gray-800">0 円</span>
-                                </div>
-                                <div class="flex justify-between border-t-2 border-green-200 pt-3 mt-1">
-                                    <span class="font-black text-green-900">人件費合計目安</span>
-                                    <span id="sr-total-cost" class="text-xl font-black text-green-700">0 円</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                    <div class="px-7 pb-4">
-                        <button onclick="exportToPDF()"
-                            class="w-full bg-blue-50 hover:bg-blue-100 text-blue-900 font-bold py-3 rounded-2xl transition text-sm border border-blue-200 flex items-center justify-center gap-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                            結果をPDFで保存
-                        </button>
-                    </div>
-
-                    
-                    <div class="mx-7 mb-4 bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-2xl">
-                        <p class="font-bold text-blue-900 mb-1 text-sm flex items-center gap-1.5">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1z"/></svg>
-                            ワンポイントアドバイス
-                        </p>
-                        <p id="advice-text" class="text-blue-800 text-sm leading-relaxed">支給額を入力すると、ここにアドバイスが表示されます。</p>
-                    </div>
-
-                    
-                    <div class="px-7 pb-6 pt-2 bg-gradient-to-br from-blue-900 to-blue-800 rounded-b-3xl">
-                        <p class="text-blue-100 text-xs mb-3 font-bold">💡 給与計算を丸ごとお任せ！</p>
-                        <p class="text-blue-200 text-xs mb-4 leading-relaxed">毎月の給与計算・社会保険手続きを社労士が代行。ミスなし・法改正対応も自動で。</p>
-                        <button onclick="showPage('contact')"
-                            class="w-full bg-orange-500 hover:bg-orange-400 text-white font-black py-4 rounded-2xl transition shadow-xl text-sm">
-                            無料相談を申し込む
-                        </button>
-                        <p class="text-center text-blue-300/60 text-xs pt-3">※概算です。正確な計算は専門家にご相談ください</p>
-                    </div>
-                </div>
-
-                
-                <div class="mt-6 bg-white rounded-2xl border border-gray-100 shadow p-5 text-xs text-gray-500 space-y-1">
-                    <p class="font-bold text-gray-700 mb-2">⚠️ ご利用にあたっての注意事項</p>
-                    <p>・本ツールは概算計算です。実際の保険料は標準報酬月額（等級）をもとに決定されます</p>
-                    <p>・健康保険料率は協会けんぽ2025年度の料率を使用しています</p>
-                    <p>・所得税は令和6年分源泉徴収税額表による概算です</p>
-                    <p>・住民税は含まれていません（前年所得をもとに市区町村が決定）</p>
-                    <p>・正確な給与計算・保険料計算は専門家にご相談ください</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
 
         <!-- DOWNLOAD THANK-YOU PAGE -->
         <section id="page-dl-thankyou" class="hidden py-16 md:py-24" style="background:linear-gradient(135deg,#f0fdf4 0%,#eff6ff 60%,#fdf8f0 100%);">
@@ -2459,7 +2099,495 @@
     </div><!-- /container -->
 </section>
 
+<section id="page-salary-calc" class="hidden" style="min-height:80vh;">
+    <!-- ======= HERO BAND ======= -->
+    <div class="hero-band">
+        <div style="max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+                <div>
+                    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:4px 12px;border-radius:999px;margin-bottom:12px;">
+                        <svg width="12" height="12" viewBox="0 0 20 20" fill="#fbbf24"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg>
+                        <span style="color:rgba(255,255,255,.85);font-size:.72rem;font-weight:700;letter-spacing:.05em;">個人情報不要・入力データは保存されません</span>
+                    </div>
+                    <h2 style="color:white;font-size:1.5rem;font-weight:900;margin:0 0 6px;">月例給与・賞与シミュレーター</h2>
+                    <p style="color:rgba(255,255,255,.65);font-size:.85rem;margin:0;">協会けんぽ2025年度料率対応 ／ 令和6年分源泉徴収税額表（甲欄）</p>
+                </div>
+                <div style="display:flex;gap:20px;">
+                    <div style="text-align:center;">
+                        <div style="font-size:1.6rem;font-weight:900;color:white;font-family:'DM Mono',monospace;">4<span style="font-size:1rem;font-weight:700;color:rgba(255,255,255,.6);">項目</span></div>
+                        <div style="font-size:.7rem;color:rgba(255,255,255,.55);font-weight:600;">控除内訳表示</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:1.6rem;font-weight:900;color:white;font-family:'DM Mono',monospace;">PDF<span style="font-size:.85rem;font-weight:700;color:rgba(255,255,255,.6);">保存</span></div>
+                        <div style="font-size:.7rem;color:rgba(255,255,255,.55);font-weight:600;">試算結果</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:1.6rem;font-weight:900;color:white;font-family:'DM Mono',monospace;">無料<span style="font-size:.85rem;font-weight:700;color:rgba(255,255,255,.6);">利用</span></div>
+                        <div style="font-size:.7rem;color:rgba(255,255,255,.55);font-weight:600;">登録不要</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- ======= MAIN ======= -->
+    <main class="main-grid">
+
+        <!-- ===== INPUT PANEL ===== -->
+        <aside class="input-panel fade-up">
+            <div class="input-panel-header">
+                <h3 style="color:white;font-weight:900;font-size:.95rem;margin:0 0 4px;display:flex;align-items:center;gap:8px;">
+                    <svg width="18" height="18" fill="none" stroke="white" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                    入力条件
+                </h3>
+                <p style="color:rgba(255,255,255,.6);font-size:.72rem;margin:0;">値を変更すると即時に再計算されます</p>
+            </div>
+
+            <div style="padding:20px;display:flex;flex-direction:column;gap:16px;">
+
+                <!-- 計算対象タブ -->
+                <div>
+                    <span class="field-label">計算対象</span>
+                    <div class="tab-bar">
+                        <button id="stab-employee" class="tab-btn active" onclick="sSwitchTab('employee')">従業員負担</button>
+                        <button id="stab-employer" class="tab-btn" onclick="sSwitchTab('employer')">事業主負担</button>
+                    </div>
+                </div>
+
+                <!-- 支給額 -->
+                <div>
+                    <label class="field-label" for="s-salary">支給額（額面）</label>
+                    <div class="field-input-wrap">
+                        <input type="number" id="s-salary" class="field-input" value="300000" min="0" max="9999999" step="1000" oninput="sCalc()">
+                        <span class="field-suffix">円</span>
+                    </div>
+                </div>
+
+                <!-- 計算モード -->
+                <div>
+                    <span class="field-label">計算モード</span>
+                    <div class="mode-toggle">
+                        <label class="mode-label">
+                            <input type="radio" name="s-mode" value="monthly" checked onchange="sToggleMode('monthly')">
+                            <span>月例給与</span>
+                        </label>
+                        <label class="mode-label">
+                            <input type="radio" name="s-mode" value="bonus" onchange="sToggleMode('bonus')">
+                            <span>賞与</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 前月給与（賞与時） -->
+                <div id="s-prev-salary-section" style="display:none;">
+                    <label class="field-label" for="s-prev-salary">
+                        前月の給与（社保控除前）
+                        <span class="hint"> ※賞与税率算定に使用</span>
+                    </label>
+                    <div class="field-input-wrap">
+                        <input type="number" id="s-prev-salary" class="field-input" value="300000" oninput="sCalc()" style="background:#faf5ff;border-color:#e9d5ff;">
+                        <span class="field-suffix">円</span>
+                    </div>
+                </div>
+
+                <!-- 勤務地 -->
+                <div>
+                    <label class="field-label" for="s-pref">勤務地（健康保険料率）</label>
+                    <select id="s-pref" class="field-select" onchange="sCalc()">
+                        <option value="miyagi" selected>宮城県 — 10.10%</option>
+                        <option value="tokyo">東京都 — 9.94%</option>
+                        <option value="osaka">大阪府 — 10.64%</option>
+                        <option value="other">その他 — 10.00%</option>
+                    </select>
+                </div>
+
+                <!-- 介護保険 -->
+                <div>
+                    <label class="check-label">
+                        <input type="checkbox" id="s-kaigo" onchange="sCalc()">
+                        <span>40歳以上（介護保険 1.80%）</span>
+                    </label>
+                </div>
+
+                <!-- 扶養 -->
+                <div>
+                    <label class="field-label" for="s-deps">扶養親族の人数</label>
+                    <select id="s-deps" class="field-select" onchange="sCalc()">
+                        <option value="0">0人（本人のみ）</option>
+                        <option value="1">1人</option>
+                        <option value="2">2人</option>
+                        <option value="3">3人以上</option>
+                    </select>
+                </div>
+
+                <!-- 住民税 -->
+                <div id="s-resident-section">
+                    <label class="field-label" for="s-resident-tax">住民税（月額）<span class="hint"> ※前年所得より市区町村が決定</span></label>
+                    <div class="field-input-wrap">
+                        <input type="number" id="s-resident-tax" class="field-input" value="0" min="0" step="100" oninput="sCalc()">
+                        <span class="field-suffix">円</span>
+                    </div>
+                </div>
+
+                <!-- 事業種類 -->
+                <div>
+                    <label class="field-label" for="s-industry">事業の種類（雇用保険料率）</label>
+                    <select id="s-industry" class="field-select" onchange="sCalc()">
+                        <option value="general">一般の事業 — 従業員 6/1000</option>
+                        <option value="construction">建設業 — 従業員 7/1000</option>
+                    </select>
+                </div>
+
+                <div class="section-divider"></div>
+                <button class="btn-reset" onclick="sReset()">🔄 入力をリセット</button>
+            </div>
+        </aside>
+
+        <!-- ===== RESULT AREA ===== -->
+        <section class="result-area">
+
+            <!-- 内訳バー -->
+            <div style="background:white;border-radius:16px;border:1.5px solid var(--border);padding:18px 24px;box-shadow:0 2px 12px rgba(15,42,94,.05);" class="fade-up delay-1">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                    <span style="font-size:.76rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;">支給額の内訳</span>
+                    <span id="current-date" style="font-size:.72rem;color:#94a3b8;font-weight:600;"></span>
+                </div>
+                <div class="breakdown-bar" id="breakdown-bar">
+                    <div class="bar-social" id="bar-social" style="width:30%"></div>
+                    <div class="bar-tax"    id="bar-tax"    style="width:5%"></div>
+                    <div class="bar-home"   id="bar-home"   style="width:65%"></div>
+                </div>
+                <div class="breakdown-legend">
+                    <span><span class="legend-dot" style="background:var(--blue)"></span>社会保険料 <strong id="leg-social">—</strong></span>
+                    <span><span class="legend-dot" style="background:var(--accent)"></span>税金 <strong id="leg-tax">—</strong></span>
+                    <span><span class="legend-dot" style="background:#10b981"></span>手取り <strong id="leg-home">—</strong></span>
+                </div>
+            </div>
+
+            <!-- ① 総支給額 -->
+            <div class="result-card card-gross fade-up delay-1">
+                <div class="result-card-header">
+                    <div class="result-card-title">
+                        <div class="result-card-badge" style="background:#94a3b8;">①</div>
+                        <span style="color:var(--muted);">総支給額（額面）</span>
+                    </div>
+                    <span id="sr-gross" class="result-card-total" style="color:var(--text);">300,000 円</span>
+                </div>
+            </div>
+
+            <!-- ② 社会保険料 -->
+            <div class="result-card card-social fade-up delay-2">
+                <div class="result-card-header">
+                    <div class="result-card-title">
+                        <div class="result-card-badge">②</div>
+                        <span>社会保険料 合計</span>
+                    </div>
+                    <span id="sr-social-total" class="result-card-total">— 円</span>
+                </div>
+                <div class="result-card-body">
+                    <div class="result-row">
+                        <span class="result-row-label">🏥 健康保険料</span>
+                        <span id="sr-kenpo" class="result-row-value">0 円</span>
+                    </div>
+                    <div class="result-row" id="sr-row-kaigo" style="display:none;">
+                        <span class="result-row-label">🧓 介護保険料</span>
+                        <span id="sr-kaigo" class="result-row-value">0 円</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-row-label">🏛 厚生年金保険料</span>
+                        <span id="sr-kousei" class="result-row-value">0 円</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-row-label">📋 雇用保険料</span>
+                        <span id="sr-koyo" class="result-row-value">0 円</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ③ 税金 -->
+            <div class="result-card card-tax fade-up delay-3">
+                <div class="result-card-header">
+                    <div class="result-card-title">
+                        <div class="result-card-badge" style="background:var(--accent);">③</div>
+                        <span>税金 合計</span>
+                    </div>
+                    <span id="sr-tax-total" class="result-card-total">— 円</span>
+                </div>
+                <div class="result-card-body">
+                    <div class="result-row">
+                        <span class="result-row-label">📄 源泉所得税</span>
+                        <span id="sr-tax" class="result-row-value">0 円</span>
+                    </div>
+                    <div class="result-row" id="sr-row-resident">
+                        <span class="result-row-label">🏙 住民税（入力値）</span>
+                        <span id="sr-res-display" class="result-row-value">0 円</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ④ 手取り -->
+            <div class="result-card card-takehome fade-up delay-4">
+                <div class="card-takehome-inner">
+                    <div>
+                        <div class="card-takehome-label">差引支給額</div>
+                        <div class="card-takehome-title">手取り金額</div>
+                    </div>
+                    <div>
+                        <div id="sr-takehome" class="card-takehome-amount">0 円</div>
+                        <div id="sr-takehome-rate" class="card-takehome-rate"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ⑤ 事業主負担（条件付き表示） -->
+            <div class="result-card card-employer fade-up delay-4" id="sr-employer-card" style="display:none;">
+                <div class="result-card-header">
+                    <div class="result-card-title">
+                        <div class="result-card-badge" style="background:var(--green);">⑤</div>
+                        <span style="color:#166534;">事業主負担額（概算）</span>
+                    </div>
+                    <span id="sr-emp-soc-total" class="result-card-total" style="color:var(--green);">— 円</span>
+                </div>
+                <div class="result-card-body">
+                    <div class="result-row">
+                        <span class="result-row-label">社会保険料（会社負担分）</span>
+                        <span id="sr-emp-soc-display" class="result-row-value">0 円</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-row-label">労災保険料</span>
+                        <span id="sr-rosai-emp" class="result-row-value">0 円</span>
+                    </div>
+                </div>
+                <div class="employer-total-row">
+                    <span class="employer-total-label">👤 人件費合計目安</span>
+                    <span id="sr-total-cost" class="employer-total-value">0 円</span>
+                </div>
+            </div>
+
+            <!-- アドバイス -->
+            <div class="advice-box fade-up delay-4">
+                <div class="advice-title">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                    ワンポイントアドバイス
+                </div>
+                <p id="advice-text" class="advice-text">支給額を入力すると、ここにアドバイスが表示されます。</p>
+            </div>
+
+            <!-- PDF 保存 -->
+            <button class="btn-pdf" onclick="exportToPDF()">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                結果をPDFで保存する
+            </button>
+
+            <!-- CTA -->
+            <div class="cta-box">
+                <h4 style="font-size:1rem;font-weight:900;margin:0 0 6px;">給与計算を丸ごとお任せ！</h4>
+                <p style="color:rgba(255,255,255,.7);font-size:.84rem;margin:0 0 16px;line-height:1.6;">毎月の給与計算・社会保険手続きを社労士が代行。法改正対応も自動で。</p>
+                <button class="btn-cta" onclick="showPage('contact')">無料相談を予約する →</button>
+            </div>
+
+            <!-- 注意事項 -->
+            <div class="note-box">
+                <strong>⚠️ ご利用にあたっての注意事項</strong><br>
+                本ツールは概算計算です。実際の保険料は標準報酬月額（等級）をもとに決定されます。健康保険料率は協会けんぽ2025年度料率を使用。所得税は令和6年分源泉徴収税額表（甲欄）による概算です。住民税は前年所得をもとに市区町村が決定するため正確な金額は含まれません。正確な給与計算・保険料計算は専門家にご相談ください。
+            </div>
+
+            <!-- 保険料率テーブル -->
+            <div class="rate-section" style="background:white;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;box-shadow:0 2px 12px rgba(15,42,94,.05);">
+                <div style="padding:16px 20px;border-bottom:1px solid #f1f5f9;">
+                    <h3 style="font-size:.85rem;font-weight:900;color:var(--navy);margin:0;display:flex;align-items:center;gap:8px;">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        計算根拠・保険料率（2025年度）
+                    </h3>
+                </div>
+                <div style="padding:16px 20px;">
+                    <table class="rate-table">
+                        <thead>
+                            <tr>
+                                <th>保険種別</th>
+                                <th>従業員負担</th>
+                                <th>事業主負担</th>
+                                <th>備考</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>健康保険（宮城）</strong></td>
+                                <td><span class="rate-pill">5.05%</span></td>
+                                <td><span class="rate-pill">5.05%</span></td>
+                                <td style="color:var(--muted);">協会けんぽ 合計10.10%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>健康保険（東京）</strong></td>
+                                <td><span class="rate-pill">4.97%</span></td>
+                                <td><span class="rate-pill">4.97%</span></td>
+                                <td style="color:var(--muted);">協会けんぽ 合計9.94%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>健康保険（大阪）</strong></td>
+                                <td><span class="rate-pill">5.32%</span></td>
+                                <td><span class="rate-pill">5.32%</span></td>
+                                <td style="color:var(--muted);">協会けんぽ 合計10.64%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>介護保険</strong></td>
+                                <td><span class="rate-pill">0.90%</span></td>
+                                <td><span class="rate-pill">0.90%</span></td>
+                                <td style="color:var(--muted);">40歳以上 合計1.80%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>厚生年金</strong></td>
+                                <td><span class="rate-pill">9.15%</span></td>
+                                <td><span class="rate-pill">9.15%</span></td>
+                                <td style="color:var(--muted);">全国一律 合計18.30%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>雇用保険（一般）</strong></td>
+                                <td><span class="rate-pill">6/1000</span></td>
+                                <td><span class="rate-pill">9.5/1000</span></td>
+                                <td style="color:var(--muted);">合計15.5/1000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>雇用保険（建設）</strong></td>
+                                <td><span class="rate-pill">7/1000</span></td>
+                                <td><span class="rate-pill">11.5/1000</span></td>
+                                <td style="color:var(--muted);">合計17.5/1000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>労災保険（一般）</strong></td>
+                                <td><span class="rate-pill">0%</span></td>
+                                <td><span class="rate-pill">3/1000</span></td>
+                                <td style="color:var(--muted);">全額事業主負担</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- ======= PDF 出力専用レイヤー（非表示） ======= -->
+    <div id="pdf-layer">
+        <!-- ヘッダー -->
+        <div class="pl-header">
+            <div>
+                <div class="pl-office">カミウエ社会保険労務士事務所</div>
+                <h1 class="pl-title">🧮 給与試算結果明細</h1>
+            </div>
+            <div class="pl-date" id="pdf-date"></div>
+        </div>
+
+        <!-- 試算条件サマリー -->
+        <div class="pl-conditions" id="pdf-conditions"></div>
+
+        <!-- 内訳バー -->
+        <div class="pl-bar-wrap">
+            <div class="pl-bar-title">支給額の内訳</div>
+            <div class="pl-bar">
+                <div class="pl-bar-s" id="pdf-bar-s" style="width:30%"></div>
+                <div class="pl-bar-t" id="pdf-bar-t" style="width:5%"></div>
+                <div class="pl-bar-h" id="pdf-bar-h" style="width:65%"></div>
+            </div>
+            <div class="pl-legend">
+                <span><span class="pl-dot" style="background:#1e40af"></span>社会保険料 <strong id="pdf-leg-s">—</strong></span>
+                <span><span class="pl-dot" style="background:#f97316"></span>税金 <strong id="pdf-leg-t">—</strong></span>
+                <span><span class="pl-dot" style="background:#10b981"></span>手取り <strong id="pdf-leg-h">—</strong></span>
+            </div>
+        </div>
+
+        <!-- 手取り（フルワイド） -->
+        <div class="pl-takehome">
+            <div>
+                <div class="pl-takehome-label">差引支給額</div>
+                <div class="pl-takehome-title">手取り金額（概算）</div>
+            </div>
+            <div style="text-align:right">
+                <div id="pdf-takehome" class="pl-takehome-amount">0 円</div>
+                <div id="pdf-takehome-rate" class="pl-takehome-rate"></div>
+            </div>
+        </div>
+
+        <!-- 2カラムグリッド -->
+        <div class="pl-grid">
+
+            <!-- ① 総支給額 -->
+            <div class="pl-card pl-card-gross">
+                <div class="pl-card-head">
+                    <div class="pl-card-head-label">
+                        <span class="pl-badge" style="background:#94a3b8">①</span>
+                        総支給額（額面）
+                    </div>
+                    <span id="pdf-gross" class="pl-card-total">0 円</span>
+                </div>
+            </div>
+
+            <!-- 空欄 or 事業主ラベル -->
+            <div class="pl-card pl-card-gross" id="pdf-employer-cell" style="display:none;">
+                <div class="pl-card-head">
+                    <div class="pl-card-head-label" style="color:#166534">
+                        <span class="pl-badge" style="background:#059669">⑤</span>
+                        事業主負担（概算）
+                    </div>
+                    <span id="pdf-emp-soc-total" class="pl-card-total" style="color:#059669">0 円</span>
+                </div>
+                <div class="pl-card-body">
+                    <div class="pl-row"><span class="pl-row-label">社会保険料（会社負担）</span><span id="pdf-emp-soc-display" class="pl-row-value">0 円</span></div>
+                    <div class="pl-row"><span class="pl-row-label">労災保険料</span><span id="pdf-rosai-emp" class="pl-row-value">0 円</span></div>
+                </div>
+                <div class="pl-employer-foot">
+                    <span class="pl-employer-foot-label">👤 人件費合計目安</span>
+                    <span id="pdf-total-cost" class="pl-employer-foot-val">0 円</span>
+                </div>
+            </div>
+
+            <!-- ② 社会保険料 -->
+            <div class="pl-card pl-card-social">
+                <div class="pl-card-head">
+                    <div class="pl-card-head-label">
+                        <span class="pl-badge" style="background:#1e40af">②</span>
+                        社会保険料 合計
+                    </div>
+                    <span id="pdf-social-total" class="pl-card-total">0 円</span>
+                </div>
+                <div class="pl-card-body">
+                    <div class="pl-row"><span class="pl-row-label">🏥 健康保険料</span><span id="pdf-kenpo" class="pl-row-value">0 円</span></div>
+                    <div class="pl-row" id="pdf-row-kaigo" style="display:none"><span class="pl-row-label">🧓 介護保険料</span><span id="pdf-kaigo" class="pl-row-value">0 円</span></div>
+                    <div class="pl-row"><span class="pl-row-label">🏛 厚生年金保険料</span><span id="pdf-kousei" class="pl-row-value">0 円</span></div>
+                    <div class="pl-row"><span class="pl-row-label">📋 雇用保険料</span><span id="pdf-koyo" class="pl-row-value">0 円</span></div>
+                </div>
+            </div>
+
+            <!-- ③ 税金 -->
+            <div class="pl-card pl-card-tax">
+                <div class="pl-card-head">
+                    <div class="pl-card-head-label">
+                        <span class="pl-badge" style="background:#f97316">③</span>
+                        税金 合計
+                    </div>
+                    <span id="pdf-tax-total" class="pl-card-total">0 円</span>
+                </div>
+                <div class="pl-card-body">
+                    <div class="pl-row"><span class="pl-row-label">📄 源泉所得税</span><span id="pdf-tax" class="pl-row-value">0 円</span></div>
+                    <div class="pl-row" id="pdf-row-resident"><span class="pl-row-label">🏙 住民税（入力値）</span><span id="pdf-resident" class="pl-row-value">0 円</span></div>
+                </div>
+            </div>
+
+        </div><!-- /.pl-grid -->
+
+        <!-- 注意書き -->
+        <div class="pl-note">
+            <strong>⚠️ ご利用にあたっての注意事項：</strong>
+            本ツールは概算計算です。実際の保険料は標準報酬月額（等級）をもとに決定されます。健康保険料率は協会けんぽ2025年度料率を使用。所得税は令和6年分源泉徴収税額表（甲欄）による概算です。住民税は前年所得をもとに市区町村が決定するため正確な金額は含まれません。正確な計算はカミウエ社会保険労務士事務所にご相談ください。
+        </div>
+
+        <!-- フッター -->
+        <div class="pl-footer">
+            <span>カミウエ社会保険労務士事務所 — 給与計算ツール（簡易試算）</span>
+            <span id="pdf-footer-date"></span>
+        </div>
+    </div>
+</section>
 
 
         <!-- ===================================================
@@ -2754,6 +2882,77 @@
             </div>
         </section>
 
+        <!-- 助成金診断ページ -->
+        <section id="page-subsidy-sim" class="py-16 md:py-24 bg-gray-50 hidden">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center gap-3 bg-orange-100 text-orange-700 px-6 py-2 rounded-full text-sm font-bold mb-4">
+                        💰 助成金診断ツール
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-black text-blue-900 mb-4">貴社で申請可能な助成金を診断</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">以下の項目にチェックを入れて「診断する」ボタンを押してください。現在の状況に合った助成金を自動で提案します。</p>
+                </div>
+
+                <!-- フォームエリア -->
+                <div id="subsidy-form" class="bg-white rounded-3xl shadow-xl p-8 md:p-12">
+                    <form id="subsidy-diagnostic-form" class="space-y-10">
+                        <div>
+                            <h3 class="text-2xl font-bold text-blue-900 mb-6 flex items-center gap-3">
+                                <span class="text-3xl">📋</span> 検討中の計画・取り組み
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <label class="flex items-start gap-4 bg-gray-50 hover:bg-blue-50 p-6 rounded-2xl cursor-pointer transition border border-transparent hover:border-blue-200">
+                                    <input type="checkbox" name="plan" value="regular" class="mt-1 w-5 h-5 accent-blue-600">
+                                    <div>
+                                        <p class="font-semibold text-lg">正社員化を考えている</p>
+                                        <p class="text-sm text-gray-600">有期雇用者を正社員に転換したい</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start gap-4 bg-gray-50 hover:bg-blue-50 p-6 rounded-2xl cursor-pointer transition border border-transparent hover:border-blue-200">
+                                    <input type="checkbox" name="plan" value="wage" class="mt-1 w-5 h-5 accent-blue-600">
+                                    <div>
+                                        <p class="font-semibold text-lg">最低賃金を引き上げたい</p>
+                                        <p class="text-sm text-gray-600">設備投資も同時に検討</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start gap-4 bg-gray-50 hover:bg-blue-50 p-6 rounded-2xl cursor-pointer transition border border-transparent hover:border-blue-200">
+                                    <input type="checkbox" name="plan" value="training" class="mt-1 w-5 h-5 accent-blue-600">
+                                    <div>
+                                        <p class="font-semibold text-lg">社員の教育訓練を実施したい</p>
+                                        <p class="text-sm text-gray-600">職業訓練・スキルアップ</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start gap-4 bg-gray-50 hover:bg-blue-50 p-6 rounded-2xl cursor-pointer transition border border-transparent hover:border-blue-200">
+                                    <input type="checkbox" name="plan" value="worklife" class="mt-1 w-5 h-5 accent-blue-600">
+                                    <div>
+                                        <p class="font-semibold text-lg">育児・介護と仕事の両立支援</p>
+                                        <p class="text-sm text-gray-600">育休取得促進など</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start gap-4 bg-gray-50 hover:bg-blue-50 p-6 rounded-2xl cursor-pointer transition border border-transparent hover:border-blue-200">
+                                    <input type="checkbox" name="plan" value="hiring" class="mt-1 w-5 h-5 accent-blue-600">
+                                    <div>
+                                        <p class="font-semibold text-lg">高齢者・障害者等の雇用を考えている</p>
+                                        <p class="text-sm text-gray-600">特定求職者の採用</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="text-center pt-6">
+                            <button type="submit" 
+                                    class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-xl py-6 px-16 rounded-2xl shadow-lg transition transform hover:scale-105">
+                                診断する
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 診断結果表示エリア -->
+                <div id="subsidy-result" class="hidden"></div>
+            </div>
+        </section>
+
     </div>
     <!-- /content -->
 
@@ -2877,11 +3076,10 @@
     </div>
 </div>
 
-
 <script src="./chatbot.js" defer></script>
 
 <link rel="stylesheet" href="./price-simulator.css">
-<link rel="stylesheet" href="./salary-calc.css">
+<link rel="stylesheet" href="./salary-calc-page.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -2891,6 +3089,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="./checkup.js" defer></script>
+
+<script src="./subsidy-sim.js" defer></script>
 
 <script src="./script.js"></script>
 

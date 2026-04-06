@@ -254,12 +254,17 @@ function showPage(pageId, tabIdx) {
     }
     if (pageId === 'salary-calc') {
         setTimeout(function() {
-            const dateEl = document.getElementById('current-date');
-            if (dateEl && !dateEl.textContent) {
-                const d = new Date();
-                dateEl.textContent = `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 実施`;
+            var dateEl = document.getElementById('current-date');
+            if (dateEl) {
+                var d = new Date();
+                dateEl.textContent = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日 現在';
             }
-            if (typeof sCalc === 'function') sCalc();
+            if (typeof sCalc === 'function' && document.getElementById('s-salary')) sCalc();
+        }, 50);
+    }
+    if (pageId === 'subsidy-sim') {
+        setTimeout(function() {
+            if (typeof initializeSubsidySimulator === 'function') initializeSubsidySimulator();
         }, 50);
     }
     if (pageId === 'spot') {
@@ -297,7 +302,8 @@ function showPage(pageId, tabIdx) {
         if (hideCTAOn.includes(pageId)) ctaElement.classList.add('hidden');
         else ctaElement.classList.remove('hidden');
     }
-    document.getElementById('mobile-menu').classList.add('hidden');
+    var mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu) mobileMenu.classList.add('hidden');
     window.scrollTo(0, 0);
 
     if (pageId === 'blog') {
@@ -314,7 +320,8 @@ function showPage(pageId, tabIdx) {
 }
 
 function toggleMobileMenu() {
-    document.getElementById('mobile-menu').classList.toggle('hidden');
+    var mm = document.getElementById('mobile-menu');
+    if (mm) mm.classList.toggle('hidden');
 }
 
 
@@ -354,164 +361,10 @@ document.addEventListener('DOMContentLoaded', function() {
 // =============================================
 // 労務リスク診断
 // =============================================
-window.checkupQuestions = [
-    { q: "就業規則を作成し、労働基準監督署に届出していますか？",                            cat: "規則" },
-    { q: "就業規則を従業員に周知していますか？",                                            cat: "規則" },
-    { q: "36協定（時間外労働・休日労働に関する協定）を締結し、届出していますか？",          cat: "労使協定" },
-    { q: "36協定は毎年更新していますか？",                                                  cat: "労使協定" },
-    { q: "過半数代表者を適切な方法で選出していますか？",                                    cat: "労使協定" },
-    { q: "時間外労働の上限規制（月45時間・年360時間）を遵守していますか？",                 cat: "労働時間" },
-    { q: "労働時間を適切に管理（記録）していますか？",                                      cat: "労働時間" },
-    { q: "残業代を正確に計算し、支払っていますか？",                                        cat: "賃金" },
-    { q: "固定残業代制度を採用している場合、適切に運用していますか？",                      cat: "賃金" },
-    { q: "最低賃金を遵守していますか？",                                                    cat: "賃金" },
-    { q: "有給休暇を年5日取得させていますか？",                                             cat: "休暇" },
-    { q: "有給休暇の管理簿を作成していますか？",                                            cat: "休暇" },
-    { q: "雇用契約書（労働条件通知書）を全従業員と締結していますか？",                      cat: "契約" },
-    { q: "社会保険（健康保険・厚生年金）に加入していますか？",                              cat: "保険" },
-    { q: "雇用保険・労災保険に加入していますか？",                                          cat: "保険" },
-    { q: "ハラスメント防止措置を講じていますか？",                                          cat: "ハラスメント" },
-    { q: "育児・介護休業規程を整備していますか？",                                          cat: "両立支援" },
-    { q: "定期健康診断を実施していますか？",                                                cat: "安全衛生" },
-    { q: "労働者名簿を作成していますか？",                                                  cat: "帳簿" },
-    { q: "賃金台帳を作成していますか？",                                                    cat: "帳簿" }
-];
-
-window.startCheckup = function() {
-    const intro     = document.getElementById('checkup-intro');
-    const questions = document.getElementById('checkup-questions');
-    if (intro) intro.style.display = 'none';
-    let html = '<form id="checkup-form" class="space-y-4">';
-    window.checkupQuestions.forEach((item, index) => {
-        html += `<div class="p-4 border-2 border-gray-200 rounded-xl hover:border-blue-300 transition"><div class="flex items-start gap-3"><span class="flex-shrink-0 w-8 h-8 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">${index + 1}</span><div class="flex-1"><p class="text-gray-800 font-medium mb-3">${item.q}</p><div class="flex gap-4 flex-wrap"><label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q${index}" value="yes" class="w-4 h-4" required><span class="text-sm text-green-600 font-medium">はい</span></label><label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q${index}" value="no" class="w-4 h-4"><span class="text-sm text-red-600 font-medium">いいえ</span></label><label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q${index}" value="unknown" class="w-4 h-4"><span class="text-sm text-gray-500 font-medium">わからない</span></label></div></div></div></div>`;
-    });
-    html += `<div class="text-center pt-8"><button type="submit" class="bg-gradient-to-r from-blue-900 to-blue-700 text-white font-bold py-5 px-12 rounded-xl hover:from-blue-800 hover:to-blue-600 transition shadow-lg text-lg">診断結果を見る</button></div></form>`;
-    if (questions) {
-        questions.innerHTML = html;
-        questions.style.display = 'block';
-        const form = document.getElementById('checkup-form');
-        if (form) form.addEventListener('submit', function(e) { e.preventDefault(); window.showCheckupResult(); });
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-window.showCheckupResult = function() {
-    const form      = document.getElementById('checkup-form');
-    const questions = document.getElementById('checkup-questions');
-    const result    = document.getElementById('checkup-result');
-    const formData  = new FormData(form);
-    let yesCount = 0, noCount = 0, unknownCount = 0;
-    const issues = [];
-    window.checkupQuestions.forEach((item, index) => {
-        const answer = formData.get(`q${index}`);
-        if (answer === 'yes') yesCount++;
-        else if (answer === 'no')      { noCount++;      issues.push({ q: item.q, cat: item.cat }); }
-        else if (answer === 'unknown') { unknownCount++; issues.push({ q: item.q, cat: item.cat }); }
-    });
-    const score = Math.round((yesCount / window.checkupQuestions.length) * 100);
-    let riskLevel, riskColor, riskBg, riskMessage;
-    if      (score >= 90) { riskLevel = "優良";   riskColor = "text-green-600";  riskBg = "bg-green-50";  riskMessage = "労務管理が非常に良好です。引き続き、法改正への対応を継続してください。"; }
-    else if (score >= 70) { riskLevel = "良好";   riskColor = "text-blue-600";   riskBg = "bg-blue-50";   riskMessage = "基本的な労務管理はできていますが、いくつか改善の余地があります。"; }
-    else if (score >= 50) { riskLevel = "要注意"; riskColor = "text-orange-600"; riskBg = "bg-orange-50"; riskMessage = "労務リスクがあります。早めの対策をおすすめします。"; }
-    else                  { riskLevel = "危険";   riskColor = "text-red-600";    riskBg = "bg-red-50";    riskMessage = "重大な労務リスクがあります。至急、専門家にご相談ください。"; }
-
-    const resultHtml = `
-        <div class="text-center mb-8">
-            <h3 class="text-3xl font-bold text-blue-900 mb-6">診断結果</h3>
-            <div class="${riskBg} rounded-2xl p-8 mb-6">
-                <p class="text-lg text-gray-600 mb-4">労務管理レベル</p>
-                <div class="text-6xl font-black ${riskColor} mb-4">${score}点</div>
-                <p class="text-2xl font-bold ${riskColor}">${riskLevel}</p>
-            </div>
-            <p class="text-gray-700 leading-relaxed">${riskMessage}</p>
-        </div>
-        <div class="mb-8">
-            <h4 class="text-xl font-bold text-blue-900 mb-4">診断内訳</h4>
-            <div class="grid grid-cols-3 gap-4">
-                <div class="bg-green-50 rounded-xl p-4 text-center"><p class="text-sm text-gray-600 mb-2">遵守できている</p><p class="text-3xl font-bold text-green-600">${yesCount}</p></div>
-                <div class="bg-red-50 rounded-xl p-4 text-center"><p class="text-sm text-gray-600 mb-2">未対応</p><p class="text-3xl font-bold text-red-600">${noCount}</p></div>
-                <div class="bg-gray-50 rounded-xl p-4 text-center"><p class="text-sm text-gray-600 mb-2">不明</p><p class="text-3xl font-bold text-gray-600">${unknownCount}</p></div>
-            </div>
-        </div>
-        ${issues.length > 0 ? `<div class="mb-8"><h4 class="text-xl font-bold text-blue-900 mb-4">改善が必要な項目</h4><div class="space-y-3">${issues.map(issue => `<div class="flex items-start gap-3 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded"><svg class="w-5 h-5 text-yellow-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg><div class="flex-1"><span class="text-xs font-bold text-yellow-700">[${issue.cat}]</span><p class="text-sm text-gray-700">${issue.q}</p></div></div>`).join('')}</div></div>` : ''}
-        <div class="bg-gradient-to-r from-blue-900 to-blue-700 rounded-2xl p-8 text-white text-center">
-            <h4 class="text-2xl font-bold mb-4">専門家による無料相談を承ります</h4>
-            <p class="mb-6 opacity-90">診断結果を基に、貴社に最適な改善プランをご提案いたします</p>
-            <button onclick="showPage('contact')" class="bg-white text-blue-900 font-bold py-4 px-10 rounded-xl hover:bg-blue-50 transition shadow-lg">今すぐ無料相談を申し込む</button>
-        </div>
-        <div class="text-center mt-8"><button onclick="window.resetCheckup()" class="text-blue-600 hover:text-blue-800 font-medium underline">もう一度診断する</button></div>
-    `;
-    if (questions) questions.style.display = 'none';
-    if (result)    { result.innerHTML = resultHtml; result.style.display = 'block'; }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-window.resetCheckup = function() {
-    const intro     = document.getElementById('checkup-intro');
-    const questions = document.getElementById('checkup-questions');
-    const result    = document.getElementById('checkup-result');
-    if (questions) { questions.innerHTML = ''; questions.style.display = 'none'; }
-    if (result)    { result.innerHTML = '';    result.style.display = 'none'; }
-    if (intro)     intro.style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
 
 // =============================================
 // 助成金診断
 // =============================================
-function initializeSubsidySimulator() {
-    const form = document.getElementById('subsidy-diagnostic-form');
-    if (form) form.addEventListener('submit', function(e) { e.preventDefault(); showSubsidyResult(); });
-}
-
-function showSubsidyResult() {
-    const form     = document.getElementById('subsidy-diagnostic-form');
-    const formData = new FormData(form);
-    const plans    = formData.getAll('plan');
-    const subsidies = [];
-
-    if (plans.includes('regular'))
-        subsidies.push({ name: 'キャリアアップ助成金（正社員化コース）', amount: '最大80万円/人', detail: '有期雇用労働者等を正規雇用労働者に転換した場合に助成', requirements: ['6ヶ月以上の有期契約労働者がいる','正社員化後6ヶ月の賃金が転換前より5%以上増額'], level: 'high' });
-    if (plans.includes('wage') && plans.includes('equipment'))
-        subsidies.push({ name: '業務改善助成金', amount: '最大600万円', detail: '事業場内最低賃金を引き上げ、設備投資等を行った場合に助成', requirements: ['事業場内最低賃金と地域別最低賃金の差額が50円以内','生産性向上に資する設備投資を実施'], level: 'high' });
-    if (plans.includes('training'))
-        subsidies.push({ name: '人材開発支援助成金', amount: '最大100万円', detail: '従業員の職業訓練を実施した場合の訓練経費や賃金を助成', requirements: ['訓練実施計画を作成し提出','10時間以上の訓練を実施'], level: 'medium' });
-    if (plans.includes('worklife'))
-        subsidies.push({ name: '両立支援等助成金（育児休業等支援コース）', amount: '最大72万円', detail: '育児休業の円滑な取得・職場復帰のための取組を実施した場合に助成', requirements: ['育児休業取得者がいる','育児休業復帰支援プランを作成'], level: 'medium' });
-    if (plans.includes('hiring'))
-        subsidies.push({ name: '特定求職者雇用開発助成金', amount: '最大240万円', detail: '高年齢者や障害者等の就職困難者を雇い入れた場合に助成', requirements: ['ハローワーク等の紹介により雇い入れ','60歳以上や障害者等を雇用'], level: 'medium' });
-    if (subsidies.length === 0)
-        subsidies.push({ name: '雇用調整助成金', amount: '変動', detail: '経済上の理由により事業活動の縮小を余儀なくされた場合の雇用維持を支援', requirements: ['売上高等が減少','休業を実施'], level: 'low' });
-
-    const totalAmount = subsidies.reduce((sum, s) => {
-        const match = s.amount.match(/(\d+)/);
-        return sum + (match ? parseInt(match[1]) : 0);
-    }, 0);
-
-    const resultHtml = `
-        <div class="text-center mb-8">
-            <h3 class="text-3xl font-bold text-blue-900 mb-6">診断結果</h3>
-            <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-8 text-white mb-6">
-                <p class="text-lg mb-4">申請可能な助成金</p>
-                <div class="text-5xl font-black mb-4">${subsidies.length}件</div>
-                <p class="text-xl">受給見込額 最大 <span class="font-bold">${totalAmount.toLocaleString()}万円</span></p>
-            </div>
-        </div>
-        <div class="space-y-4 mb-8">
-            ${subsidies.map(s => `<div class="border-2 ${s.level === 'high' ? 'border-orange-300 bg-orange-50' : s.level === 'medium' ? 'border-blue-300 bg-blue-50' : 'border-gray-300 bg-gray-50'} rounded-2xl p-6"><div class="flex items-start justify-between mb-3"><h4 class="text-lg font-bold text-blue-900 flex-1">${s.name}</h4><span class="bg-orange-600 text-white px-4 py-1 rounded-full text-sm font-bold ml-4">${s.amount}</span></div><p class="text-gray-700 mb-4">${s.detail}</p><div class="bg-white rounded-xl p-4"><p class="text-xs font-bold text-gray-600 mb-2">主な要件</p><ul class="space-y-1">${s.requirements.map(req => `<li class="text-sm text-gray-700 flex items-start gap-2"><span class="text-orange-600 mt-0.5">✓</span><span>${req}</span></li>`).join('')}</ul></div></div>`).join('')}
-        </div>
-        <div class="bg-gradient-to-r from-blue-900 to-blue-700 rounded-2xl p-8 text-white text-center mb-6">
-            <h4 class="text-2xl font-bold mb-4">助成金申請をサポートいたします</h4>
-            <p class="mb-6 opacity-90">成功報酬型なので、受給できなければ費用は発生しません</p>
-            <button onclick="showPage('contact')" class="bg-white text-blue-900 font-bold py-4 px-10 rounded-xl hover:bg-blue-50 transition shadow-lg">助成金申請サポートを依頼</button>
-        </div>
-        <div class="text-center"><button onclick="location.reload()" class="text-blue-600 hover:text-blue-800 font-medium">もう一度診断する</button></div>
-    `;
-    document.getElementById('subsidy-form').classList.add('hidden');
-    document.getElementById('subsidy-result').innerHTML = resultHtml;
-    document.getElementById('subsidy-result').classList.remove('hidden');
-}
 
 
 // =============================================
@@ -520,7 +373,6 @@ function showSubsidyResult() {
 document.addEventListener('DOMContentLoaded', function() {
     if (typeof renderHomeColumns === 'function') renderHomeColumns();
     if (typeof renderBlogGrid === 'function') renderBlogGrid('all');
-    if (typeof initializeSubsidySimulator === 'function') initializeSubsidySimulator();
     if (typeof sCalc === 'function' && document.getElementById('s-salary')) sCalc();
     showPage('home');
 });
