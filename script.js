@@ -5,58 +5,44 @@
 // =============================================
 // --- 修正後：DL_PDF_DATA (全6ファイル対応) ---
 const DL_PDF_DATA = [
-  { 
-    filename: "01_shugyo_kisoku.pdf", 
-    title: "就業規則 作成テンプレート集", 
-    emoji: "📋", 
-    url: "/files/01_shugyo_kisoku.pdf" 
-  },
-  { 
-    filename: "02_36_kyotei_manual.pdf", 
-    title: "36協定（時間外・休日労働）届出マニュアル", 
-    emoji: "📄", 
-    url: "/files/02_36_kyotei_manual.pdf"
-  },
-  { 
-    filename: "03_joseikin_guide.pdf", 
-    title: "【最新版】助成金活用ガイドブック", 
-    emoji: "💡", 
-    url: "/files/03_joseikin_guide.pdf"
-  },
-  { 
-    filename: "04_koyo_keiyaku_sample.pdf", 
-    title: "雇用契約書・労働条件通知書サンプルセット", 
-    emoji: "📝", 
-    url: "/files/04_koyo_keiyaku_sample.pdf"
-  },
-  { 
-    filename: "05_telework_kitei.pdf", 
-    title: "テレワーク導入・運用規定モデル案", 
-    emoji: "💻", 
-    url: "/files/05_telework_kitei.pdf"
-  },
-  { 
-    filename: "06_stress_check_guide.pdf", 
-    title: "メンタルヘルス・ストレスチェック実施ガイド", 
-    emoji: "🧠", 
-    url: "/files/06_stress_check_guide.pdf"
-  }
+    { filename: "01_shugyo_kisoku.pdf", title: "就業規則 作成テンプレート集", emoji: "📋", url: "./files/01_shugyo_kisoku.pdf" },
+    { filename: "02_36_kyotei_manual.pdf", title: "36協定 届出マニュアル", emoji: "📄", url: "./files/02_36_kyotei_manual.pdf" },
+    { filename: "03_joseikin_guide.pdf", title: "【最新版】助成金活用ガイドブック", emoji: "💡", url: "./files/03_joseikin_guide.pdf" },
+    { filename: "04_koyo_keiyaku_sample.pdf", title: "雇用契約書・労働条件通知書サンプル", emoji: "📝", url: "./files/04_koyo_keiyaku_sample.pdf" },
+    { filename: "05_telework_kitei.pdf", title: "テレワーク導入・運用規定案", emoji: "💻", url: "./files/05_telework_kitei.pdf" },
+    { filename: "06_stress_check_guide.pdf", title: "メンタルヘルス実施ガイド", emoji: "🧠", url: "./files/06_stress_check_guide.pdf" }
 ];
 
-// --- 修正後：downloadPDF関数 ---
+// --- 2. ダウンロード関数 (デバッグ用ログ付き) ---
 function downloadPDF(index) {
-  const item = DL_PDF_DATA[index];
-  if (!item) return;
+    const item = DL_PDF_DATA[index];
+    if (!item) {
+        console.error("指定されたインデックスのデータが見つかりません:", index);
+        return;
+    }
 
-  // 実ファイルへのリンクを生成してクリックイベントを実行
-  const link = document.createElement('a');
-  link.href = item.url;
-  link.download = item.filename; 
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+    console.log("ダウンロード開始:", item.title, "パス:", item.url);
 
-  addMessage('assistant', `「${item.title}」のダウンロードを開始します。`);
+    // 古いBase64版の処理が残っていないか確認するため、シンプルなリンク方式を徹底
+    const link = document.createElement('a');
+    link.href = item.url;
+    link.download = item.filename;
+    link.style.display = 'none'; // 画面に表示させない
+    document.body.appendChild(link);
+    
+    try {
+        link.click();
+        console.log("クリックイベントを実行しました");
+    } catch (e) {
+        console.error("クリックイベント中にエラーが発生しました:", e);
+    }
+    
+    document.body.removeChild(link);
+
+    // チャット画面へのフィードバック
+    if (typeof addMessage === 'function') {
+        addMessage('assistant', `「${item.title}」のダウンロードを開始します。\n※開始されない場合は、ブラウザのポップアップブロックを確認してください。`);
+    }
 }
 
 // =============================================
