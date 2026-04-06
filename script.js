@@ -502,3 +502,95 @@ function spotSubmitForm(formIdx) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 500);
 }
+
+// =============================================
+// 無料資料ダウンロード モーダル制御
+// =============================================
+
+// モーダルが対象とする資料リスト（HTMLカードの順番と一致させる）
+const DL_MODAL_ITEMS = [
+    { emoji: '📋', title: '就業規則 作成テンプレート集',          filename: '01_shugyo_kisoku.pdf',      url: './files/01_shugyo_kisoku.pdf' },
+    { emoji: '💰', title: '助成金申請 完全マニュアル',            filename: '03_joseikin_guide.pdf',     url: './files/03_joseikin_guide.pdf' },
+    { emoji: '⚖️', title: '労務リスク 50項目チェックリスト',     filename: '02_36_kyotei_manual.pdf',   url: './files/02_36_kyotei_manual.pdf' },
+    { emoji: '📝', title: '雇用契約書・労働条件通知書サンプル',  filename: '04_koyo_keiyaku_sample.pdf',url: './files/04_koyo_keiyaku_sample.pdf' },
+    { emoji: '💻', title: 'テレワーク導入・運用規定案',          filename: '05_telework_kitei.pdf',     url: './files/05_telework_kitei.pdf' },
+    { emoji: '🧠', title: 'メンタルヘルス実施ガイド',            filename: '06_stress_check_guide.pdf', url: './files/06_stress_check_guide.pdf' },
+];
+
+let _dlCurrentIndex = 0;
+
+function dlOpenModal(index) {
+    _dlCurrentIndex = index;
+    const item = DL_MODAL_ITEMS[index];
+    if (!item) return;
+
+    // ヘッダー更新
+    document.getElementById('dl-modal-emoji').textContent = item.emoji;
+    document.getElementById('dl-modal-title').textContent = item.title;
+
+    // フォームをリセット・エラー非表示
+    document.getElementById('dl-name').value = '';
+    document.getElementById('dl-email').value = '';
+    document.getElementById('dl-company').value = '';
+    document.getElementById('dl-newsletter').checked = true;
+    document.getElementById('dl-form-error').classList.add('hidden');
+    document.getElementById('dl-form-area').classList.remove('hidden');
+    document.getElementById('dl-success-area').classList.add('hidden');
+
+    // モーダル表示（display:flex に切り替え）
+    const overlay = document.getElementById('dl-modal-overlay');
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function dlCloseModal() {
+    document.getElementById('dl-modal-overlay').style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+function dlOverlayClick(event) {
+    if (event.target === document.getElementById('dl-modal-overlay')) {
+        dlCloseModal();
+    }
+}
+
+function dlSubmit() {
+    const name  = document.getElementById('dl-name').value.trim();
+    const email = document.getElementById('dl-email').value.trim();
+    const errorEl = document.getElementById('dl-form-error');
+
+    if (!name || !email) {
+        errorEl.classList.remove('hidden');
+        return;
+    }
+    errorEl.classList.add('hidden');
+
+    const item = DL_MODAL_ITEMS[_dlCurrentIndex];
+
+    // --- ① ファイルを即ダウンロード ---
+    const link = document.createElement('a');
+    link.href = item.url;
+    link.download = item.filename;
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // --- ② Formspree でメール通知（任意）---
+    // ★ https://formspree.io/ で無料アカウントを作成し、
+    //   フォームIDを取得して下の YOUR_FORM_ID を置き換えてください。
+    // fetch('https://formspree.io/f/YOUR_FORM_ID', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({
+    //         name, email,
+    //         company: document.getElementById('dl-company').value.trim(),
+    //         newsletter: document.getElementById('dl-newsletter').checked,
+    //         document: item.title,
+    //     }),
+    // });
+
+    // --- ③ 完了画面に切り替え ---
+    document.getElementById('dl-form-area').classList.add('hidden');
+    document.getElementById('dl-success-area').classList.remove('hidden');
+}
