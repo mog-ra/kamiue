@@ -1,0 +1,129 @@
+/* =============================================
+   料金シミュレーター 専用スタイル
+   price-simulator.css
+   依存: Tailwind CSS (CDN)
+   ============================================= */
+
+/* タブ アクティブ状態 */
+.sim-tab-active {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+    color: white;
+    box-shadow: 0 4px 14px rgba(30,58,138,0.25);
+}
+
+/* 従業員スライダー */
+.sim-slider {
+    background: linear-gradient(to right, #1e3a8a 0%, #1e3a8a var(--val,5%), #e5e7eb var(--val,5%), #e5e7eb 100%);
+}
+.sim-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #1e3a8a;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(30,58,138,0.4);
+    cursor: pointer;
+}
+.sim-slider::-moz-range-thumb {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #1e3a8a;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(30,58,138,0.4);
+    cursor: pointer;
+}
+
+/* 従業員数チップ（顧問契約） */
+.sim-chip {
+    background: white;
+    border-color: #e5e7eb;
+    color: #6b7280;
+}
+.sim-chip:hover,
+.sim-chip.active {
+    background: #eff6ff;
+    border-color: #1e3a8a;
+    color: #1e3a8a;
+}
+
+/* 従業員数チップ（スポット） */
+.sim-chip-spot {
+    background: white;
+    border-color: #e5e7eb;
+    color: #6b7280;
+}
+.sim-chip-spot:hover,
+.sim-chip-spot.active {
+    background: #fff7ed;
+    border-color: #f97316;
+    color: #c2410c;
+}
+
+/* ベースプランカード */
+.sim-plan-card {
+    border-color: #e5e7eb;
+    background: white;
+    transition: all 0.15s;
+}
+.sim-plan-card:has(input:checked) {
+    border-color: #1e3a8a;
+    background: #eff6ff;
+}
+.sim-plan-card:hover {
+    border-color: #93c5fd;
+    background: #f8faff;
+}
+
+/* オプションカード（顧問契約） */
+.sim-opt-card {
+    border-color: #e5e7eb;
+    background: white;
+}
+.sim-opt-card:has(input:checked) {
+    border-color: #1d4ed8;
+    background: #eff6ff;
+}
+.sim-opt-card:has(input:checked:disabled) {
+    border-color: #bbf7d0 !important;
+    background: #f0fdf4 !important;
+    opacity: 0.75;
+    pointer-events: none;
+}
+.sim-opt-card:hover {
+    border-color: #93c5fd;
+}
+
+/* オプションカード（スポット） */
+.sim-opt-spot {
+    border-color: #e5e7eb;
+    background: white;
+}
+.sim-opt-spot:has(input:checked) {
+    border-color: #f97316;
+    background: #fff7ed;
+}
+.sim-opt-spot:hover {
+    border-color: #fdba74;
+}
+
+/* 内訳行 */
+.sim-breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.75);
+    padding: 0.25rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.sim-breakdown-row:last-child { border-bottom: none; }
+.sim-breakdown-row .label   { flex: 1; line-height: 1.4; }
+.sim-breakdown-row .amount  { font-weight: 800; color: #fcd34d; white-space: nowrap; }
+
+/* 印刷時 */
+@media print {
+    .hidden { display: none !important; }
+    #sim-print-area { display: block !important; }
+    body > *:not(#sim-print-area) { display: none; }
+}

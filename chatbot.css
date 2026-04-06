@@ -1,0 +1,468 @@
+/*
+  =============================================
+  chatbot.css — チャットボット専用スタイル
+
+  【修正履歴】
+  ✅ 修正②: style.css に散在していたチャットボット用クラスをこのファイルに統合
+  ✅ 修正③: chatbot.js が生成するクラス名（.chat-bubble-bot 等）と
+            旧 chatbot.css のクラス名（.chat-bubble-ai 等）が不一致だったため
+            chatbot.js の実装に合わせてクラス名を修正・統一
+
+  読み込み方:
+    <link rel="stylesheet" href="./chatbot.css">
+  =============================================
+*/
+
+/* -----------------------------------------------
+   チャット起動ボタン（ランチャー）
+----------------------------------------------- */
+#chat-launcher {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #1e40af, #2563eb);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 20px 14px 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.45);
+    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease;
+    user-select: none;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+#chat-launcher:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 28px rgba(37, 99, 235, 0.55);
+}
+
+#chat-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+}
+
+#chat-launcher-label {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+/* 未読バッジ */
+#chat-unread-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    animation: chatBadgePulse 1.8s infinite;
+}
+
+@keyframes chatBadgePulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.2); }
+}
+
+/* -----------------------------------------------
+   チャットウィンドウ
+----------------------------------------------- */
+#chat-window {
+    position: fixed;
+    bottom: 100px;
+    right: 28px;
+    z-index: 9998;
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    height: 520px;
+    max-height: calc(100vh - 130px);
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(37, 99, 235, 0.12);
+    /* ✅ 修正③: style.css の定義に合わせて transition を追加 */
+    transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    transform-origin: bottom right;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* ✅ 修正③: chatbot.js の classList.add/remove で使うクラス名に合わせて定義 */
+.chat-window-hidden {
+    opacity: 0;
+    transform: scale(0.82) translateY(20px);
+    pointer-events: none;
+}
+
+.chat-window-visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: all;
+}
+
+/* -----------------------------------------------
+   チャットヘッダー
+----------------------------------------------- */
+#chat-header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.chat-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chat-avatar {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    flex-shrink: 0;
+}
+
+.chat-header-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.chat-header-name {
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.chat-header-status {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.72rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.chat-online-dot {
+    width: 7px;
+    height: 7px;
+    background: #4ade80;
+    border-radius: 50%;
+    display: inline-block;
+    animation: chatOnlinePulse 2s ease-in-out infinite;
+}
+
+@keyframes chatOnlinePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.6; transform: scale(1.3); }
+}
+
+.chat-close-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.chat-close-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* -----------------------------------------------
+   メッセージエリア
+----------------------------------------------- */
+#chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scroll-behavior: smooth;
+    background: #f0f4ff;
+}
+
+#chat-messages::-webkit-scrollbar { width: 4px; }
+#chat-messages::-webkit-scrollbar-track { background: transparent; }
+#chat-messages::-webkit-scrollbar-thumb { background: #c7d2fe; border-radius: 4px; }
+
+/* -----------------------------------------------
+   メッセージバブル
+   ✅ 修正③: chatbot.js が生成するクラス名に統一
+     .chat-msg / .chat-msg-bot / .chat-msg-user
+     .chat-msg-avatar
+     .chat-bubble / .chat-bubble-bot / .chat-bubble-user
+     （旧 chatbot.css の .chat-bubble-ai は廃止）
+----------------------------------------------- */
+@keyframes msgSlideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.chat-msg {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    animation: msgSlideIn 0.28s ease-out;
+}
+
+.chat-msg-bot  { justify-content: flex-start; }
+.chat-msg-user { justify-content: flex-end; }
+
+.chat-msg-avatar {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);
+}
+
+.chat-bubble {
+    max-width: 82%;
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    word-break: break-word;
+}
+
+/* ✅ 修正③: .chat-bubble-ai → .chat-bubble-bot に修正 */
+.chat-bubble-bot {
+    background: #fff;
+    color: #1e293b;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.chat-bubble-user {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);
+}
+
+/* -----------------------------------------------
+   選択肢ボタン
+----------------------------------------------- */
+.chat-options {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 4px;
+    padding-left: 36px;
+    animation: msgSlideIn 0.35s ease-out;
+}
+
+.chat-opt-btn {
+    background: #fff;
+    border: 2px solid #bfdbfe;
+    color: #1e40af;
+    border-radius: 12px;
+    padding: 9px 14px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    font-family: 'Noto Sans JP', sans-serif;
+    box-shadow: 0 1px 4px rgba(30, 58, 138, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.chat-opt-btn:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    transform: translateX(3px);
+    box-shadow: 0 3px 12px rgba(30, 58, 138, 0.15);
+}
+
+.chat-opt-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* -----------------------------------------------
+   タイピングインジケーター
+----------------------------------------------- */
+.chat-typing {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    animation: msgSlideIn 0.28s ease-out;
+}
+
+.chat-typing-dots {
+    background: #fff;
+    border-radius: 16px;
+    border-bottom-left-radius: 4px;
+    padding: 12px 16px;
+    display: flex;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.chat-typing-dots span {
+    width: 7px;
+    height: 7px;
+    background: #94a3b8;
+    border-radius: 50%;
+    animation: chatTypingDot 1.2s ease-in-out infinite;
+}
+
+.chat-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes chatTypingDot {
+    0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+    40%            { transform: scale(1.2); opacity: 1; }
+}
+
+/* -----------------------------------------------
+   CTAボタン・ハイライト
+----------------------------------------------- */
+.chat-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 11px 18px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 8px;
+    box-shadow: 0 4px 16px rgba(249, 115, 22, 0.4);
+    transition: all 0.2s;
+    font-family: 'Noto Sans JP', sans-serif;
+    width: 100%;
+    justify-content: center;
+}
+
+.chat-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(249, 115, 22, 0.5);
+}
+
+.chat-highlight {
+    background: linear-gradient(135deg, #fef9c3, #fef3c7);
+    border: 1.5px solid #fbbf24;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: #92400e;
+    font-weight: 600;
+}
+
+/* -----------------------------------------------
+   入力エリア
+----------------------------------------------- */
+#chat-input-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    background: #fff;
+    border-top: 1.5px solid #e0e7ff;
+    flex-shrink: 0;
+}
+
+#chat-input {
+    flex: 1;
+    border: 2px solid #e0e7ff;
+    border-radius: 12px;
+    padding: 9px 14px;
+    font-size: 0.85rem;
+    outline: none;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #1e293b;
+    background: #f8faff;
+    transition: border-color 0.2s;
+}
+
+#chat-input:focus {
+    border-color: #3b82f6;
+    background: #fff;
+}
+
+#chat-send-btn {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);
+    flex-shrink: 0;
+}
+
+#chat-send-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 14px rgba(30, 58, 138, 0.45);
+}
+
+/* -----------------------------------------------
+   レスポンシブ（スマートフォン）
+----------------------------------------------- */
+@media (max-width: 480px) {
+    #chat-window {
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        height: 70vh;
+        border-radius: 20px 20px 0 0;
+    }
+
+    #chat-launcher {
+        bottom: 16px;
+        right: 16px;
+    }
+}

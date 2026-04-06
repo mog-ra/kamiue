@@ -1,0 +1,36 @@
+/* ===== 給与計算ツール専用スタイル ===== */
+
+.salary-tool-bg {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e8f4fd 50%, #f0f4ff 100%);
+}
+
+.salary-input-group input,
+.salary-input-group select {
+    transition: all 0.2s ease;
+}
+
+.salary-tab-btn {
+    background: transparent;
+    color: #64748b;
+}
+
+.salary-tab-btn.active {
+    background: white;
+    color: #1e3a8a;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.total-card {
+    transition: transform 0.3s ease;
+}
+
+.total-card:hover {
+    transform: translateY(-2px);
+}
+
+/* PDF/印刷用調整 */
+@media print {
+    body { background: white; }
+    .salary-tool-bg { background: none; padding: 0; }
+    button { display: none !important; }
+}

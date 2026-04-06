@@ -1,0 +1,79 @@
+<!--
+  =============================================
+  チャットボット ウィジェット
+  chatbot.html — index.html から独立した単体ファイル
+
+  使い方:
+    index.html の </body> 直前に以下を追記するだけで動作します。
+
+      <link rel="stylesheet" href="./chatbot.css">
+      <script src="./chatbot.js" defer></script>
+      <!-- チャットボット HTML を動的に挿入 -->
+      <script>
+        fetch('./chatbot.html')
+          .then(r => r.text())
+          .then(html => {
+            const div = document.createElement('div');
+            div.innerHTML = html;
+            document.body.appendChild(div);
+          });
+      </script>
+
+  ※ または下記 HTML ブロックをそのまま </body> 直前に貼り付けても使えます。
+  =============================================
+-->
+
+<!-- チャット起動ボタン -->
+<div id="chat-launcher" onclick="chatOpen()" title="ご相談はこちら">
+    <div id="chat-launcher-icon">
+        <svg id="chat-icon-bubble" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="26" height="26">
+            <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+        </svg>
+        <svg id="chat-icon-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24" style="display:none;">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+    </div>
+    <span id="chat-launcher-label">ご相談</span>
+    <span id="chat-unread-badge" style="display:none;">1</span>
+</div>
+
+<!-- チャットウィンドウ -->
+<div id="chat-window" class="chat-window-hidden">
+    <!-- ヘッダー -->
+    <div id="chat-header">
+        <div class="chat-header-left">
+            <div class="chat-avatar">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+                    <ellipse cx="100" cy="100" rx="95" ry="75" fill="#FDB913"/>
+                    <rect x="50" y="40" width="20" height="120" rx="10" fill="#2E5BA5"/>
+                    <path d="M 70 70 L 145 35" stroke="#2E5BA5" stroke-width="20" stroke-linecap="round" fill="none"/>
+                    <path d="M 70 100 L 145 165" stroke="#2E5BA5" stroke-width="20" stroke-linecap="round" fill="none"/>
+                    <circle cx="60" cy="50" r="25" fill="#C8102E"/>
+                </svg>
+            </div>
+            <div class="chat-header-info">
+                <p class="chat-header-name">カミウエ社労士事務所</p>
+                <p class="chat-header-status"><span class="chat-online-dot"></span>AIアシスタント対応中</p>
+            </div>
+        </div>
+        <button onclick="chatClose()" class="chat-close-btn" aria-label="閉じる">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18" height="18">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- メッセージエリア -->
+    <div id="chat-messages"></div>
+
+    <!-- 入力エリア -->
+    <div id="chat-input-area">
+        <input type="text" id="chat-input" placeholder="メッセージを入力..." autocomplete="off"
+            onkeydown="if(event.key==='Enter')chatSend()">
+        <button onclick="chatSend()" id="chat-send-btn" aria-label="送信">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18" height="18">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+        </button>
+    </div>
+</div>
