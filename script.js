@@ -16,27 +16,15 @@ const DL_PDF_DATA = [
 
 // ダウンロード関数（チャットボット等から直接呼び出す用）
 function downloadPDF(index) {
-    const item = DL_PDF_DATA[index];
-    if (!item) {
-        console.error("指定されたインデックスのデータが見つかりません:", index);
-        return;
-    }
-    console.log("ダウンロード開始:", item.title, "パス:", item.url);
+    const item = DL_MODAL_ITEMS[index]; // DL_PDF_DATAではなくDL_MODAL_ITEMSを参照
+    if (!item) return;
+    
     const link = document.createElement('a');
     link.href = item.url;
     link.download = item.filename;
-    link.style.display = 'none';
     document.body.appendChild(link);
-    try {
-        link.click();
-        console.log("クリックイベントを実行しました");
-    } catch (e) {
-        console.error("クリックイベント中にエラーが発生しました:", e);
-    }
+    link.click();
     document.body.removeChild(link);
-    if (typeof addMessage === 'function') {
-        addMessage('assistant', `「${item.title}」のダウンロードを開始します。\n※開始されない場合は、ブラウザのポップアップブロックを確認してください。`);
-    }
 }
 
 
