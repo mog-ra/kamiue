@@ -44,15 +44,15 @@ function downloadPDF(index) {
 // 無料資料ダウンロード モーダル制御
 // =============================================
 
-// HTMLカードの表示順と一致させた資料リスト
-// ※ index 0〜5 がそれぞれのカードの「無料でダウンロード」ボタンの dlOpenModal(N) に対応
+// HTMLカードの表示順（index 0〜5）と対応するPDFファイル
+// ※ HTMLの dlOpenModal(N) のN番号と順番を一致させること
 const DL_MODAL_ITEMS = [
-    { emoji: '📋', title: '就業規則 作成テンプレート集',         filename: '01_shugyo_kisoku.pdf',       url: './files/01_shugyo_kisoku.pdf' },
-    { emoji: '💰', title: '助成金申請 完全マニュアル',           filename: '03_joseikin_guide.pdf',      url: './files/03_joseikin_guide.pdf' },
-    { emoji: '⚖️', title: '労務リスク 50項目チェックリスト',    filename: '02_36_kyotei_manual.pdf',    url: './files/02_36_kyotei_manual.pdf' },
-    { emoji: '📝', title: '雇用契約書・労働条件通知書サンプル', filename: '04_koyo_keiyaku_sample.pdf', url: './files/04_koyo_keiyaku_sample.pdf' },
-    { emoji: '💻', title: 'テレワーク導入・運用規定案',         filename: '05_telework_kitei.pdf',      url: './files/05_telework_kitei.pdf' },
-    { emoji: '🧠', title: 'メンタルヘルス実施ガイド',           filename: '06_stress_check_guide.pdf',  url: './files/06_stress_check_guide.pdf' },
+    { emoji: '📋', title: '就業規則 作成テンプレート集',              filename: '01_shugyo_kisoku.pdf',       url: './files/01_shugyo_kisoku.pdf' },
+    { emoji: '💰', title: '助成金申請 完全マニュアル',                filename: '03_joseikin_guide.pdf',      url: './files/03_joseikin_guide.pdf' },
+    { emoji: '⚖️', title: '労務リスク 50項目チェックリスト',         filename: '02_36_kyotei_manual.pdf',    url: './files/02_36_kyotei_manual.pdf' },
+    { emoji: '📊', title: '社会保険料 早見表 2025年度版',             filename: '04_koyo_keiyaku_sample.pdf', url: './files/04_koyo_keiyaku_sample.pdf' },
+    { emoji: '🏢', title: 'はじめて社員を雇う時の手続き完全ガイド',  filename: '05_telework_kitei.pdf',      url: './files/05_telework_kitei.pdf' },
+    { emoji: '🕐', title: '36協定 作成・届出 実務ガイドブック',       filename: '06_stress_check_guide.pdf',  url: './files/06_stress_check_guide.pdf' },
 ];
 
 let _dlCurrentIndex = 0;
@@ -94,7 +94,7 @@ function dlOpenModal(index) {
     const overlay = document.getElementById('dl-modal-overlay');
     if (overlay) {
         overlay.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // 背面スクロール防止
+        document.body.style.overflow = 'hidden';
     }
 }
 
@@ -143,17 +143,14 @@ function dlSubmit() {
 
     // ② Formspree でリード情報をメール通知（任意）
     //    https://formspree.io/ で無料アカウントを作成し、
-    //    フォームIDを取得して YOUR_FORM_ID を置き換えてください。
+    //    フォームIDを取得して YOUR_FORM_ID を置き換えてコメントを外してください。
     // -------------------------------------------------------
     // const company    = (document.getElementById('dl-company')?.value || '').trim();
     // const newsletter = document.getElementById('dl-newsletter')?.checked ?? true;
     // fetch('https://formspree.io/f/YOUR_FORM_ID', {
     //     method: 'POST',
     //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({
-    //         name, email, company, newsletter,
-    //         document: item.title,
-    //     }),
+    //     body: JSON.stringify({ name, email, company, newsletter, document: item.title }),
     // }).catch(err => console.warn('Formspree送信エラー:', err));
     // -------------------------------------------------------
 
@@ -162,6 +159,56 @@ function dlSubmit() {
     const successArea = document.getElementById('dl-success-area');
     if (formArea)    formArea.classList.add('hidden');
     if (successArea) successArea.classList.remove('hidden');
+}
+
+
+// =============================================
+// ダウンロードページ バナー一括登録
+// ※ 「まとめて受け取る」ボタン (dlBannerRegister) から呼ばれる
+// =============================================
+function dlBannerRegister() {
+    const emailEl    = document.getElementById('dl-banner-email');
+    const bannerForm = document.getElementById('dl-banner-form');
+    const bannerDone = document.getElementById('dl-banner-done');
+    const email      = (emailEl?.value || '').trim();
+
+    // メールアドレス簡易バリデーション
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (emailEl) {
+            emailEl.style.border       = '2px solid #ef4444';
+            emailEl.style.background   = '#fff5f5';
+            emailEl.placeholder        = '正しいメールアドレスを入力してください';
+        }
+        return;
+    }
+    if (emailEl) {
+        emailEl.style.border     = '';
+        emailEl.style.background = '';
+    }
+
+    // 全6資料を0.8秒ずつずらして連続ダウンロード
+    DL_MODAL_ITEMS.forEach(function(item, i) {
+        setTimeout(function() {
+            const link = document.createElement('a');
+            link.href = item.url;
+            link.download = item.filename;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            try { link.click(); } catch(e) { console.error('DL error:', item.filename, e); }
+            document.body.removeChild(link);
+        }, i * 800);
+    });
+
+    // Formspree でリード情報をメール通知（任意）
+    // fetch('https://formspree.io/f/YOUR_FORM_ID', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ email, type: '一括登録' }),
+    // }).catch(err => console.warn('Formspree送信エラー:', err));
+
+    // 完了表示に切り替え
+    if (bannerForm) bannerForm.classList.add('hidden');
+    if (bannerDone) bannerDone.classList.remove('hidden');
 }
 
 
@@ -231,7 +278,6 @@ function showPage(pageId, tabIdx) {
         setTimeout(function() {
             const idx = (typeof tabIdx !== 'undefined' && tabIdx !== null) ? parseInt(tabIdx) : 0;
             if (typeof spotSwitchTab === 'function') spotSwitchTab(idx);
-            // フォーム submit イベントを登録（未登録の場合のみ）
             for (let i = 0; i < 4; i++) {
                 (function(fi) {
                     const form = document.getElementById('spot-form-data-' + fi);
@@ -266,7 +312,6 @@ function showPage(pageId, tabIdx) {
     document.getElementById('mobile-menu').classList.add('hidden');
     window.scrollTo(0, 0);
 
-    // コラム関連ページの再描画
     if (pageId === 'blog') {
         if (typeof renderBlogGrid === 'function') {
             renderBlogGrid('all');
@@ -315,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // =============================================
 // 給与計算ツール
 // =============================================
-// ※ ロジックはすべて salary-calc.js に移行済みのため、このファイルには記述なし。
+// ※ ロジックはすべて salary-calc.js に移行済み。
 
 
 // =============================================
@@ -485,19 +530,10 @@ function showSubsidyResult() {
 // 初期化（DOMContentLoaded）
 // =============================================
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. コラム・ブログの描画
     if (typeof renderHomeColumns === 'function') renderHomeColumns();
     if (typeof renderBlogGrid === 'function') renderBlogGrid('all');
-
-    // 2. 各種シミュレーターの初期化
     if (typeof initializeSubsidySimulator === 'function') initializeSubsidySimulator();
-
-    // 3. 給与計算ツールの初期計算
-    if (typeof sCalc === 'function' && document.getElementById('s-salary')) {
-        sCalc();
-    }
-
-    // 4. 初期表示ページをホームに設定
+    if (typeof sCalc === 'function' && document.getElementById('s-salary')) sCalc();
     showPage('home');
 });
 
@@ -523,18 +559,8 @@ function toggleFaq(id) {
 
 // =============================================
 // 労務コラム機能スクリプト（分離）
-//
-// コラムデータ・描画関数はすべて columns-data.js に移動しました。
-//
-// ■ 読み込み順序（HTMLに記述）
-//   <script src="columns-data.js"></script>  ← このファイルより先に読む
-//   <script src="script.js"></script>
-//
-// ■ columns-data.js が提供する関数（本ファイルから呼び出し可能）
-//   - renderHomeColumns()   トップページ最新コラム描画
-//   - renderBlogGrid(cat)   コラム一覧グリッド描画
-//   - showArticle(id)       記事詳細表示
-//   - filterBlog(cat)       カテゴリーフィルター
+// コラムデータ・描画関数はすべて columns-data.js に移動済み。
+// 読み込み順: columns-data.js → script.js
 // =============================================
 
 
