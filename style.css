@@ -169,6 +169,24 @@
         .animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
         .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
 
+/* ===== 対応可能システム 自動スクロール ===== */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-scroll {
+    animation: scroll 40s linear infinite;
+}
+
+.animate-scroll:hover {
+    animation-play-state: paused;
+}
+
 /* ===== 料金シミュレーター ===== */
 /* ※ price-simulator.css に移行済みのため削除 */
 
