@@ -3528,8 +3528,9 @@
   var API_KEY    = 'AIzaSyBtuFKMfSuvHBJi9mA2ECNY-O3y4hayxPE';
   var CHANNEL_ID = 'UCN0gus5F7Hdi0bzQJJ0NLVw';
   var CHANNEL_URL = 'https://www.youtube.com/channel/' + CHANNEL_ID;
+  var TIMEOUT_MS = 8000; // 8秒でタイムアウト
 
-  var _cache = null; // APIレスポンスをキャッシュして二重リクエスト防止
+  var _cache = null;
 
   function fmtDate(iso) {
     var d = new Date(iso);
@@ -3538,8 +3539,30 @@
   function esc(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
+
+  // タイムアウト付きfetch（APIキー制限やネットワーク遅延で無限待ちにならない）
+  // referrerPolicy: 'origin' でkamiue.comのオリジンをリファラーとして送信し、
+  // APIキーのHTTPリファラー制限（kamiue.com/*）を確実に通過させる
   function apiFetch(url) {
-    return fetch(url).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); });
+    var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = controller
+      ? setTimeout(function(){ controller.abort(); }, TIMEOUT_MS)
+      : null;
+    var opts = {
+      referrerPolicy: 'origin',
+      signal: controller ? controller.signal : undefined
+    };
+    return fetch(url, opts)
+      .then(function(r) {
+        if (timer) clearTimeout(timer);
+        if (!r.ok) throw new Error('HTTP ' + r.status + ' ' + r.statusText);
+        return r.json();
+      })
+      .catch(function(err) {
+        if (timer) clearTimeout(timer);
+        // AbortError もここで確実にcatchされ、errHTMLへ流れる
+        throw err;
+      });
   }
 
   function buildCard(item) {
@@ -3565,48 +3588,64 @@
     '</a>';
   }
 
-  function errHTML(gridId) {
-    return '<div class="col-span-1 sm:col-span-2 md:col-span-3 text-center py-8 text-gray-400 text-sm">'+
+  function errHTML() {
+    return '<div style="grid-column:1/-1" class="text-center py-10 text-gray-400 text-sm">'+
       '動画の読み込みに失敗しました。<br>'+
-      '<a href="'+esc(CHANNEL_URL)+'" target="_blank" rel="noopener" class="text-red-600 font-semibold hover:underline">YouTubeチャンネルを直接ご覧ください →</a></div>';
+      '<a href="'+esc(CHANNEL_URL)+'" target="_blank" rel="noopener" class="text-red-600 font-semibold hover:underline mt-2 inline-block">YouTubeチャンネルを直接ご覧ください →</a>'+
+    '</div>';
   }
 
-  function fetchVideos(maxResults) {
+  function fetchVideos() {
     if (_cache) return Promise.resolve(_cache);
-    return apiFetch('https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id='+CHANNEL_ID+'&key='+API_KEY)
-      .then(function(d){
-        if(!d.items||!d.items.length) throw new Error('ch');
-        return apiFetch('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId='+d.items[0].contentDetails.relatedPlaylists.uploads+'&maxResults=50&key='+API_KEY);
-      })
-      .then(function(d){
-        _cache = d.items || [];
-        return _cache;
-      });
+    return apiFetch(
+      'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id='+CHANNEL_ID+'&key='+API_KEY
+    ).then(function(d) {
+      if (!d.items || !d.items.length) throw new Error('チャンネルが見つかりません');
+      var uploadsId = d.items[0].contentDetails.relatedPlaylists.uploads;
+      return apiFetch(
+        'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId='+uploadsId+'&maxResults=50&key='+API_KEY
+      );
+    }).then(function(d) {
+      _cache = d.items || [];
+      return _cache;
+    });
+  }
+
+  function renderGrid(grid, items, max) {
+    var slice = items.slice(0, max);
+    if (!slice.length) {
+      grid.innerHTML = '<div style="grid-column:1/-1" class="text-center py-8 text-gray-400 text-sm">現在、公開動画はありません。</div>';
+      return;
+    }
+    grid.innerHTML = slice.map(buildCard).join('');
   }
 
   // ホームセクション用（最新6件）
   function loadHomeYT() {
     var grid = document.getElementById('home-yt-grid');
     if (!grid) return;
-    fetchVideos(6).then(function(items){
-      var slice = items.slice(0, 6);
-      if(!slice.length){ grid.innerHTML='<div class="col-span-3 text-center py-8 text-gray-400 text-sm">現在、公開動画はありません。</div>'; return; }
-      grid.innerHTML = slice.map(buildCard).join('');
-    }).catch(function(err){ console.warn('[YT-home]', err); grid.innerHTML = errHTML(); });
+    fetchVideos()
+      .then(function(items) { renderGrid(grid, items, 6); })
+      .catch(function(err) {
+        console.warn('[YT-home]', err.name, err.message);
+        grid.innerHTML = errHTML();
+      });
   }
 
-  // 専用ページ用（最新12件）、初回のみ読み込む
+  // 専用ページ用（最新12件）、初回のみAPIを叩く
   var _pageLoaded = false;
   window.loadYouTubePage = function() {
     var grid = document.getElementById('yt-grid-page');
     if (!grid) return;
     if (_pageLoaded) return;
     _pageLoaded = true;
-    fetchVideos(12).then(function(items){
-      var slice = items.slice(0, 12);
-      if(!slice.length){ grid.innerHTML='<div class="col-span-3 text-center py-8 text-gray-400 text-sm">現在、公開動画はありません。</div>'; return; }
-      grid.innerHTML = slice.map(buildCard).join('');
-    }).catch(function(err){ console.warn('[YT-page]', err); grid.innerHTML = errHTML(); });
+    fetchVideos()
+      .then(function(items) { renderGrid(grid, items, 12); })
+      .catch(function(err) {
+        console.warn('[YT-page]', err.name, err.message);
+        grid.innerHTML = errHTML();
+        _pageLoaded = false; // 失敗時はリトライ可能にする
+      });
   };
 
   // ホームは即時読み込み
