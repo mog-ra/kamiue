@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>YouTube API デバッグ</title>
+<style>
+body { font-family: monospace; padding: 20px; background: #111; color: #0f0; }
+h2 { color: #fff; }
+.ok  { color: #0f0; }
+.err { color: #f55; }
+.inf { color: #ff0; }
+pre  { background: #222; padding: 12px; border-radius: 6px; white-space: pre-wrap; word-break: break-all; font-size: 13px; }
+button { padding: 10px 24px; font-size: 16px; margin: 4px; cursor: pointer; border-radius: 6px; border: none; }
+</style>
+</head>
+<body>
+<h2>🔍 YouTube API デバッグツール</h2>
+<p class="inf">このページを kamiue.com にアップして開き、結果をスクリーンショットして共有してください。</p>
+
+<button onclick="runAll()" style="background:#0f0;color:#000;">▶ 全テスト実行</button>
+<button onclick="document.getElementById('log').innerHTML=''" style="background:#555;color:#fff;">クリア</button>
+
+<pre id="log">ボタンを押してください...</pre>
+
+<script>
+var API_KEY    = 'AIzaSyBtuFKMfSuvHBJi9mA2ECNY-O3y4hayxPE';
+var CHANNEL_ID = 'UCN0gus5F7Hdi0bzQJJ0NLVw';
+var log = document.getElementById('log');
+
+function write(cls, msg) {
+  var d = new Date().toISOString().substr(11,12);
+  log.innerHTML += '<span class="'+cls+'">['+d+'] '+msg+'</span>\n';
+}
+
+function runAll() {
+  log.innerHTML = '';
+  write('inf', '=== 環境情報 ===');
+  write('inf', 'location.origin : ' + location.origin);
+  write('inf', 'location.href   : ' + location.href);
+  write('inf', 'document.referrer: ' + (document.referrer || '(空)'));
+  write('inf', 'AbortController : ' + (typeof AbortController !== 'undefined' ? 'あり' : 'なし'));
+  write('inf', '');
+
+  write('inf', '=== STEP 1: channels API (リファラーなし) ===');
+  var url1 = 'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id='+CHANNEL_ID+'&key='+API_KEY;
+  fetch(url1)
+    .then(function(r) {
+      write('inf', 'HTTP status: ' + r.status + ' ' + r.statusText);
+      return r.text();
+    })
+    .then(function(t) {
+      try {
+        var j = JSON.parse(t);
+        if (j.error) {
+          write('err', 'APIエラー: ' + j.error.code + ' ' + j.error.message);
+          j.error.errors && j.error.errors.forEach(function(e){
+            write('err', '  reason: ' + e.reason + ' / domain: ' + e.domain);
+          });
+        } else if (j.items && j.items.length) {
+          write('ok', 'OK! uploadsId = ' + j.items[0].contentDetails.relatedPlaylists.uploads);
+          runStep2(j.items[0].contentDetails.relatedPlaylists.uploads);
+        } else {
+          write('err', 'items が空: ' + t.substr(0,200));
+        }
+      } catch(e) {
+        write('err', 'JSON parse失敗: ' + t.substr(0,200));
+      }
+    })
+    .catch(function(e) {
+      write('err', 'STEP1 fetch失敗: ' + e.name + ' - ' + e.message);
+      write('inf', '');
+      write('inf', '=== STEP 1b: origin referrer付きで再試行 ===');
+      fetch(url1, {referrerPolicy:'origin'})
+        .then(function(r){ write('inf','HTTP status: '+r.status); return r.text(); })
+        .then(function(t){ write('inf','response: '+t.substr(0,300)); })
+        .catch(function(e){ write('err','STEP1b fetch失敗: '+e.name+' - '+e.message); });
+    });
+}
+
+function runStep2(uploadsId) {
+  write('inf', '');
+  write('inf', '=== STEP 2: playlistItems API ===');
+  var url2 = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId='+uploadsId+'&maxResults=3&key='+API_KEY;
+  fetch(url2)
+    .then(function(r) {
+      write('inf', 'HTTP status: ' + r.status + ' ' + r.statusText);
+      return r.json();
+    })
+    .then(function(j) {
+      if (j.error) {
+        write('err', 'APIエラー: ' + j.error.code + ' ' + j.error.message);
+      } else {
+        write('ok', 'OK! 動画数: ' + (j.items||[]).length);
+        (j.items||[]).forEach(function(v,i){
+          write('ok', '  ['+i+'] ' + v.snippet.title.substr(0,40));
+        });
+        write('ok', '');
+        write('ok', '✅ APIは正常に動作しています！');
+        write('inf', '→ script.js側の問題（showPage連携など）を確認してください');
+      }
+    })
+    .catch(function(e) {
+      write('err', 'STEP2 fetch失敗: ' + e.name + ' - ' + e.message);
+    });
+}
+</script>
+</body>
+</html>
