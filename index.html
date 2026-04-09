@@ -208,7 +208,15 @@
                 <button type="button" id="nav-faq" onclick="showPage('faq')" class="nav-main-link">よくある質問</button>
                 <button type="button" id="nav-contact" onclick="showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2.5 rounded-lg font-bold shadow-md transition duration-200 hover:from-orange-600 hover:to-orange-700 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]">お問い合わせ</button>
             </nav>
-            <div class="md:hidden">
+            <div class="md:hidden flex items-center gap-1">
+                <!-- スマホ用電話発信ボタン -->
+                <a href="tel:07010471625" aria-label="電話で問い合わせる"
+                   class="flex items-center gap-1.5 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white text-xs font-bold px-3 py-2.5 rounded-lg transition mr-1 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                    </svg>
+                    <span class="leading-none">無料相談</span>
+                </a>
                 <button type="button" class="text-blue-900 p-2 rounded-lg transition hover:bg-blue-50 hover:text-blue-950 active:bg-blue-100" onclick="toggleMobileMenu()" aria-label="メニューを開く">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -279,29 +287,56 @@
                             </svg>
                             宮城県仙台市宮城野区
                         </div>
-                        <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                        <h1 class="text-2xl sm:text-3xl md:text-6xl font-bold mb-5 leading-tight">
                             経営者の<span class="text-blue-200">「労務の悩み」</span>を<br class="md:hidden">解決する、<br>地域密着のパートナー
                         </h1>
-                        <p class="text-lg md:text-xl mb-10 opacity-95 font-light leading-relaxed">
+                        <p class="text-base md:text-xl mb-8 opacity-95 font-light leading-relaxed">
                             複雑な労務管理、頻繁な法改正対応、従業員とのトラブル防止...<br class="hidden md:block">
                             中小企業の経営者様が本業に専念できるよう、<br class="hidden md:block">
                             <span class="font-medium">誠実な対応</span>と<span class="font-medium">確かな専門知識</span>でサポートいたします。
                         </p>
-                        <div class="flex flex-col sm:flex-row gap-5 mb-12">
-                            <button onclick="showPage('contact')" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-5 px-6 w-full sm:w-auto rounded-xl shadow-2xl transition transform hover:scale-105 text-lg">
+
+                        <!-- スマホ：主CTA1本 + 電話ボタン -->
+                        <div class="flex flex-col sm:hidden gap-3 mb-8">
+                            <button onclick="showPage('contact')" class="bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-bold py-4 px-6 w-full rounded-xl shadow-2xl transition text-lg">
+                                📅 初回無料相談（60分）
+                            </button>
+                            <a href="tel:07010471625" class="flex items-center justify-center gap-2 bg-white/15 backdrop-blur-md text-white border-2 border-white/60 font-bold py-4 px-6 w-full rounded-xl transition text-base">
+                                <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+                                070-1047-1625（無料）
+                            </a>
+                            <!-- サブリンク行 -->
+                            <div class="flex gap-2">
+                                <button onclick="showPage('services')" class="flex-1 bg-white/10 backdrop-blur-md text-white border border-white/40 font-medium py-2.5 px-3 rounded-lg transition text-sm">サービス一覧</button>
+                                <button onclick="showPage('blog')" class="flex-1 bg-white/10 backdrop-blur-md text-white border border-white/40 font-medium py-2.5 px-3 rounded-lg transition text-sm">📝 コラム</button>
+                                <button onclick="showPage('price-sim')" class="flex-1 bg-amber-400/90 text-amber-900 border border-amber-300/60 font-medium py-2.5 px-3 rounded-lg transition text-sm">🧮 料金</button>
+                                <button onclick="showPage('youtube')" class="flex-1 bg-red-600/90 text-white border border-red-400/60 font-medium py-2.5 px-3 rounded-lg transition text-sm flex items-center justify-center gap-1">
+                                    <svg class="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
+                                    動画
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- タブレット以上：元の4ボタンレイアウト -->
+                        <div class="hidden sm:flex flex-row flex-wrap gap-4 mb-10">
+                            <button onclick="showPage('contact')" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-5 px-6 rounded-xl shadow-2xl transition transform hover:scale-105 text-lg">
                                 初回無料相談（60分）
                             </button>
-                            <button onclick="showPage('services')" class="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-2 border-white/50 font-bold py-5 px-6 w-full sm:w-auto rounded-xl transition text-lg">
+                            <button onclick="showPage('services')" class="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-2 border-white/50 font-bold py-5 px-6 rounded-xl transition text-lg">
                                 サービス一覧
                             </button>
-                            <button onclick="showPage('blog')" class="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-2 border-white/50 font-bold py-5 px-6 w-full sm:w-auto rounded-xl transition text-lg flex items-center gap-2">
+                            <button onclick="showPage('blog')" class="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-2 border-white/50 font-bold py-5 px-6 rounded-xl transition text-lg flex items-center gap-2">
                                 📝 労務管理コラム
                             </button>
-                            <button onclick="showPage('price-sim')" class="bg-amber-400 hover:bg-amber-300 text-amber-900 font-bold py-5 px-6 w-full sm:w-auto rounded-xl shadow-lg transition text-lg flex items-center gap-2">
+                            <button onclick="showPage('price-sim')" class="bg-amber-400 hover:bg-amber-300 text-amber-900 font-bold py-5 px-6 rounded-xl shadow-lg transition text-lg flex items-center gap-2">
                                 🧮 料金シミュレーター
                             </button>
+                            <button onclick="showPage('youtube')" class="bg-red-600 hover:bg-red-500 text-white font-bold py-5 px-6 rounded-xl shadow-lg transition text-lg flex items-center gap-2">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
+                                YouTube
+                            </button>
                         </div>
-                        <div class="flex flex-wrap gap-4 text-sm">
+                        <div class="hidden sm:flex flex-wrap gap-4 text-sm">
                             <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
                                 <svg class="w-5 h-5 text-blue-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                                 <span>社会保険労務士資格保有</span>
@@ -489,22 +524,22 @@
                                         忙しい経営者様の手続き負担をゼロにします。
                                     </p>
                                     <!-- 4種類の手続きカード -->
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-6">
-                                        <button onclick="showPage('spot', 0)" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition rounded-xl p-3 text-center border border-blue-200 group">
-                                            <div class="text-xl mb-1">👤</div>
-                                            <p class="text-xs font-bold text-blue-900 group-hover:text-white leading-tight">雇用保険<br>資格取得届</p>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 mb-6">
+                                        <button onclick="showPage('spot', 0)" class="bg-blue-50 hover:bg-blue-900 hover:text-white active:bg-blue-950 transition rounded-xl p-4 text-left sm:text-center border border-blue-200 group flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0">
+                                            <div class="text-2xl sm:text-xl sm:mb-1 flex-shrink-0">👤</div>
+                                            <p class="text-sm font-bold text-blue-900 group-hover:text-white leading-tight">雇用保険　資格取得届</p>
                                         </button>
-                                        <button onclick="showPage('spot', 1)" class="bg-orange-50 hover:bg-orange-600 hover:text-white transition rounded-xl p-3 text-center border border-orange-200 group">
-                                            <div class="text-xl mb-1">📤</div>
-                                            <p class="text-xs font-bold text-orange-800 group-hover:text-white leading-tight">雇用保険<br>資格喪失・離職票</p>
+                                        <button onclick="showPage('spot', 1)" class="bg-orange-50 hover:bg-orange-600 hover:text-white active:bg-orange-700 transition rounded-xl p-4 text-left sm:text-center border border-orange-200 group flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0">
+                                            <div class="text-2xl sm:text-xl sm:mb-1 flex-shrink-0">📤</div>
+                                            <p class="text-sm font-bold text-orange-800 group-hover:text-white leading-tight">雇用保険　資格喪失届・離職票</p>
                                         </button>
-                                        <button onclick="showPage('spot', 2)" class="bg-green-50 hover:bg-green-700 hover:text-white transition rounded-xl p-3 text-center border border-green-200 group">
-                                            <div class="text-xl mb-1">🏥</div>
-                                            <p class="text-xs font-bold text-green-800 group-hover:text-white leading-tight">社会保険<br>資格取得届</p>
+                                        <button onclick="showPage('spot', 2)" class="bg-green-50 hover:bg-green-700 hover:text-white active:bg-green-800 transition rounded-xl p-4 text-left sm:text-center border border-green-200 group flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0">
+                                            <div class="text-2xl sm:text-xl sm:mb-1 flex-shrink-0">🏥</div>
+                                            <p class="text-sm font-bold text-green-800 group-hover:text-white leading-tight">社会保険　資格取得届</p>
                                         </button>
-                                        <button onclick="showPage('spot', 3)" class="bg-purple-50 hover:bg-purple-700 hover:text-white transition rounded-xl p-3 text-center border border-purple-200 group">
-                                            <div class="text-xl mb-1">🚪</div>
-                                            <p class="text-xs font-bold text-purple-800 group-hover:text-white leading-tight">社会保険<br>資格喪失届</p>
+                                        <button onclick="showPage('spot', 3)" class="bg-purple-50 hover:bg-purple-700 hover:text-white active:bg-purple-800 transition rounded-xl p-4 text-left sm:text-center border border-purple-200 group flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0">
+                                            <div class="text-2xl sm:text-xl sm:mb-1 flex-shrink-0">🚪</div>
+                                            <p class="text-sm font-bold text-purple-800 group-hover:text-white leading-tight">社会保険　資格喪失届</p>
                                         </button>
                                     </div>
                                 </div>
@@ -800,6 +835,74 @@
                     <div id="home-columns-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <!-- JSで最新3件を描画 -->
                     </div>
+                </div>
+            </section>
+
+            <!-- ===== YouTube 動画セクション ===== -->
+            <section id="home-yt-section" class="py-20 md:py-28 bg-gray-50 relative overflow-hidden">
+                <!-- 背景装飾 -->
+                <div class="absolute top-0 left-0 w-72 h-72 bg-red-50 rounded-full -ml-36 -mt-36 opacity-60 pointer-events-none"></div>
+                <div class="absolute bottom-0 right-0 w-56 h-56 bg-blue-50 rounded-full -mr-28 -mb-28 opacity-60 pointer-events-none"></div>
+
+                <div class="container mx-auto px-4 max-w-6xl relative z-10">
+
+                    <!-- セクションヘッダー（料金シミュレーターと同様のスタイル） -->
+                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="inline-flex items-center gap-2 bg-red-600 text-white text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">
+                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
+                                    YouTube
+                                </span>
+                            </div>
+                            <h2 class="text-3xl md:text-4xl font-black text-blue-900 leading-tight">
+                                労務管理専門チャンネル
+                                <span class="block text-lg md:text-xl font-normal text-gray-500 mt-2">カミウエ社会保険労務士事務所 公式YouTube</span>
+                            </h2>
+                        </div>
+                        <button onclick="showPage('youtube')"
+                            class="group inline-flex items-center gap-2 text-red-600 font-bold border-2 border-red-600 px-6 py-3 rounded-full hover:bg-red-600 hover:text-white transition-all duration-300 flex-shrink-0 self-start md:self-auto">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
+                            チャンネルを見る
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- 動画グリッド（JSで自動挿入） -->
+                    <div id="home-yt-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                        <!-- ローディング -->
+                        <div class="col-span-1 sm:col-span-2 md:col-span-3 text-center py-12 text-gray-400">
+                            <div class="w-8 h-8 border-3 border-gray-200 border-t-red-600 rounded-full animate-spin mx-auto mb-3" style="border-width:3px;"></div>
+                            <p class="text-sm">動画を読み込んでいます...</p>
+                        </div>
+                    </div>
+
+                    <!-- セクションフッター（料金シミュレーターと同様のバナースタイル） -->
+                    <div class="mt-12">
+                        <div class="relative overflow-hidden rounded-3xl shadow-xl" style="background:linear-gradient(135deg,#7f1d1d 0%,#cc0000 60%,#1e3a8a 100%);">
+                            <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(circle at 20% 50%, white 1px, transparent 1px),radial-gradient(circle at 80% 20%, white 1px, transparent 1px); background-size:30px 30px;"></div>
+                            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 p-8 md:p-10">
+                                <div>
+                                    <div class="inline-flex items-center gap-2 text-red-300 text-sm font-bold mb-3">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
+                                        労務管理専門チャンネル
+                                    </div>
+                                    <h3 class="text-2xl md:text-3xl font-black text-white mb-2">すべての動画を<br class="md:hidden">YouTubeで確認</h3>
+                                    <p class="text-red-200 text-sm leading-relaxed">助成金・就業規則・給与計算など、<br>経営者・労務担当者に役立つ動画を配信中。</p>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <button onclick="showPage('youtube')"
+                                        class="inline-flex items-center gap-3 bg-white hover:bg-red-50 text-red-700 font-black py-5 px-10 rounded-2xl transition shadow-2xl transform hover:scale-105 text-base">
+                                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
+                                        チャンネルを見る
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
@@ -1889,7 +1992,70 @@
         </section>
 
 
-<section id="page-price-sim" class="hidden" style="background:linear-gradient(160deg,#f8faff 0%,#eef2ff 40%,#fffbf0 100%); min-height:80vh; padding: 4rem 0 6rem;">
+        <!-- YOUTUBE PAGE -->
+        <section id="page-youtube" class="hidden py-20 md:py-28 bg-gray-50">
+            <div class="container mx-auto px-4 max-w-6xl">
+
+                <!-- セクションヘッダー -->
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="inline-flex items-center gap-2 bg-red-600 text-white text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
+                                YouTube
+                            </span>
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-black text-blue-900 leading-tight">
+                            労務管理専門チャンネル
+                            <span class="block text-lg md:text-xl font-normal text-gray-500 mt-2">カミウエ社会保険労務士事務所 公式YouTube</span>
+                        </h2>
+                    </div>
+                    <a href="https://www.youtube.com/channel/UCN0gus5F7Hdi0bzQJJ0NLVw" target="_blank" rel="noopener noreferrer"
+                        class="group inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-full transition-all duration-300 flex-shrink-0 self-start md:self-auto">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
+                        YouTubeで開く
+                        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- 動画グリッド（youtube-section.htmlのJSで描画） -->
+                <div id="yt-grid-page" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="col-span-1 sm:col-span-2 md:col-span-3 text-center py-12 text-gray-400">
+                        <div class="w-8 h-8 border-gray-200 border-t-red-600 rounded-full animate-spin mx-auto mb-3" style="border-width:3px;border-style:solid;"></div>
+                        <p class="text-sm">動画を読み込んでいます...</p>
+                    </div>
+                </div>
+
+                <!-- セクションフッター -->
+                <div class="mt-12">
+                    <div class="relative overflow-hidden rounded-3xl shadow-xl" style="background:linear-gradient(135deg,#7f1d1d 0%,#cc0000 60%,#1e3a8a 100%);">
+                        <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(circle at 20% 50%, white 1px, transparent 1px),radial-gradient(circle at 80% 20%, white 1px, transparent 1px); background-size:30px 30px;"></div>
+                        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 p-8 md:p-10">
+                            <div>
+                                <div class="inline-flex items-center gap-2 text-red-300 text-sm font-bold mb-3">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
+                                    労務管理専門チャンネル
+                                </div>
+                                <h3 class="text-2xl md:text-3xl font-black text-white mb-2">もっと動画を見る</h3>
+                                <p class="text-red-200 text-sm leading-relaxed">助成金・就業規則・給与計算など、<br>経営者・労務担当者に役立つ動画を配信中。</p>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <a href="https://www.youtube.com/channel/UCN0gus5F7Hdi0bzQJJ0NLVw" target="_blank" rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-3 bg-white hover:bg-red-50 text-red-700 font-black py-5 px-10 rounded-2xl transition shadow-2xl transform hover:scale-105 text-base">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
+                                    YouTubeチャンネルへ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="page-price-sim" class="hidden" style="background:linear-gradient(160deg,#f8faff 0%,#eef2ff 40%,#fffbf0 100%); min-height:80vh; padding: 4rem 0 6rem;">
     <div class="container mx-auto px-4 max-w-5xl">
 
         <!-- ヘッダー -->
@@ -2878,21 +3044,21 @@
 
                 <!-- タブナビ -->
                 <div class="grid grid-cols-2 md:grid-cols-4 border-b border-gray-200">
-                    <button id="spot-tab-0" onclick="spotSwitchTab(0)" class="spot-tab-btn active py-4 px-3 text-center text-sm font-bold transition border-b-4 border-blue-900 text-blue-900 bg-blue-50">
-                        <div class="text-2xl mb-1">👤</div>
-                        <div class="leading-tight">雇用保険<br><span class="text-xs font-normal">資格取得届</span></div>
+                    <button id="spot-tab-0" onclick="spotSwitchTab(0)" class="spot-tab-btn active py-5 px-3 text-center text-sm font-bold transition border-b-4 border-blue-900 text-blue-900 bg-blue-50 md:border-r md:border-r-gray-100">
+                        <div class="text-3xl md:text-2xl mb-2 md:mb-1">👤</div>
+                        <div class="leading-tight text-xs md:text-sm">雇用保険<br><span class="font-normal">資格取得届</span></div>
                     </button>
-                    <button id="spot-tab-1" onclick="spotSwitchTab(1)" class="spot-tab-btn py-4 px-3 text-center text-sm font-bold transition border-b-4 border-transparent text-gray-500 hover:text-blue-700 hover:bg-blue-50">
-                        <div class="text-2xl mb-1">📤</div>
-                        <div class="leading-tight">雇用保険<br><span class="text-xs font-normal">資格喪失届・離職票</span></div>
+                    <button id="spot-tab-1" onclick="spotSwitchTab(1)" class="spot-tab-btn py-5 px-3 text-center text-sm font-bold transition border-b-4 border-transparent text-gray-500 hover:text-blue-700 hover:bg-blue-50">
+                        <div class="text-3xl md:text-2xl mb-2 md:mb-1">📤</div>
+                        <div class="leading-tight text-xs md:text-sm">雇用保険<br><span class="font-normal">資格喪失・離職票</span></div>
                     </button>
-                    <button id="spot-tab-2" onclick="spotSwitchTab(2)" class="spot-tab-btn py-4 px-3 text-center text-sm font-bold transition border-b-4 border-transparent text-gray-500 hover:text-blue-700 hover:bg-blue-50">
-                        <div class="text-2xl mb-1">🏥</div>
-                        <div class="leading-tight">社会保険<br><span class="text-xs font-normal">資格取得届</span></div>
+                    <button id="spot-tab-2" onclick="spotSwitchTab(2)" class="spot-tab-btn py-5 px-3 text-center text-sm font-bold transition border-b-4 border-transparent text-gray-500 hover:text-blue-700 hover:bg-blue-50 border-t border-t-gray-100 md:border-t-0 md:border-r md:border-r-gray-100">
+                        <div class="text-3xl md:text-2xl mb-2 md:mb-1">🏥</div>
+                        <div class="leading-tight text-xs md:text-sm">社会保険<br><span class="font-normal">資格取得届</span></div>
                     </button>
-                    <button id="spot-tab-3" onclick="spotSwitchTab(3)" class="spot-tab-btn py-4 px-3 text-center text-sm font-bold transition border-b-4 border-transparent text-gray-500 hover:text-blue-700 hover:bg-blue-50">
-                        <div class="text-2xl mb-1">🚪</div>
-                        <div class="leading-tight">社会保険<br><span class="text-xs font-normal">資格喪失届</span></div>
+                    <button id="spot-tab-3" onclick="spotSwitchTab(3)" class="spot-tab-btn py-5 px-3 text-center text-sm font-bold transition border-b-4 border-transparent text-gray-500 hover:text-blue-700 hover:bg-blue-50 border-t border-t-gray-100 md:border-t-0">
+                        <div class="text-3xl md:text-2xl mb-2 md:mb-1">🚪</div>
+                        <div class="leading-tight text-xs md:text-sm">社会保険<br><span class="font-normal">資格喪失届</span></div>
                     </button>
                 </div>
 
@@ -3355,6 +3521,98 @@
 <script src="./subsidy-sim.js" defer></script>
 
 <script src="./script.js"></script>
+
+<!-- ===== YouTube セクション スクリプト（ホーム用＋専用ページ用） ===== -->
+<script>
+(function () {
+  var API_KEY    = 'AIzaSyBtuFKMfSuvHBJi9mA2ECNY-O3y4hayxPE';
+  var CHANNEL_ID = 'UCN0gus5F7Hdi0bzQJJ0NLVw';
+  var CHANNEL_URL = 'https://www.youtube.com/channel/' + CHANNEL_ID;
+
+  var _cache = null; // APIレスポンスをキャッシュして二重リクエスト防止
+
+  function fmtDate(iso) {
+    var d = new Date(iso);
+    return d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日';
+  }
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function apiFetch(url) {
+    return fetch(url).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); });
+  }
+
+  function buildCard(item) {
+    var sn    = item.snippet;
+    var vid   = sn.resourceId.videoId;
+    var thumb = (sn.thumbnails.maxres||sn.thumbnails.high||sn.thumbnails.medium||sn.thumbnails.default||{}).url||'';
+    var title = esc(sn.title);
+    var date  = fmtDate(sn.publishedAt);
+    return '<a href="https://www.youtube.com/watch?v='+esc(vid)+'" target="_blank" rel="noopener noreferrer"'+
+      ' class="block bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md group">'+
+      '<div class="relative w-full overflow-hidden" style="aspect-ratio:16/9;background:#0f0f0f;">'+
+        '<img src="'+esc(thumb)+'" alt="'+title+'" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">'+
+        '<div class="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors duration-200">'+
+          '<div class="w-12 h-12 bg-red-600/85 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-200">'+
+            '<svg class="w-5 h-5 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="p-4">'+
+        '<p class="text-sm font-semibold text-gray-800 leading-snug line-clamp-2 min-h-[2.8em]">'+title+'</p>'+
+        '<p class="text-xs text-gray-400 mt-2">'+date+'</p>'+
+      '</div>'+
+    '</a>';
+  }
+
+  function errHTML(gridId) {
+    return '<div class="col-span-1 sm:col-span-2 md:col-span-3 text-center py-8 text-gray-400 text-sm">'+
+      '動画の読み込みに失敗しました。<br>'+
+      '<a href="'+esc(CHANNEL_URL)+'" target="_blank" rel="noopener" class="text-red-600 font-semibold hover:underline">YouTubeチャンネルを直接ご覧ください →</a></div>';
+  }
+
+  function fetchVideos(maxResults) {
+    if (_cache) return Promise.resolve(_cache);
+    return apiFetch('https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id='+CHANNEL_ID+'&key='+API_KEY)
+      .then(function(d){
+        if(!d.items||!d.items.length) throw new Error('ch');
+        return apiFetch('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId='+d.items[0].contentDetails.relatedPlaylists.uploads+'&maxResults=50&key='+API_KEY);
+      })
+      .then(function(d){
+        _cache = d.items || [];
+        return _cache;
+      });
+  }
+
+  // ホームセクション用（最新6件）
+  function loadHomeYT() {
+    var grid = document.getElementById('home-yt-grid');
+    if (!grid) return;
+    fetchVideos(6).then(function(items){
+      var slice = items.slice(0, 6);
+      if(!slice.length){ grid.innerHTML='<div class="col-span-3 text-center py-8 text-gray-400 text-sm">現在、公開動画はありません。</div>'; return; }
+      grid.innerHTML = slice.map(buildCard).join('');
+    }).catch(function(err){ console.warn('[YT-home]', err); grid.innerHTML = errHTML(); });
+  }
+
+  // 専用ページ用（最新12件）、初回のみ読み込む
+  var _pageLoaded = false;
+  window.loadYouTubePage = function() {
+    var grid = document.getElementById('yt-grid-page');
+    if (!grid) return;
+    if (_pageLoaded) return;
+    _pageLoaded = true;
+    fetchVideos(12).then(function(items){
+      var slice = items.slice(0, 12);
+      if(!slice.length){ grid.innerHTML='<div class="col-span-3 text-center py-8 text-gray-400 text-sm">現在、公開動画はありません。</div>'; return; }
+      grid.innerHTML = slice.map(buildCard).join('');
+    }).catch(function(err){ console.warn('[YT-page]', err); grid.innerHTML = errHTML(); });
+  };
+
+  // ホームは即時読み込み
+  loadHomeYT();
+}());
+</script>
 
 </body>
 </html>

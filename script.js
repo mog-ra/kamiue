@@ -82,7 +82,11 @@ function dlOpenModal(index) {
     const overlay = document.getElementById('dl-modal-overlay');
     if (overlay) {
         overlay.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
+        // iOS Safari対応：position:fixedでbody固定し、スクロール位置を保持
+        const scrollY = window.scrollY;
+        document.body.style.top = '-' + scrollY + 'px';
+        document.body.classList.add('modal-open');
+        document.body.dataset.scrollY = scrollY;
     }
 }
 
@@ -90,7 +94,11 @@ function dlOpenModal(index) {
 function dlCloseModal() {
     const overlay = document.getElementById('dl-modal-overlay');
     if (overlay) overlay.style.display = 'none';
-    document.body.style.overflow = '';
+    // iOS Safari対応：スクロール位置を復元してからbody固定を解除
+    const scrollY = parseInt(document.body.dataset.scrollY || '0', 10);
+    document.body.classList.remove('modal-open');
+    document.body.style.top = '';
+    window.scrollTo(0, scrollY);
 }
 
 // オーバーレイ背景クリックで閉じる
@@ -285,7 +293,7 @@ function showPage(pageId, tabIdx) {
             }
         }, 50);
     }
-    const pages = ['home','services','about','links','faq','contact','solutions','blog','checkup','subsidy-sim','salary-calc','download','dl-thankyou','price-sim','spot','article-detail'];
+    const pages = ['home','services','about','links','faq','contact','solutions','blog','checkup','subsidy-sim','salary-calc','download','dl-thankyou','price-sim','spot','article-detail','youtube'];
     pages.forEach(id => {
         const section = document.getElementById('page-' + id);
         if (section) section.classList.add('hidden');
@@ -316,6 +324,9 @@ function showPage(pageId, tabIdx) {
     }
     if (pageId === 'home') {
         if (typeof renderHomeColumns === 'function') renderHomeColumns();
+    }
+    if (pageId === 'youtube') {
+        if (typeof loadYouTubePage === 'function') loadYouTubePage();
     }
 }
 
@@ -459,22 +470,80 @@ function spotSubmitForm(formIdx) {
         '健康保険・厚生年金保険被保険者資格取得届',
         '健康保険・厚生年金保険被保険者資格喪失届'
     ];
-    let subject = encodeURIComponent('【スポット手続き依頼】' + formNames[formIdx]);
-    let body    = '【依頼手続き種別】\n' + formNames[formIdx] + '\n\n【入力内容】\n';
-    for (let [key, value] of data.entries()) {
-        if (value && value.toString().trim()) body += key + '：' + value + '\n';
+
+    // ---- ボタンをローディング状態に ----
+    const btn = form.querySelector('button[type="submit"]');
+    const originalHTML = btn ? btn.innerHTML : '';
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/></svg> 送信中...';
     }
-    body += '\n\n※このメールはカミウエ社会保険労務士事務所のWebサイトより自動生成されました。';
 
-    window.location.href = 'mailto:sr.kamiue@gmail.com?subject=' + subject + '&body=' + encodeURIComponent(body);
+    // ---- メール本文組み立て ----
+    let bodyText = '【依頼手続き種別】\n' + formNames[formIdx] + '\n\n【入力内容】\n';
+    for (let [key, value] of data.entries()) {
+        if (value && value.toString().trim()) bodyText += key + '：' + value + '\n';
+    }
+    bodyText += '\n\n※このメッセージはカミウエ社会保険労務士事務所のWebサイトより自動送信されました。';
 
-    setTimeout(function() {
-        for (let i = 0; i < 4; i++) {
-            const f = document.getElementById('spot-form-' + i);
-            if (f) f.classList.add('hidden');
-        }
-        const success = document.getElementById('spot-success');
-        if (success) success.classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 500);
+    // ---- Formspree fetch送信 ----
+    // ▼ Formspree (https://formspree.io) で無料アカウントを作成後、
+    //   YOUR_FORMSPREE_ID を実際のフォームIDに置き換えてください。
+    //   例: https://formspree.io/f/xpzgkdlr
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+    const USE_FORMSPREE = FORMSPREE_ENDPOINT.indexOf('YOUR_FORMSPREE_ID') === -1;
+
+    const sendData = {
+        _subject: '【スポット手続き依頼】' + formNames[formIdx],
+        手続き種別: formNames[formIdx],
+        内容: bodyText,
+    };
+    // フォームの各フィールドも追加
+    for (let [key, value] of data.entries()) {
+        if (value && value.toString().trim()) sendData[key] = value.toString();
+    }
+
+    if (USE_FORMSPREE) {
+        // --- Formspree が設定済みの場合：fetch送信 ---
+        fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(sendData),
+        })
+        .then(function(res) {
+            if (res.ok) {
+                spotShowSuccess();
+            } else {
+                return res.json().then(function(d) { throw new Error(d.error || '送信エラー'); });
+            }
+        })
+        .catch(function(err) {
+            console.error('送信エラー:', err);
+            // フォールバック：mailtoで開く
+            spotFallbackMailto(formNames[formIdx], bodyText);
+        })
+        .finally(function() {
+            if (btn) { btn.disabled = false; btn.innerHTML = originalHTML; }
+        });
+    } else {
+        // --- Formspree 未設定の場合：従来の mailto フォールバック ---
+        if (btn) { btn.disabled = false; btn.innerHTML = originalHTML; }
+        spotFallbackMailto(formNames[formIdx], bodyText);
+    }
+}
+
+function spotFallbackMailto(formName, bodyText) {
+    var subject = encodeURIComponent('【スポット手続き依頼】' + formName);
+    window.location.href = 'mailto:sr.kamiue@gmail.com?subject=' + subject + '&body=' + encodeURIComponent(bodyText);
+    setTimeout(spotShowSuccess, 800);
+}
+
+function spotShowSuccess() {
+    for (let i = 0; i < 4; i++) {
+        const f = document.getElementById('spot-form-' + i);
+        if (f) f.classList.add('hidden');
+    }
+    const success = document.getElementById('spot-success');
+    if (success) success.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
