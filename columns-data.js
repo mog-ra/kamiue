@@ -1099,6 +1099,818 @@ const COLUMNS = [
 
     // ==================== 新規追加8記事（id:13〜20） ====================
 
+    // ==================== さらに新規追加8記事（id:21〜28） ====================
+
+    {
+        id: 21,
+        title: '雇用契約書・労働条件通知書の正しい作り方 ～採用時の落とし穴を完全回避～',
+        excerpt: '「口約束で採用した」「雇用契約書がない」は採用トラブルの温床。労働条件通知書の法定記載事項から、パート・契約社員・正社員それぞれの注意点まで実務で使える書き方を解説します。',
+        category: '法令遵守',
+        emoji: '📝',
+        date: '2026年4月',
+        isNew: true,
+        readTime: '9分',
+        contact: '雇用契約書・労働条件通知書の作成を依頼する',
+        body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">採用時に雇用契約書・労働条件通知書を正しく整備しないと、<strong>「聞いていた話と違う」というトラブルが入社直後から発生</strong>します。労働基準法は使用者に労働条件の書面（または電子）通知を義務付けており、違反は30万円以下の罰金。書類一枚が会社を守る盾になります。</p>
+
+<div class="bg-red-50 border-l-4 border-red-500 rounded-r-xl p-5 mb-8">
+  <p class="font-black text-red-800 mb-2">🚨 これだけはNG！よくある致命的ミス</p>
+  <ul class="text-gray-700 text-sm space-y-1 leading-relaxed">
+    <li>・口約束のみで採用→後から「賃金が違う」「休日が違う」とトラブル</li>
+    <li>・「正社員化する予定」と伝えたが書面なし→不履行でも証拠がない</li>
+    <li>・試用期間の条件（期間・賃金）を明記していない</li>
+    <li>・パートは「簡単な契約書でいい」と思っている（法的義務は同じ）</li>
+  </ul>
+</div>
+
+<div class="bg-blue-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">📋</span> 法定必須記載事項（絶対に外せない項目）
+  </h2>
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-3 text-base">【全雇用形態で必須】書面（電子可）で通知</p>
+      <ul class="space-y-2 text-sm text-gray-600">
+        <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">①</span><span><strong>労働契約の期間</strong>（期間の定めなし／定めあり＋期間・更新有無）</span></li>
+        <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">②</span><span><strong>就業場所・業務内容</strong>（変更の範囲も明示義務：2024年4月〜）</span></li>
+        <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">③</span><span><strong>始業・終業時刻、休憩時間、休日・休暇</strong></span></li>
+        <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">④</span><span><strong>賃金の決定・計算・支払方法、支払時期</strong></span></li>
+        <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">⑤</span><span><strong>退職に関する事項</strong>（解雇事由を含む）</span></li>
+      </ul>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-3 text-base">【有期・パートは追加で明示必須】</p>
+      <ul class="space-y-2 text-sm text-gray-600">
+        <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">・</span><span>契約更新の有無・判断基準</span></li>
+        <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">・</span><span>無期転換申込権の発生（勤続5年以上の場合）</span></li>
+        <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">・</span><span>正社員転換の推進措置（2024年4月〜）</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="bg-green-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-green-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">✅</span> 雇用形態別チェックポイント
+  </h2>
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 border border-green-100 shadow-sm">
+      <p class="font-black text-green-800 mb-2 text-base">正社員</p>
+      <ul class="space-y-1 text-sm text-gray-600">
+        <li>・試用期間の長さ・期間中の賃金・解約予告要件を明記</li>
+        <li>・就業規則の適用範囲を契約書に明示（「就業規則に定める通り」は規則周知が前提）</li>
+        <li>・固定残業代を設ける場合、時間数と超過時の追加支払いを明記</li>
+      </ul>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-green-100 shadow-sm">
+      <p class="font-black text-green-800 mb-2 text-base">パート・アルバイト</p>
+      <ul class="space-y-1 text-sm text-gray-600">
+        <li>・時給・週所定労働時間・週所定労働日数を明示（社会保険適用判定にも影響）</li>
+        <li>・更新回数の上限または「雇い止め予告」方針を明記</li>
+        <li>・正社員転換に関する措置（2024年4月〜義務）の記載</li>
+      </ul>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-green-100 shadow-sm">
+      <p class="font-black text-green-800 mb-2 text-base">有期契約社員</p>
+      <ul class="space-y-1 text-sm text-gray-600">
+        <li>・勤続5年到達時点の無期転換申込権の説明義務</li>
+        <li>・無期転換後の労働条件（正社員と同一or別段の定め）を事前に整備</li>
+        <li>・雇い止め3回以上または3年超の場合、予告義務（30日前）が発生</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="bg-gray-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-4">📋 採用時チェックリスト</h2>
+  <div class="space-y-3">
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">法定5項目（契約期間・就業場所・労働時間・賃金・退職）を書面で通知した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">就業場所・業務内容の「変更の範囲」を明示した（2024年4月〜必須）</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">試用期間中の賃金・社会保険加入の取扱いを明記した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">有期・パートは更新基準・無期転換・正社員転換措置を明示した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">署名・記名押印（または電子署名）を両者分取得・保管した</span>
+    </label>
+  </div>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    雇用契約書は一度作れば使いまわせますが、法改正のたびに更新が必要です。特に2024年4月の「変更範囲の明示」義務化を見落としている中小企業が非常に多い。採用のたびに古いテンプレートを使っていると、後から大きなトラブルになります。まずは今使っている契約書を見直すところから始めましょう。無料でチェックします。
+  </p>
+</div>
+`
+    },
+    {
+        id: 22,
+        title: '年次有給休暇の年5日取得義務 完全実務ガイド ～管理台帳の作り方から取得促進策まで～',
+        excerpt: '年5日の有給取得義務に違反すると1人あたり30万円以下の罰金。「うちの社員は取らない」では済まされません。管理台帳の整備・計画的付与制度・時季指定の手順を実務レベルで解説します。',
+        category: '法令遵守',
+        emoji: '📅',
+        date: '2026年4月',
+        isNew: true,
+        readTime: '8分',
+        contact: '有給休暇管理台帳の整備を依頼する',
+        body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">2019年4月から、年10日以上の有給休暇が付与される労働者に対して、<strong>使用者が年5日の有給休暇を必ず取得させる義務</strong>が課されています。「従業員が取ろうとしない」「忙しくて取れない」は理由になりません。違反1人につき30万円以下の罰金が科されます。</p>
+
+<div class="bg-red-50 border-l-4 border-red-500 rounded-r-xl p-5 mb-8">
+  <p class="font-black text-red-800 mb-2">🚨 基準日から1年以内に年5日取得させないと罰則！</p>
+  <p class="text-gray-700 text-sm leading-relaxed">対象：年次有給休暇が10日以上付与される全労働者（正社員・パート・管理職を含む）。<strong>年度末に「あと3日足りない」と気づいても手遅れ</strong>になります。年間を通じた計画的な管理が必須です。</p>
+</div>
+
+<div class="bg-green-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-green-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">📊</span> 3つの取得促進手法と使い分け
+  </h2>
+  <div class="space-y-5">
+    <div class="bg-white rounded-xl p-5 border border-green-100 shadow-sm">
+      <p class="font-black text-green-800 mb-2 text-base">手法1：時季指定（使用者が取得日を指定）</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-2">年5日の基準日（有給付与日）から1年以内に取得できていない場合、<strong>使用者が時季を指定</strong>して取得させることが可能（かつ義務）。指定の際は従業員の意見を聴取し、できる限り希望に沿う必要があります。</p>
+      <div class="bg-green-50 rounded-lg p-3 text-xs text-green-800 font-medium">
+        📌 手順：意見聴取→時季指定通知→就業規則への根拠規定が必要
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-green-100 shadow-sm">
+      <p class="font-black text-green-800 mb-2 text-base">手法2：計画的付与制度（労使協定で取得日を事前決定）</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-2">過半数組合等との労使協定で、特定の日（夏季休暇・年末年始前後など）を計画的付与日として設定。<strong>個人の5日分のうち最大5日まで</strong>計画的付与に充てることができます。一斉付与・グループ付与・個人別付与の3方式あり。</p>
+      <div class="bg-green-50 rounded-lg p-3 text-xs text-green-800 font-medium">
+        📌 製造業・サービス業の閑散期・工場一斉休業などに活用しやすい
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-green-100 shadow-sm">
+      <p class="font-black text-green-800 mb-2 text-base">手法3：半日・時間単位付与制度の活用</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-2">半日単位の有給は就業規則の定めがあれば運用可能（5日カウントに算入可）。時間単位有給は労使協定が必要で、年5日分（所定労働時間×5日）を上限に取得できます。<strong>「1日休めない」という従業員に取得を促しやすい</strong>手法です。</p>
+      <div class="bg-green-50 rounded-lg p-3 text-xs text-green-800 font-medium">
+        📌 時間単位有給を使っても、日数換算での5日カウントは通常の有給取得と同様
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-blue-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-4">🗂️ 有給管理台帳に必ず記録すべき項目</h2>
+  <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+    <ul class="space-y-2 text-sm text-gray-600">
+      <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">①</span><span>氏名・基準日（有給付与日）・付与日数</span></li>
+      <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">②</span><span>取得した日付・日数（取得のつど記録）</span></li>
+      <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">③</span><span>残日数・年5日の達成状況</span></li>
+      <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">④</span><span>時季指定を行った場合はその記録（意見聴取・通知の記録含む）</span></li>
+    </ul>
+    <p class="text-xs text-red-700 font-bold mt-3 bg-red-50 rounded-lg p-2">⚠️ 管理台帳は3年間保存義務。賃金台帳・出勤簿とあわせて一元管理が理想</p>
+  </div>
+</div>
+
+<div class="bg-gray-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-4">✅ 有給取得義務チェックリスト</h2>
+  <div class="space-y-3">
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">全従業員の有給管理台帳を個人別に整備している</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">基準日から6か月経過時点で取得状況を中間確認している</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">5日未達成の従業員に時季指定を行う手順が整備されている</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">就業規則に時季指定・計画的付与に関する規定を設けている</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">管理台帳を3年間保存する体制が整っている</span>
+    </label>
+  </div>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    有給の取得義務は「取らせればいい」ではなく、管理台帳を整備して証拠を残すことが重要です。労基署の臨検で「管理台帳がない」「年5日達成できていない従業員がいる」となれば即アウト。Excelの簡易台帳でも、正しく運用していれば十分です。今の管理台帳をお持ちいただければ無料で確認します。
+  </p>
+</div>
+`
+    },
+    {
+        id: 23,
+        title: 'テレワーク・在宅勤務の労務管理完全ガイド ～労働時間把握から安全配慮義務まで～',
+        excerpt: '「在宅だから管理しにくい」は通じません。テレワーク中も使用者の労働時間把握義務・安全配慮義務は継続します。就業規則整備・時間管理ツール選定・費用負担ルールを実務レベルで解説します。',
+        category: 'DX推進',
+        emoji: '🏠',
+        date: '2026年4月',
+        isNew: true,
+        readTime: '8分',
+        contact: 'テレワーク規程・労務管理体制の整備を相談する',
+        body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">テレワーク・在宅勤務を導入しても、<strong>使用者の労働時間把握義務・安全配慮義務・割増賃金の支払い義務はなくなりません</strong>。「見えないから管理できない」という発想では、未払い残業代請求や労災認定リスクを招きます。制度の骨格となる就業規則と運用ルールを整備しましょう。</p>
+
+<div class="bg-blue-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">⚙️</span> テレワーク就業規則に必ず盛り込む6項目
+  </h2>
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">1. テレワークの対象者・申請手続き</p>
+      <p class="text-gray-600 text-sm leading-relaxed">誰が・どんな条件で利用できるか明確に。「上司の承認制」か「届出制」かも明記。育児介護休業法改正（2025年10月〜）でテレワーク導入の努力義務が課されていることも考慮が必要。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">2. 労働時間の管理方法</p>
+      <p class="text-gray-600 text-sm leading-relaxed">PCのログオン・ログオフ記録、チャットツールの稼働状況、日報提出のいずれかで<strong>客観的な記録</strong>が必要。「自己申告のみ」は不十分。みなし労働時間制を適用する場合は、労使協定と就業規則の整備が必須。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">3. 費用負担のルール（通信費・光熱費）</p>
+      <p class="text-gray-600 text-sm leading-relaxed">在宅勤務に伴う通信費・光熱費の費用負担について労働契約で定めた場合、<strong>一定額の手当が非課税扱い</strong>になります（国税庁通達：勤務日数按分で計算）。「会社持ち」か「自己負担」かを就業規則に明記しないとトラブルの元。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">4. 情報セキュリティ規程との連携</p>
+      <p class="text-gray-600 text-sm leading-relaxed">私有PCの業務利用の可否、VPN接続義務、画面のぞき見防止のプライバシーフィルター装着義務などを明記。情報漏えい時の責任範囲も規定に含めておく。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">5. 安全配慮義務への対応</p>
+      <p class="text-gray-600 text-sm leading-relaxed">自宅での作業環境（椅子・デスク・照度・通気）の自己チェックシート提出義務化や定期的な健康状態確認フローを整備。過重労働・孤立防止のための定期1on1も規程に盛り込む。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">6. 在宅勤務中の労災認定基準</p>
+      <p class="text-gray-600 text-sm leading-relaxed">自宅内での作業中のけが・脳疾患も<strong>業務起因性が認められれば労災対象</strong>。就業場所（自宅の作業部屋）を明確にし、私的行為と業務の区別を記録に残す運用が重要。</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-purple-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-purple-900 mb-4">🖥️ 労働時間管理ツール比較（中小企業向け）</h2>
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 border border-purple-100 shadow-sm">
+      <p class="font-black text-purple-800 mb-2">クラウド勤怠システム（推奨）</p>
+      <p class="text-gray-600 text-sm leading-relaxed">スマホ・PCからの打刻、GPS記録、残業アラートが可能。月額数百円〜の低コストで導入でき、労基署調査にも対応できる記録が残る。テレワーク・出社の混在管理にも対応。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-purple-100 shadow-sm">
+      <p class="font-black text-purple-800 mb-2">PCログ管理ツール</p>
+      <p class="text-gray-600 text-sm leading-relaxed">PCのログオン・ログオフ・アプリ使用状況を自動記録。業務集中度の把握や勤怠記録の補完に有効。ただし、離席や考え事など「仕事しているが記録されない時間」の扱いを規程で明確に。</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-gray-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-4">✅ テレワーク実務チェックリスト</h2>
+  <div class="space-y-3">
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">テレワーク規程（または就業規則の在宅勤務条項）を整備している</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">客観的な労働時間の記録手段（PCログ・クラウド勤怠等）がある</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">通信費・光熱費の負担ルールを就業規則または個別合意で定めている</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">自宅作業環境の安全チェックシートを整備・収集している</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">情報セキュリティ規程とテレワーク規程が連動している</span>
+    </label>
+  </div>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    テレワーク規程を作らずに「なんとなく在宅OK」で運用している企業が多いですが、費用負担・労働時間管理・労災対応のいずれかで必ずトラブルが起きます。特に費用負担の不明確さは従業員の不満につながりやすい。まずは現状の運用を確認し、規程に落とし込むことが最優先です。
+  </p>
+</div>
+`
+    },
+    {
+        id: 24,
+        title: 'パワーハラスメント防止措置の整備ガイド ～就業規則改定から相談窓口構築まで～',
+        excerpt: '中小企業もパワハラ防止措置義務の対象。「うちにはハラスメントがない」と思っていても、法的義務を果たしていないと企業名公表リスクがあります。就業規則改定・研修・相談窓口の整備を実務で解説。',
+        category: 'リスク管理',
+        emoji: '🛡️',
+        date: '2026年4月',
+        isNew: true,
+        readTime: '9分',
+        contact: 'ハラスメント防止規程・研修の整備を相談する',
+        body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">2022年4月から中小企業でもパワーハラスメント防止措置が義務化されました。<strong>「ハラスメントをしてはいけない」という規定だけでは不十分</strong>で、相談窓口の設置・従業員への周知・事後対応体制の整備まで求められています。未整備の場合は厚生労働大臣から勧告を受け、企業名を公表されるリスクがあります。</p>
+
+<div class="bg-red-50 border-l-4 border-red-500 rounded-r-xl p-5 mb-8">
+  <p class="font-black text-red-800 mb-2">🚨 義務化されている「4つの措置」すべて整備できていますか？</p>
+  <ul class="text-gray-700 text-sm space-y-1 leading-relaxed">
+    <li>① 事業主の方針明確化・周知・啓発</li>
+    <li>② 相談に応じ適切に対応するための体制の整備（相談窓口の設置）</li>
+    <li>③ 職場におけるパワハラに係る事後の迅速・適切な対応</li>
+    <li>④ プライバシー保護・相談者への不利益取扱い禁止の措置</li>
+  </ul>
+</div>
+
+<div class="bg-blue-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">📋</span> 整備すべき4ステップ
+  </h2>
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 flex items-center gap-2 text-base">
+        <span class="bg-blue-700 text-white w-7 h-7 rounded-full flex items-center justify-center text-sm font-black">1</span>
+        就業規則にパワハラ禁止規定と懲戒条項を整備
+      </p>
+      <p class="text-gray-600 text-sm leading-relaxed pl-9">「職場におけるパワーハラスメントを行ってはならない」という方針を就業規則に明記し、違反した場合の懲戒処分（けん責・減給・出勤停止・懲戒解雇）を具体的に規定。就業規則はすべての従業員が閲覧できる状態に周知。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 flex items-center gap-2 text-base">
+        <span class="bg-blue-600 text-white w-7 h-7 rounded-full flex items-center justify-center text-sm font-black">2</span>
+        相談窓口の設置と担当者の選任
+      </p>
+      <p class="text-gray-600 text-sm leading-relaxed pl-9">社内相談窓口の担当者を明確に選任（人事担当・信頼できる管理職等）。担当者が社長や加害者と近い場合は<strong>外部窓口（社労士・EAP機関）との契約</strong>が有効。相談先・連絡先・利用方法を全従業員に書面で周知。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 flex items-center gap-2 text-base">
+        <span class="bg-blue-500 text-white w-7 h-7 rounded-full flex items-center justify-center text-sm font-black">3</span>
+        事後対応フローの整備（相談→調査→措置→再発防止）
+      </p>
+      <p class="text-gray-600 text-sm leading-relaxed pl-9">相談を受けた後の手順（事実確認・双方ヒアリング・行為者への措置・被害者への配慮・再発防止教育）を明文化。対応記録を保管し、プライバシーに配慮した上で関係者以外への情報漏えいを防ぐ誓約書を整備。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 flex items-center gap-2 text-base">
+        <span class="bg-blue-400 text-white w-7 h-7 rounded-full flex items-center justify-center text-sm font-black">4</span>
+        年1回以上の研修・啓発（管理職・全従業員）
+      </p>
+      <p class="text-gray-600 text-sm leading-relaxed pl-9">「どんな言動がパワハラにあたるか」を具体的なケーススタディで管理職・全従業員に研修。研修実施記録を保管し、新入社員には入社時研修で必ず実施。Eラーニングを活用すれば中小企業でも低コストで対応可能。</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-orange-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-orange-900 mb-4">⚠️ 「パワハラに当たらない」と「パワハラに当たる」の判断基準</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="bg-white rounded-xl p-4 border border-green-100">
+      <p class="font-bold text-green-800 mb-2 text-sm">✓ 業務上の適切な指示</p>
+      <ul class="text-xs text-gray-600 space-y-1">
+        <li>・ミスを指摘し、その場で改善を指導する</li>
+        <li>・業務の目標・期限を明確に伝える</li>
+        <li>・能力・経験に見合った難しい仕事を任せる</li>
+      </ul>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-red-100">
+      <p class="font-bold text-red-800 mb-2 text-sm">✗ パワハラに該当する言動</p>
+      <ul class="text-xs text-gray-600 space-y-1">
+        <li>・人格・能力を否定する言葉（「バカ」「使えない」）</li>
+        <li>・皆の前でのつるし上げ・長時間の叱責</li>
+        <li>・業務と無関係な雑用を強制・無視</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="bg-gray-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-4">✅ パワハラ防止措置チェックリスト</h2>
+  <div class="space-y-3">
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">就業規則にパワハラ禁止規定と懲戒処分を明記した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">相談窓口の担当者を選任し、全従業員に周知した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">相談→調査→措置→再発防止の対応フローを文書化した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">管理職向けハラスメント研修を年1回以上実施している</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">相談者・加害者・関係者のプライバシー保護措置を整備した</span>
+    </label>
+  </div>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    ハラスメントは「起きてから対応」では遅い。従業員が辞め、労基署や裁判所への申告につながった時点では多大なコストと時間が失われます。中小企業こそ、小回りを活かした相談しやすい環境づくりが重要。就業規則改定・研修資料作成・外部相談窓口の設置を一括でサポートします。
+  </p>
+</div>
+`
+    },
+    {
+        id: 25,
+        title: '試用期間の正しい運用と解雇リスク回避の実務ガイド',
+        excerpt: '「試用期間中だからすぐに解雇できる」は大きな誤解。試用期間中・終了時の解雇にも解雇権濫用の法理が適用されます。適法に運用するための手続き・記録・通知方法を実務で解説します。',
+        category: 'リスク管理',
+        emoji: '⚖️',
+        date: '2026年4月',
+        isNew: true,
+        readTime: '9分',
+        contact: '試用期間・解雇リスク診断を相談する（無料）',
+        body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">「試用期間中だからいつでも辞めさせられる」と思っていませんか？<strong>試用期間中の解雇にも解雇権濫用の法理（労働契約法第16条）が適用</strong>されます。採用後14日を超えていれば30日前の解雇予告または解雇予告手当の支払いも必要。「なんとなく合わないから」では解雇できません。</p>
+
+<div class="bg-red-50 border-l-4 border-red-500 rounded-r-xl p-5 mb-8">
+  <p class="font-black text-red-800 mb-2">🚨 試用期間にまつわる5つの大きな誤解</p>
+  <ul class="text-gray-700 text-sm space-y-1 leading-relaxed">
+    <li>❌「試用期間中はいつでも解雇できる」→ 正当な理由が必要、解雇権濫用は無効</li>
+    <li>❌「試用期間中は社会保険に入れなくてよい」→ 2か月以内の試用期間でも条件を満たせば加入義務あり</li>
+    <li>❌「口頭で「試用期間は3か月」と言えば有効」→ 雇用契約書への明記が必須</li>
+    <li>❌「試用期間中は有給が発生しない」→ 6か月継続勤務・8割出勤で付与（試用期間も算入）</li>
+    <li>❌「試用期間を延長しても問題ない」→ 就業規則の根拠規定と本人の同意が必要</li>
+  </ul>
+</div>
+
+<div class="bg-blue-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">📋</span> 試用期間終了時の本採用拒否を適法に行う手順
+  </h2>
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 flex items-center gap-2 text-base">
+        <span class="bg-blue-700 text-white w-7 h-7 rounded-full flex items-center justify-center text-sm font-black">1</span>
+        採用時に「試用期間中の評価基準」を明示する
+      </p>
+      <p class="text-gray-600 text-sm leading-relaxed pl-9">雇用契約書・就業規則に「勤務態度・能力・健康状態等を総合評価した結果、本採用を行わない場合がある」と記載。<strong>評価基準を事前に明示しておくことが重要</strong>。「何を評価されているか知らなかった」という後の言い訳を防ぐ。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 flex items-center gap-2 text-base">
+        <span class="bg-blue-600 text-white w-7 h-7 rounded-full flex items-center justify-center text-sm font-black">2</span>
+        問題行動・能力不足を都度記録する
+      </p>
+      <p class="text-gray-600 text-sm leading-relaxed pl-9">遅刻・欠勤・指示無視・能力不足の具体的事例を<strong>日付・状況・指導内容とともに記録</strong>。「口頭で注意した」だけでは証拠が残らない。面談記録・業務日誌・メールでの指摘などを残す。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 flex items-center gap-2 text-base">
+        <span class="bg-blue-500 text-white w-7 h-7 rounded-full flex items-center justify-center text-sm font-black">3</span>
+        改善機会を与えた記録を残す
+      </p>
+      <p class="text-gray-600 text-sm leading-relaxed pl-9">「指摘→改善指示→経過確認」のサイクルを複数回行い、記録を残す。本採用拒否の前に<strong>「改善の機会を与えたか」が裁判での重要な判断要素</strong>になります。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 flex items-center gap-2 text-base">
+        <span class="bg-blue-400 text-white w-7 h-7 rounded-full flex items-center justify-center text-sm font-black">4</span>
+        本採用拒否を30日前に書面で通知する
+      </p>
+      <p class="text-gray-600 text-sm leading-relaxed pl-9">採用後14日超の場合、30日前の解雇予告または解雇予告手当（30日分以上の平均賃金）が必要。<strong>試用期間満了時の本採用拒否も解雇の一種</strong>として扱われます。口頭のみの通知は絶対NG。</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-gray-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-4">✅ 試用期間管理チェックリスト</h2>
+  <div class="space-y-3">
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">試用期間の長さ・本採用拒否の可能性を雇用契約書に明記した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">試用期間中の評価基準（勤怠・能力・態度等）を就業規則に記載した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">問題行動・指導履歴を日付入りで書面記録している</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">本採用拒否の場合、30日前書面通知または解雇予告手当を準備している</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">試用期間の延長は就業規則に根拠があり、本人の同意を書面で得ている</span>
+    </label>
+  </div>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    試用期間中の本採用拒否は「普通解雇より緩やかな基準」が認められてはいますが、それでも相当の理由と適切な手続きが必要です。「なんとなく合わない気がする」だけで辞めさせようとすると、不当解雇として訴えられるリスクがあります。問題が発生したら即記録・即相談が鉄則。判断に迷ったら早めにご相談ください。
+  </p>
+</div>
+`
+    },
+    {
+        id: 26,
+        title: '退職・解雇トラブル防止の実務対応ガイド ～辞め方・辞めさせ方の法律と実務～',
+        excerpt: '「突然の無断欠勤からの退職」「解雇したら不当解雇と言われた」は中小企業に多いトラブルです。退職届の受取り方・解雇予告・退職合意書の作り方まで、使用者側の実務手順を徹底解説します。',
+        category: 'リスク管理',
+        emoji: '🚪',
+        date: '2026年4月',
+        isNew: true,
+        readTime: '9分',
+        contact: '退職・解雇対応の緊急相談をする',
+        body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">退職・解雇のトラブルは中小企業にとって最も多い労務問題の一つです。<strong>「不当解雇」と判断されると、解雇が無効となり未払い賃金の支払いを求められる</strong>ケースがあります。一方で「突然来なくなった従業員をいつまで待てばいいか」という悩みも多い。両方の局面を実務レベルで解説します。</p>
+
+<div class="bg-blue-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">📤</span> 従業員が退職する場合の使用者側の対応
+  </h2>
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">退職届の受取りと手続き</p>
+      <p class="text-gray-600 text-sm leading-relaxed">退職届は<strong>書面で受取り、受領印または受領確認メールで記録</strong>を残す。民法上の退職（辞意表明から2週間後）と就業規則上の退職（例：1か月前申出）が異なる場合、どちらが適用されるかは状況による。感情的にならず粛々と手続きを進めることが重要。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">無断欠勤・音信不通の退職処理</p>
+      <p class="text-gray-600 text-sm leading-relaxed">無断欠勤が続く場合、<strong>就業規則に「○日以上の無断欠勤を自己都合退職とみなす」規定があれば</strong>、内容証明郵便で通知後に退職処理できます。一方的な退職（失踪）でも給与・社会保険の喪失手続きは期限内に行う必要あり。残された私物・貸与物の返却は書面で請求。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-blue-100 shadow-sm">
+      <p class="font-black text-blue-800 mb-2 text-base">退職合意書（合意退職）の活用</p>
+      <p class="text-gray-600 text-sm leading-relaxed">円満退職の場合でも、後から「解雇された」「パワハラがあった」と言われないよう<strong>退職合意書に「一切の請求権の放棄（清算条項）」を盛り込む</strong>。競業避止義務・秘密保持義務の確認も合意書で実施。</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-red-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-red-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">⚠️</span> 解雇を行う場合の3種類と必要手続き
+  </h2>
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 border border-red-100 shadow-sm">
+      <p class="font-black text-red-800 mb-2 text-base">普通解雇（能力不足・勤怠不良等）</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-2">「社会通念上相当」な理由（繰り返す指導・改善機会の付与・記録）が必要。30日前予告または解雇予告手当（平均賃金×30日以上）の支払いが必須。<strong>解雇通知は必ず書面で交付し、理由を明記</strong>。</p>
+      <div class="bg-red-50 rounded-lg p-3 text-xs text-red-800 font-medium">⚠️ 「改善の機会を与えたか」「記録があるか」が裁判での分岐点</div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-red-100 shadow-sm">
+      <p class="font-black text-red-800 mb-2 text-base">懲戒解雇（重大な規律違反・不正等）</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-2">就業規則の懲戒規程に該当事由が明記されていることが前提。弁明の機会を与えた上で懲戒委員会等で判断。<strong>事実確認・証拠保全・本人への書面通知</strong>が必須。不正行為があっても手続き瑕疵で無効とされるケースが多い。</p>
+      <div class="bg-red-50 rounded-lg p-3 text-xs text-red-800 font-medium">⚠️ 感情的に即日解雇→後から「手続き違反で無効」になるリスク大</div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-red-100 shadow-sm">
+      <p class="font-black text-red-800 mb-2 text-base">整理解雇（経営上の理由）</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-2">「整理解雇の4要件」（①経営上の必要性、②解雇回避努力、③人選の合理性、④手続きの相当性）を満たす必要あり。<strong>事前の従業員への説明・協議・希望退職の募集</strong>などの段階的手続きが不可欠。</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-gray-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-4">✅ 退職・解雇対応チェックリスト</h2>
+  <div class="space-y-3">
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">退職届は書面で受取り、日付・受領確認の記録を残した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">就業規則に「無断欠勤○日で自己都合退職とみなす」条項がある</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">合意退職の場合は退職合意書（清算条項・秘密保持条項含む）を締結した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">解雇の場合は30日前書面通知または予告手当を準備した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">解雇理由を書面（解雇理由証明書）で交付できる状態にある</span>
+    </label>
+  </div>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    退職・解雇トラブルは「感情的に対応した結果」が最も多い原因です。「もう来なくていい」と口頭で言った瞬間から法律的リスクが生じます。問題社員への対応は必ず事前に社労士に相談してから動いてください。後から相談では取り返せないケースが少なくありません。緊急対応にも対応します。
+  </p>
+</div>
+`
+    },
+    {
+        id: 27,
+        title: 'パート・有期社員を正社員登用する際の手続きと注意点',
+        excerpt: '「頑張っているパートを正社員にしたい」は良いことですが、手続きを誤ると労務リスクが生じます。労働条件の変更・社会保険の切替・無期転換ルールとの関係・キャリアアップ助成金の申請タイミングを解説します。',
+        category: '採用・定着',
+        emoji: '🎖️',
+        date: '2026年4月',
+        isNew: true,
+        readTime: '8分',
+        contact: '正社員登用手続き・キャリアアップ助成金申請を相談する',
+        body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">優秀なパート・有期社員を正社員登用することは、採用コスト削減・定着率向上・組織力強化につながります。ただし、<strong>労働条件の変更手続きを誤ると後から「合意していない」とトラブルになる</strong>ことも。正しい手順と、キャリアアップ助成金の申請タイミングを同時に押さえましょう。</p>
+
+<div class="bg-green-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-green-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">📋</span> 正社員登用の正しい手順（5ステップ）
+  </h2>
+  <div class="space-y-4">
+    <div class="flex gap-4">
+      <span class="bg-green-700 text-white font-black text-sm w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">1</span>
+      <div>
+        <p class="font-bold text-green-900 mb-1">登用前に助成金の受給要件を確認する（最重要）</p>
+        <p class="text-gray-600 text-sm leading-relaxed">キャリアアップ助成金（正社員化コース）は<strong>「転換後の申請」ではなく、転換前に就業規則・転換制度の整備が必要</strong>。「登用してから申請しよう」は間違い。事前に社労士に相談して要件を確認してから動く。</p>
+      </div>
+    </div>
+    <div class="flex gap-4">
+      <span class="bg-green-600 text-white font-black text-sm w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">2</span>
+      <div>
+        <p class="font-bold text-green-900 mb-1">就業規則に正社員転換制度の根拠条文を設ける</p>
+        <p class="text-gray-600 text-sm leading-relaxed">「パート・有期社員を正社員へ転換する制度を設ける」旨の条文と、転換の判断基準（勤続年数・評価・試験等）を就業規則に明記。この整備がキャリアアップ助成金の前提要件。</p>
+      </div>
+    </div>
+    <div class="flex gap-4">
+      <span class="bg-green-500 text-white font-black text-sm w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">3</span>
+      <div>
+        <p class="font-bold text-green-900 mb-1">新たな雇用契約書を締結する</p>
+        <p class="text-gray-600 text-sm leading-relaxed">雇用形態が変わるため、<strong>正社員としての新しい雇用契約書を必ず作成・署名</strong>。旧契約書の変更書や口頭確認だけでは不十分。「契約期間の定めなし」「正社員就業規則の適用」「賃金・職種・就業場所の変更範囲」を明記。</p>
+      </div>
+    </div>
+    <div class="flex gap-4">
+      <span class="bg-green-400 text-white font-black text-sm w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">4</span>
+      <div>
+        <p class="font-bold text-green-900 mb-1">社会保険の切替手続きを行う</p>
+        <p class="text-gray-600 text-sm leading-relaxed">パートで既に社会保険に加入している場合は標準報酬月額の変更手続き（月額変更届）を。未加入から加入になる場合は資格取得届を提出。<strong>健康保険証の切替・扶養の再確認</strong>も忘れずに。</p>
+      </div>
+    </div>
+    <div class="flex gap-4">
+      <span class="bg-green-300 text-white font-black text-sm w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">5</span>
+      <div>
+        <p class="font-bold text-green-900 mb-1">転換後6か月で助成金申請</p>
+        <p class="text-gray-600 text-sm leading-relaxed">キャリアアップ助成金は転換後6か月間の賃金支払い実績が確認されてから申請。転換から申請まで<strong>賃金台帳・出勤簿・雇用契約書を確実に保管</strong>。書類不備は申請却下の最大原因。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-orange-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-orange-900 mb-4">⚠️ 無期転換ルールとの違いを理解する</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="bg-white rounded-xl p-4 border border-orange-100">
+      <p class="font-bold text-orange-800 mb-2 text-sm">無期転換（労働契約法5年ルール）</p>
+      <ul class="text-xs text-gray-600 space-y-1">
+        <li>・勤続5年超で有期→無期契約に転換する権利が発生</li>
+        <li>・「無期」になっても正社員ではない（処遇は変わらないことも）</li>
+        <li>・断ることはできない（申込みがあれば承諾義務）</li>
+      </ul>
+    </div>
+    <div class="bg-white rounded-xl p-4 border border-green-100">
+      <p class="font-bold text-green-800 mb-2 text-sm">正社員登用（キャリアアップ）</p>
+      <ul class="text-xs text-gray-600 space-y-1">
+        <li>・会社が能力・意欲を評価して正社員として転換</li>
+        <li>・賃金・職種・待遇が正社員規程に変わる</li>
+        <li>・キャリアアップ助成金の対象になる</li>
+      </ul>
+    </div>
+  </div>
+  <p class="text-xs text-orange-800 font-medium mt-3 bg-orange-50 rounded-lg p-2">📌 無期転換申込権への対応として正社員化を選ぶ場合も、雇用契約書の作り直しと助成金申請を同時に進めるのがベスト</p>
+</div>
+
+<div class="bg-gray-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-4">✅ 正社員登用チェックリスト</h2>
+  <div class="space-y-3">
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">転換前に社労士にキャリアアップ助成金の受給要件を確認した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">就業規則に正社員転換制度の根拠条文を整備した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">新たな正社員雇用契約書を作成し、署名・捺印を取得した</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">社会保険の切替手続き（月額変更届または資格取得届）を行った</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">助成金申請に必要な書類（賃金台帳・出勤簿等）を6か月分保管している</span>
+    </label>
+  </div>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    正社員登用は「内示→あとで書類」では助成金が受給できません。転換制度の整備→就業規則改定→転換実施→申請という正しい順序を守るだけで、1人あたり最大80万円（重点支援対象者）が受給できます。「頑張っているスタッフを正社員にしようかと思っている」という段階でご相談いただければ、助成金も含めた最適プランをご提案します。
+  </p>
+</div>
+`
+    },
+    {
+        id: 28,
+        title: '中小企業のための給与制度・賞与設計の基礎知識 ～「なんとなく決めている」賃金から卒業する～',
+        excerpt: '「なんとなく同業他社を参考にした」「毎年社長の判断で決めている」という賃金設計は、優秀な人材の流出と採用競争力の低下を招きます。等級制度・評価連動・賞与設計の基礎を中小企業向けに解説します。',
+        category: '採用・定着',
+        emoji: '💹',
+        date: '2026年4月',
+        isNew: true,
+        readTime: '10分',
+        contact: '賃金・賞与制度の設計を相談する',
+        body: `
+<p class="text-lg text-gray-700 leading-relaxed mb-8 font-medium">中小企業の賃金設計で最も多い問題は、<strong>「なんとなく決まっている」「なぜこの金額か説明できない」</strong>という状態です。賃金の根拠が不透明だと、優秀な人材ほど不満を持ち退職します。一方、透明な賃金制度があれば採用競争力と定着率が大幅に向上します。基礎から実践的に解説します。</p>
+
+<div class="bg-indigo-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-indigo-900 mb-5 flex items-center gap-2">
+    <span class="text-2xl">🏗️</span> 賃金制度の3つの柱と中小企業に適した設計
+  </h2>
+  <div class="space-y-5">
+    <div class="bg-white rounded-xl p-5 border border-indigo-100 shadow-sm">
+      <p class="font-black text-indigo-800 mb-2 text-base">柱1：基本給の決め方（等級制度の設計）</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-3">基本給の決め方には「年齢・勤続年数で決める年功型」「役職で決める役割型」「担当業務の難易度で決める職務型」の3種類があります。中小企業には<strong>「役割等級＋職能（スキル）の混合型」</strong>が現実的。5〜7段階の等級を設け、各等級に給与レンジ（上限・下限）を設定します。</p>
+      <div class="bg-indigo-50 rounded-lg p-3 text-xs text-indigo-900 font-medium">
+        📌 例：1等級（新入社員）月18〜22万円 / 3等級（中堅）月25〜32万円 / 5等級（リーダー）月35〜45万円
+      </div>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-indigo-100 shadow-sm">
+      <p class="font-black text-indigo-800 mb-2 text-base">柱2：評価制度との連動（昇給の根拠づくり）</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-3">「なぜ昇給したか／しなかったか」を従業員に説明できる評価制度が必要です。評価項目は「業績（目標達成度）」「行動（コンピテンシー）」「態度（勤怠・取り組み）」の3軸が基本。年2回（上期・下期）の評価サイクルと、評価結果が賃金に反映される仕組みを明確にします。<strong>評価結果のフィードバック面談</strong>もセットで制度化することが定着率向上の鍵。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-indigo-100 shadow-sm">
+      <p class="font-black text-indigo-800 mb-2 text-base">柱3：賞与設計（モチベーションと経営の両立）</p>
+      <p class="text-gray-600 text-sm leading-relaxed mb-3">賞与は「会社業績×個人評価」で決まる変動報酬として設計するのが理想。<strong>「月額×○か月分」という固定的な慣行は、会社業績が悪化しても支払い義務がある</strong>と誤解されるリスクがあります。就業規則に「業績や会社の状況に応じて支給しない場合がある」と明記することが重要。賞与の年3回以内支給（社会保険料の算定基礎に含まれない）も設計ポイントです。</p>
+      <div class="bg-indigo-50 rounded-lg p-3 text-xs text-indigo-900 font-medium">
+        📌 賞与算定式の例：賞与原資（会社業績連動）× 個人評価係数（0.8〜1.2）× 在籍月数按分
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-teal-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-teal-900 mb-4">💡 中小企業がよく陥る賃金設計の失敗4パターン</h2>
+  <div class="space-y-4">
+    <div class="bg-white rounded-xl p-5 border border-teal-100 shadow-sm">
+      <p class="font-black text-teal-800 mb-1">失敗1：初任給引き上げだけで中堅社員の逆転が生じる</p>
+      <p class="text-gray-600 text-sm">最低賃金上昇に対応して初任給を上げた結果、入社3〜5年の中堅社員の基本給が新入社員と逆転する「賃金逆転現象」。等級制度の整備と既存社員のベースアップをセットで対応しないと定着率が下がります。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-teal-100 shadow-sm">
+      <p class="font-black text-teal-800 mb-1">失敗2：固定残業代の時間数が多すぎる</p>
+      <p class="text-gray-600 text-sm">「月80時間分の固定残業代を含む」という設計は、採用市場でのイメージが悪く応募が集まらない原因に。月20〜30時間分以内に抑え、超過分は別途支払う設計に変更しましょう。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-teal-100 shadow-sm">
+      <p class="font-black text-teal-800 mb-1">失敗3：賞与の支給基準が不明確で不満が生じる</p>
+      <p class="text-gray-600 text-sm">「社長の気分次第」と感じさせる賞与設計は従業員のモチベーションを破壊します。業績連動の算定式と評価フィードバックの徹底が必須。</p>
+    </div>
+    <div class="bg-white rounded-xl p-5 border border-teal-100 shadow-sm">
+      <p class="font-black text-teal-800 mb-1">失敗4：就業規則に賃金規程が整備されていない</p>
+      <p class="text-gray-600 text-sm">賃金の計算方法・支払日・控除項目・昇給の根拠が就業規則に明記されていないと、「聞いていた話と違う」というトラブルの温床に。賃金規程は就業規則の最重要部分です。</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-gray-50 rounded-2xl p-6 mb-8">
+  <h2 class="text-xl font-black text-blue-900 mb-4">✅ 賃金制度整備チェックリスト</h2>
+  <div class="space-y-3">
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">等級制度（またはそれに準じた給与テーブル）が整備されている</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">昇給・降給の根拠（評価結果との連動）が就業規則に明記されている</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">賞与の支給基準・算定式（業績連動の場合は具体的計算方法）が規定されている</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">固定残業代の金額・時間数を雇用契約書と給与明細の両方に明記している</span>
+    </label>
+    <label class="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100 cursor-pointer hover:border-blue-300 transition">
+      <input type="checkbox" class="mt-0.5 w-4 h-4 accent-blue-900">
+      <span class="text-sm text-gray-700">年1回以上、評価結果を本人にフィードバックする面談を実施している</span>
+    </label>
+  </div>
+</div>
+
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+  <p class="text-amber-900 text-sm leading-relaxed">
+    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    賃金制度の整備は「難しそう」「費用がかかる」と後回しにされがちですが、等級5段階・評価2軸・賞与基準の明確化という最小限の整備だけでも、従業員の納得感と定着率は大きく変わります。特に採用難の今、「賃金の根拠を説明できる会社」は求職者からの評価が高い。現状の賃金体系を持参いただければ、改善の優先順位をご提案します。
+  </p>
+</div>
+`
+    },
+
+
     {
         id: 13,
         title: '2026年 子育て支援金制度完全対応ガイド ～健康保険料上乗せ負担を最小化する実務チェックリスト～',
