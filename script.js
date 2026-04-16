@@ -293,7 +293,7 @@ function showPage(pageId, tabIdx) {
             }
         }, 50);
     }
-    const pages = ['home','services','about','links','faq','contact','solutions','blog','checkup','subsidy-sim','salary-calc','download','dl-thankyou','price-sim','spot','article-detail','youtube'];
+    const pages = ['home','services','about','links','faq','contact','solutions','blog','checkup','subsidy-sim','salary-calc','download','dl-thankyou','price-sim','spot','article-detail','youtube','campaign'];
     pages.forEach(id => {
         const section = document.getElementById('page-' + id);
         if (section) section.classList.add('hidden');
@@ -321,6 +321,10 @@ function showPage(pageId, tabIdx) {
                 btn.classList.toggle('active-filter', btn.dataset.cat === 'all');
             });
         }
+        // 全文検索初期化（開発指示書 Step 5）
+        setTimeout(function () {
+            if (typeof initSearch === 'function') initSearch();
+        }, 0);
     }
     if (pageId === 'home') {
         if (typeof renderHomeColumns === 'function') renderHomeColumns();
@@ -338,29 +342,8 @@ function toggleMobileMenu() {
 
 // =============================================
 // ヒーロー画像フェード処理
+// ※ hero-slider.js に移管済みのため無効化
 // =============================================
-document.addEventListener('DOMContentLoaded', function() {
-    var img1 = document.getElementById('hero-img-1');
-    var img2 = document.getElementById('hero-img-2');
-    if (!img1 || !img2) return;
-    img1.style.transition = 'opacity 1.5s ease-in-out';
-    img1.style.opacity    = '0.52';
-    img2.style.transition = 'opacity 1.5s ease-in-out';
-    img2.style.opacity    = '0';
-    var current  = 1;
-    var INTERVAL = 15000;
-    setInterval(function() {
-        if (current === 1) {
-            img1.style.opacity = '0';
-            img2.style.opacity = '0.52';
-            current = 2;
-        } else {
-            img2.style.opacity = '0';
-            img1.style.opacity = '0.52';
-            current = 1;
-        }
-    }, INTERVAL);
-});
 
 
 // =============================================

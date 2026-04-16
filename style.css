@@ -391,6 +391,336 @@ body.modal-open {
 }
 
 /* =============================================
+   ヒーロースライダー スタイル（再設計版）
+   hero-slider.js と連携
+   ============================================= */
+
+/* ---- スライド表示制御 ---- */
+.hero-slide {
+    display: none;
+}
+.hero-slide.active {
+    display: block;
+    animation: heroFadeIn 0.65s ease-out both;
+}
+@keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* prefers-reduced-motion 対応 */
+@media (prefers-reduced-motion: reduce) {
+    .hero-slide.active { animation: none; }
+    #hero-progress { display: none; }
+}
+
+/* ---- スライド内レイアウト：左テキスト・右画像の2カラム ---- */
+/* PC: 固定高さ520px / スマホ: 最低高を確保しつつ可変 */
+.hero-slide-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-height: 520px;            /* PC固定高さ */
+    max-width: 1152px;
+    margin: 0 auto;
+    padding: 3rem 2rem 3.5rem;    /* 上下padding（ドットナビ分を下に確保） */
+    gap: 2.5rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* テキストエリア：左側55% */
+.hero-text-col {
+    flex: 0 0 55%;
+    max-width: 55%;
+}
+
+/* 画像エリア：右側45% */
+.hero-img-col {
+    flex: 0 0 45%;
+    max-width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.hero-slide-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 1.25rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    mix-blend-mode: luminosity;
+    opacity: 0.85;
+}
+
+/* ---- タイポグラフィ ---- */
+.hero-heading {
+    font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+}
+
+.hero-body {
+    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+    opacity: 0.93;
+    font-weight: 300;
+}
+
+/* ---- 信頼バッジ行 ---- */
+.hero-trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.hero-trust-badges span {
+    font-size: 0.72rem;
+    font-weight: 500;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* ---- CTAボタン行：主ボタン + 詳細を見るボタン ---- */
+.hero-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+/* 主CTA（オレンジ） */
+.hero-btn-primary {
+    background: #f97316;
+    color: white;
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 8px 24px rgba(249,115,22,0.4);
+    white-space: nowrap;
+}
+.hero-btn-primary:hover  { background: #ea580c; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(249,115,22,0.5); }
+.hero-btn-primary:active { transform: scale(0.98); }
+
+/* 主CTA（緑：キャンペーン用） */
+.hero-btn-green {
+    background: #22c55e;
+    color: white;
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 8px 24px rgba(34,197,94,0.4);
+    white-space: nowrap;
+}
+.hero-btn-green:hover  { background: #16a34a; transform: translateY(-2px); }
+.hero-btn-green:active { transform: scale(0.98); }
+
+/* 主CTA（ティール：コラム用） */
+.hero-btn-teal {
+    background: #0d9488;
+    color: white;
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 8px 24px rgba(13,148,136,0.4);
+    white-space: nowrap;
+}
+.hero-btn-teal:hover  { background: #0f766e; transform: translateY(-2px); }
+.hero-btn-teal:active { transform: scale(0.98); }
+
+/* 詳細を見るボタン（ghost） */
+.hero-btn-detail {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.875rem 1.25rem;
+    border-radius: 0.75rem;
+    border: 2px solid rgba(255,255,255,0.45);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    backdrop-filter: blur(4px);
+    white-space: nowrap;
+}
+.hero-btn-detail:hover  { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.7); transform: translateY(-1px); }
+.hero-btn-detail:active { transform: scale(0.98); }
+
+/* ---- 前後ナビ矢印 ---- */
+.hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1.5px solid rgba(255,255,255,0.4);
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s ease, opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hero-arrow:hover  { background: rgba(255,255,255,0.28); }
+.hero-arrow:active { transform: translateY(-50%) scale(0.95); }
+#hero-prev { left: 1rem; }
+#hero-next { right: 1rem; }
+
+/* ---- ドットナビゲーション ---- */
+#hero-dots {
+    position: absolute;
+    bottom: 1.125rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 20;
+}
+.hero-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: width 0.3s ease, border-radius 0.3s ease, background 0.3s ease;
+    flex-shrink: 0;
+}
+.hero-dot.active          { width: 24px; border-radius: 4px; background: rgba(255,255,255,0.95); }
+.hero-dot:hover:not(.active) { background: rgba(255,255,255,0.65); }
+
+/* ---- プログレスバー ---- */
+#hero-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: rgba(255,255,255,0.7);
+    width: 0%;
+    z-index: 20;
+    will-change: width;
+}
+
+/* =============================================
+   スマホ対応（～767px）
+   ============================================= */
+@media (max-width: 767px) {
+    /* 2カラム → 1カラムに変更 */
+    .hero-slide-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: auto;
+        padding: 2.25rem 1.25rem 3rem;
+        gap: 1.25rem;
+    }
+
+    /* テキストエリア：全幅 */
+    .hero-text-col {
+        flex: none;
+        max-width: 100%;
+        width: 100%;
+        order: 2;
+    }
+
+    /* 画像エリア：全幅、上に配置 */
+    .hero-img-col {
+        flex: none;
+        max-width: 100%;
+        width: 100%;
+        order: 1;
+        justify-content: center;
+    }
+
+    .hero-slide-img {
+        height: 200px;
+        border-radius: 0.875rem;
+        width: 100%;
+    }
+
+    /* フォントサイズ調整 */
+    .hero-heading {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .hero-body {
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+    }
+
+    /* 信頼バッジを非表示（スペース節約） */
+    .hero-trust-badges {
+        display: none;
+    }
+
+    /* CTAボタン：縦並び・全幅 */
+    .hero-cta-row {
+        flex-direction: column;
+        gap: 0.625rem;
+    }
+    .hero-btn-primary,
+    .hero-btn-green,
+    .hero-btn-teal,
+    .hero-btn-detail {
+        width: 100%;
+        text-align: center;
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    /* 矢印ナビ：スマホではサイズ縮小・端に寄せる */
+    .hero-arrow {
+        width: 36px;
+        height: 36px;
+    }
+    #hero-prev { left: 0.5rem; }
+    #hero-next { right: 0.5rem; }
+
+    /* ドット位置調整 */
+    #hero-dots { bottom: 0.75rem; }
+}
+
+/* タブレット（768px〜1023px）中間調整 */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .hero-slide-inner {
+        min-height: 460px;
+        padding: 2.5rem 1.5rem 3rem;
+        gap: 1.5rem;
+    }
+    .hero-text-col { flex: 0 0 56%; max-width: 56%; }
+    .hero-img-col  { flex: 0 0 44%; max-width: 44%; }
+    .hero-slide-img { height: 320px; }
+    .hero-heading { font-size: clamp(1.4rem, 2.8vw, 2rem); }
+}
+
+
+/* =============================================
    全文検索機能 追加CSS（開発指示書 v1.0）
    ============================================= */
 
