@@ -194,6 +194,7 @@
                             <button type="button" onclick="showPage('price-sim')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-semibold text-amber-800">🧮 料金シミュレーター</button>
                             <button type="button" onclick="showPage('download')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-semibold text-indigo-800">📥 無料資料ダウンロード</button>
                             <hr class="my-1 border-gray-100">
+                            <button type="button" onclick="showPage('campaign')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-bold text-red-700">🎁 キャンペーン情報</button>
                             <button type="button" onclick="showPage('spot')" class="nav-submenu-item nav-submenu-item--accent w-full text-left px-4 py-2.5 text-sm font-bold text-orange-800">📋 手続き代行依頼</button>
                         </div>
                     </div>
@@ -231,6 +232,7 @@
                 <button type="button" onclick="showPage('salary-calc')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">🧮 給与計算ツール</button>
                 <button type="button" onclick="showPage('price-sim')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-semibold text-amber-800">🧮 料金シミュレーター</button>
                 <button type="button" onclick="showPage('download')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-semibold text-indigo-800">📥 無料資料ダウンロード</button>
+                <button type="button" onclick="showPage('campaign')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-bold text-red-700">🎁 キャンペーン情報</button>
             </div>
             <button type="button" onclick="showPage('links')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">関連リンク</button>
             <button type="button" onclick="showPage('faq')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">よくある質問</button>
@@ -244,10 +246,11 @@
         <!-- HOME PAGE -->
         <section id="page-home">
             
-            <!-- Hero -->
-            <section class="hero-gradient text-white py-20 md:py-28 px-4 relative overflow-hidden">
-                <!-- 背景装飾SVG -->
-                <div class="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
+            <!-- Hero Slider -->
+            <section class="hero-gradient hero-slider text-white relative overflow-hidden" id="hero-slider-section" aria-label="メインビジュアル スライダー">
+
+                <!-- 背景装飾SVG（全スライド共通） -->
+                <div class="absolute inset-0 overflow-hidden opacity-10 pointer-events-none" aria-hidden="true">
                     <svg class="absolute top-10 right-10 w-64 h-64" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                         <path fill="#ffffff" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,90,-16.3,88.5,-0.9C87,14.6,81.4,29.2,73.1,42.4C64.8,55.6,53.8,67.4,40.3,74.8C26.8,82.2,10.8,85.2,-4.8,83.3C-20.4,81.4,-35.5,74.6,-48.1,66.1C-60.7,57.6,-70.8,47.4,-77.2,35.2C-83.6,23,-86.3,8.8,-84.9,-4.9C-83.5,-18.6,-78,-31.8,-69.8,-43.3C-61.6,-54.8,-50.7,-64.6,-38.1,-72.4C-25.5,-80.2,-11.2,-86,2.3,-90.1C15.8,-94.2,30.6,-83.6,44.7,-76.4Z" transform="translate(100 100)" />
                     </svg>
@@ -256,226 +259,320 @@
                     </svg>
                 </div>
 
-                                <!-- 透過写真クロスフェード（右側背景に配置） -->
-                <div class="absolute inset-0 pointer-events-none overflow-hidden" id="hero-img-container">
-                    <img id="hero-img-1"
-                         src="./hero-img-1.webp"
-                         alt=""
-                         aria-hidden="true"
-                         style="position:absolute; right:0; top:50%; transform:translateY(-50%); height:115%; width:auto; max-width:68%; object-fit:cover; mix-blend-mode:luminosity; opacity:0.52; transition:opacity 1.5s ease-in-out;"
-                    />
-                    <img id="hero-img-2"
-                         src="./hero-img-2.webp"
-                         alt=""
-                         aria-hidden="true"
-                         style="position:absolute; left:0; top:50%; transform:translateY(-50%); height:115%; width:auto; max-width:68%; object-fit:cover; mix-blend-mode:luminosity; opacity:0.52; transition:opacity 1.5s ease-in-out; opacity:0;"
-                    />
+                <!-- ==================== スライドトラック ==================== -->
+                <div id="hero-track">
+
+                    <!-- ===== スライド1：地域密着パートナー ===== -->
+                    <!-- data-img: 右側に表示する画像ファイル名（拡張子なし）。該当ファイルを差し替えるだけで画像変更可能 -->
+                    <div class="hero-slide active" data-index="0" data-img="hero-img-1" role="group" aria-label="スライド 1 / 6">
+                        <div class="hero-slide-inner">
+                            <!-- 右側画像エリア（PC のみ表示） -->
+                            <div class="hero-img-col" aria-hidden="true">
+                                <img src="./hero-img-1.webp" alt="" class="hero-slide-img" loading="eager" />
+                            </div>
+                            <!-- テキスト・CTAエリア -->
+                            <div class="hero-text-col">
+                                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/30 text-white px-4 py-1.5 rounded-full text-xs mb-5 font-medium">
+                                    <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                                    宮城県仙台市宮城野区
+                                </div>
+                                <h1 class="hero-heading">
+                                    経営者の<span class="text-blue-200">「労務の悩み」</span>を<br>解決する、<br>地域密着のパートナー
+                                </h1>
+                                <p class="hero-body">
+                                    複雑な労務管理・法改正対応・トラブル防止まで、<br class="hidden md:block">
+                                    <span class="font-semibold">誠実な対応</span>と<span class="font-semibold">確かな専門知識</span>でサポートします。
+                                </p>
+                                <div class="hero-trust-badges">
+                                    <span>✅ 社会保険労務士資格保有</span>
+                                    <span>📍 地域密着10年以上</span>
+                                    <span>🆓 初回相談完全無料</span>
+                                </div>
+                                <div class="hero-cta-row">
+                                    <button onclick="showPage('contact')" class="hero-btn-primary">📅 初回無料相談（60分）</button>
+                                    <button onclick="showPage('services')" class="hero-btn-detail">詳細を見る →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== スライド2：助成金訴求 ===== -->
+                    <!-- data-img: 画像を変更する場合は値を差し替える（例: data-img="hero-img-subsidy"） -->
+                    <div class="hero-slide" data-index="1" data-img="hero-img-2" role="group" aria-label="スライド 2 / 6">
+                        <div class="hero-slide-inner">
+                            <div class="hero-img-col" aria-hidden="true">
+                                <img src="./hero-img-2.webp" alt="" class="hero-slide-img" loading="lazy" />
+                            </div>
+                            <div class="hero-text-col">
+                                <div class="inline-flex items-center gap-2 bg-yellow-400/20 border border-yellow-300/40 text-white px-4 py-1.5 rounded-full text-xs mb-5 font-medium">
+                                    💰 助成金・補助金サポート
+                                </div>
+                                <h1 class="hero-heading">
+                                    使える助成金、<br><span class="text-yellow-300">見逃していませんか？</span>
+                                </h1>
+                                <p class="hero-body">
+                                    キャリアアップ・業務改善・雇用調整など御社が受給できる助成金を丸ごとサポート。<br class="hidden md:block">
+                                    <span class="font-semibold">成功報酬型</span>なので受給できなければ費用ゼロです。
+                                </p>
+                                <div class="hero-trust-badges">
+                                    <span>✅ 成功報酬型・リスクなし</span>
+                                    <span>📋 申請書類も社労士が作成</span>
+                                    <span>🏦 受給後フォローも対応</span>
+                                </div>
+                                <div class="hero-cta-row">
+                                    <button onclick="showPage('subsidy-sim')" class="hero-btn-primary">💰 助成金診断（無料）</button>
+                                    <button onclick="showPage('subsidy-sim')" class="hero-btn-detail">詳細を見る →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== スライド3：スポット依頼 ===== -->
+                    <!-- data-img: スポット依頼専用画像があれば差し替え可 -->
+                    <div class="hero-slide" data-index="2" data-img="hero-img-3" role="group" aria-label="スライド 3 / 6">
+                        <div class="hero-slide-inner">
+                            <div class="hero-img-col" aria-hidden="true">
+                                <img src="./hero-img-3.webp" alt="" class="hero-slide-img" loading="lazy" />
+                            </div>
+                            <div class="hero-text-col">
+                                <div class="inline-flex items-center gap-2 bg-white/10 border border-white/30 text-white px-4 py-1.5 rounded-full text-xs mb-5 font-medium">
+                                    📋 スポット手続き代行
+                                </div>
+                                <h1 class="hero-heading">
+                                    <span class="text-blue-200">1回から</span>依頼できる、<br>スポット社労士サービス
+                                </h1>
+                                <p class="hero-body">
+                                    入退社の社会保険・雇用保険手続きや就業規則改訂まで、<br class="hidden md:block">
+                                    <span class="font-semibold">顧問契約なし</span>でWebフォームから単発でご依頼いただけます。
+                                </p>
+                                <div class="hero-trust-badges">
+                                    <span>🔒 顧問契約不要</span>
+                                    <span>💻 Webフォームで完結</span>
+                                    <span>⚡ 最短即日対応</span>
+                                </div>
+                                <div class="hero-cta-row">
+                                    <button onclick="showPage('spot')" class="hero-btn-primary">📋 スポット手続きを依頼</button>
+                                    <button onclick="showPage('spot')" class="hero-btn-detail">詳細を見る →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== スライド4：簡易出退勤アプリ 無料キャンペーン ===== -->
+                    <!-- data-img: キャンペーン用画像に変更する場合はファイルを用意して差し替え -->
+                    <div class="hero-slide" data-index="3" data-img="hero-img-4" role="group" aria-label="スライド 4 / 6">
+                        <div class="hero-slide-inner">
+                            <div class="hero-img-col" aria-hidden="true">
+                                <img src="./hero-img-4.webp" alt="" class="hero-slide-img" loading="lazy" />
+                            </div>
+                            <div class="hero-text-col">
+                                <div class="inline-flex items-center gap-2 bg-green-500/20 border border-green-300/40 text-white px-4 py-1.5 rounded-full text-xs mb-5 font-medium">
+                                    🎁 期間限定キャンペーン実施中
+                                </div>
+                                <h1 class="hero-heading">
+                                    タイムカード卒業！<br>
+                                    <span class="text-green-200">簡易出退勤アプリ</span>を<br>
+                                    今なら<span class="text-yellow-300">無料</span>でご提供
+                                </h1>
+                                <p class="hero-body">
+                                    スマホで打刻・自動集計・CSV出力まで対応。<br class="hidden md:block">
+                                    <span class="font-semibold">導入初月は費用ゼロ</span>。複雑な設定も社労士がサポートします。
+                                </p>
+                                <div class="hero-trust-badges">
+                                    <span>📱 スマホ・PCどちらでも利用可</span>
+                                    <span>📊 自動集計でミスゼロ</span>
+                                    <span>🆓 初月完全無料</span>
+                                </div>
+                                <div class="hero-cta-row">
+                                    <button onclick="showPage('contact')" class="hero-btn-green">🎁 無料で試してみる</button>
+                                    <button onclick="showPage('contact')" class="hero-btn-detail">詳細を見る →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== スライド5：労務コラム更新情報 ===== -->
+                    <!-- data-img: コラム用画像があれば差し替え可 -->
+                    <div class="hero-slide" data-index="4" data-img="hero-img-5" role="group" aria-label="スライド 5 / 6">
+                        <div class="hero-slide-inner">
+                            <div class="hero-img-col" aria-hidden="true">
+                                <img src="./hero-img-5.webp" alt="" class="hero-slide-img" loading="lazy" />
+                            </div>
+                            <div class="hero-text-col">
+                                <div class="inline-flex items-center gap-2 bg-white/10 border border-white/30 text-white px-4 py-1.5 rounded-full text-xs mb-5 font-medium">
+                                    📝 労務管理コラム
+                                </div>
+                                <p class="text-sm text-blue-200 mb-2 font-medium" id="hero-col-label">最新コラム公開中</p>
+                                <h1 class="hero-heading" id="hero-col-title">
+                                    労務管理のお役立ち情報をお届けします
+                                </h1>
+                                <div id="hero-col-cats" class="flex flex-wrap gap-2 mb-4"></div>
+                                <p class="hero-body">
+                                    助成金・法令遵守・DX推進など、<br class="hidden md:block">
+                                    現場で使える情報を<span class="font-semibold">毎月更新中</span>。無料でどなたでもご覧いただけます。
+                                </p>
+                                <div class="hero-trust-badges">
+                                    <span>📅 毎月更新</span>
+                                    <span>🆓 無料で読める</span>
+                                    <span>⚖️ 法改正情報もいち早くお届け</span>
+                                </div>
+                                <div class="hero-cta-row">
+                                    <button onclick="showPage('blog')" class="hero-btn-teal">📝 コラムを読む</button>
+                                    <button onclick="showPage('blog')" class="hero-btn-detail">詳細を見る →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- ===== スライド6：YouTubeチャンネル紹介 ===== -->
+                    <div class="hero-slide" data-index="5" data-img="" role="group" aria-label="スライド 6 / 6">
+                        <div class="hero-slide-inner">
+                            <!-- 右側：YouTube埋め込み動画エリア -->
+                            <div class="hero-img-col" style="align-items:center;justify-content:center;">
+                                <div style="width:100%;max-width:460px;aspect-ratio:16/9;border-radius:1.25rem;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.45);">
+                                    <iframe
+                                        src="https://www.youtube.com/embed/OK6WtQbLti0?autoplay=1&mute=1&loop=1&playlist=ABC12345678&controls=0&rel=0"
+                                        title="カミウエ社会保険労務士事務所 YouTubeチャンネル"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                        loading="lazy"
+                                        style="width:100%;height:100%;border:none;display:block;"
+                                    ></iframe>
+                                </div>
+                            </div>
+                            <!-- テキスト・CTAエリア -->
+                            <div class="hero-text-col">
+                                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs mb-5 font-medium" style="background:rgba(255,0,0,0.25);border:1px solid rgba(255,100,100,0.45);color:#fff;">
+                                    <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                                    YouTubeチャンネル公開中
+                                </div>
+                                <h1 class="hero-heading">
+                                    労務のお役立ち動画を<br>
+                                    <span style="color:#fca5a5;">YouTube</span>で<br>
+                                    わかりやすく解説
+                                </h1>
+                                <p class="hero-body">
+                                    助成金・就業規則・給与計算など、<br class="hidden md:block">
+                                    経営者・担当者が知りたい<span class="font-semibold">労務情報を動画でお届け</span>。<br class="hidden md:block">
+                                    チャンネル登録で最新情報を見逃しません。
+                                </p>
+                                <div class="hero-trust-badges">
+                                    <span>▶ わかりやすい解説動画</span>
+                                    <span>📅 定期更新</span>
+                                    <span>🆓 無料で視聴可能</span>
+                                </div>
+                                <div class="hero-cta-row">
+                                    <a href="https://www.youtube.com/channel/UCN0gus5F7Hdi0bzQJJ0NLVw" target="_blank" rel="noopener noreferrer" style="background:#dc2626;box-shadow:0 8px 24px rgba(220,38,38,0.45);text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;color:white;font-weight:800;font-size:1rem;padding:0.875rem 1.5rem;border-radius:0.75rem;border:none;cursor:pointer;white-space:nowrap;">
+                                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                                        チャンネル登録する
+                                    </a>
+                                    <button onclick="showPage('youtube')" class="hero-btn-detail">動画一覧を見る →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /#hero-track -->
+
+                <!-- ==================== 前後ナビ矢印 ==================== -->
+                <button id="hero-prev" class="hero-arrow" aria-label="前のスライドへ">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <button id="hero-next" class="hero-arrow" aria-label="次のスライドへ">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+
+                <!-- ==================== ドットナビゲーション ==================== -->
+                <div id="hero-dots" role="tablist" aria-label="スライドナビゲーション">
+                    <button class="hero-dot active" role="tab" aria-selected="true"  aria-label="スライド 1" data-slide="0"></button>
+                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 2" data-slide="1"></button>
+                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 3" data-slide="2"></button>
+                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 4" data-slide="3"></button>
+                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 5" data-slide="4"></button>
+                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 6" data-slide="5"></button>
                 </div>
 
-                <!-- コンテンツ（左寄せ・テキスト可読性確保） -->
-                <div class="max-w-6xl mx-auto relative z-10">
-                    <div class="max-w-2xl">
-                        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/30 text-white px-5 py-2 rounded-full text-xs mb-8 font-medium">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-                            </svg>
-                            宮城県仙台市宮城野区
-                        </div>
-                        <h1 class="text-2xl sm:text-3xl md:text-6xl font-bold mb-5 leading-tight">
-                            経営者の<span class="text-blue-200">「労務の悩み」</span>を<br class="md:hidden">解決する、<br>地域密着のパートナー
-                        </h1>
-                        <p class="text-base md:text-xl mb-8 opacity-95 font-light leading-relaxed">
-                            複雑な労務管理、頻繁な法改正対応、従業員とのトラブル防止...<br class="hidden md:block">
-                            中小企業の経営者様が本業に専念できるよう、<br class="hidden md:block">
-                            <span class="font-medium">誠実な対応</span>と<span class="font-medium">確かな専門知識</span>でサポートいたします。
-                        </p>
+                <!-- ==================== プログレスバー ==================== -->
+                <div id="hero-progress" aria-hidden="true"></div>
 
-                        <!-- スマホ：主CTA1本 + 電話ボタン -->
-                        <div class="flex flex-col sm:hidden gap-3 mb-8">
-                            <button onclick="showPage('contact')" class="bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-bold py-4 px-6 w-full rounded-xl shadow-2xl transition text-lg">
-                                📅 初回無料相談（60分）
-                            </button>
-                            <a href="tel:07010471625" class="flex items-center justify-center gap-2 bg-white/15 backdrop-blur-md text-white border-2 border-white/60 font-bold py-4 px-6 w-full rounded-xl transition text-base">
-                                <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
-                                070-1047-1625（無料）
-                            </a>
-                            <!-- サブリンク行 -->
-                            <div class="flex gap-2">
-                                <button onclick="showPage('services')" class="flex-1 bg-white/10 backdrop-blur-md text-white border border-white/40 font-medium py-2.5 px-3 rounded-lg transition text-sm">サービス一覧</button>
-                                <button onclick="showPage('blog')" class="flex-1 bg-white/10 backdrop-blur-md text-white border border-white/40 font-medium py-2.5 px-3 rounded-lg transition text-sm">📝 コラム</button>
-                                <button onclick="showPage('price-sim')" class="flex-1 bg-amber-400/90 text-amber-900 border border-amber-300/60 font-medium py-2.5 px-3 rounded-lg transition text-sm">🧮 料金</button>
-                                <button onclick="showPage('youtube')" class="flex-1 bg-red-600/90 text-white border border-red-400/60 font-medium py-2.5 px-3 rounded-lg transition text-sm flex items-center justify-center gap-1">
-                                    <svg class="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
-                                    動画
-                                </button>
+                <!-- ==================== 対応システム 自動スクロール（既存維持） ==================== -->
+                <div class="supported-systems bg-white/90 backdrop-blur-sm py-6 px-4 rounded-2xl mx-4 mt-4 mb-4 shadow-lg border border-white/20 relative z-10">
+                    <p class="text-center text-blue-900/60 text-xs mb-2">
+                        仙台の社労士として、宮城県内の中小企業様の社会保険手続き・給与計算・助成金申請・就業規則作成を幅広くサポートしています。
+                    </p>
+                    <h3 class="text-center text-blue-900 font-bold text-lg mb-4">対応可能システム</h3>
+                    <div class="scroll-container overflow-hidden">
+                        <div class="scroll-content flex animate-scroll">
+                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                                <svg class="w-16 h-16 mx-auto mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12,6 12,12 16,14"></polyline></svg>
+                                <p class="text-xs text-gray-700 font-medium">KING OF TIME</p>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
                             </div>
-                        </div>
-
-                        <!-- タブレット以上：元の4ボタンレイアウト -->
-                        <div class="hidden sm:flex flex-row flex-wrap gap-4 mb-10">
-                            <button onclick="showPage('contact')" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-5 px-6 rounded-xl shadow-2xl transition transform hover:scale-105 text-lg">
-                                初回無料相談（60分）
-                            </button>
-                            <button onclick="showPage('services')" class="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-2 border-white/50 font-bold py-5 px-6 rounded-xl transition text-lg">
-                                サービス一覧
-                            </button>
-                            <button onclick="showPage('blog')" class="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-2 border-white/50 font-bold py-5 px-6 rounded-xl transition text-lg flex items-center gap-2">
-                                📝 労務管理コラム
-                            </button>
-                            <button onclick="showPage('price-sim')" class="bg-amber-400 hover:bg-amber-300 text-amber-900 font-bold py-5 px-6 rounded-xl shadow-lg transition text-lg flex items-center gap-2">
-                                🧮 料金シミュレーター
-                            </button>
-                            <button onclick="showPage('youtube')" class="bg-red-600 hover:bg-red-500 text-white font-bold py-5 px-6 rounded-xl shadow-lg transition text-lg flex items-center gap-2">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
-                                YouTube
-                            </button>
-                        </div>
-                        <div class="hidden sm:flex flex-wrap gap-4 text-sm">
-                            <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                                <svg class="w-5 h-5 text-blue-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                                <span>社会保険労務士資格保有</span>
+                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                                <svg class="w-16 h-16 mx-auto mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <p class="text-xs text-gray-700 font-medium">SmartHR</p>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
                             </div>
-                            <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                                <svg class="w-5 h-5 text-blue-200" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
-                                <span>地域密着10年以上の実績</span>
+                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                                <svg class="w-16 h-16 mx-auto mb-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="6" x2="15" y2="6"></line><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="13" y2="14"></line><line x1="9" y1="18" x2="11" y2="18"></line></svg>
+                                <p class="text-xs text-gray-700 font-medium">マネーフォワード給与</p>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
                             </div>
-                            <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
-                                <svg class="w-5 h-5 text-blue-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
-                                <span>初回相談完全無料</span>
+                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                                <svg class="w-16 h-16 mx-auto mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12,6 12,12 16,14"></polyline></svg>
+                                <p class="text-xs text-gray-700 font-medium">ジョブカン勤怠管理</p>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
+                            </div>
+                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                                <svg class="w-16 h-16 mx-auto mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14,2 14,8 20,8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10,9 9,9 8,9"></polyline></svg>
+                                <p class="text-xs text-gray-700 font-medium">freee人事労務</p>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
+                            </div>
+                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                                <svg class="w-16 h-16 mx-auto mb-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="6" x2="15" y2="6"></line><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="13" y2="14"></line><line x1="9" y1="18" x2="11" y2="18"></line></svg>
+                                <p class="text-xs text-gray-700 font-medium">弥生給与</p>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
+                            </div>
+                            <!-- 繰り返し -->
+                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                                <svg class="w-16 h-16 mx-auto mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12,6 12,12 16,14"></polyline></svg>
+                                <p class="text-xs text-gray-700 font-medium">KING OF TIME</p>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
+                            </div>
+                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                                <svg class="w-16 h-16 mx-auto mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <p class="text-xs text-gray-700 font-medium">SmartHR</p>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
+                            </div>
+                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                                <svg class="w-16 h-16 mx-auto mb-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="6" x2="15" y2="6"></line><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="13" y2="14"></line><line x1="9" y1="18" x2="11" y2="18"></line></svg>
+                                <p class="text-xs text-gray-700 font-medium">マネーフォワード給与</p>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
+                            </div>
+                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                                <svg class="w-16 h-16 mx-auto mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12,6 12,12 16,14"></polyline></svg>
+                                <p class="text-xs text-gray-700 font-medium">ジョブカン勤怠管理</p>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
+                            </div>
+                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                                <svg class="w-16 h-16 mx-auto mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14,2 14,8 20,8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10,9 9,9 8,9"></polyline></svg>
+                                <p class="text-xs text-gray-700 font-medium">freee人事労務</p>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
+                            </div>
+                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                                <svg class="w-16 h-16 mx-auto mb-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="6" x2="15" y2="6"></line><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="13" y2="14"></line><line x1="9" y1="18" x2="11" y2="18"></line></svg>
+                                <p class="text-xs text-gray-700 font-medium">弥生給与</p>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Supported Systems Auto Scroll -->
-                <div class="supported-systems bg-white/90 backdrop-blur-sm py-6 px-4 rounded-2xl mx-4 mt-16 mb-8 shadow-lg border border-white/20">
-                     <!-- クローラー向け事務所概要 -->
-                     <p class="text-center text-blue-900/60 text-xs mb-2">
-                         仙台の社労士として、宮城県内の中小企業様の社会保険手続き・給与計算・助成金申請・就業規則作成を幅広くサポートしています。
-                     </p>
-                     <h3 class="text-center text-blue-900 font-bold text-lg mb-4">対応可能システム</h3>
-                     <div class="scroll-container overflow-hidden">
-                         <div class="scroll-content flex animate-scroll">
-                             <div class="system-item flex-shrink-0 mx-4 text-center">
-                                 <svg class="w-16 h-16 mx-auto mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                     <circle cx="12" cy="12" r="10"></circle>
-                                     <polyline points="12,6 12,12 16,14"></polyline>
-                                 </svg>
-                                 <p class="text-xs text-gray-700 font-medium">KING OF TIME</p>
-                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                             </div>
-                             <div class="system-item flex-shrink-0 mx-4 text-center">
-                                 <svg class="w-16 h-16 mx-auto mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                     <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                 </svg>
-                                 <p class="text-xs text-gray-700 font-medium">SmartHR</p>
-                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                             </div>
-                             <div class="system-item flex-shrink-0 mx-4 text-center">
-                                 <svg class="w-16 h-16 mx-auto mb-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                     <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-                                     <line x1="9" y1="6" x2="15" y2="6"></line>
-                                     <line x1="9" y1="10" x2="15" y2="10"></line>
-                                     <line x1="9" y1="14" x2="13" y2="14"></line>
-                                     <line x1="9" y1="18" x2="11" y2="18"></line>
-                                 </svg>
-                                 <p class="text-xs text-gray-700 font-medium">マネーフォワード給与</p>
-                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                             </div>
-                             <div class="system-item flex-shrink-0 mx-4 text-center">
-                                 <svg class="w-16 h-16 mx-auto mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                     <circle cx="12" cy="12" r="10"></circle>
-                                     <polyline points="12,6 12,12 16,14"></polyline>
-                                 </svg>
-                                 <p class="text-xs text-gray-700 font-medium">ジョブカン勤怠管理</p>
-                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                             </div>
-                             <div class="system-item flex-shrink-0 mx-4 text-center">
-                                 <svg class="w-16 h-16 mx-auto mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                     <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
-                                     <polyline points="14,2 14,8 20,8"></polyline>
-                                     <line x1="16" y1="13" x2="8" y2="13"></line>
-                                     <line x1="16" y1="17" x2="8" y2="17"></line>
-                                     <polyline points="10,9 9,9 8,9"></polyline>
-                                 </svg>
-                                 <p class="text-xs text-gray-700 font-medium">freee人事労務</p>
-                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                             </div>
-                             <div class="system-item flex-shrink-0 mx-4 text-center">
-                                 <svg class="w-16 h-16 mx-auto mb-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                     <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-                                     <line x1="9" y1="6" x2="15" y2="6"></line>
-                                     <line x1="9" y1="10" x2="15" y2="10"></line>
-                                     <line x1="9" y1="14" x2="13" y2="14"></line>
-                                     <line x1="9" y1="18" x2="11" y2="18"></line>
-                                 </svg>
-                                 <p class="text-xs text-gray-700 font-medium">弥生給与</p>
-                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                             </div>
-                             <!-- 繰り返し -->
-                             <div class="system-item flex-shrink-0 mx-4 text-center">
-                                 <svg class="w-16 h-16 mx-auto mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                     <circle cx="12" cy="12" r="10"></circle>
-                                     <polyline points="12,6 12,12 16,14"></polyline>
-                                 </svg>
-                                 <p class="text-xs text-gray-700 font-medium">KING OF TIME</p>
-                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                             </div>
-                             <div class="system-item flex-shrink-0 mx-4 text-center">
-                                 <svg class="w-16 h-16 mx-auto mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                     <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                 </svg>
-                                 <p class="text-xs text-gray-700 font-medium">SmartHR</p>
-                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                             </div>
-                             <div class="system-item flex-shrink-0 mx-4 text-center">
-                                 <svg class="w-16 h-16 mx-auto mb-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                     <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-                                     <line x1="9" y1="6" x2="15" y2="6"></line>
-                                     <line x1="9" y1="10" x2="15" y2="10"></line>
-                                     <line x1="9" y1="14" x2="13" y2="14"></line>
-                                     <line x1="9" y1="18" x2="11" y2="18"></line>
-                                 </svg>
-                                 <p class="text-xs text-gray-700 font-medium">マネーフォワード給与</p>
-                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                             </div>
-                             <div class="system-item flex-shrink-0 mx-4 text-center">
-                                 <svg class="w-16 h-16 mx-auto mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                     <circle cx="12" cy="12" r="10"></circle>
-                                     <polyline points="12,6 12,12 16,14"></polyline>
-                                 </svg>
-                                 <p class="text-xs text-gray-700 font-medium">ジョブカン勤怠管理</p>
-                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                             </div>
-                             <div class="system-item flex-shrink-0 mx-4 text-center">
-                                 <svg class="w-16 h-16 mx-auto mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                     <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
-                                     <polyline points="14,2 14,8 20,8"></polyline>
-                                     <line x1="16" y1="13" x2="8" y2="13"></line>
-                                     <line x1="16" y1="17" x2="8" y2="17"></line>
-                                     <polyline points="10,9 9,9 8,9"></polyline>
-                                 </svg>
-                                 <p class="text-xs text-gray-700 font-medium">freee人事労務</p>
-                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                             </div>
-                             <div class="system-item flex-shrink-0 mx-4 text-center">
-                                 <svg class="w-16 h-16 mx-auto mb-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                     <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-                                     <line x1="9" y1="6" x2="15" y2="6"></line>
-                                     <line x1="9" y1="10" x2="15" y2="10"></line>
-                                     <line x1="9" y1="14" x2="13" y2="14"></line>
-                                     <line x1="9" y1="18" x2="11" y2="18"></line>
-                                 </svg>
-                                 <p class="text-xs text-gray-700 font-medium">弥生給与</p>
-                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
             </section>
 
             <!-- Quick Access -->
-            <div class="container mx-auto px-4 -mt-16 mb-20 relative z-10">
+            <div class="container mx-auto px-4 mb-20 relative z-10">
                 <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-10 border border-gray-100">
                     <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10">
                         <div class="text-center md:text-left md:min-w-[220px]">
@@ -554,7 +651,7 @@
                 </div>
             </div>
 
-            <!-- 新規顧問契約特典 -->
+            <!-- 新規顧問契約特典バナー（ホーム：誘導カード） -->
             <div class="container mx-auto px-4 mb-20 relative">
                 <div class="max-w-5xl mx-auto">
                     <div class="text-center mb-6 animate-bounce">
@@ -566,92 +663,36 @@
                         </div>
                     </div>
                     
-                    <div class="relative bg-gradient-to-br from-red-500 via-orange-500 to-yellow-500 rounded-[2.5rem] shadow-[0_20px_60px_rgba(234,88,12,0.5)] p-1 animate-pulse-slow">
-                        <div class="bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 rounded-[2.3rem] p-8 md:p-12 relative overflow-hidden">
-                            <div class="absolute top-4 right-4 text-yellow-300 text-4xl animate-ping">✨</div>
-                            <div class="absolute top-8 left-8 text-yellow-300 text-3xl animate-ping" style="animation-delay: 0.5s;">⭐</div>
-                            <div class="absolute bottom-8 right-12 text-yellow-300 text-5xl animate-ping" style="animation-delay: 1s;">🎁</div>
-                            <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48"></div>
-                            <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -ml-32 -mb-32"></div>
-                            <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[32px] border-r-[32px] border-t-[32px] border-l-transparent border-r-transparent border-t-pink-600"></div>
-                            
-                            <div class="relative z-10">
-                                <div class="flex items-center justify-center mb-8">
-                                    <div class="bg-white px-8 py-4 rounded-2xl font-black text-xl shadow-2xl border-4 border-yellow-400">
-                                        <div class="flex items-center gap-3">
-                                            <span class="text-4xl">🎉</span>
-                                            <span class="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">期間限定！新規顧問契約特典</span>
-                                            <span class="text-4xl">🎉</span>
-                                        </div>
+                    <!-- ホーム誘導カード（クリックでキャンペーンページへ） -->
+                    <button onclick="showPage('campaign')" class="w-full text-left group relative bg-gradient-to-br from-red-500 via-orange-500 to-yellow-500 rounded-[2rem] shadow-[0_16px_48px_rgba(234,88,12,0.45)] p-1 animate-pulse-slow hover:shadow-[0_20px_60px_rgba(234,88,12,0.6)] transition-shadow duration-300">
+                        <div class="bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 rounded-[1.8rem] px-8 py-10 md:py-12 relative overflow-hidden">
+                            <div class="absolute top-4 right-4 text-yellow-300 text-3xl animate-ping">✨</div>
+                            <div class="absolute top-8 left-8 text-yellow-300 text-2xl animate-ping" style="animation-delay:0.5s;">⭐</div>
+                            <div class="absolute bottom-6 right-12 text-yellow-300 text-4xl animate-ping" style="animation-delay:1s;">🎁</div>
+                            <div class="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full -mr-40 -mt-40"></div>
+                            <div class="absolute bottom-0 left-0 w-56 h-56 bg-white/5 rounded-full -ml-28 -mb-28"></div>
+                            <div class="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                                <div class="flex-1 text-center md:text-left">
+                                    <div class="inline-flex items-center gap-2 bg-white/15 border border-white/30 text-yellow-300 px-5 py-1.5 rounded-full text-sm font-bold mb-4">
+                                        🎉 期間限定！新規顧問契約特典
                                     </div>
-                                </div>
-                                
-                                <div class="text-center mb-10">
-                                    <div class="inline-block bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full mb-4">
-                                        <p class="text-yellow-300 font-bold text-sm">顧問契約締結企業様限定プレゼント</p>
-                                    </div>
-                                    <h3 class="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
-                                        簡易出退勤アプリを<br class="md:hidden">
-                                        <span class="text-yellow-300 text-5xl md:text-7xl">完全無料</span>で提供！
+                                    <h3 class="text-3xl md:text-5xl font-black text-white mb-3 drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)] leading-tight">
+                                        簡易出退勤アプリを<br>
+                                        <span class="text-yellow-300">完全無料</span>で提供！
                                     </h3>
-                                    <p class="text-white text-xl md:text-2xl leading-relaxed font-bold drop-shadow-lg">
-                                        「タイムカード管理が面倒」「Excelでは不安」<br class="hidden md:block">
-                                        そんなお悩みを<span class="bg-yellow-300 text-orange-600 px-3 py-1 rounded-lg">ゼロ円</span>で解決します！
+                                    <p class="text-white/90 text-base md:text-lg font-bold">
+                                        タイムカード管理の悩みを<span class="bg-yellow-300 text-orange-600 px-2 py-0.5 rounded-md mx-1">ゼロ円</span>で解決。詳細はこちら →
                                     </p>
                                 </div>
-                                
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                                    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl transform hover:scale-105 transition border-4 border-yellow-300">
-                                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xl">
-                                            <svg class="w-11 h-11 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                        </div>
-                                        <h4 class="font-black text-xl mb-3 text-gray-800">ワンタッチ打刻</h4>
-                                        <p class="text-gray-600 font-medium">スマホ・PCから<br>簡単に出退勤を記録</p>
+                                <div class="flex-shrink-0">
+                                    <div class="bg-white text-orange-600 font-black text-lg px-8 py-5 rounded-2xl shadow-2xl border-4 border-yellow-300 group-hover:scale-105 transition-transform duration-200 flex items-center gap-3 animate-bounce-slow">
+                                        <span>詳しく見る</span>
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                                     </div>
-                                    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl transform hover:scale-105 transition border-4 border-yellow-300">
-                                        <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-700 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xl">
-                                            <svg class="w-11 h-11 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                                        </div>
-                                        <h4 class="font-black text-xl mb-3 text-gray-800">自動集計</h4>
-                                        <p class="text-gray-600 font-medium">勤怠データを自動集計<br>CSV出力も可能</p>
-                                    </div>
-                                    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl transform hover:scale-105 transition border-4 border-yellow-300">
-                                        <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xl">
-                                            <svg class="w-11 h-11 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                        </div>
-                                        <h4 class="font-black text-xl mb-3 text-gray-800">ずっと0円</h4>
-                                        <p class="text-gray-600 font-medium">初期費用・月額費用<br>すべて無料</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="bg-yellow-300 rounded-3xl p-8 mb-10 border-4 border-yellow-500 shadow-2xl">
-                                    <div class="flex items-start gap-5 text-gray-900">
-                                        <svg class="w-12 h-12 flex-shrink-0 mt-1 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
-                                        <div>
-                                            <h5 class="font-black text-2xl mb-3 text-red-600">💡 こんな企業様におすすめ</h5>
-                                            <p class="text-lg leading-relaxed font-bold text-gray-900">
-                                                タイムカードの手作業集計から解放されたい／Excelでの管理ミスをなくしたい／従業員の勤怠を正確に把握したい／低コストで勤怠管理を始めたい
-                                            </p>
-                                            <p class="text-lg mt-4 leading-relaxed font-black text-red-700">
-                                                ⚡ 顧問契約期間中は<span class="text-2xl underline">永久無料</span>でご利用いただけます！
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="text-center">
-                                    <button onclick="showPage('contact')" class="bg-white text-orange-600 hover:bg-yellow-50 font-black py-8 px-16 md:px-20 rounded-[2rem] transition shadow-[0_10px_40px_rgba(0,0,0,0.3)] text-2xl md:text-3xl transform hover:scale-110 inline-flex items-center gap-4 border-4 border-yellow-300 animate-bounce-slow">
-                                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                                        <span>今すぐ無料相談</span>
-                                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-                                    </button>
-                                    <p class="text-white text-lg mt-6 font-bold drop-shadow-lg">
-                                        ※ まずはお気軽にお問い合わせください　相談は完全無料です
-                                    </p>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </button>
                 </div>
             </div>
 
@@ -1497,7 +1538,7 @@
 
             <div class="container mx-auto px-4 max-w-6xl py-16 md:py-20">
 
-                <!-- ===== 全文検索ボックス（Step 2） ===== -->
+                <!-- ===== 全文検索ボックス ===== -->
                 <div id="search-container" class="mb-6">
                     <div class="relative">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg pointer-events-none select-none">🔍</span>
@@ -1505,14 +1546,12 @@
                             type="search"
                             id="search-input"
                             placeholder="キーワードで検索（例：残業代、助成金、育休）"
-                            class="w-full pl-11 pr-12 py-3 rounded-xl border border-gray-200 bg-white text-sm
-                                   text-gray-800 placeholder-gray-400 shadow-sm transition"
+                            class="w-full pl-11 pr-12 py-3 rounded-xl border border-gray-200 bg-white text-sm text-gray-800 placeholder-gray-400 shadow-sm transition"
                             autocomplete="off"
                         >
                         <button
                             id="search-clear"
-                            class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700
-                                   transition hidden text-xl leading-none font-bold"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 transition hidden text-xl leading-none font-bold"
                             aria-label="検索をクリア"
                         >×</button>
                     </div>
@@ -3313,6 +3352,117 @@
         </section>
 
         <!-- SOLUTIONS PAGE (Dynamic) -->
+        <!-- ===== キャンペーンページ ===== -->
+        <section id="page-campaign" class="hidden py-16 md:py-24" style="background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 40%, #fff1f2 100%); min-height: 80vh;">
+            <div class="container mx-auto px-4 max-w-5xl">
+
+                <!-- パンくず -->
+                <div class="flex items-center gap-2 text-sm text-gray-500 mb-8">
+                    <button onclick="showPage('home')" class="hover:text-blue-700 transition">ホーム</button>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    <span class="text-orange-600 font-bold">キャンペーン</span>
+                </div>
+
+                <!-- ヘッダー -->
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center gap-3 bg-gradient-to-r from-blue-900 to-blue-700 text-white px-8 py-3 rounded-full shadow-2xl font-black text-base border-4 border-blue-300 mb-6 animate-bounce">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"/></svg>
+                        <span>今だけの特別キャンペーン！</span>
+                    </div>
+                </div>
+
+                <!-- メインバナー -->
+                <div class="relative bg-gradient-to-br from-red-500 via-orange-500 to-yellow-500 rounded-[2.5rem] shadow-[0_20px_60px_rgba(234,88,12,0.5)] p-1 animate-pulse-slow mb-12">
+                    <div class="bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 rounded-[2.3rem] p-8 md:p-12 relative overflow-hidden">
+                        <div class="absolute top-4 right-4 text-yellow-300 text-4xl animate-ping">✨</div>
+                        <div class="absolute top-8 left-8 text-yellow-300 text-3xl animate-ping" style="animation-delay:0.5s;">⭐</div>
+                        <div class="absolute bottom-8 right-12 text-yellow-300 text-5xl animate-ping" style="animation-delay:1s;">🎁</div>
+                        <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48"></div>
+                        <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -ml-32 -mb-32"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-center mb-8">
+                                <div class="bg-white px-8 py-4 rounded-2xl font-black text-xl shadow-2xl border-4 border-yellow-400">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-4xl">🎉</span>
+                                        <span class="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">期間限定！新規顧問契約特典</span>
+                                        <span class="text-4xl">🎉</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mb-10">
+                                <div class="inline-block bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full mb-4">
+                                    <p class="text-yellow-300 font-bold text-sm">顧問契約締結企業様限定プレゼント</p>
+                                </div>
+                                <h1 class="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
+                                    簡易出退勤アプリを<br class="md:hidden">
+                                    <span class="text-yellow-300 text-5xl md:text-7xl">完全無料</span>で提供！
+                                </h1>
+                                <p class="text-white text-xl md:text-2xl leading-relaxed font-bold drop-shadow-lg">
+                                    「タイムカード管理が面倒」「Excelでは不安」<br class="hidden md:block">
+                                    そんなお悩みを<span class="bg-yellow-300 text-orange-600 px-3 py-1 rounded-lg">ゼロ円</span>で解決します！
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3つの特徴カード -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl hover:scale-105 transition border-4 border-yellow-300">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xl">
+                            <svg class="w-11 h-11 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <h4 class="font-black text-xl mb-3 text-gray-800">ワンタッチ打刻</h4>
+                        <p class="text-gray-600 font-medium">スマホ・PCから<br>簡単に出退勤を記録</p>
+                    </div>
+                    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl hover:scale-105 transition border-4 border-yellow-300">
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-700 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xl">
+                            <svg class="w-11 h-11 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        </div>
+                        <h4 class="font-black text-xl mb-3 text-gray-800">自動集計</h4>
+                        <p class="text-gray-600 font-medium">勤怠データを自動集計<br>CSV出力も可能</p>
+                    </div>
+                    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl hover:scale-105 transition border-4 border-yellow-300">
+                        <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xl">
+                            <svg class="w-11 h-11 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <h4 class="font-black text-xl mb-3 text-gray-800">ずっと0円</h4>
+                        <p class="text-gray-600 font-medium">初期費用・月額費用<br>すべて無料</p>
+                    </div>
+                </div>
+
+                <!-- おすすめ企業 -->
+                <div class="bg-yellow-300 rounded-3xl p-8 mb-12 border-4 border-yellow-500 shadow-2xl">
+                    <div class="flex items-start gap-5 text-gray-900">
+                        <svg class="w-12 h-12 flex-shrink-0 mt-1 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                        <div>
+                            <h5 class="font-black text-2xl mb-3 text-red-600">💡 こんな企業様におすすめ</h5>
+                            <p class="text-lg leading-relaxed font-bold text-gray-900">
+                                タイムカードの手作業集計から解放されたい／Excelでの管理ミスをなくしたい／従業員の勤怠を正確に把握したい／低コストで勤怠管理を始めたい
+                            </p>
+                            <p class="text-lg mt-4 leading-relaxed font-black text-red-700">
+                                ⚡ 顧問契約期間中は<span class="text-2xl underline">永久無料</span>でご利用いただけます！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTAボタン -->
+                <div class="text-center">
+                    <button onclick="showPage('contact')" class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-black py-7 px-14 md:px-20 rounded-[2rem] transition shadow-[0_10px_40px_rgba(234,88,12,0.4)] text-2xl md:text-3xl inline-flex items-center gap-4 border-4 border-yellow-300 animate-bounce-slow">
+                        <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <span>今すぐ無料相談</span>
+                        <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                    </button>
+                    <p class="text-gray-600 text-base mt-6 font-bold">
+                        ※ まずはお気軽にお問い合わせください　相談は完全無料です
+                    </p>
+                    <button onclick="showPage('home')" class="mt-6 text-sm text-gray-400 hover:text-blue-700 underline transition">← ホームに戻る</button>
+                </div>
+
+            </div>
+        </section>
+
         <section id="page-solutions" class="py-16 md:py-24 bg-white min-h-[60vh] hidden">
             <div class="container mx-auto px-4 max-w-4xl">
                 <div id="solution-content"></div>
@@ -3463,33 +3613,6 @@
 <!-- コラム機能 -->
 <link rel="stylesheet" href="./style.css">
 <script src="./columns-data.js"></script>
-
-<!-- ===== 全文検索 初期化フック（Step 5） ===== -->
-<script>
-(function () {
-    // script.js の showPage をラップして blog 表示時に initSearch() を呼び出す
-    document.addEventListener('DOMContentLoaded', function () {
-        // showPage が script.js で定義されるのを待つため MutationObserver ではなく
-        // script.js は同期読み込みのため DOMContentLoaded 時点で確実に存在する
-        var _origShowPage = window.showPage;
-        if (typeof _origShowPage === 'function') {
-            window.showPage = function (page) {
-                _origShowPage(page);
-                if (page === 'blog') {
-                    // DOM描画後に初期化（renderBlogGrid は showPage 内で呼ばれる想定）
-                    setTimeout(function () { initSearch(); }, 0);
-                }
-            };
-        } else {
-            // showPage が未定義の場合（DOMContentLoaded 前に呼ばれる可能性）
-            // blog-grid が存在するときに initSearch を呼ぶ安全策
-            if (document.getElementById('search-input')) {
-                initSearch();
-            }
-        }
-    });
-}());
-</script>
 <!-- チャットボット（独立ファイル） -->
 <link rel="stylesheet" href="./chatbot.css">
 
@@ -3558,6 +3681,7 @@
 <script src="./subsidy-sim.js" defer></script>
 
 <script src="./script.js"></script>
+<script src="./hero-slider.js" defer></script>
 
 <!-- ===== YouTube セクション スクリプト（ホーム用＋専用ページ用） ===== -->
 <script>
