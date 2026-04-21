@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 既存のカスタムスタイルをインポート */
+@import "../../style.css";
+@import "../../chatbot.css";
+@import "../../price-simulator.css";
+@import "../../salary-calc-page.css";
+@import "./spot-form.css";
+@import "./toast.css"; /* 必要に応じて追加 */

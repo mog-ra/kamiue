@@ -1,532 +1,258 @@
-// =============================================
-// 外部ライブラリ読み込み
-// ※ HTMLの <head> または <body> 末尾に以下を記述してください
-// <script src="https://cdn.tailwindcss.com"></script>
-// =============================================
-
-// --- DL_PDF_DATA (全6ファイル対応) ---
-const DL_PDF_DATA = [
-    { filename: "01_shugyo_kisoku.pdf",      title: "就業規則 作成テンプレート集",         emoji: "📋", url: "./files/01_shugyo_kisoku.pdf" },
-    { filename: "02_36_kyotei_manual.pdf",   title: "36協定 届出マニュアル",               emoji: "📄", url: "./files/02_36_kyotei_manual.pdf" },
-    { filename: "03_joseikin_guide.pdf",     title: "【最新版】助成金活用ガイドブック",     emoji: "💡", url: "./files/03_joseikin_guide.pdf" },
-    { filename: "04_koyo_keiyaku_sample.pdf",title: "雇用契約書・労働条件通知書サンプル",  emoji: "📝", url: "./files/04_koyo_keiyaku_sample.pdf" },
-    { filename: "05_telework_kitei.pdf",     title: "テレワーク導入・運用規定案",          emoji: "💻", url: "./files/05_telework_kitei.pdf" },
-    { filename: "06_stress_check_guide.pdf", title: "メンタルヘルス実施ガイド",            emoji: "🧠", url: "./files/06_stress_check_guide.pdf" }
-];
-
-// ダウンロード関数（チャットボット等から直接呼び出す用）
-function downloadPDF(index) {
-    const item = DL_PDF_DATA[index];
-    if (!item) return;
-    
-    const link = document.createElement('a');
-    link.href = item.url;
-    link.download = item.filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
-
-
-// =============================================
-// 無料資料ダウンロード モーダル制御
-// =============================================
-
-// HTMLカードの表示順（index 0〜5）と対応するPDFファイル
-// ※ HTMLの dlOpenModal(N) のN番号と順番を一致させること
-const DL_MODAL_ITEMS = [
-    { emoji: '📋', title: '就業規則 作成テンプレート集',              filename: '01_shugyo_kisoku.pdf',       url: './files/01_shugyo_kisoku.pdf' },
-    { emoji: '💰', title: '助成金申請 完全マニュアル',                filename: '03_joseikin_guide.pdf',      url: './files/03_joseikin_guide.pdf' },
-    { emoji: '⚖️', title: '労務リスク 50項目チェックリスト',         filename: '02_36_kyotei_manual.pdf',    url: './files/02_36_kyotei_manual.pdf' },
-    { emoji: '📊', title: '社会保険料 早見表 2025年度版',             filename: '04_koyo_keiyaku_sample.pdf', url: './files/04_koyo_keiyaku_sample.pdf' },
-    { emoji: '🏢', title: 'はじめて社員を雇う時の手続き完全ガイド',  filename: '05_telework_kitei.pdf',      url: './files/05_telework_kitei.pdf' },
-    { emoji: '🕐', title: '36協定 作成・届出 実務ガイドブック',       filename: '06_stress_check_guide.pdf',  url: './files/06_stress_check_guide.pdf' },
-];
-
-let _dlCurrentIndex = 0;
-
-// モーダルを開く
-function dlOpenModal(index) {
-    _dlCurrentIndex = index;
-    const item = DL_MODAL_ITEMS[index];
-    if (!item) {
-        console.error("dlOpenModal: 該当する資料が見つかりません index =", index);
-        return;
-    }
-
-    // ヘッダー内容を更新
-    const emojiEl = document.getElementById('dl-modal-emoji');
-    const titleEl = document.getElementById('dl-modal-title');
-    if (emojiEl) emojiEl.textContent = item.emoji;
-    if (titleEl) titleEl.textContent = item.title;
-
-    // フォームをリセット
-    const nameEl    = document.getElementById('dl-name');
-    const emailEl   = document.getElementById('dl-email');
-    const companyEl = document.getElementById('dl-company');
-    const newsEl    = document.getElementById('dl-newsletter');
-    const errorEl   = document.getElementById('dl-form-error');
-    if (nameEl)    nameEl.value = '';
-    if (emailEl)   emailEl.value = '';
-    if (companyEl) companyEl.value = '';
-    if (newsEl)    newsEl.checked = true;
-    if (errorEl)   errorEl.classList.add('hidden');
-
-    // フォームエリアを表示、完了エリアを非表示
-    const formArea    = document.getElementById('dl-form-area');
-    const successArea = document.getElementById('dl-success-area');
-    if (formArea)    formArea.classList.remove('hidden');
-    if (successArea) successArea.classList.add('hidden');
-
-    // オーバーレイを表示（display:flex に切り替え）
-    const overlay = document.getElementById('dl-modal-overlay');
-    if (overlay) {
-        overlay.style.display = 'flex';
-        // iOS Safari対応：position:fixedでbody固定し、スクロール位置を保持
-        const scrollY = window.scrollY;
-        document.body.style.top = '-' + scrollY + 'px';
-        document.body.classList.add('modal-open');
-        document.body.dataset.scrollY = scrollY;
-    }
-}
-
-// モーダルを閉じる
-function dlCloseModal() {
-    const overlay = document.getElementById('dl-modal-overlay');
-    if (overlay) overlay.style.display = 'none';
-    // iOS Safari対応：スクロール位置を復元してからbody固定を解除
-    const scrollY = parseInt(document.body.dataset.scrollY || '0', 10);
-    document.body.classList.remove('modal-open');
-    document.body.style.top = '';
-    window.scrollTo(0, scrollY);
-}
-
-// オーバーレイ背景クリックで閉じる
-function dlOverlayClick(event) {
-    if (event.target === document.getElementById('dl-modal-overlay')) {
-        dlCloseModal();
-    }
-}
-
-// フォーム送信・ダウンロード実行
-function dlSubmit() {
-    const name    = (document.getElementById('dl-name')?.value  || '').trim();
-    const email   = (document.getElementById('dl-email')?.value || '').trim();
-    const errorEl = document.getElementById('dl-form-error');
-
-    // バリデーション
-    if (!name || !email) {
-        if (errorEl) errorEl.classList.remove('hidden');
-        return;
-    }
-    if (errorEl) errorEl.classList.add('hidden');
-
-    const item = DL_MODAL_ITEMS[_dlCurrentIndex];
-    if (!item) return;
-
-    // ① ファイルを即ダウンロード
-    const link = document.createElement('a');
-    link.href = item.url;
-    link.download = item.filename;
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    try {
-        link.click();
-    } catch (e) {
-        console.error("ダウンロードエラー:", e);
-    }
-    document.body.removeChild(link);
-
-    // ② Formspree でリード情報をメール通知（任意）
-    //    https://formspree.io/ で無料アカウントを作成し、
-    //    フォームIDを取得して YOUR_FORM_ID を置き換えてコメントを外してください。
-    // -------------------------------------------------------
-    // const company    = (document.getElementById('dl-company')?.value || '').trim();
-    // const newsletter = document.getElementById('dl-newsletter')?.checked ?? true;
-    // fetch('https://formspree.io/f/YOUR_FORM_ID', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ name, email, company, newsletter, document: item.title }),
-    // }).catch(err => console.warn('Formspree送信エラー:', err));
-    // -------------------------------------------------------
-
-    // ③ 完了画面に切り替え
-    const formArea    = document.getElementById('dl-form-area');
-    const successArea = document.getElementById('dl-success-area');
-    if (formArea)    formArea.classList.add('hidden');
-    if (successArea) successArea.classList.remove('hidden');
-}
-
-
-// =============================================
-// ダウンロードページ バナー一括登録
-// ※ 「まとめて受け取る」ボタン (dlBannerRegister) から呼ばれる
-// =============================================
-function dlBannerRegister() {
-    const emailEl    = document.getElementById('dl-banner-email');
-    const bannerForm = document.getElementById('dl-banner-form');
-    const bannerDone = document.getElementById('dl-banner-done');
-    const email      = (emailEl?.value || '').trim();
-
-    // メールアドレス簡易バリデーション
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        if (emailEl) {
-            emailEl.style.border       = '2px solid #ef4444';
-            emailEl.style.background   = '#fff5f5';
-            emailEl.placeholder        = '正しいメールアドレスを入力してください';
+/**
+ * カミウエ社会保険労務士事務所 メインアプリケーション
+ */
+const App = {
+    // 内部状態
+    state: {
+        dlCurrentIndex: 0,
+        validPages: [
+            'home','services','about','links','faq','contact','solutions','blog',
+            'checkup','subsidy-sim','salary-calc','download','dl-thankyou',
+            'price-sim','spot','article-detail','youtube','campaign'
+        ],
+        solutions: {
+            'subsidy':    { icon: '💰', title: '助成金を活用したい',           description: '返済不要の助成金は、企業の成長を加速させる貴重な財源です。雇用維持、設備投資、教育訓練など、最新の2025年度改正に対応した最適な制度をご提案。煩雑な申請プロセスをプロに任せることで、受給可能性を最大化します。', image: './subsidy.webp', steps: [{title:'精密無料診断',desc:'ヒアリングに基づき、キャリアアップ助成金や業務改善助成金など、受給可能な制度を網羅的にリストアップします。'},{title:'戦略的計画策定',desc:'「いつ、誰を、どう雇用するか」など、受給要件を満たすための社内規定の整備や事業計画を専門家が立案します。'},{title:'完全代行申請',desc:'労働局やハローワークへの膨大な提出書類作成と窓口対応を全て代行。不備による不支給リスクを徹底排除します。'},{title:'継続的フォロー',desc:'受給後の実施報告や、年度ごとに変わる最新の助成金情報の提供を行い、中長期的な資金活用をサポートします。'}], point: '弊所は完全成功報酬型を採用。着手金不要で、受給が確定するまで費用は一切発生しません。攻めの経営をバックアップします。' },
+            'payroll':    { icon: '📊', title: '給与計算を外注したい',           description: '給与計算は「間違えて当然」ではなく「間違えてはいけない」業務です。法改正による社会保険料率の変更や所得税計算、年末調整までを完全自動化。属人化を排除し、コスト削減とコンプライアンス強化を同時に実現します。', image: './payroll.webp', steps: [{title:'業務フロー構築',desc:'現行の計算方法を精査し、クラウドツール等を活用したミスが起きない最適な運用フローをゼロから設計します。'},{title:'精緻な計算実行',desc:'定昇・賞与・残業代、さらに複雑な社会保険料の随時改定（月変）まで、専門知識に基づき正確に算出します。'},{title:'WEB明細・データ連携',desc:'全従業員への WEB明細発行に加え、銀行振込データの作成、会計ソフトへの仕訳連携まで対応し、事務作業を極小化します。'},{title:'年末調整・算定業務',desc:'年に一度の重要業務である年末調整や社会保険の算定基礎届もパッケージ。一年を通じて一貫した管理を行います。'}], point: '経営リソースを給与計算という「管理業務」から、売上を作る「本業」へ。弊所が貴社の給与計算部として機能します。' },
+            'trouble':    { icon: '⚖️', title: '従業員とのトラブルを防ぎたい', description: '解雇、残業代未払い、ハラスメントなど、ひとたびトラブルが発生すれば多大な賠償金や企業イメージの低下を招きます。弊所は「起きてから解決する」のではなく「起きない仕組みを作る」予防労務を徹底しています。', image: './trouble.webp', steps: [{title:'労務リスク監査',desc:'現状の雇用契約、勤怠管理、賃金体系をプロの視点で総点検し、将来的に訴訟や労働局調査の火種となる箇所を特定します。'},{title:'防御力の高い規程整備',desc:'判例に基づき、会社を守るための条文を盛り込んだ就業規則や労使協定（36協定等）をオーダーメイドで整備します。'},{title:'相談窓口の外注化',desc:'社内では言いづらいハラスメント等の相談窓口を弊所が代行。早期発見により、問題の深刻化を未然に防ぎます。'},{title:'管理職マネジメント教育',desc:'トラブルの多くは現場の不適切な言動から。最新の法知識とマネジメント手法を伝える研修を通じ、組織の質を高めます。'}], point: '労働基準監督署の臨検（調査）対策も万全。調査官の視点を熟知した社労士が、貴社の盾となり伴走します。' },
+            'startup':    { icon: '🏢', title: '会社を設立したばかり',           description: '創業期は「売上」に集中すべき時期。しかし、最初の1人の雇用で発生する法的義務は膨大です。社会保険の新規適用から、助成金の獲得、最小限のコストで構築する労務基盤まで、スタートアップ特有の課題を解決します。', image: './startup.webp', steps: [{title:'スピード新規適用',desc:'健康保険・厚生年金・雇用保険の立ち上げ手続きを迅速に代行。従業員が安心して働ける環境を即座に構築します。'},{title:'創業助成金セット',desc:'創業時にしか申請できない助成金や、新規雇用で使える支援金を提案。キャッシュフローの改善に寄与します。'},{title:'ミニマム就業規則',desc:'まずは「これだけは必要」というコアな規則と雇用契約書を整備。成長に合わせて拡張できる柔軟な基盤を作ります。'},{title:'給与・評価の型作り',desc:'今後の採用競争力を左右する初任給の設定や、シンプルな評価基準の設計など、成長に向けた人事をサポートします。'}], point: '宮城県内のスタートアップ支援実績多数。融資や税務についても、提携する他士業（税理士・司法書士等）と連携可能です。' },
+            'it':         { icon: '💻', title: 'クラウド勤怠・労務DXを導入したい', description: 'Excelや紙の管理はもう限界。マネーフォワードやジョブカン、KING OF TIMEなどの最新ITツールを導入し、バックオフィスをデジタル化。リアルタイムでの労働時間把握により、生産性向上と残業代適正化を推進します。', image: './it.webp', steps: [{title:'IT適正ツール診断',desc:'企業規模、勤務体系（シフト制・フレックス等）、ご予算に合わせて、数あるクラウドサービスから最適なものを選定します。'},{title:'社労士マスター設定',desc:'「システムを入れたが設定が間違っていた」という失敗を防ぐため、就業規則に基づいた法的根拠ある初期設定を行います。'},{title:'操作定着支援',desc:'管理者はもちろん、従業員がスマホでスムーズに打刻・申請できるよう、説明会やマニュアル提供で現場への定着を支援します。'},{title:'データ活用コンサル',desc:'集まったデータを分析し、過重労働の予兆検知や、人件費の最適化など、データに基づく経営判断をサポートします。'}], point: 'ITに強い社労士事務所として、単なるツール導入で終わらせません。業務が「本当に楽になる」まで責任を持って支援します。' },
+            'employment': { icon: '📝', title: '就業規則を整備したい',           description: '就業規則は「形だけあればいい」ものではありません。2025年4月の育児介護休業法改正など、頻繁な法改正への対応は必須。貴社の独自の風土を守りつつ、法的リスクを最小化する最強の「会社の憲法」をオーダーメイドで作成します。', image: './employment.webp', steps: [{title:'現行規則の無料診断',desc:'お手元の就業規則が最新の法律に適合しているか、逆に会社にとって不利な規定がないか、スコアリング形式で診断します。'},{title:'経営理念の反映',desc:'単なる法律のコピペではなく、会社が従業員に期待することや、独自の表彰制度などを盛り込み、組織を強くする内容にします。'},{title:'付属規程の充実',desc:'テレワーク規程、ハラスメント防止規定、慶弔見舞金規定など、実務で必要となる各種細則まで網羅的に整備します。'},{title:'法改正ウォッチング',desc:'一度作って終わりにせず、法改正のたびに最新状態をキープするための継続的なアップデートをご提案します。'}], point: '就業規則は「作って終わり」ではありません。法改正に応じて定期的な見直しが必要です。' }
         }
-        return;
-    }
-    if (emailEl) {
-        emailEl.style.border     = '';
-        emailEl.style.background = '';
-    }
+    },
 
-    // 全6資料を0.8秒ずつずらして連続ダウンロード
-    DL_MODAL_ITEMS.forEach(function(item, i) {
-        setTimeout(function() {
+    // =============================================
+    // ページ表示制御・ルーティング
+    // =============================================
+    showPage(pageId, tabIdx, skipHashUpdate = false) {
+        if (!this.state.validPages.includes(pageId)) pageId = 'home';
+
+        if (!skipHashUpdate && pageId) {
+            const newHash = '#' + pageId;
+            if (window.location.hash !== newHash) window.location.hash = newHash;
+        }
+
+        // ページ固有の初期化
+        this.initPageContent(pageId, tabIdx);
+
+        // セクションの表示・非表示切り替え
+        this.state.validPages.forEach(id => {
+            const section = document.getElementById('page-' + id);
+            if (section) section.classList.add('hidden');
+            const navBtn = document.getElementById('nav-' + id);
+            if (navBtn) navBtn.classList.remove('active-tab');
+        });
+
+        const activeSection = document.getElementById('page-' + pageId);
+        if (activeSection) activeSection.classList.remove('hidden');
+        const activeNav = document.getElementById('nav-' + pageId);
+        if (activeNav) activeNav.classList.add('active-tab');
+
+        // 共通CTAの制御
+        const hideCTAOn = ['contact', 'solutions'];
+        const ctaElement = document.getElementById('common-cta');
+        if (ctaElement) {
+            ctaElement.classList.toggle('hidden', hideCTAOn.includes(pageId));
+        }
+
+        this.closeMobileMenu();
+        window.scrollTo(0, 0);
+    },
+
+    initPageContent(pageId, tabIdx) {
+        if (pageId === 'price-sim' && typeof simCalc === 'function') {
+            setTimeout(() => { simCalc(); simSpotCalc(); updateSliderColor(); }, 50);
+        }
+        if (pageId === 'home' && typeof renderHomeColumns === 'function') {
+            setTimeout(() => {
+                renderHomeColumns();
+                if (typeof loadHomeYT === 'function') {
+                    loadHomeYT();
+                }
+            }, 50);
+        }
+        if (pageId === 'salary-calc' && typeof sCalc === 'function') {
+            setTimeout(() => {
+                const dateEl = document.getElementById('current-date');
+                if (dateEl) dateEl.textContent = new Date().toLocaleDateString('ja-JP') + ' 現在';
+                sCalc();
+            }, 50);
+        }
+        if (pageId === 'spot' && typeof spotSwitchTab === 'function') {
+            setTimeout(() => spotSwitchTab(parseInt(tabIdx || 0)), 50);
+        }
+        if (pageId === 'blog' && typeof renderBlogGrid === 'function') {
+            renderBlogGrid('all');
+            setTimeout(() => { if (typeof initSearch === 'function') initSearch(); }, 0);
+        }
+        if (pageId === 'youtube' && typeof loadYouTubePage === 'function') {
+            loadYouTubePage();
+        }
+    },
+
+    // =============================================
+    // UI 制御
+    // =============================================
+    /**
+     * トースト通知を表示する
+     * @param {string} message - 表示するメッセージ
+     * @param {'success'|'error'|'info'|'warning'} type - 通知の種類
+     */
+    showToast(message, type = 'success') {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+
+        const toast = document.createElement('div');
+        const colorClasses = {
+            success: 'bg-green-600',
+            error: 'bg-red-600',
+            info: 'bg-blue-600',
+            warning: 'bg-orange-500'
+        };
+
+        toast.className = `flex items-center gap-3 px-6 py-4 rounded-xl text-white shadow-2xl transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-auto ${colorClasses[type] || colorClasses.success}`;
+        
+        const icons = {
+            success: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>',
+            error: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>',
+            info: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>'
+        };
+
+        toast.innerHTML = `${icons[type] || ''} <span class="font-bold text-sm">${message}</span>`;
+        container.appendChild(toast);
+
+        // アニメーション開始
+        setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
+
+        // 4秒後に自動消去
+        setTimeout(() => {
+            toast.classList.add('opacity-0', 'translate-x-10');
+            setTimeout(() => toast.remove(), 300);
+        }, 4000);
+    },
+
+    toggleMobileMenu() {
+        const mm = document.getElementById('mobile-menu');
+        if (mm) mm.classList.toggle('hidden');
+    },
+    closeMobileMenu() {
+        const mm = document.getElementById('mobile-menu');
+        if (mm) mm.classList.add('hidden');
+    },
+    toggleFaq(id) {
+        const ans = document.getElementById(`faq-ans-${id}`);
+        const icon = document.getElementById(`faq-icon-${id}`);
+        if (ans && icon) {
+            const isHidden = ans.classList.toggle('hidden');
+            icon.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+    },
+
+    // =============================================
+    // ソリューション・資料ダウンロード
+    // =============================================
+    showSolution(key) {
+        const data = this.state.solutions[key];
+        if (!data) return;
+
+        const tmpl = document.getElementById('tmpl-solution');
+        const stepTmpl = document.getElementById('tmpl-solution-step');
+        if (!tmpl || !stepTmpl) return;
+
+        // メインテンプレートのクローン
+        const clone = tmpl.content.cloneNode(true);
+
+        clone.querySelector('.js-icon').textContent = data.icon;
+        clone.querySelector('.js-title').textContent = data.title;
+        clone.querySelector('.js-description').textContent = data.description;
+        clone.querySelector('.js-point').textContent = data.point;
+        
+        const imgEl = clone.querySelector('.js-image');
+        if (imgEl && data.image) {
+            // 画像が読み込めなかった場合、枠だけが残らないように透明度を戻すか代替処理をする
+            imgEl.onerror = function() {
+                this.classList.remove('opacity-0');
+                this.src = 'https://placehold.jp/24/1e3a8a/ffffff/800x350.png?text=' + encodeURIComponent(data.title);
+            };
+            imgEl.src = data.image;
+            imgEl.alt = data.title;
+        }
+
+        // ステップ（グリッドアイテム）の生成
+        const stepsContainer = clone.querySelector('.js-steps-container');
+        data.steps.forEach((step, i) => {
+            const sClone = stepTmpl.content.cloneNode(true);
+            sClone.querySelector('.js-step-number').textContent = i + 1;
+            sClone.querySelector('.js-step-title').textContent = step.title;
+            sClone.querySelector('.js-step-desc').textContent = step.desc;
+            stepsContainer.appendChild(sClone);
+        });
+
+        // 描画エリアの更新
+        const container = document.getElementById('solution-content');
+        container.innerHTML = '';
+        container.appendChild(clone);
+
+        this.showPage('solutions');
+    },
+
+    dlOpenModal(index) {
+        this.state.dlCurrentIndex = index;
+        const item = SITE_CONFIG.DOCUMENTS[index];
+        if (!item) return;
+
+        document.getElementById('dl-modal-emoji').textContent = item.emoji;
+        document.getElementById('dl-modal-title').textContent = item.title;
+        
+        // フォームリセット
+        ['dl-name', 'dl-email', 'dl-company'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.value = '';
+        });
+        document.getElementById('dl-form-error').classList.add('hidden');
+        document.getElementById('dl-form-area').classList.remove('hidden');
+        document.getElementById('dl-success-area').classList.add('hidden');
+
+        const overlay = document.getElementById('dl-modal-overlay');
+        overlay.style.display = 'flex';
+        document.body.classList.add('modal-open');
+    },
+
+    dlCloseModal() {
+        document.getElementById('dl-modal-overlay').style.display = 'none';
+        document.body.classList.remove('modal-open');
+    },
+
+    dlSubmit() {
+        const name = document.getElementById('dl-name')?.value.trim();
+        const email = document.getElementById('dl-email')?.value.trim();
+        if (!name || !email) {
+            document.getElementById('dl-form-error').classList.remove('hidden');
+            return;
+        }
+
+        const item = SITE_CONFIG.DOCUMENTS[this.state.dlCurrentIndex];
+        if (item) {
             const link = document.createElement('a');
             link.href = item.url;
             link.download = item.filename;
-            link.style.display = 'none';
-            document.body.appendChild(link);
-            try { link.click(); } catch(e) { console.error('DL error:', item.filename, e); }
-            document.body.removeChild(link);
-        }, i * 800);
-    });
+            link.click();
+            this.showToast(`${item.title}をダウンロードしました`, 'success');
+        }
 
-    // Formspree でリード情報をメール通知（任意）
-    // fetch('https://formspree.io/f/YOUR_FORM_ID', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ email, type: '一括登録' }),
-    // }).catch(err => console.warn('Formspree送信エラー:', err));
-
-    // 完了表示に切り替え
-    if (bannerForm) bannerForm.classList.add('hidden');
-    if (bannerDone) bannerDone.classList.remove('hidden');
-}
-
-
-// =============================================
-// ページ切り替え・ソリューション表示
-// =============================================
-const solutions = {
-    'subsidy':    { icon: '💰', title: '助成金を活用したい',           description: '国や自治体の助成金制度を活用することで、採用コスト削減や職場環境改善を実質負担ゼロで実現できます。', steps: [{title:'助成金診断',desc:'貴社の状況に合致する助成金を洗い出し、受給可能性を診断します。'},{title:'計画書作成',desc:'申請に必要な計画書や添付書類を社労士が作成・準備します。'},{title:'申請代行',desc:'労働局やハローワークへの申請手続きを全て代行いたします。'},{title:'フォローアップ',desc:'受給後の報告書作成や、次回申請に向けたアドバイスも行います。'}], point: '助成金は「成功報酬型」なので、受給できなければ費用は発生しません。まずはお気軽にご相談ください。' },
-    'payroll':    { icon: '📊', title: '給与計算を外注したい',           description: '複雑化する給与計算業務。法改正対応や年末調整まで、全てお任せいただけます。', steps: [{title:'勤怠データ受領',desc:'タイムカードやクラウド勤怠データをお預かりします。'},{title:'給与計算実施',desc:'社会保険料、税金、各種手当を正確に計算いたします。'},{title:'明細発行',desc:'WEB給与明細システムで従業員様へ直接配信します。'},{title:'振込データ作成',desc:'金融機関への振込データも作成し、お渡しいたします。'}], point: '給与計算のアウトソーシングで、経営者様の時間を本業に集中していただけます。' },
-    'trouble':    { icon: '⚖️', title: '従業員とのトラブルを防ぎたい', description: '労務トラブルは事前の対策が最も重要です。就業規則の整備や相談体制の構築をサポートします。', steps: [{title:'就業規則見直し',desc:'最新の法令に適合した就業規則を作成・改定します。'},{title:'労使協定整備',desc:'36協定など必要な労使協定を漏れなく整備します。'},{title:'相談窓口設置',desc:'従業員からの相談を受け付ける体制を構築します。'},{title:'研修実施',desc:'ハラスメント防止研修など、予防的な取り組みを支援します。'}], point: 'トラブルが起きてからでは遅いのです。予防的な労務管理が、企業を守ります。' },
-    'startup':    { icon: '🏢', title: '会社を設立したばかり',           description: '創業期の労務手続きは複雑です。社会保険の加入から就業規則作成まで、ワンストップでサポートします。', steps: [{title:'社会保険新規適用',desc:'法人設立後の社会保険・労働保険の加入手続きを代行します。'},{title:'就業規則作成',desc:'10名未満でも作成をお勧めします。トラブル予防の要です。'},{title:'雇用契約書整備',desc:'労働条件通知書や雇用契約書のひな形を作成します。'},{title:'給与体系設計',desc:'採用活動に活かせる、競争力のある給与体系を設計します。'}], point: '創業期こそ、労務の「仕組み化」が重要です。後から修正するのは大変です。' },
-    'it':         { icon: '💻', title: 'クラウド勤怠・労務管理を導入したい', description: 'タイムカードでの管理は集計ミスの温床です。ITの力で効率化し、法改正にも対応しやすい体制を構築しましょう。', steps: [{title:'ツール選定',desc:'マネーフォワード、ジョブカン等から、貴社に最適なツールを選定します。'},{title:'初期設定',desc:'複雑な就業設定、休日設定などを社労士の視点で正確に設定します。'},{title:'運用レクチャー',desc:'従業員への説明や、管理者画面の使い方を丁寧にサポートします。'},{title:'データ連携',desc:'勤怠データと給与計算をスムーズに連携させ、手入力を最小限にします。'}], point: 'ITに詳しくない経営者様でも安心してください。設定から運用まで、私たちが伴走します。' },
-    'employment': { icon: '📝', title: '就業規則を整備したい',           description: '就業規則は会社のルールブックであり、労務トラブルを防ぐ最重要文書です。法令に適合した就業規則を整備しましょう。', steps: [{title:'現状分析',desc:'現在の就業規則（ある場合）と実態を確認し、課題を洗い出します。'},{title:'法令適合チェック',desc:'最新の労働基準法、働き方改革関連法に適合しているか確認します。'},{title:'規則作成・改定',desc:'貴社の実情に合わせた、実用的な就業規則を作成・改定します。'},{title:'届出・周知',desc:'労働基準監督署への届出、従業員への周知まで完全サポートします。'}], point: '就業規則は「作って終わり」ではありません。法改正に応じて定期的な見直しが必要です。' }
+        document.getElementById('dl-form-area').classList.add('hidden');
+        document.getElementById('dl-success-area').classList.remove('hidden');
+    }
 };
 
-function showSolution(key) {
-    const data = solutions[key];
-    const html = `
-        <div class="flex items-center gap-4 mb-8">
-            <div class="text-5xl md:text-6xl">${data.icon}</div>
-            <h2 class="text-2xl md:text-4xl font-bold text-blue-900">${data.title}</h2>
-        </div>
-        <p class="text-lg text-gray-700 mb-12 leading-relaxed">${data.description}</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12">
-            ${data.steps.map((step, i) => `
-                <div class="flex gap-4 p-6 md:p-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl border border-gray-200 shadow-sm">
-                    <div class="flex-shrink-0 w-10 h-10 bg-blue-900 text-white rounded-full flex items-center justify-center font-bold text-lg">${i + 1}</div>
-                    <div>
-                        <h4 class="font-bold text-blue-900 mb-2 text-lg">${step.title}</h4>
-                        <p class="text-sm text-gray-600 leading-relaxed">${step.desc}</p>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-        <div class="bg-gradient-to-r from-blue-50 to-orange-50 border-l-4 border-blue-900 p-8 md:p-10 rounded-r-2xl">
-            <h4 class="font-bold text-blue-900 mb-3 flex items-center gap-2 text-lg"><span>💡</span> 神植からのアドバイス</h4>
-            <p class="text-gray-700 leading-relaxed">${data.point}</p>
-        </div>
-    `;
-    document.getElementById('solution-content').innerHTML = html;
-    showPage('solutions');
-}
-
-
 // =============================================
-// ページ表示制御
+// グローバルイベントリスナー
 // =============================================
-function showPage(pageId, tabIdx) {
-    if (pageId === 'price-sim') {
-        setTimeout(function() {
-            if (typeof simCalc === 'function') simCalc();
-            if (typeof simSpotCalc === 'function') simSpotCalc();
-            if (typeof updateSliderColor === 'function') updateSliderColor();
-        }, 50);
-    }
-    if (pageId === 'salary-calc') {
-        setTimeout(function() {
-            var dateEl = document.getElementById('current-date');
-            if (dateEl) {
-                var d = new Date();
-                dateEl.textContent = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日 現在';
-            }
-            if (typeof sCalc === 'function' && document.getElementById('s-salary')) sCalc();
-        }, 50);
-    }
-    if (pageId === 'subsidy-sim') {
-        setTimeout(function() {
-            if (typeof initializeSubsidySimulator === 'function') initializeSubsidySimulator();
-        }, 50);
-    }
-    if (pageId === 'spot') {
-        setTimeout(function() {
-            const idx = (typeof tabIdx !== 'undefined' && tabIdx !== null) ? parseInt(tabIdx) : 0;
-            if (typeof spotSwitchTab === 'function') spotSwitchTab(idx);
-            for (let i = 0; i < 4; i++) {
-                (function(fi) {
-                    const form = document.getElementById('spot-form-data-' + fi);
-                    if (form && !form.dataset.listenerAttached) {
-                        form.addEventListener('submit', function(e) {
-                            e.preventDefault();
-                            spotSubmitForm(fi);
-                        });
-                        form.dataset.listenerAttached = 'true';
-                    }
-                })(i);
-            }
-        }, 50);
-    }
-    const pages = ['home','services','about','links','faq','contact','solutions','blog','checkup','subsidy-sim','salary-calc','download','dl-thankyou','price-sim','spot','article-detail','youtube','campaign'];
-    pages.forEach(id => {
-        const section = document.getElementById('page-' + id);
-        if (section) section.classList.add('hidden');
-        const navBtn = document.getElementById('nav-' + id);
-        if (navBtn) navBtn.classList.remove('active-tab');
-    });
-    const activeSection = document.getElementById('page-' + pageId);
-    if (activeSection) activeSection.classList.remove('hidden');
-    const activeNav = document.getElementById('nav-' + pageId);
-    if (activeNav) activeNav.classList.add('active-tab');
-    const hideCTAOn = ['contact', 'solutions'];
-    const ctaElement = document.getElementById('common-cta');
-    if (ctaElement) {
-        if (hideCTAOn.includes(pageId)) ctaElement.classList.add('hidden');
-        else ctaElement.classList.remove('hidden');
-    }
-    var mobileMenu = document.getElementById('mobile-menu');
-    if (mobileMenu) mobileMenu.classList.add('hidden');
-    window.scrollTo(0, 0);
-
-    if (pageId === 'blog') {
-        if (typeof renderBlogGrid === 'function') {
-            renderBlogGrid('all');
-            document.querySelectorAll('.blog-filter-btn').forEach(btn => {
-                btn.classList.toggle('active-filter', btn.dataset.cat === 'all');
-            });
-        }
-        // 全文検索初期化（開発指示書 Step 5）
-        setTimeout(function () {
-            if (typeof initSearch === 'function') initSearch();
-        }, 0);
-    }
-    if (pageId === 'home') {
-        if (typeof renderHomeColumns === 'function') renderHomeColumns();
-    }
-    if (pageId === 'youtube') {
-        if (typeof loadYouTubePage === 'function') loadYouTubePage();
-    }
-}
-
-function toggleMobileMenu() {
-    var mm = document.getElementById('mobile-menu');
-    if (mm) mm.classList.toggle('hidden');
-}
-
-
-// =============================================
-// ヒーロー画像フェード処理
-// ※ hero-slider.js に移管済みのため無効化
-// =============================================
-
-
-// =============================================
-// 給与計算ツール
-// =============================================
-// ※ ロジックはすべて salary-calc.js に移行済み。
-
-
-// =============================================
-// 労務リスク診断
-// =============================================
-
-// =============================================
-// 助成金診断
-// =============================================
-
-
-// =============================================
-// 初期化（DOMContentLoaded）
-// =============================================
-document.addEventListener('DOMContentLoaded', function() {
-    if (typeof renderHomeColumns === 'function') renderHomeColumns();
-    if (typeof renderBlogGrid === 'function') renderBlogGrid('all');
-    if (typeof sCalc === 'function' && document.getElementById('s-salary')) sCalc();
-    showPage('home');
+document.addEventListener('DOMContentLoaded', () => {
+    const initialPage = window.location.hash.replace('#', '') || 'home';
+    App.showPage(initialPage);
 });
 
-
-// =============================================
-// FAQの開閉制御
-// =============================================
-function toggleFaq(id) {
-    const ans  = document.getElementById(`faq-ans-${id}`);
-    const icon = document.getElementById(`faq-icon-${id}`);
-    if (ans && icon) {
-        const isHidden = ans.classList.contains('hidden');
-        if (isHidden) {
-            ans.classList.remove('hidden');
-            icon.style.transform = 'rotate(180deg)';
-        } else {
-            ans.classList.add('hidden');
-            icon.style.transform = 'rotate(0deg)';
-        }
-    }
-}
-
-
-// =============================================
-// 労務コラム機能スクリプト（分離）
-// コラムデータ・描画関数はすべて columns-data.js に移動済み。
-// 読み込み順: columns-data.js → script.js
-// =============================================
-
-
-// =============================================
-// スポット手続き依頼フォーム
-// =============================================
-function spotSwitchTab(idx) {
-    for (let i = 0; i < 4; i++) {
-        const tab  = document.getElementById('spot-tab-' + i);
-        const form = document.getElementById('spot-form-' + i);
-        if (!tab || !form) continue;
-        if (i === idx) {
-            tab.classList.add('active');
-            tab.style.borderBottomColor = '#1e40af';
-            tab.style.color             = '#1e40af';
-            tab.style.backgroundColor   = '#eff6ff';
-            form.classList.remove('hidden');
-        } else {
-            tab.classList.remove('active');
-            tab.style.borderBottomColor = 'transparent';
-            tab.style.color             = '#6b7280';
-            tab.style.backgroundColor   = '';
-            form.classList.add('hidden');
-        }
-    }
-    const success = document.getElementById('spot-success');
-    if (success) success.classList.add('hidden');
-}
-
-function spotReset() {
-    for (let i = 0; i < 4; i++) {
-        const form = document.getElementById('spot-form-data-' + i);
-        if (form) form.reset();
-    }
-    const success = document.getElementById('spot-success');
-    if (success) success.classList.add('hidden');
-    spotSwitchTab(0);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function updateRikokuhyoFee() {
-    const val = document.querySelector('input[name="rikokuhyo"]:checked')?.value;
-    const el  = document.getElementById('rikokuhyo-fee');
-    if (el) el.textContent = val === 'ari' ? '10,000円〜' : '5,000円〜';
-}
-
-function spotSubmitForm(formIdx) {
-    const form = document.getElementById('spot-form-data-' + formIdx);
-    if (!form) return;
-    if (!form.checkValidity()) { form.reportValidity(); return; }
-
-    const data      = new FormData(form);
-    const formNames = [
-        '雇用保険被保険者資格取得届',
-        '雇用保険被保険者資格喪失届・離職票',
-        '健康保険・厚生年金保険被保険者資格取得届',
-        '健康保険・厚生年金保険被保険者資格喪失届'
-    ];
-
-    // ---- ボタンをローディング状態に ----
-    const btn = form.querySelector('button[type="submit"]');
-    const originalHTML = btn ? btn.innerHTML : '';
-    if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = '<svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/></svg> 送信中...';
-    }
-
-    // ---- メール本文組み立て ----
-    let bodyText = '【依頼手続き種別】\n' + formNames[formIdx] + '\n\n【入力内容】\n';
-    for (let [key, value] of data.entries()) {
-        if (value && value.toString().trim()) bodyText += key + '：' + value + '\n';
-    }
-    bodyText += '\n\n※このメッセージはカミウエ社会保険労務士事務所のWebサイトより自動送信されました。';
-
-    // ---- Formspree fetch送信 ----
-    // ▼ Formspree (https://formspree.io) で無料アカウントを作成後、
-    //   YOUR_FORMSPREE_ID を実際のフォームIDに置き換えてください。
-    //   例: https://formspree.io/f/xpzgkdlr
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
-    const USE_FORMSPREE = FORMSPREE_ENDPOINT.indexOf('YOUR_FORMSPREE_ID') === -1;
-
-    const sendData = {
-        _subject: '【スポット手続き依頼】' + formNames[formIdx],
-        手続き種別: formNames[formIdx],
-        内容: bodyText,
-    };
-    // フォームの各フィールドも追加
-    for (let [key, value] of data.entries()) {
-        if (value && value.toString().trim()) sendData[key] = value.toString();
-    }
-
-    if (USE_FORMSPREE) {
-        // --- Formspree が設定済みの場合：fetch送信 ---
-        fetch(FORMSPREE_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify(sendData),
-        })
-        .then(function(res) {
-            if (res.ok) {
-                spotShowSuccess();
-            } else {
-                return res.json().then(function(d) { throw new Error(d.error || '送信エラー'); });
-            }
-        })
-        .catch(function(err) {
-            console.error('送信エラー:', err);
-            // フォールバック：mailtoで開く
-            spotFallbackMailto(formNames[formIdx], bodyText);
-        })
-        .finally(function() {
-            if (btn) { btn.disabled = false; btn.innerHTML = originalHTML; }
-        });
-    } else {
-        // --- Formspree 未設定の場合：従来の mailto フォールバック ---
-        if (btn) { btn.disabled = false; btn.innerHTML = originalHTML; }
-        spotFallbackMailto(formNames[formIdx], bodyText);
-    }
-}
-
-function spotFallbackMailto(formName, bodyText) {
-    var subject = encodeURIComponent('【スポット手続き依頼】' + formName);
-    window.location.href = 'mailto:sr.kamiue@gmail.com?subject=' + subject + '&body=' + encodeURIComponent(bodyText);
-    setTimeout(spotShowSuccess, 800);
-}
-
-function spotShowSuccess() {
-    for (let i = 0; i < 4; i++) {
-        const f = document.getElementById('spot-form-' + i);
-        if (f) f.classList.add('hidden');
-    }
-    const success = document.getElementById('spot-success');
-    if (success) success.classList.remove('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+window.addEventListener('hashchange', () => {
+    const pageId = window.location.hash.replace('#', '') || 'home';
+    App.showPage(pageId, null, true);
+});

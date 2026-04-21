@@ -7,21 +7,43 @@
     <meta name="description" content="仙台市の社会保険労務士事務所。助成金申請・給与計算・就業規則・労務相談をワンストップでサポート。初回60分無料相談受付中。宮城県内の中小企業を地域密着で支援します。">
     <meta name="keywords" content="社労士,社会保険労務士,仙台,宮城野区,助成金,給与計算,就業規則,労務相談,労務管理,宮城県">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://kamiue-sr.com/">
+    <link rel="canonical" href="https://kamiue.com/">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kamiue-sr.com/">
+    <meta property="og:url" content="https://kamiue.com/">
     <meta property="og:title" content="仙台の社労士｜カミウエ社会保険労務士事務所（宮城野区）">
     <meta property="og:description" content="仙台市の社会保険労務士事務所。助成金申請・給与計算・就業規則・労務相談をワンストップでサポート。初回60分無料相談受付中。">
-    <meta property="og:image" content="https://kamiue-sr.com/ogp.png">
+    <meta property="og:image" content="https://kamiue.com/ogp.png">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="仙台の社労士｜カミウエ社会保険労務士事務所（宮城野区）">
     <meta name="twitter:description" content="仙台市の社会保険労務士事務所。助成金申請・給与計算・労務相談をサポート。初回60分無料相談受付中。">
-    <meta name="twitter:image" content="https://kamiue-sr.com/ogp.png">
+    <meta name="twitter:image" content="https://kamiue.com/ogp.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- スポット手続きフォームは tetsuzuki_v2.html に移行済み -->
+
+    <style>
+        /* ヒーロースライダー ドットインジケーターのスタイル */
+        .hero-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 9999px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hero-dot:hover { background-color: rgba(255, 255, 255, 0.6); }
+        .hero-dot.active {
+            background-color: #1e3a8a; /* 事務所ブランドカラーの青 */
+            width: 28px; /* アクティブなドットを少し横長にする */
+            border-color: #1e3a8a;
+            box-shadow: 0 0 10px rgba(30, 58, 138, 0.3);
+        }
+    </style>
 
     <meta name="google-site-verification" content="CzQ1gV_RKAq7_NziXejLsGk4pVfp99mz1Lw8mmEbXUg" />
 
@@ -32,12 +54,12 @@
       "@type": "LocalBusiness",
       "name": "カミウエ社会保険労務士事務所",
       "alternateName": "KAMIUE SR OFFICE",
-      "url": "https://kamiue-sr.com/",
-      "logo": "https://kamiue-sr.com/ogp.png",
-      "image": "https://kamiue-sr.com/ogp.png",
+      "url": "https://kamiue.com/",
+      "logo": "https://kamiue.com/ogp.png",
+      "image": "https://kamiue.com/ogp.png",
       "description": "仙台市宮城野区を拠点とする社会保険労務士事務所。助成金申請・給与計算・就業規則・労務相談をワンストップでサポート。",
       "telephone": "070-1047-1625",
-      "email": "info@kamiue-sr.com",
+      "email": "info@kamiue.com",
       "address": {
         "@type": "PostalAddress",
         "postalCode": "983-0005",
@@ -133,7 +155,7 @@
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "カミウエ社会保険労務士事務所",
-      "url": "https://kamiue-sr.com/",
+      "url": "https://kamiue.com/",
       "telephone": "070-1047-1625",
       "address": {
         "@type": "PostalAddress",
@@ -160,11 +182,13 @@
 </head>
 
 <body class="bg-gray-50">
+    <!-- 全体設定の読み込み -->
+    <script src="./config.js"></script>
 
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <button onclick="showPage('home')" class="flex items-center gap-3 hover:opacity-80 transition">
+            <button onclick="App.showPage('home')" class="flex items-center gap-3 hover:opacity-80 transition">
                 <div class="w-16 h-16">
                     <img src="./logo.png" alt="カミウエ社会保険労務士事務所 ロゴ" class="w-full h-full object-contain">
                 </div>
@@ -174,9 +198,9 @@
                 </div>
             </button>
             <nav class="hidden md:flex gap-2 lg:gap-3 items-center text-sm font-medium">
-                <button type="button" id="nav-home" onclick="showPage('home')" class="nav-main-link active-tab">ホーム</button>
-                <button type="button" id="nav-services" onclick="showPage('services')" class="nav-main-link">サービス</button>
-                <button type="button" id="nav-about" onclick="showPage('about')" class="nav-main-link">事務所紹介</button>
+                <button type="button" id="nav-home" onclick="App.showPage('home')" class="nav-main-link active-tab">ホーム</button>
+                <button type="button" id="nav-services" onclick="App.showPage('services')" class="nav-main-link">サービス</button>
+                <button type="button" id="nav-about" onclick="App.showPage('about')" class="nav-main-link">事務所紹介</button>
                 <div class="relative group">
                     <button type="button" class="nav-main-link flex items-center gap-1 group-hover:bg-blue-50 group-hover:text-blue-900 group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-blue-600 group-focus-visible:ring-offset-2" aria-haspopup="true" aria-label="お役立ちコンテンツ メニュー">
                         お役立ちコンテンツ
@@ -187,21 +211,21 @@
                     <!-- top-full + 上方向 pt-2: トリガーと白パネルの間にホバー空白ができず、メニューが一瞬で消えにくい -->
                     <div class="hidden group-hover:block group-focus-within:block absolute top-full left-0 z-50 w-56 pt-2">
                         <div class="bg-white rounded-lg shadow-xl border border-gray-200 py-2">
-                            <button type="button" onclick="showPage('blog')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">📝 労務管理コラム</button>
-                            <button type="button" onclick="showPage('checkup')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">✅ 労務リスク診断</button>
-                            <button type="button" onclick="showPage('subsidy-sim')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">💰 助成金診断</button>
-                            <button type="button" onclick="showPage('salary-calc')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">🧮 給与計算ツール</button>
-                            <button type="button" onclick="showPage('price-sim')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-semibold text-amber-800">🧮 料金シミュレーター</button>
-                            <button type="button" onclick="showPage('download')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-semibold text-indigo-800">📥 無料資料ダウンロード</button>
+                            <button type="button" onclick="App.showPage('blog')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">📝 労務管理コラム</button>
+                            <button type="button" onclick="App.showPage('checkup')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">✅ 労務リスク診断</button>
+                            <button type="button" onclick="App.showPage('subsidy-sim')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">💰 助成金診断</button>
+                            <button type="button" onclick="App.showPage('salary-calc')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">🧮 給与計算ツール</button>
+                            <button type="button" onclick="App.showPage('price-sim')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-semibold text-amber-800">🧮 料金シミュレーター</button>
+                            <button type="button" onclick="App.showPage('download')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-semibold text-indigo-800">📥 無料資料ダウンロード</button>
                             <hr class="my-1 border-gray-100">
-                            <button type="button" onclick="showPage('campaign')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-bold text-red-700">🎁 キャンペーン情報</button>
-                            <button type="button" onclick="showPage('spot')" class="nav-submenu-item nav-submenu-item--accent w-full text-left px-4 py-2.5 text-sm font-bold text-orange-800">📋 手続き代行依頼</button>
+                            <button type="button" onclick="App.showPage('campaign')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-bold text-red-700">🎁 キャンペーン情報</button>
+                            <button type="button" onclick="App.showPage('spot')" class="nav-submenu-item nav-submenu-item--accent w-full text-left px-4 py-2.5 text-sm font-bold text-orange-800">📋 スポット手続き依頼</button>
                         </div>
                     </div>
                 </div>
-                <button type="button" id="nav-links" onclick="showPage('links')" class="nav-main-link">関連リンク</button>
-                <button type="button" id="nav-faq" onclick="showPage('faq')" class="nav-main-link">よくある質問</button>
-                <button type="button" id="nav-contact" onclick="showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2.5 rounded-lg font-bold shadow-md transition duration-200 hover:from-orange-600 hover:to-orange-700 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]">お問い合わせ</button>
+                <button type="button" id="nav-links" onclick="App.showPage('links')" class="nav-main-link">関連リンク</button>
+                <button type="button" id="nav-faq" onclick="App.showPage('faq')" class="nav-main-link">よくある質問</button>
+                <button type="button" id="nav-contact" onclick="App.showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2.5 rounded-lg font-bold shadow-md transition duration-200 hover:from-orange-600 hover:to-orange-700 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]">お問い合わせ</button>
             </nav>
             <div class="md:hidden flex items-center gap-1">
                 <!-- スマホ用電話発信ボタン -->
@@ -212,7 +236,7 @@
                     </svg>
                     <span class="leading-none">無料相談</span>
                 </a>
-                <button type="button" class="text-blue-900 p-2 rounded-lg transition hover:bg-blue-50 hover:text-blue-950 active:bg-blue-100" onclick="toggleMobileMenu()" aria-label="メニューを開く">
+                <button type="button" class="text-blue-900 p-2 rounded-lg transition hover:bg-blue-50 hover:text-blue-950 active:bg-blue-100" onclick="App.toggleMobileMenu()" aria-label="メニューを開く">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
@@ -221,22 +245,22 @@
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-4 space-y-1 shadow-inner">
-            <button type="button" onclick="showPage('home')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">ホーム</button>
-            <button type="button" onclick="showPage('services')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">サービス・料金</button>
-            <button type="button" onclick="showPage('about')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">事務所紹介</button>
+            <button type="button" onclick="App.showPage('home')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">ホーム</button>
+            <button type="button" onclick="App.showPage('services')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">サービス・料金</button>
+            <button type="button" onclick="App.showPage('about')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">事務所紹介</button>
             <div class="pl-2 pt-1">
                 <p class="text-xs text-gray-500 font-bold py-2 px-3">お役立ちコンテンツ</p>
-                <button type="button" onclick="showPage('blog')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">📝 労務管理コラム</button>
-                <button type="button" onclick="showPage('checkup')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">✅ 労務リスク診断</button>
-                <button type="button" onclick="showPage('subsidy-sim')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">💰 助成金診断</button>
-                <button type="button" onclick="showPage('salary-calc')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">🧮 給与計算ツール</button>
-                <button type="button" onclick="showPage('price-sim')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-semibold text-amber-800">🧮 料金シミュレーター</button>
-                <button type="button" onclick="showPage('download')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-semibold text-indigo-800">📥 無料資料ダウンロード</button>
-                <button type="button" onclick="showPage('campaign')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-bold text-red-700">🎁 キャンペーン情報</button>
+                <button type="button" onclick="App.showPage('blog')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">📝 労務管理コラム</button>
+                <button type="button" onclick="App.showPage('checkup')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">✅ 労務リスク診断</button>
+                <button type="button" onclick="App.showPage('subsidy-sim')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">💰 助成金診断</button>
+                <button type="button" onclick="App.showPage('salary-calc')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">🧮 給与計算ツール</button>
+                <button type="button" onclick="App.showPage('price-sim')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-semibold text-amber-800">🧮 料金シミュレーター</button>
+                <button type="button" onclick="App.showPage('download')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-semibold text-indigo-800">📥 無料資料ダウンロード</button>
+                <button type="button" onclick="App.showPage('campaign')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-bold text-red-700">🎁 キャンペーン情報</button>
             </div>
-            <button type="button" onclick="showPage('links')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">関連リンク</button>
-            <button type="button" onclick="showPage('faq')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">よくある質問</button>
-            <button type="button" onclick="showPage('contact')" class="mobile-nav-item mobile-nav-item--cta block w-full py-3 text-left font-bold rounded-lg px-3 text-orange-700">お問い合わせ</button>
+            <button type="button" onclick="App.showPage('links')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">関連リンク</button>
+            <button type="button" onclick="App.showPage('faq')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">よくある質問</button>
+            <button type="button" onclick="App.showPage('contact')" class="mobile-nav-item mobile-nav-item--cta block w-full py-3 text-left font-bold rounded-lg px-3 text-orange-700">お問い合わせ</button>
         </div>
     </header>
 
@@ -289,8 +313,8 @@
                                     <span>🆓 初回相談完全無料</span>
                                 </div>
                                 <div class="hero-cta-row">
-                                    <button onclick="showPage('contact')" class="hero-btn-primary">📅 初回無料相談（60分）</button>
-                                    <button onclick="showPage('services')" class="hero-btn-detail">詳細を見る →</button>
+                                    <button onclick="App.showPage('contact')" class="hero-btn-primary">📅 初回無料相談（60分）</button>
+                                    <button onclick="App.showPage('services')" class="hero-btn-detail">詳細を見る →</button>
                                 </div>
                             </div>
                         </div>
@@ -320,8 +344,8 @@
                                     <span>🏦 受給後フォローも対応</span>
                                 </div>
                                 <div class="hero-cta-row">
-                                    <button onclick="showPage('subsidy-sim')" class="hero-btn-primary">💰 助成金診断（無料）</button>
-                                    <button onclick="showPage('subsidy-sim')" class="hero-btn-detail">詳細を見る →</button>
+                                    <button onclick="App.showPage('subsidy-sim')" class="hero-btn-primary">💰 助成金診断（無料）</button>
+                                    <button onclick="App.showPage('subsidy-sim')" class="hero-btn-detail">詳細を見る →</button>
                                 </div>
                             </div>
                         </div>
@@ -351,8 +375,8 @@
                                     <span>⚡ 最短即日対応</span>
                                 </div>
                                 <div class="hero-cta-row">
-                                    <button onclick="showPage('spot')" class="hero-btn-primary">📋 スポット手続きを依頼</button>
-                                    <button onclick="showPage('spot')" class="hero-btn-detail">詳細を見る →</button>
+                                    <button onclick="App.showPage('spot')" class="hero-btn-primary">📋 スポット手続きを依頼</button>
+                                    <button onclick="App.showPage('spot')" class="hero-btn-detail">詳細を見る →</button>
                                 </div>
                             </div>
                         </div>
@@ -384,8 +408,8 @@
                                     <span>🆓 初月完全無料</span>
                                 </div>
                                 <div class="hero-cta-row">
-                                    <button onclick="showPage('contact')" class="hero-btn-green">🎁 無料で試してみる</button>
-                                    <button onclick="showPage('contact')" class="hero-btn-detail">詳細を見る →</button>
+                                    <button onclick="App.showPage('campaign')" class="hero-btn-green">🎁 無料で試してみる</button>
+                                    <button onclick="App.showPage('campaign')" class="hero-btn-detail">詳細を見る →</button>
                                 </div>
                             </div>
                         </div>
@@ -417,8 +441,8 @@
                                     <span>⚖️ 法改正情報もいち早くお届け</span>
                                 </div>
                                 <div class="hero-cta-row">
-                                    <button onclick="showPage('blog')" class="hero-btn-teal">📝 コラムを読む</button>
-                                    <button onclick="showPage('blog')" class="hero-btn-detail">詳細を見る →</button>
+                                    <button onclick="App.showPage('blog')" class="hero-btn-teal">📝 コラムを読む</button>
+                                    <button onclick="App.showPage('blog')" class="hero-btn-detail">詳細を見る →</button>
                                 </div>
                             </div>
                         </div>
@@ -432,11 +456,10 @@
                             <div class="hero-img-col" style="align-items:center;justify-content:center;">
                                 <div style="width:100%;max-width:460px;aspect-ratio:16/9;border-radius:1.25rem;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.45);">
                                     <iframe
-                                        src="https://www.youtube.com/embed?listType=user_uploads&list=UCN0gus5F7Hdi0bzQJJ0NLVw&autoplay=0&rel=0&modestbranding=1"
+                                        src="https://www.youtube-nocookie.com/embed?listType=playlist&list=UUN0gus5F7Hdi0bzQJJ0NLVw&rel=0"
                                         title="カミウエ社会保険労務士事務所 YouTubeチャンネル"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowfullscreen
-                                        loading="lazy"
                                         style="width:100%;height:100%;border:none;display:block;"
                                     ></iframe>
                                 </div>
@@ -467,7 +490,7 @@
                                         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                                         チャンネル登録する
                                     </a>
-                                    <button onclick="showPage('youtube')" class="hero-btn-detail">動画一覧を見る →</button>
+                                    <button onclick="App.showPage('youtube')" class="hero-btn-detail">動画一覧を見る →</button>
                                 </div>
                             </div>
                         </div>
@@ -484,92 +507,62 @@
                 </button>
 
                 <!-- ==================== ドットナビゲーション ==================== -->
-                <div id="hero-dots" role="tablist" aria-label="スライドナビゲーション">
-                    <button class="hero-dot active" role="tab" aria-selected="true"  aria-label="スライド 1" data-slide="0"></button>
-                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 2" data-slide="1"></button>
-                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 3" data-slide="2"></button>
-                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 4" data-slide="3"></button>
-                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 5" data-slide="4"></button>
-                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 6" data-slide="5"></button>
+                <div id="hero-dots" class="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3" role="tablist" aria-label="スライドナビゲーション">
+                    <button class="hero-dot active" role="tab" aria-selected="true"  aria-label="スライド 1" data-slide="0" type="button"></button>
+                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 2" data-slide="1" type="button"></button>
+                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 3" data-slide="2" type="button"></button>
+                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 4" data-slide="3" type="button"></button>
+                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 5" data-slide="4" type="button"></button>
+                    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="スライド 6" data-slide="5" type="button"></button>
                 </div>
 
                 <!-- ==================== プログレスバー ==================== -->
                 <div id="hero-progress" aria-hidden="true"></div>
+            </section>
 
-                <!-- ==================== 対応システム 自動スクロール（既存維持） ==================== -->
-                <div class="supported-systems bg-white/90 backdrop-blur-sm py-6 px-4 rounded-2xl mx-4 mt-4 mb-4 shadow-lg border border-white/20 relative z-10">
+            <!-- ==================== 対応システム 自動スクロール（スライダー欄外へ移動） ==================== -->
+            <div class="container mx-auto px-4 py-10 md:py-16">
+                <div class="supported-systems bg-white py-8 px-6 rounded-3xl shadow-xl border border-blue-50 relative z-10">
                     <p class="text-center text-blue-900/60 text-xs mb-2">
                         仙台の社労士として、宮城県内の中小企業様の社会保険手続き・給与計算・助成金申請・就業規則作成を幅広くサポートしています。
                     </p>
-                    <h3 class="text-center text-blue-900 font-bold text-lg mb-4">対応可能システム</h3>
+                    <h3 class="text-center text-blue-900 font-bold text-xl mb-6">対応可能システム</h3>
                     <div class="scroll-container overflow-hidden">
                         <div class="scroll-content flex animate-scroll">
-                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                            <div class="system-item flex-shrink-0 mx-6 text-center">
                                 <svg class="w-16 h-16 mx-auto mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12,6 12,12 16,14"></polyline></svg>
-                                <p class="text-xs text-gray-700 font-medium">KING OF TIME</p>
+                                <p class="text-sm text-gray-700 font-medium">KING OF TIME</p>
                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
                             </div>
-                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                            <div class="system-item flex-shrink-0 mx-6 text-center">
                                 <svg class="w-16 h-16 mx-auto mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                                <p class="text-xs text-gray-700 font-medium">SmartHR</p>
+                                <p class="text-sm text-gray-700 font-medium">SmartHR</p>
                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
                             </div>
-                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                            <div class="system-item flex-shrink-0 mx-6 text-center">
                                 <svg class="w-16 h-16 mx-auto mb-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="6" x2="15" y2="6"></line><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="13" y2="14"></line><line x1="9" y1="18" x2="11" y2="18"></line></svg>
-                                <p class="text-xs text-gray-700 font-medium">マネーフォワード給与</p>
+                                <p class="text-sm text-gray-700 font-medium">MF給与</p>
                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
                             </div>
-                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                            <div class="system-item flex-shrink-0 mx-6 text-center">
                                 <svg class="w-16 h-16 mx-auto mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12,6 12,12 16,14"></polyline></svg>
-                                <p class="text-xs text-gray-700 font-medium">ジョブカン勤怠管理</p>
+                                <p class="text-sm text-gray-700 font-medium">ジョブカン勤怠</p>
                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
                             </div>
-                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                            <div class="system-item flex-shrink-0 mx-6 text-center">
                                 <svg class="w-16 h-16 mx-auto mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14,2 14,8 20,8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10,9 9,9 8,9"></polyline></svg>
-                                <p class="text-xs text-gray-700 font-medium">freee人事労務</p>
+                                <p class="text-sm text-gray-700 font-medium">freee人事労務</p>
                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
                             </div>
-                            <div class="system-item flex-shrink-0 mx-4 text-center">
+                            <div class="system-item flex-shrink-0 mx-6 text-center">
                                 <svg class="w-16 h-16 mx-auto mb-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="6" x2="15" y2="6"></line><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="13" y2="14"></line><line x1="9" y1="18" x2="11" y2="18"></line></svg>
-                                <p class="text-xs text-gray-700 font-medium">弥生給与</p>
-                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                            </div>
-                            <!-- 繰り返し -->
-                            <div class="system-item flex-shrink-0 mx-4 text-center">
-                                <svg class="w-16 h-16 mx-auto mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12,6 12,12 16,14"></polyline></svg>
-                                <p class="text-xs text-gray-700 font-medium">KING OF TIME</p>
-                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                            </div>
-                            <div class="system-item flex-shrink-0 mx-4 text-center">
-                                <svg class="w-16 h-16 mx-auto mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                                <p class="text-xs text-gray-700 font-medium">SmartHR</p>
-                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                            </div>
-                            <div class="system-item flex-shrink-0 mx-4 text-center">
-                                <svg class="w-16 h-16 mx-auto mb-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="6" x2="15" y2="6"></line><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="13" y2="14"></line><line x1="9" y1="18" x2="11" y2="18"></line></svg>
-                                <p class="text-xs text-gray-700 font-medium">マネーフォワード給与</p>
-                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                            </div>
-                            <div class="system-item flex-shrink-0 mx-4 text-center">
-                                <svg class="w-16 h-16 mx-auto mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12,6 12,12 16,14"></polyline></svg>
-                                <p class="text-xs text-gray-700 font-medium">ジョブカン勤怠管理</p>
-                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                            </div>
-                            <div class="system-item flex-shrink-0 mx-4 text-center">
-                                <svg class="w-16 h-16 mx-auto mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14,2 14,8 20,8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10,9 9,9 8,9"></polyline></svg>
-                                <p class="text-xs text-gray-700 font-medium">freee人事労務</p>
-                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
-                            </div>
-                            <div class="system-item flex-shrink-0 mx-4 text-center">
-                                <svg class="w-16 h-16 mx-auto mb-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="6" x2="15" y2="6"></line><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="13" y2="14"></line><line x1="9" y1="18" x2="11" y2="18"></line></svg>
-                                <p class="text-xs text-gray-700 font-medium">弥生給与</p>
+                                <p class="text-sm text-gray-700 font-medium">弥生給与</p>
                                 <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">対応可能</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
-            </section>
+            </div>
 
             <!-- Quick Access -->
             <div class="container mx-auto px-4 mb-20 relative z-10">
@@ -580,14 +573,14 @@
                             <p class="text-sm text-gray-500">よくあるご相談内容</p>
                         </div>
                         <div class="flex flex-wrap justify-center md:justify-start gap-3">
-                            <button onclick="showSolution('subsidy')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">💰 助成金を活用したい</button>
-                            <button onclick="showSolution('payroll')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">📊 給与計算を任せたい</button>
-                            <button onclick="showSolution('trouble')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">⚖️ 労務トラブル予防</button>
-                            <button onclick="showSolution('startup')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">🏢 会社設立サポート</button>
-                            <button onclick="showSolution('it')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">💻 勤怠管理DX支援</button>
-                            <button onclick="showSolution('employment')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">📝 就業規則を整備したい</button>
-                            <button onclick="showPage('salary-calc')" class="bg-orange-50 hover:bg-orange-500 hover:text-white transition text-orange-700 px-5 py-3 rounded-full border border-orange-200 text-sm font-medium shadow-sm">🧮 給与・保険料を試算したい</button>
-                            <button onclick="showPage('spot')" class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-full border border-green-600 text-sm font-bold shadow-md">📋 入退社の手続きを今すぐ依頼</button>
+                                <button onclick="App.showSolution('subsidy')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">💰 助成金を活用したい</button>
+                                <button onclick="App.showSolution('payroll')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">📊 給与計算を任せたい</button>
+                                <button onclick="App.showSolution('trouble')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">⚖️ 労務トラブル予防</button>
+                                <button onclick="App.showSolution('startup')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">🏢 会社設立サポート</button>
+                                <button onclick="App.showSolution('it')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">💻 勤怠管理DX支援</button>
+                                <button onclick="App.showSolution('employment')" class="bg-blue-50 hover:bg-blue-900 hover:text-white transition text-blue-800 px-5 py-3 rounded-full border border-blue-200 text-sm font-medium shadow-sm">📝 就業規則を整備したい</button>
+                                <button onclick="App.showPage('salary-calc')" class="bg-orange-50 hover:bg-orange-500 hover:text-white transition text-orange-700 px-5 py-3 rounded-full border border-orange-200 text-sm font-medium shadow-sm">🧮 給与・保険料を試算したい</button>
+                                <button onclick="App.showPage('spot')" class="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-full border border-green-600 text-sm font-bold shadow-md">📋 スポット手続き依頼</button>
                         </div>
                     </div>
                 </div>
@@ -616,19 +609,19 @@
                                     </p>
                                     <!-- 4種類の手続きカード -->
                                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 mb-6">
-                                        <button onclick="showPage('spot', 0)" class="bg-blue-50 hover:bg-blue-900 hover:text-white active:bg-blue-950 transition rounded-xl p-4 text-left sm:text-center border border-blue-200 group flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0">
+                                        <button onclick="App.showPage('spot', 0)" class="bg-blue-50 hover:bg-blue-900 hover:text-white active:bg-blue-950 transition rounded-xl p-4 text-left sm:text-center border border-blue-200 group flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0">
                                             <div class="text-2xl sm:text-xl sm:mb-1 flex-shrink-0">👤</div>
                                             <p class="text-sm font-bold text-blue-900 group-hover:text-white leading-tight">雇用保険　資格取得届</p>
                                         </button>
-                                        <button onclick="showPage('spot', 1)" class="bg-orange-50 hover:bg-orange-600 hover:text-white active:bg-orange-700 transition rounded-xl p-4 text-left sm:text-center border border-orange-200 group flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0">
+                                        <button onclick="App.showPage('spot', 1)" class="bg-orange-50 hover:bg-orange-600 hover:text-white active:bg-orange-700 transition rounded-xl p-4 text-left sm:text-center border border-orange-200 group flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0">
                                             <div class="text-2xl sm:text-xl sm:mb-1 flex-shrink-0">📤</div>
                                             <p class="text-sm font-bold text-orange-800 group-hover:text-white leading-tight">雇用保険　資格喪失届・離職票</p>
                                         </button>
-                                        <button onclick="showPage('spot', 2)" class="bg-green-50 hover:bg-green-700 hover:text-white active:bg-green-800 transition rounded-xl p-4 text-left sm:text-center border border-green-200 group flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0">
+                                        <button onclick="App.showPage('spot', 2)" class="bg-green-50 hover:bg-green-700 hover:text-white active:bg-green-800 transition rounded-xl p-4 text-left sm:text-center border border-green-200 group flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0">
                                             <div class="text-2xl sm:text-xl sm:mb-1 flex-shrink-0">🏥</div>
                                             <p class="text-sm font-bold text-green-800 group-hover:text-white leading-tight">社会保険　資格取得届</p>
                                         </button>
-                                        <button onclick="showPage('spot', 3)" class="bg-purple-50 hover:bg-purple-700 hover:text-white active:bg-purple-800 transition rounded-xl p-4 text-left sm:text-center border border-purple-200 group flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0">
+                                        <button onclick="App.showPage('spot', 3)" class="bg-purple-50 hover:bg-purple-700 hover:text-white active:bg-purple-800 transition rounded-xl p-4 text-left sm:text-center border border-purple-200 group flex sm:flex-col items-center sm:items-center gap-3 sm:gap-0">
                                             <div class="text-2xl sm:text-xl sm:mb-1 flex-shrink-0">🚪</div>
                                             <p class="text-sm font-bold text-purple-800 group-hover:text-white leading-tight">社会保険　資格喪失届</p>
                                         </button>
@@ -636,9 +629,9 @@
                                 </div>
                                 <!-- 右：CTAボタン -->
                                 <div class="flex-shrink-0 text-center">
-                                    <button onclick="showPage('spot')" class="bg-gradient-to-br from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-black py-5 px-10 rounded-2xl shadow-xl transition transform hover:scale-105 text-lg flex items-center gap-3 mx-auto mb-3">
+                                    <button onclick="App.showPage('spot')" class="bg-gradient-to-br from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-black py-5 px-10 rounded-2xl shadow-xl transition transform hover:scale-105 text-lg flex items-center gap-3 mx-auto mb-3">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                                        手続きを依頼する
+                                        スポット手続き依頼
                                     </button>
                                     <p class="text-xs text-gray-400">最短翌営業日対応 ・ 電子申請対応</p>
                                     <div class="mt-3 bg-green-50 border border-green-200 rounded-xl px-4 py-2">
@@ -664,7 +657,7 @@
                     </div>
                     
                     <!-- ホーム誘導カード（クリックでキャンペーンページへ） -->
-                    <button onclick="showPage('campaign')" class="w-full text-left group relative bg-gradient-to-br from-red-500 via-orange-500 to-yellow-500 rounded-[2rem] shadow-[0_16px_48px_rgba(234,88,12,0.45)] p-1 animate-pulse-slow hover:shadow-[0_20px_60px_rgba(234,88,12,0.6)] transition-shadow duration-300">
+                    <button onclick="App.showPage('campaign')" class="w-full text-left group relative bg-gradient-to-br from-red-500 via-orange-500 to-yellow-500 rounded-[2rem] shadow-[0_16px_48px_rgba(234,88,12,0.45)] p-1 animate-pulse-slow hover:shadow-[0_20px_60px_rgba(234,88,12,0.6)] transition-shadow duration-300">
                         <div class="bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 rounded-[1.8rem] px-8 py-10 md:py-12 relative overflow-hidden">
                             <div class="absolute top-4 right-4 text-yellow-300 text-3xl animate-ping">✨</div>
                             <div class="absolute top-8 left-8 text-yellow-300 text-2xl animate-ping" style="animation-delay:0.5s;">⭐</div>
@@ -857,7 +850,7 @@
                                 <span class="block text-lg md:text-xl font-normal text-gray-500 mt-2">経営者・労務担当者に役立つ実務情報</span>
                             </h2>
                         </div>
-                        <button onclick="showPage('blog')"
+                        <button onclick="App.showPage('blog')"
                             class="group inline-flex items-center gap-2 text-blue-900 font-bold border-2 border-blue-900 px-6 py-3 rounded-full hover:bg-blue-900 hover:text-white transition-all duration-300 flex-shrink-0 self-start md:self-auto">
                             コラム一覧を見る
                             <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -895,7 +888,7 @@
                                 <span class="block text-lg md:text-xl font-normal text-gray-500 mt-2">カミウエ社会保険労務士事務所 公式YouTube</span>
                             </h2>
                         </div>
-                        <button onclick="showPage('youtube')"
+                        <button onclick="App.showPage('youtube')"
                             class="group inline-flex items-center gap-2 text-red-600 font-bold border-2 border-red-600 px-6 py-3 rounded-full hover:bg-red-600 hover:text-white transition-all duration-300 flex-shrink-0 self-start md:self-auto">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
                             チャンネルを見る
@@ -928,7 +921,7 @@
                                     <p class="text-red-200 text-sm leading-relaxed">助成金・就業規則・給与計算など、<br>経営者・労務担当者に役立つ動画を配信中。</p>
                                 </div>
                                 <div class="flex-shrink-0">
-                                    <button onclick="showPage('youtube')"
+                                    <button onclick="App.showPage('youtube')"
                                         class="inline-flex items-center gap-3 bg-white hover:bg-red-50 text-red-700 font-black py-5 px-10 rounded-2xl transition shadow-2xl transform hover:scale-105 text-base">
                                         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4L15.8 12l-6.3 3.6z"/></svg>
                                         チャンネルを見る
@@ -950,7 +943,7 @@
                         初回60分の無料相談で、貴社に最適な解決策をご提案いたします。
                     </p>
                     <div class="flex flex-col md:flex-row justify-center gap-5">
-                        <button onclick="showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-5 px-12 rounded-xl shadow-xl transition transform hover:scale-105 text-lg">📞 今すぐ無料相談を予約</button>
+                        <button onclick="App.showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-5 px-12 rounded-xl shadow-xl transition transform hover:scale-105 text-lg">📞 今すぐ無料相談を予約</button>
                         <a href="tel:07010471625" class="bg-white hover:bg-gray-50 text-blue-900 border-2 border-blue-900 font-bold py-5 px-12 rounded-xl transition text-lg flex items-center justify-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
                             070-1047-1625
@@ -1023,7 +1016,7 @@
                             <li class="flex gap-3 text-sm"><svg class="w-5 h-5 text-blue-900 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-gray-700">入退社等の社会保険手続き代行</span></li>
                             <li class="flex gap-3 text-sm"><svg class="w-5 h-5 text-blue-900 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-gray-700">36協定等の労使協定作成・届出</span></li>
                         </ul>
-                        <button onclick="showPage('contact')" class="border-2 border-blue-900 text-blue-900 w-full py-4 rounded-xl font-bold hover:bg-blue-900 hover:text-white transition">お問い合わせ</button>
+                        <button onclick="App.showPage('contact')" class="border-2 border-blue-900 text-blue-900 w-full py-4 rounded-xl font-bold hover:bg-blue-900 hover:text-white transition">お問い合わせ</button>
                     </div>
 
                     <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 md:p-10 rounded-2xl border-2 border-blue-900 ring-4 ring-blue-900/20 card-hover relative">
@@ -1042,7 +1035,7 @@
                             <li class="flex gap-3 text-sm"><svg class="w-5 h-5 text-blue-900 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-gray-700">WEB給与明細システム（利用料込）</span></li>
                             <li class="flex gap-3 text-sm"><svg class="w-5 h-5 text-blue-900 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-gray-700">年末調整業務サポート</span></li>
                         </ul>
-                        <button onclick="showPage('contact')" class="bg-gradient-to-r from-blue-900 to-blue-700 text-white w-full py-4 rounded-xl font-bold hover:from-blue-800 hover:to-blue-600 transition shadow-lg">お問い合わせ</button>
+                        <button onclick="App.showPage('contact')" class="bg-gradient-to-r from-blue-900 to-blue-700 text-white w-full py-4 rounded-xl font-bold hover:from-blue-800 hover:to-blue-600 transition shadow-lg">お問い合わせ</button>
                     </div>
 
                     <div class="bg-white p-8 md:p-10 rounded-2xl border-2 border-gray-200 card-hover">
@@ -1060,7 +1053,7 @@
                             <li class="flex gap-3 text-sm"><svg class="w-5 h-5 text-blue-900 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-gray-700">クラウド勤怠システム導入支援</span></li>
                             <li class="flex gap-3 text-sm"><svg class="w-5 h-5 text-blue-900 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-gray-700">労務監査、従業員研修</span></li>
                         </ul>
-                        <button onclick="showPage('contact')" class="border-2 border-blue-900 text-blue-900 w-full py-4 rounded-xl font-bold hover:bg-blue-900 hover:text-white transition">お問い合わせ</button>
+                        <button onclick="App.showPage('contact')" class="border-2 border-blue-900 text-blue-900 w-full py-4 rounded-xl font-bold hover:bg-blue-900 hover:text-white transition">お問い合わせ</button>
                     </div>
                 </div>
 
@@ -1133,7 +1126,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button onclick="showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-5 px-12 rounded-xl transition shadow-2xl text-lg transform hover:scale-105">詳しく相談する（無料）</button>
+                                <button onclick="App.showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-5 px-12 rounded-xl transition shadow-2xl text-lg transform hover:scale-105">詳しく相談する（無料）</button>
                                 <p class="text-xs text-gray-500 mt-4">※6ヶ月後は通常の顧問契約に移行可能です</p>
                             </div>
                         </div>
@@ -1164,7 +1157,7 @@
                                 <p class="text-blue-200 text-sm leading-relaxed">従業員数とサービスを選ぶだけ。<br>顧問契約・スポット手続きどちらも対応。</p>
                             </div>
                             <div class="flex-shrink-0">
-                                <button onclick="showPage('price-sim')"
+                                <button onclick="App.showPage('price-sim')"
                                     class="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-400 text-white font-black py-5 px-10 rounded-2xl transition shadow-2xl transform hover:scale-105 text-base">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
                                     シミュレーターを試す
@@ -1325,141 +1318,497 @@
         </section>
 
         <!-- FAQ PAGE -->
-       <section id="page-faq" class="hidden py-16 md:py-24 bg-gray-50">
-            <div class="container mx-auto px-4 max-w-4xl">
+       <section id="page-faq" class="hidden py-20 md:py-28 relative overflow-hidden" style="background: linear-gradient(160deg, #f8faff 0%, #f1f5f9 100%);">
+            <!-- 背景装飾 -->
+            <div class="absolute top-0 right-0 w-80 h-80 bg-blue-50 rounded-full -mr-40 -mt-40 opacity-50 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-orange-50 rounded-full -ml-32 -mb-32 opacity-50 pointer-events-none"></div>
+
+            <div class="container mx-auto px-4 max-w-4xl relative z-10">
+                <!-- ヘッダー -->
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-4">よくある質問</h2>
-                    <p class="text-gray-600 text-lg">ご契約やサービスに関する代表的なご質問をまとめました。</p>
+                    <span class="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-blue-600 bg-blue-50 border border-blue-200 px-4 py-1.5 rounded-full mb-5">
+                        ❓ FAQ
+                    </span>
+                    <h2 class="text-4xl md:text-5xl font-black text-blue-900 mb-4" style="letter-spacing:-0.02em">よくある質問</h2>
+                    <p class="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">ご契約やサービスに関する代表的なご質問をまとめました。</p>
                 </div>
 
-                <div class="space-y-4">
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                        <button onclick="toggleFaq(1)" class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition">
-                            <span class="font-bold text-blue-900 md:text-lg">Q1. どのような内容を相談できますか？</span>
-                            <svg id="faq-icon-1" class="w-6 h-6 text-blue-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="faq-ans-1" class="hidden p-6 pt-0 border-t border-gray-100 bg-blue-50/30">
-                            <p class="text-gray-700 leading-relaxed">従業員の入退社手続き、給与計算、就業規則の作成・変更、助成金申請、労務トラブルの相談、法改正への対応など、人事労務全般に関するご相談が可能です。</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                        <button onclick="toggleFaq(2)" class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition">
-                            <span class="font-bold text-blue-900 md:text-lg">Q2. 顧問契約とスポット依頼、どちらが良いでしょうか？</span>
-                            <svg id="faq-icon-2" class="w-6 h-6 text-blue-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="faq-ans-2" class="hidden p-6 pt-0 border-t border-gray-100 bg-blue-50/30">
-                            <p class="text-gray-700 leading-relaxed">継続的なサポートが必要な場合は「顧問契約」、特定のプロジェクト（就業規則作成のみ等）や急ぎの手続きのみであれば「スポット依頼」が適しています。月1回以上ご依頼がある場合は顧問契約の方が割安になる傾向があります。</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                        <button onclick="toggleFaq(3)" class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition">
-                            <span class="font-bold text-blue-900 md:text-lg">Q3. 仙台市以外でも対応可能ですか？</span>
-                            <svg id="faq-icon-3" class="w-6 h-6 text-blue-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="faq-ans-3" class="hidden p-6 pt-0 border-t border-gray-100 bg-blue-50/30">
-                            <p class="text-gray-700 leading-relaxed">はい。仙台市宮城野区を拠点としておりますが、宮城県全域および近隣県にも対応しております。また、オンライン（Zoom等）での面談も活用し、遠方の企業様もサポート可能です。</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                        <button onclick="toggleFaq(4)" class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition">
-                            <span class="font-bold text-blue-900 md:text-lg">Q4. 費用はどのくらいかかりますか？</span>
-                            <svg id="faq-icon-4" class="w-6 h-6 text-blue-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="faq-ans-4" class="hidden p-6 pt-0 border-t border-gray-100 bg-blue-50/30">
-                            <p class="text-gray-700 leading-relaxed">顧問契約は月額25,000円〜、スポットの手続きは内容により数千円〜設定されています。従業員数やご依頼内容によって変動するため、詳細は「料金シミュレーター」で概算をご確認いただけます。</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                        <button onclick="toggleFaq(5)" class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition">
-                            <span class="font-bold text-blue-900 md:text-lg">Q5. まだ従業員が1人もいませんが、相談できますか？</span>
-                            <svg id="faq-icon-5" class="w-6 h-6 text-blue-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="faq-ans-5" class="hidden p-6 pt-0 border-t border-gray-100 bg-blue-50/30">
-                            <p class="text-gray-700 leading-relaxed">もちろんです。これから雇用を予定されているスタートアップ企業様向けに、雇用時の注意点や助成金のアドバイス、社会保険の加入準備など「創業支援」も行っております。</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                        <button onclick="toggleFaq(6)" class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition">
-                            <span class="font-bold text-blue-900 md:text-lg">Q6. 助成金だけの申請代行もお願いできますか？</span>
-                            <svg id="faq-icon-6" class="w-6 h-6 text-blue-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="faq-ans-6" class="hidden p-6 pt-0 border-t border-gray-100 bg-blue-50/30">
-                            <p class="text-gray-700 leading-relaxed">スポットでの助成金申請も承ります。ただし、助成金受給には適正な労務管理が前提となるため、まずは現在の労務環境をチェックさせていただく場合がございます。</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                        <button onclick="toggleFaq(7)" class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition">
-                            <span class="font-bold text-blue-900 md:text-lg">Q7. クラウド勤怠や給与ソフトの導入相談はできますか？</span>
-                            <svg id="faq-icon-7" class="w-6 h-6 text-blue-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="faq-ans-7" class="hidden p-6 pt-0 border-t border-gray-100 bg-blue-50/30">
-                            <p class="text-gray-700 leading-relaxed">はい、得意分野の一つです。マネーフォワードやfreee、KING OF TIME等の導入・運用支援を通じて、業務効率化と法改正（残業上限規制等）への対応をサポートします。</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                        <button onclick="toggleFaq(8)" class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition">
-                            <span class="font-bold text-blue-900 md:text-lg">Q8. 従業員とのトラブルが発生してしまったのですが……。</span>
-                            <svg id="faq-icon-8" class="w-6 h-6 text-blue-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="faq-ans-8" class="hidden p-6 pt-0 border-t border-gray-100 bg-blue-50/30">
-                            <p class="text-gray-700 leading-relaxed">まずは状況を詳しく伺います。法律に基づいた円満解決のためのアドバイスを行い、今後同様のトラブルが起きないよう就業規則等の見直しも併せて提案いたします。</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                        <button onclick="toggleFaq(9)" class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition">
-                            <span class="font-bold text-blue-900 md:text-lg">Q9. 他の社労士との違いは何ですか？</span>
-                            <svg id="faq-icon-9" class="w-6 h-6 text-blue-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="faq-ans-9" class="hidden p-6 pt-0 border-t border-gray-100 bg-blue-50/30">
-                            <p class="text-gray-700 leading-relaxed">地域密着10年以上の実績に基づき、仙台近郊の労働情勢に詳しい点と、ITツール活用による「速くて正確な手続き」に強みを持っています。誠実なコミュニケーションを最も大切にしています。</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                        <button onclick="toggleFaq(10)" class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition">
-                            <span class="font-bold text-blue-900 md:text-lg">Q10. 会社や従業員の機密情報は守られますか？</span>
-                            <svg id="faq-icon-10" class="w-6 h-6 text-blue-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="faq-ans-10" class="hidden p-6 pt-0 border-t border-gray-100 bg-blue-50/30">
-                            <p class="text-gray-700 leading-relaxed">社会保険労務士法第21条に基づき、厳格な守秘義務を負っております。個人情報保護についても、セキュリティの強化されたシステムを用いて厳重に管理いたしますのでご安心ください。</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                        <button onclick="toggleFaq(11)" class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition">
-                            <span class="font-bold text-blue-900 md:text-lg">Q11. 既に別の社労士がいますが、相談は可能ですか？</span>
-                            <svg id="faq-icon-11" class="w-6 h-6 text-blue-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="faq-ans-11" class="hidden p-6 pt-0 border-t border-gray-100 bg-blue-50/30">
-                            <p class="text-gray-700 leading-relaxed">はい、セカンドオピニオンとしての契約も可能です。「手続きは今の先生、助成金やDXの相談は神植事務所へ」といった切り分けでご活用いただく企業様もいらっしゃいます。</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                        <button onclick="toggleFaq(12)" class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition">
-                            <span class="font-bold text-blue-900 md:text-lg">Q12. 相談してから契約するまでの流れは？</span>
-                            <svg id="faq-icon-12" class="w-6 h-6 text-blue-500 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="faq-ans-12" class="hidden p-6 pt-0 border-t border-gray-100 bg-blue-50/30">
-                            <p class="text-gray-700 leading-relaxed">まずはお問い合わせフォームより「60分無料相談」をご予約ください。お悩みを伺った後、最適なプランとお見積りを提示します。ご納得いただいた場合のみご契約となります。</p>
-                        </div>
+                <!-- FAQ 検索窓 -->
+                <div class="max-w-2xl mx-auto mb-10 relative px-4">
+                    <div class="relative group">
+                        <span class="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-xl pointer-events-none transition-colors group-focus-within:text-blue-500">🔍</span>
+                        <input
+                            type="text"
+                            id="faq-search-input"
+                            placeholder="キーワードで検索（例：助成金、費用、手続き）"
+                            oninput="handleFaqSearch()"
+                            class="w-full pl-14 pr-12 py-5 rounded-[1.5rem] border-2 border-gray-100 focus:border-blue-500 focus:ring-4 focus:ring-blue-50/50 bg-white text-gray-800 placeholder-gray-400 shadow-sm transition-all duration-300 outline-none"
+                        >
+                        <button
+                            id="faq-search-clear"
+                            onclick="clearFaqSearch()"
+                            class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-300 hover:text-gray-600 transition-all hidden text-2xl leading-none font-light"
+                            aria-label="検索をクリア"
+                        >&times;</button>
                     </div>
                 </div>
 
-                <div class="mt-16 bg-blue-900 rounded-3xl p-8 md:p-12 text-center text-white">
-                    <h3 class="text-2xl font-bold mb-4">他にもご不明な点はございませんか？</h3>
-                    <p class="mb-8 opacity-90">具体的なお悩みや、個別の事情に合わせたご相談を「初回無料」で承っております。</p>
-                    <button onclick="showPage('contact')" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-xl transition shadow-lg text-lg">
-                        無料で社労士に相談する
-                    </button>
+                <!-- FAQ フィルターボタン -->
+                <div class="flex flex-wrap justify-center gap-3 mb-12">
+                    <button onclick="filterFaq('all')" data-tag="all" class="faq-filter-btn px-6 py-2.5 rounded-full text-sm font-bold border-2 transition-all duration-200 bg-blue-900 text-white border-blue-900">すべて</button>
+                    <button onclick="filterFaq('before')" data-tag="before" class="faq-filter-btn px-6 py-2.5 rounded-full text-sm font-bold border-2 transition-all duration-200 bg-white text-gray-600 border-gray-200 hover:border-blue-900 hover:text-blue-900">契約前</button>
+                    <button onclick="filterFaq('after')" data-tag="after" class="faq-filter-btn px-6 py-2.5 rounded-full text-sm font-bold border-2 transition-all duration-200 bg-white text-gray-600 border-gray-200 hover:border-blue-900 hover:text-blue-900">契約中</button>
+                </div>
+
+                <!-- 検索結果なしメッセージ -->
+                <div id="faq-no-results" class="hidden text-center py-10 text-gray-500 text-lg">
+                    該当する質問が見つかりませんでした。
+                </div>
+                <div class="space-y-12">
+                    <!-- カテゴリ1：サービス内容・対応エリア -->
+                    <div class="faq-category-group">
+                        <div class="pt-4 pb-4">
+                            <h3 class="flex items-center gap-3 text-lg md:text-xl font-black text-blue-900/80">
+                                <span class="w-8 h-1.5 bg-blue-600 rounded-full"></span>
+                                サービス内容・対応エリア
+                            </h3>
+                        </div>
+                        <div class="space-y-5">
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(1)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">どのような内容を相談できますか？</span>
+                                    </div>
+                                    <div id="faq-icon-1" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-1" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">従業員の入退社手続き、給与計算、就業規則の作成・変更、助成金申請、労務トラブルの相談、法改正への対応など、人事労務全般に関するご相談が可能です。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(2)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">顧問契約とスポット依頼、どちらが良いでしょうか？</span>
+                                    </div>
+                                    <div id="faq-icon-2" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-2" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">継続的なサポートが必要な場合は「顧問契約」、特定のプロジェクトや急ぎの手続きのみであれば「スポット依頼」が適しています。月1回以上ご依頼がある場合は顧問契約の方が割安になる傾向があります。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(3)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">仙台市以外でも対応可能ですか？</span>
+                                    </div>
+                                    <div id="faq-icon-3" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-3" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">はい。仙台市宮城野区を拠点としておりますが、宮城県全域および近隣県にも対応しております。また、オンライン（Zoom等）での面談も活用し、遠方の企業様もサポート可能です。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(4)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">従業員が1〜2名と非常に少ないのですが、依頼できますか？</span>
+                                    </div>
+                                    <div id="faq-icon-4" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-4" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">もちろんです。当事務所では従業員1名の小規模企業様からサポートしております。人数に関わらず、労働法遵守やリスク管理は重要です。規模に応じた最適なプランを提案します。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(5)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">建設業や医療・介護など、特定の業種にも詳しいですか？</span>
+                                    </div>
+                                    <div id="faq-icon-5" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-5" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">はい。建設業の働き方改革対応や、医療・介護業界の処遇改善加算、複雑なシフト管理などにも対応実績がございます。業種特有の課題を理解した上でアドバイスいたします。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(6)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">急ぎの手続きがあるのですが、いつから動いてもらえますか？</span>
+                                    </div>
+                                    <div id="faq-icon-6" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-6" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">可能な限り迅速に対応いたします。電子申請を活用しておりますので、必要な情報が揃い次第、即日〜翌営業日には手続きを開始・完了させることが可能です。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="after" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(7)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-1">契約中</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">クラウド給与・勤怠ソフト（MF・freee等）の導入相談はできますか？</span>
+                                    </div>
+                                    <div id="faq-icon-7" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-7" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">はい、得意分野の一つです。マネーフォワード、freee、ジョブカン、KING OF TIME等の導入から設定、運用レクチャーまで一貫してサポートいたします。</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- カテゴリ2：料金・費用について -->
+                    <div class="faq-category-group">
+                        <div class="pt-10 pb-4">
+                            <h3 class="flex items-center gap-3 text-lg md:text-xl font-black text-blue-900/80">
+                                <span class="w-8 h-1.5 bg-orange-500 rounded-full"></span>
+                                料金について
+                            </h3>
+                        </div>
+                        <div class="space-y-5">
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(8)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">具体的な費用はどのくらいかかりますか？</span>
+                                    </div>
+                                    <div id="faq-icon-8" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-8" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">顧問契約は月額25,000円〜、就業規則作成は80,000円〜など、内容と従業員数で決まります。サイト内の「料金シミュレーター」で24時間いつでも概算を確認いただけます。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(9)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">助成金だけの申請代行（スポット）もお願いできますか？</span>
+                                    </div>
+                                    <div id="faq-icon-9" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-9" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">はい、可能です。ただし、助成金受給には適正な労務管理が前提となるため、事前の労務チェックをセットでお願いしております。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(10)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">初回の相談や見積もり作成に費用はかかりますか？</span>
+                                    </div>
+                                    <div id="faq-icon-10" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-10" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">いいえ、無料です。初回60分のご相談およびお見積りまでは一切費用をいただきません。じっくりとお悩みを伺った上で、納得いただけるプランを提案します。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="after" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(11)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-1">契約中</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">助成金の「成功報酬」以外に追加でかかる費用はありますか？</span>
+                                    </div>
+                                    <div id="faq-icon-11" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-11" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">原則として着手金と成功報酬のみですが、申請のために就業規則の新規作成や大幅な改定が必要な場合は、別途規程作成費用をいただく場合がございます。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="after" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(12)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-1">契約中</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">クラウドソフトの月額利用料は顧問料に含まれますか？</span>
+                                    </div>
+                                    <div id="faq-icon-12" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-12" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">いいえ、ソフト会社へ支払う月額利用料はお客様の直接負担となります。当事務所の顧問料には、そのソフトの運用・操作サポートが含まれます。</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- カテゴリ3：ご契約・相談の流れ -->
+                    <div class="faq-category-group">
+                        <div class="pt-10 pb-4">
+                            <h3 class="flex items-center gap-3 text-lg md:text-xl font-black text-blue-900/80">
+                                <span class="w-8 h-1.5 bg-indigo-500 rounded-full"></span>
+                                ご契約・相談の流れ
+                            </h3>
+                        </div>
+                        <div class="space-y-5">
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(13)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">既に別の社労士がいますが、相談や切り替えは可能ですか？</span>
+                                    </div>
+                                    <div id="faq-icon-13" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-13" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">はい、セカンドオピニオンやスムーズな引き継ぎも承っております。IT化や助成金に強い社労士への切り替えニーズも多く頂いています。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(14)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">まだ従業員が0名ですが、創業前から相談できますか？</span>
+                                    </div>
+                                    <div id="faq-icon-14" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-14" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">もちろんです。創業時に受けられる助成金や、社会保険の加入時期など、スタートアップに特化した支援を行っております。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(15)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">相談してから実際にサポートが開始されるまでの流れは？</span>
+                                    </div>
+                                    <div id="faq-icon-15" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-15" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">「問合せ → 無料面談 → 最適プラン提案 → お見積り → 契約」の流れです。最短で即日サポートを開始することも可能です。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(16)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">最低契約期間はありますか？また解約の手続きはどうなりますか？</span>
+                                    </div>
+                                    <div id="faq-icon-16" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-16" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">原則1年ですが、期間の縛りはございません。解約を希望される場合は1ヶ月前までにお申し出いただければ、スムーズに終了の手続きを行います。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(17)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">初回相談の前に何か準備しておくものはありますか？</span>
+                                    </div>
+                                    <div id="faq-icon-17" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-17" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">特に必須なものはございませんが、現在の就業規則や賃金台帳、労働局からの通知等がある場合は、ご用意いただけるとより具体的なアドバイスが可能です。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(18)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">オンライン（Zoom/Teams）での相談は可能ですか？</span>
+                                    </div>
+                                    <div id="faq-icon-18" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-18" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">はい。初回相談からその後の月例面談まで、オンラインで完結させることも可能です。画面共有を活用して資料を一緒に確認しながらお話しできるため好評です。</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- カテゴリ4：運用・コミュニケーション・情報管理 -->
+                    <div class="faq-category-group">
+                        <div class="pt-10 pb-4">
+                            <h3 class="flex items-center gap-3 text-lg md:text-xl font-black text-blue-900/80">
+                                <span class="w-8 h-1.5 bg-green-500 rounded-full"></span>
+                                運用・コミュニケーション・情報管理
+                            </h3>
+                        </div>
+                        <div class="space-y-5">
+                            <div data-faq-item data-tags="after" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(19)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-1">契約中</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">契約後の主な連絡手段は何ですか？</span>
+                                    </div>
+                                    <div id="faq-icon-19" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-19" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">電話、メールのほか、ChatworkやSlack、LINE等にも対応しております。お客様の使い慣れた手段でスムーズに連絡を取り合うことが可能です。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="after" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(20)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-1">契約中</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">会社の機密情報やマイナンバー等の管理は安全ですか？</span>
+                                    </div>
+                                    <div id="faq-icon-20" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-20" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">社労士には厳格な守秘義務が法律で課せられています。加えて、当事務所では2段階認証付きのセキュアなシステムを採用し、物理的な書類の紛失リスクを最小限に抑えた運用を徹底しています。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="after" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(21)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-1">契約中</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">質問をしてから回答をいただくまで、どのくらい時間がかかりますか？</span>
+                                    </div>
+                                    <div id="faq-icon-21" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-21" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">原則当日または翌営業日までには第一報を差し上げます。法的調査が必要な場合も、いつまで回答できるかの目途を即座に共有いたします。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="after" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(22)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-1">契約中</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">担当者は代表の神植さんですか？それともスタッフの方ですか？</span>
+                                    </div>
+                                    <div id="faq-icon-22" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-22" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">当事務所では代表の神植がすべての主担当として直接対応いたします。「契約した時だけ先生が来て、あとはスタッフ任せ」ということはございません。</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- カテゴリ5：労務トラブル・専門的なご相談 -->
+                    <div class="faq-category-group">
+                        <div class="pt-10 pb-4">
+                            <h3 class="flex items-center gap-3 text-lg md:text-xl font-black text-blue-900/80">
+                                <span class="w-8 h-1.5 bg-red-500 rounded-full"></span>
+                                労務トラブル・専門的なご相談
+                            </h3>
+                        </div>
+                        <div class="space-y-5">
+                            <div data-faq-item data-tags="after" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(23)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-1">契約中</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">労働基準監督署の調査が入ることになったのですが、立ち会えますか？</span>
+                                    </div>
+                                    <div id="faq-icon-23" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-23" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">はい。当事者として立ち会い、監督官への説明や、是正報告書の作成まで全面的にバックアップいたします。突然の調査通知でお困りの際もすぐにご連絡ください。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="after" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(24)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-1">契約中</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">従業員とのトラブルが発生してしまった際、解決までサポートしてもらえますか？</span>
+                                    </div>
+                                    <div id="faq-icon-24" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-24" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">はい。事実関係を整理し、法的なリスクを分析した上で、円満解決に向けた着地点をアドバイスします。必要に応じて弁護士等の専門家と連携した対応も可能です。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="before" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(25)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1">契約前</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">就業規則の一部変更（賃金改定のみ等）だけをお願いすることは可能ですか？</span>
+                                    </div>
+                                    <div id="faq-icon-25" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-25" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">はい、スポット依頼として承っております。他の条文と矛盾を生むリスクがあるため、関連する項目も含めたリーガルチェックを行なった上で作成いたします。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="after" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(26)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-1">契約中</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">外国人雇用の手続きや雇用契約書の作成もお願いできますか？</span>
+                                    </div>
+                                    <div id="faq-icon-26" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-26" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">はい、可能です。外国人従業員特有の雇用保険手続きや、必要に応じた多言語の雇用条件通知書の整備などをサポートいたします。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="after" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(27)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-1">契約中</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">経営者自身の年金や社会保険料の最適化についても相談できますか？</span>
+                                    </div>
+                                    <div id="faq-icon-27" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-27" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">はい。役員報酬の決定に伴う社会保険料の負担額シミュレーションや、将来の受給見込額を考慮したアドバイスなど、経営者様個人のサポートも行っております。</p></div></div>
+                            </div>
+                            <div data-faq-item data-tags="after" class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                                <button onclick="toggleFaq(28)" class="group w-full flex items-center gap-4 p-7 text-left transition">
+                                    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black text-lg">Q</span>
+                                    <div class="flex-1">
+                                        <span class="block text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-1">契約中</span>
+                                        <span class="font-black text-blue-900 text-lg md:text-xl leading-tight">従業員向けのハラスメント研修や法改正セミナーは依頼できますか？</span>
+                                    </div>
+                                    <div id="faq-icon-28" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-blue-500 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                                    </div>
+                                </button>
+                                <div id="faq-ans-28" class="hidden"><div class="px-7 pb-8 pt-2 ml-14"><p class="text-gray-600 leading-relaxed text-base md:text-lg">はい。管理者向けのコンプライアンス研修や全従業員向けのハラスメント防止研修など、ご要望に合わせたテーマで講師を務めます。オンライン対応も可能です。</p></div></div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 下部CTAセクション -->
+                <div class="mt-20 relative overflow-hidden rounded-[2.5rem] shadow-2xl" style="background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 60%,#7c3aed 100%);">
+
+                <!-- 下部CTAセクション -->
+                <div class="mt-20 relative overflow-hidden rounded-[2.5rem] shadow-2xl" style="background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 60%,#7c3aed 100%);">
+                    <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(circle at 20% 50%, white 1px, transparent 1px); background-size:40px 40px;"></div>
+                    <div class="relative z-10 p-10 md:p-14 text-center">
+                        <h3 class="text-2xl md:text-3xl font-black text-white mb-4 leading-tight">他にもご不明な点はございませんか？</h3>
+                        <p class="text-blue-100 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+                            具体的なお悩みや、個別の事情に合わせたご相談を<br class="hidden md:block">「初回60分無料」で承っております。無理な勧誘は一切ありません。
+                        </p>
+                        <button onclick="App.showPage('contact')"
+                                class="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-400 text-white font-black py-5 px-12 rounded-2xl transition shadow-2xl transform hover:scale-105 text-lg">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                            無料で社労士に相談する
+                        </button>
+                        <p class="text-blue-300 text-xs mt-6 uppercase tracking-widest font-bold">KAMIUE SOCIAL INSURANCE LABOR AND CONSULTANT OFFICE</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1490,7 +1839,7 @@
                 </div>
                 <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 md:p-12 border-2 border-blue-200">
                     <div class="flex items-start gap-4 mb-6"><div class="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center flex-shrink-0"><svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div><h3 class="text-2xl font-bold text-blue-900 mb-3">💡 リンク活用のポイント</h3><p class="text-gray-700 leading-relaxed mb-4">これらの公的機関のウェブサイトには、労務管理に必要な情報が豊富に掲載されています。ただし、専門的な内容も多く、自社の状況に当てはめて判断するのは難しい場合があります。</p><p class="text-gray-700 leading-relaxed"><span class="font-bold text-blue-900">「この情報は自社に当てはまるのか？」</span>と迷われたら、お気軽に当事務所へご相談ください。</p></div></div>
-                    <div class="text-center mt-8"><button onclick="showPage('contact')" class="bg-gradient-to-r from-blue-900 to-blue-700 hover:from-blue-800 hover:to-blue-600 text-white font-bold py-4 px-10 rounded-xl transition shadow-lg">無料相談を申し込む</button></div>
+                    <div class="text-center mt-8"><button onclick="App.showPage('contact')" class="bg-gradient-to-r from-blue-900 to-blue-700 hover:from-blue-800 hover:to-blue-600 text-white font-bold py-4 px-10 rounded-xl transition shadow-lg">無料相談を申し込む</button></div>
                 </div>
             </div>
         </section>
@@ -1527,7 +1876,7 @@
                 <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%); background-size: 20px 20px;"></div>
                 <div class="container mx-auto px-4 max-w-6xl relative z-10">
                     <div class="flex items-center gap-2 text-blue-300 text-sm mb-4">
-                        <button onclick="showPage('home')" class="hover:text-white transition">ホーム</button>
+                        <button onclick="App.showPage('home')" class="hover:text-white transition">ホーム</button>
                         <span>/</span>
                         <span class="text-white">労務管理コラム</span>
                     </div>
@@ -1575,7 +1924,7 @@
                 <div class="mt-16 text-center bg-white rounded-2xl p-12 shadow-lg">
                     <h3 class="text-2xl font-bold text-blue-900 mb-4">個別のご相談も承ります</h3>
                     <p class="text-gray-600 mb-6">コラムの内容について、貴社の状況に合わせた具体的なアドバイスが可能です</p>
-                    <button onclick="showPage('contact')" class="bg-gradient-to-r from-blue-900 to-blue-700 text-white font-bold py-4 px-10 rounded-xl hover:from-blue-800 hover:to-blue-600 transition shadow-lg">無料相談を申し込む</button>
+                    <button onclick="App.showPage('contact')" class="bg-gradient-to-r from-blue-900 to-blue-700 text-white font-bold py-4 px-10 rounded-xl hover:from-blue-800 hover:to-blue-600 transition shadow-lg">無料相談を申し込む</button>
                 </div>
             </div>
         </section>
@@ -1588,9 +1937,9 @@
                 <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%); background-size: 20px 20px;"></div>
                 <div class="container mx-auto px-4 max-w-4xl relative z-10">
                     <div class="flex items-center gap-2 text-white/70 text-sm mb-6">
-                        <button onclick="showPage('home')" class="hover:text-white transition">ホーム</button>
+                        <button onclick="App.showPage('home')" class="hover:text-white transition">ホーム</button>
                         <span>/</span>
-                        <button onclick="showPage('blog')" class="hover:text-white transition">労務管理コラム</button>
+                        <button onclick="App.showPage('blog')" class="hover:text-white transition">労務管理コラム</button>
                         <span>/</span>
                         <span class="text-white">記事詳細</span>
                     </div>
@@ -1614,7 +1963,7 @@
                             <p class="text-blue-200 text-sm mb-2">この記事について詳しく聞きたい方へ</p>
                             <h3 class="text-2xl font-black mb-4">まずは無料相談から</h3>
                             <p class="text-blue-100 text-sm mb-6 leading-relaxed">貴社の状況に合わせた具体的なアドバイスをご提供します。<br>初回60分・完全無料でご相談いただけます。</p>
-                            <button onclick="showPage('contact')"
+                            <button onclick="App.showPage('contact')"
                                 class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-black py-4 px-10 rounded-xl transition shadow-xl text-base transform hover:scale-105">
                                 <span id="article-cta-text">無料相談を申し込む</span>
                             </button>
@@ -1627,7 +1976,7 @@
 
                         <!-- コラム一覧に戻る -->
                         <div>
-                            <button onclick="showPage('blog')"
+                            <button onclick="App.showPage('blog')"
                                 class="w-full flex items-center gap-3 text-blue-900 font-bold border-2 border-blue-900 px-5 py-3.5 rounded-xl hover:bg-blue-900 hover:text-white transition group">
                                 <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -1658,7 +2007,7 @@
                                     <span>平日 9:00〜17:00</span>
                                 </li>
                             </ul>
-                            <button onclick="showPage('contact')"
+                            <button onclick="App.showPage('contact')"
                                 class="mt-4 w-full bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold py-2.5 rounded-xl transition">
                                 無料相談を申し込む
                             </button>
@@ -1957,7 +2306,7 @@
                     <p class="text-gray-500 text-sm leading-relaxed mb-6">ダウンロードページに全資料のリンクも表示されています。</p>
                     <div class="flex flex-col gap-3">
                         <button onclick="dlCloseModal()" class="w-full bg-gradient-to-r from-blue-900 to-blue-700 hover:from-blue-800 hover:to-blue-600 text-white font-black py-4 rounded-2xl transition shadow-md text-sm">ダウンロードページを確認する</button>
-                        <button onclick="dlCloseModal(); showPage('contact')" class="w-full border-2 border-orange-300 text-orange-600 hover:bg-orange-50 font-bold py-3 rounded-xl transition text-sm">無料相談を予約する</button>
+                        <button onclick="dlCloseModal(); App.showPage('contact')" class="w-full border-2 border-orange-300 text-orange-600 hover:bg-orange-50 font-bold py-3 rounded-xl transition text-sm">無料相談を予約する</button>
                     </div>
                 </div>
             </div>
@@ -2032,11 +2381,11 @@
                         就業規則・助成金・採用手続きなど、何でもご相談ください。
                     </p>
                     <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                        <button onclick="dlCloseModal(); showPage('contact')"
+                            <button onclick="dlCloseModal(); App.showPage('contact')"
                             class="bg-orange-500 hover:bg-orange-400 text-white font-black py-4 px-10 rounded-xl transition shadow-lg">
                             無料相談を予約する
                         </button>
-                        <button onclick="showPage('download')"
+                            <button onclick="App.showPage('download')"
                             class="bg-white/10 hover:bg-white/20 text-white font-bold py-4 px-10 rounded-xl transition border border-white/30">
                             ダウンロードページに戻る
                         </button>
@@ -2866,7 +3215,7 @@
             <div class="cta-box">
                 <h4 style="font-size:1rem;font-weight:900;margin:0 0 6px;">給与計算を丸ごとお任せ！</h4>
                 <p style="color:rgba(255,255,255,.7);font-size:.84rem;margin:0 0 16px;line-height:1.6;">毎月の給与計算・社会保険手続きを社労士が代行。法改正対応も自動で。</p>
-                <button class="btn-cta" onclick="showPage('contact')">無料相談を予約する →</button>
+                <button class="btn-cta" onclick="App.showPage('contact')">無料相談を予約する →</button>
             </div>
 
             <!-- 注意事項 -->
@@ -3073,283 +3422,20 @@
 </section>
 
 
+
         <!-- ===================================================
-             SPOT PAGE  スポット手続き依頼
+             SPOT PAGE  手続き依頼（外部ファイル参照）
              =================================================== -->
-        <section id="page-spot" class="hidden py-16 md:py-24" style="background: linear-gradient(135deg, #f0f9ff 0%, #e8f4fd 50%, #f8faff 100%); min-height:80vh;">
-        <div class="container mx-auto px-4 max-w-5xl">
-
-            <!-- ヘッダー -->
-            <div class="text-center mb-12">
-                <div class="inline-flex items-center gap-2 bg-white border-2 border-blue-200 px-6 py-2 rounded-full text-sm font-bold text-blue-900 mb-6 shadow-sm">
-                    <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                    社会保険・雇用保険 手続き代行
-                </div>
-                <h2 class="text-3xl md:text-5xl font-bold text-blue-900 mb-4">📋 スポット手続き依頼</h2>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">必要事項を入力するだけで、社会保険・雇用保険の手続き代行をご依頼いただけます。<br class="hidden md:block">内容確認後、担当者よりご連絡いたします。</p>
-                <div class="mt-6 flex flex-wrap justify-center gap-3 text-sm">
-                    <span class="bg-green-100 text-green-800 px-4 py-1.5 rounded-full font-medium">✓ 最短翌営業日対応</span>
-                    <span class="bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full font-medium">✓ 電子申請対応</span>
-                    <span class="bg-orange-100 text-orange-800 px-4 py-1.5 rounded-full font-medium">✓ 入力内容は暗号化されません。個人情報の取り扱いにご注意ください</span>
-                </div>
-            </div>
-
-            <!-- 手続き種別タブ -->
-            <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-blue-100">
-
-                <!-- タブナビ -->
-                <div class="grid grid-cols-2 md:grid-cols-4 border-b border-gray-200">
-                    <button id="spot-tab-0" onclick="spotSwitchTab(0)" class="spot-tab-btn active py-5 px-3 text-center text-sm font-bold transition border-b-4 border-blue-900 text-blue-900 bg-blue-50 md:border-r md:border-r-gray-100">
-                        <div class="text-3xl md:text-2xl mb-2 md:mb-1">👤</div>
-                        <div class="leading-tight text-xs md:text-sm">雇用保険<br><span class="font-normal">資格取得届</span></div>
-                    </button>
-                    <button id="spot-tab-1" onclick="spotSwitchTab(1)" class="spot-tab-btn py-5 px-3 text-center text-sm font-bold transition border-b-4 border-transparent text-gray-500 hover:text-blue-700 hover:bg-blue-50">
-                        <div class="text-3xl md:text-2xl mb-2 md:mb-1">📤</div>
-                        <div class="leading-tight text-xs md:text-sm">雇用保険<br><span class="font-normal">資格喪失・離職票</span></div>
-                    </button>
-                    <button id="spot-tab-2" onclick="spotSwitchTab(2)" class="spot-tab-btn py-5 px-3 text-center text-sm font-bold transition border-b-4 border-transparent text-gray-500 hover:text-blue-700 hover:bg-blue-50 border-t border-t-gray-100 md:border-t-0 md:border-r md:border-r-gray-100">
-                        <div class="text-3xl md:text-2xl mb-2 md:mb-1">🏥</div>
-                        <div class="leading-tight text-xs md:text-sm">社会保険<br><span class="font-normal">資格取得届</span></div>
-                    </button>
-                    <button id="spot-tab-3" onclick="spotSwitchTab(3)" class="spot-tab-btn py-5 px-3 text-center text-sm font-bold transition border-b-4 border-transparent text-gray-500 hover:text-blue-700 hover:bg-blue-50 border-t border-t-gray-100 md:border-t-0">
-                        <div class="text-3xl md:text-2xl mb-2 md:mb-1">🚪</div>
-                        <div class="leading-tight text-xs md:text-sm">社会保険<br><span class="font-normal">資格喪失届</span></div>
-                    </button>
-                </div>
-
-                <!-- フォームエリア -->
-                <div class="p-6 md:p-10">
-
-                    <!-- ===== フォーム0: 雇用保険 資格取得届 ===== -->
-                    <div id="spot-form-0" class="spot-form">
-                        <div class="flex items-center gap-3 mb-8">
-                            <div class="w-12 h-12 bg-blue-900 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">👤</div>
-                            <div>
-                                <h3 class="text-xl font-bold text-blue-900">雇用保険被保険者資格取得届</h3>
-                                <p class="text-sm text-gray-500">新規雇用・採用時に必要な届出です（雇用翌月10日まで）</p>
-                            </div>
-                        </div>
-                        <form id="spot-form-data-0" class="space-y-6">
-                            <div class="bg-blue-50 rounded-2xl p-5 mb-6">
-                                <h4 class="font-bold text-blue-900 mb-4 flex items-center gap-2"><span class="bg-blue-900 text-white w-6 h-6 rounded text-xs flex items-center justify-center">会</span>事業所情報</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="spot-field"><label class="spot-label">事業所名 <span class="required">*</span></label><input type="text" name="company" placeholder="例：株式会社〇〇" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">雇用保険事業所番号 <span class="spot-hint">（11桁）</span></label><input type="text" name="hellowork_no" placeholder="例：04-000000-0" class="spot-input" maxlength="14"></div>
-                                    <div class="spot-field"><label class="spot-label">担当者名 <span class="required">*</span></label><input type="text" name="contact_name" placeholder="例：田中 太郎" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">連絡先電話番号 <span class="required">*</span></label><input type="tel" name="contact_tel" placeholder="例：022-XXX-XXXX" class="spot-input" required></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">メールアドレス <span class="required">*</span></label><input type="email" name="contact_email" placeholder="例：info@example.com" class="spot-input" required></div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 rounded-2xl p-5">
-                                <h4 class="font-bold text-blue-900 mb-4 flex items-center gap-2"><span class="bg-green-600 text-white w-6 h-6 rounded text-xs flex items-center justify-center">被</span>被保険者（従業員）情報</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="spot-field"><label class="spot-label">氏名（漢字） <span class="required">*</span></label><input type="text" name="emp_name_kanji" placeholder="例：山田 花子" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">氏名（カナ） <span class="required">*</span></label><input type="text" name="emp_name_kana" placeholder="例：ヤマダ ハナコ" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">生年月日 <span class="required">*</span></label><input type="date" name="emp_birth" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">性別 <span class="required">*</span></label><select name="emp_gender" class="spot-input" required><option value="">選択してください</option><option value="male">男性</option><option value="female">女性</option></select></div>
-                                    <div class="spot-field"><label class="spot-label">雇用年月日（資格取得日） <span class="required">*</span></label><input type="date" name="emp_hire_date" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">雇用形態 <span class="required">*</span></label><select name="emp_type" class="spot-input" required><option value="">選択してください</option><option value="regular">正社員</option><option value="part">パート・アルバイト</option><option value="contract">契約社員</option><option value="dispatch">派遣社員</option></select></div>
-                                    <div class="spot-field"><label class="spot-label">賃金（月額・税込） <span class="required">*</span></label><div class="relative"><input type="number" name="emp_wage" placeholder="例：250000" class="spot-input pr-10" required><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">円</span></div></div>
-                                    <div class="spot-field"><label class="spot-label">週所定労働時間 <span class="required">*</span></label><div class="relative"><input type="number" name="emp_hours" placeholder="例：40" min="1" max="60" class="spot-input pr-14" required><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">時間</span></div></div>
-                                    <div class="spot-field"><label class="spot-label">個人番号（マイナンバー）</label><input type="text" name="emp_mynum" placeholder="12桁の数字" maxlength="12" class="spot-input"><p class="text-xs text-gray-400 mt-1">※入力される場合は通信環境にご注意ください</p></div>
-                                    <div class="spot-field"><label class="spot-label">住所（都道府県市区町村）</label><input type="text" name="emp_address" placeholder="例：宮城県仙台市宮城野区" class="spot-input"></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">備考・特記事項</label><textarea name="notes" rows="3" placeholder="例：前職でも雇用保険に加入していました（前の会社名：〇〇）" class="spot-input"></textarea></div>
-                                </div>
-                            </div>
-                            <div class="pt-4">
-                                <button type="submit" class="spot-submit-btn"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>依頼内容を送信する</button>
-                                <p class="text-xs text-center text-gray-400 mt-3">送信後、担当者よりメールまたはお電話にてご連絡いたします（通常1営業日以内）</p>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- ===== フォーム1: 雇用保険 資格喪失届・離職票 ===== -->
-                    <div id="spot-form-1" class="spot-form hidden">
-                        <div class="flex items-center gap-3 mb-8">
-                            <div class="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">📤</div>
-                            <div>
-                                <h3 class="text-xl font-bold text-blue-900">雇用保険被保険者資格喪失届</h3>
-                                <p class="text-sm text-gray-500">退職・解雇時に必要な届出です（退職翌日から10日以内）</p>
-                                <div class="mt-3 flex items-center gap-6">
-                                    <span class="text-sm font-bold text-gray-700">離職票：</span>
-                                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="rikokuhyo" value="nashi" checked onchange="updateRikokuhyoFee()" class="accent-orange-500"><span class="text-sm">不要（5,000円〜）</span></label>
-                                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="rikokuhyo" value="ari" onchange="updateRikokuhyoFee()" class="accent-orange-500"><span class="text-sm">要（10,000円〜）</span></label>
-                                    <span id="rikokuhyo-fee" class="ml-2 text-orange-600 font-black text-sm">5,000円〜</span>
-                                </div>
-                            </div>
-                        </div>
-                        <form id="spot-form-data-1" class="space-y-6">
-                            <div class="bg-orange-50 rounded-2xl p-5 mb-6">
-                                <h4 class="font-bold text-orange-900 mb-4 flex items-center gap-2"><span class="bg-orange-600 text-white w-6 h-6 rounded text-xs flex items-center justify-center">会</span>事業所情報</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="spot-field"><label class="spot-label">事業所名 <span class="required">*</span></label><input type="text" name="company" placeholder="例：株式会社〇〇" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">雇用保険事業所番号</label><input type="text" name="hellowork_no" placeholder="例：04-000000-0" class="spot-input"></div>
-                                    <div class="spot-field"><label class="spot-label">担当者名 <span class="required">*</span></label><input type="text" name="contact_name" placeholder="例：田中 太郎" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">連絡先電話番号 <span class="required">*</span></label><input type="tel" name="contact_tel" placeholder="例：022-XXX-XXXX" class="spot-input" required></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">メールアドレス <span class="required">*</span></label><input type="email" name="contact_email" placeholder="例：info@example.com" class="spot-input" required></div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 rounded-2xl p-5">
-                                <h4 class="font-bold text-blue-900 mb-4 flex items-center gap-2"><span class="bg-orange-600 text-white w-6 h-6 rounded text-xs flex items-center justify-center">被</span>被保険者（退職従業員）情報</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="spot-field"><label class="spot-label">氏名（漢字） <span class="required">*</span></label><input type="text" name="emp_name_kanji" placeholder="例：山田 花子" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">氏名（カナ） <span class="required">*</span></label><input type="text" name="emp_name_kana" placeholder="例：ヤマダ ハナコ" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">生年月日 <span class="required">*</span></label><input type="date" name="emp_birth" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">性別 <span class="required">*</span></label><select name="emp_gender" class="spot-input" required><option value="">選択してください</option><option value="male">男性</option><option value="female">女性</option></select></div>
-                                    <div class="spot-field"><label class="spot-label">雇用保険被保険者番号</label><input type="text" name="hoken_no" placeholder="例：1234-567890-1" class="spot-input"></div>
-                                    <div class="spot-field"><label class="spot-label">退職年月日 <span class="required">*</span></label><input type="date" name="retire_date" class="spot-input" required></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">離職理由 <span class="required">*</span></label><select name="retire_reason" class="spot-input" required><option value="">選択してください</option><option value="11">定年</option><option value="12">移籍出向</option><option value="21">期間満了（更新なし・本人希望）</option><option value="22">期間満了（更新なし・会社都合）</option><option value="23A">期間満了（更新なし・本人都合）</option><option value="31">勧奨退職</option><option value="32">会社解散・事業所閉鎖</option><option value="33A">人員整理・解雇</option><option value="33B">労働条件悪化による辞職</option><option value="33C">事業主都合の離職</option><option value="40A">正当な理由のある自己都合退職</option><option value="40B">正当な理由のない自己都合退職</option><option value="51">重責解雇</option></select></div>
-                                    <div class="spot-field"><label class="spot-label">資格取得日（入社日）</label><input type="date" name="acquire_date" class="spot-input"></div>
-                                    <div class="spot-field"><label class="spot-label">離職票の発行 <span class="required">*</span></label><select name="rishoku_hakkoh" class="spot-input" required><option value="">選択してください</option><option value="yes">要（本人が失業給付を希望）</option><option value="no">不要</option><option value="unknown">本人に確認中</option></select></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">退職者の現住所（離職票送付先）</label><input type="text" name="retire_address" placeholder="例：宮城県仙台市宮城野区〇〇1-2-3" class="spot-input"></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">被保険者期間中の賃金（直近6ヶ月分・概算）</label><textarea name="wage_history" rows="3" placeholder="例：4月250,000円 / 5月260,000円 / 6月250,000円 / 7月255,000円 / 8月250,000円 / 9月260,000円" class="spot-input"></textarea></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">備考・特記事項</label><textarea name="notes" rows="3" placeholder="例：有給消化後の退職です。退職日：〇月〇日" class="spot-input"></textarea></div>
-                                </div>
-                            </div>
-                            <div class="pt-4">
-                                <button type="submit" class="spot-submit-btn"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>依頼内容を送信する</button>
-                                <p class="text-xs text-center text-gray-400 mt-3">送信後、担当者よりメールまたはお電話にてご連絡いたします（通常1営業日以内）</p>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- ===== フォーム2: 社会保険 資格取得届 ===== -->
-                    <div id="spot-form-2" class="spot-form hidden">
-                        <div class="flex items-center gap-3 mb-8">
-                            <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">🏥</div>
-                            <div>
-                                <h3 class="text-xl font-bold text-blue-900">健康保険・厚生年金保険被保険者資格取得届</h3>
-                                <p class="text-sm text-gray-500">入社・加入資格発生時の届出です（5日以内）</p>
-                            </div>
-                        </div>
-                        <form id="spot-form-data-2" class="space-y-6">
-                            <div class="bg-green-50 rounded-2xl p-5 mb-6">
-                                <h4 class="font-bold text-green-900 mb-4 flex items-center gap-2"><span class="bg-green-700 text-white w-6 h-6 rounded text-xs flex items-center justify-center">会</span>事業所情報</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="spot-field"><label class="spot-label">事業所名 <span class="required">*</span></label><input type="text" name="company" placeholder="例：株式会社〇〇" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">健保・年金の事業所整理記号番号</label><input type="text" name="kenpo_no" placeholder="例：〇〇-000000" class="spot-input"></div>
-                                    <div class="spot-field"><label class="spot-label">担当者名 <span class="required">*</span></label><input type="text" name="contact_name" placeholder="例：田中 太郎" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">連絡先電話番号 <span class="required">*</span></label><input type="tel" name="contact_tel" placeholder="例：022-XXX-XXXX" class="spot-input" required></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">メールアドレス <span class="required">*</span></label><input type="email" name="contact_email" placeholder="例：info@example.com" class="spot-input" required></div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 rounded-2xl p-5">
-                                <h4 class="font-bold text-blue-900 mb-4 flex items-center gap-2"><span class="bg-green-600 text-white w-6 h-6 rounded text-xs flex items-center justify-center">被</span>被保険者情報</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="spot-field"><label class="spot-label">氏名（漢字） <span class="required">*</span></label><input type="text" name="emp_name_kanji" placeholder="例：山田 花子" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">氏名（カナ） <span class="required">*</span></label><input type="text" name="emp_name_kana" placeholder="例：ヤマダ ハナコ" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">生年月日 <span class="required">*</span></label><input type="date" name="emp_birth" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">性別 <span class="required">*</span></label><select name="emp_gender" class="spot-input" required><option value="">選択してください</option><option value="male">男性</option><option value="female">女性</option></select></div>
-                                    <div class="spot-field"><label class="spot-label">資格取得日（入社日） <span class="required">*</span></label><input type="date" name="acquire_date" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">報酬月額（税込） <span class="required">*</span></label><div class="relative"><input type="number" name="emp_salary" placeholder="例：250000" class="spot-input pr-10" required><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">円</span></div></div>
-                                    <div class="spot-field"><label class="spot-label">住所（都道府県以下） <span class="required">*</span></label><input type="text" name="emp_address" placeholder="例：宮城県仙台市宮城野区〇〇1-2-3" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">基礎年金番号</label><input type="text" name="emp_nenkin_no" placeholder="例：1234-567890" class="spot-input"></div>
-                                    <div class="spot-field"><label class="spot-label">個人番号（マイナンバー）</label><input type="text" name="emp_mynum" placeholder="12桁の数字" maxlength="12" class="spot-input"></div>
-                                    <div class="spot-field"><label class="spot-label">60歳以上の方・短時間労働者</label><select name="emp_special" class="spot-input"><option value="none">該当なし</option><option value="over60">60歳以上の方</option><option value="short">短時間労働者（週20時間以上30時間未満）</option><option value="both">両方該当</option></select></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">扶養に入れる家族（氏名・続柄・生年月日・年収）</label><textarea name="dependents" rows="3" placeholder="例：山田 次郎（配偶者・1980年4月1日生・年収90万円）" class="spot-input"></textarea></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">備考・特記事項</label><textarea name="notes" rows="2" placeholder="例：前職の健康保険証の返却が遅れています" class="spot-input"></textarea></div>
-                                </div>
-                            </div>
-                            <div class="pt-4">
-                                <button type="submit" class="spot-submit-btn" style="background: linear-gradient(135deg, #059669, #047857);"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>依頼内容を送信する</button>
-                                <p class="text-xs text-center text-gray-400 mt-3">送信後、担当者よりメールまたはお電話にてご連絡いたします（通常1営業日以内）</p>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- ===== フォーム3: 社会保険 資格喪失届 ===== -->
-                    <div id="spot-form-3" class="spot-form hidden">
-                        <div class="flex items-center gap-3 mb-8">
-                            <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">🚪</div>
-                            <div>
-                                <h3 class="text-xl font-bold text-blue-900">健康保険・厚生年金保険被保険者資格喪失届</h3>
-                                <p class="text-sm text-gray-500">退職・資格喪失時の届出です（5日以内）</p>
-                            </div>
-                        </div>
-                        <form id="spot-form-data-3" class="space-y-6">
-                            <div class="bg-purple-50 rounded-2xl p-5 mb-6">
-                                <h4 class="font-bold text-purple-900 mb-4 flex items-center gap-2"><span class="bg-purple-700 text-white w-6 h-6 rounded text-xs flex items-center justify-center">会</span>事業所情報</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="spot-field"><label class="spot-label">事業所名 <span class="required">*</span></label><input type="text" name="company" placeholder="例：株式会社〇〇" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">健保・年金の事業所整理記号番号</label><input type="text" name="kenpo_no" placeholder="例：〇〇-000000" class="spot-input"></div>
-                                    <div class="spot-field"><label class="spot-label">担当者名 <span class="required">*</span></label><input type="text" name="contact_name" placeholder="例：田中 太郎" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">連絡先電話番号 <span class="required">*</span></label><input type="tel" name="contact_tel" placeholder="例：022-XXX-XXXX" class="spot-input" required></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">メールアドレス <span class="required">*</span></label><input type="email" name="contact_email" placeholder="例：info@example.com" class="spot-input" required></div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 rounded-2xl p-5">
-                                <h4 class="font-bold text-blue-900 mb-4 flex items-center gap-2"><span class="bg-purple-600 text-white w-6 h-6 rounded text-xs flex items-center justify-center">被</span>被保険者情報</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="spot-field"><label class="spot-label">氏名（漢字） <span class="required">*</span></label><input type="text" name="emp_name_kanji" placeholder="例：山田 花子" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">氏名（カナ） <span class="required">*</span></label><input type="text" name="emp_name_kana" placeholder="例：ヤマダ ハナコ" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">生年月日 <span class="required">*</span></label><input type="date" name="emp_birth" class="spot-input" required></div>
-                                    <div class="spot-field"><label class="spot-label">性別 <span class="required">*</span></label><select name="emp_gender" class="spot-input" required><option value="">選択してください</option><option value="male">男性</option><option value="female">女性</option></select></div>
-                                    <div class="spot-field"><label class="spot-label">被保険者証の記号・番号</label><input type="text" name="hoken_no" placeholder="例：〇〇-12345678" class="spot-input"></div>
-                                    <div class="spot-field"><label class="spot-label">資格喪失日（退職翌日） <span class="required">*</span></label><input type="date" name="lose_date" class="spot-input" required><p class="text-xs text-gray-400 mt-1">例：3月31日退職 → 4月1日が喪失日</p></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">喪失理由 <span class="required">*</span></label><select name="lose_reason" class="spot-input" required><option value="">選択してください</option><option value="1">死亡</option><option value="3">適用除外（週30時間未満等）</option><option value="4">70歳到達による厚生年金のみ喪失</option><option value="5">退職・解雇</option><option value="6">転勤</option><option value="9">その他</option></select></div>
-                                    <div class="spot-field"><label class="spot-label">基礎年金番号</label><input type="text" name="emp_nenkin_no" placeholder="例：1234-567890" class="spot-input"></div>
-                                    <div class="spot-field"><label class="spot-label">健康保険証の枚数</label><div class="relative"><input type="number" name="card_count" placeholder="例：2" min="1" max="20" class="spot-input pr-10"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">枚</span></div><p class="text-xs text-gray-400 mt-1">被保険者本人＋扶養者の合計枚数</p></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">被扶養者の喪失が必要な方（氏名・続柄）</label><textarea name="dep_lose" rows="2" placeholder="例：山田 次郎（配偶者）、山田 三花（子）" class="spot-input"></textarea></div>
-                                    <div class="spot-field md:col-span-2"><label class="spot-label">備考・特記事項</label><textarea name="notes" rows="2" placeholder="例：健康保険証は退職日に本人から回収済みです" class="spot-input"></textarea></div>
-                                </div>
-                            </div>
-                            <div class="pt-4">
-                                <button type="submit" class="spot-submit-btn" style="background: linear-gradient(135deg, #7c3aed, #6d28d9);"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>依頼内容を送信する</button>
-                                <p class="text-xs text-center text-gray-400 mt-3">送信後、担当者よりメールまたはお電話にてご連絡いたします（通常1営業日以内）</p>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- 送信完了メッセージ -->
-                    <div id="spot-success" class="hidden text-center py-16">
-                        <div class="text-6xl mb-6">✅</div>
-                        <h3 class="text-2xl font-bold text-green-700 mb-4">依頼を受け付けました！</h3>
-                        <p class="text-gray-600 mb-2">ご入力いただいた内容をカミウエ社会保険労務士事務所へ送信しました。</p>
-                        <p class="text-gray-600 mb-8">通常1営業日以内に担当者よりご連絡いたします。</p>
-                        <div class="bg-blue-50 rounded-2xl p-6 max-w-md mx-auto mb-8 text-left">
-                            <p class="font-bold text-blue-900 mb-2">📞 お急ぎの場合はお電話ください</p>
-                            <p class="text-blue-800 text-lg font-bold">070-1047-1625</p>
-                            <p class="text-sm text-gray-500">平日 9:00〜17:00</p>
-                        </div>
-                        <button onclick="spotReset()" class="bg-blue-900 text-white font-bold py-3 px-8 rounded-xl hover:bg-blue-800 transition">別の手続きを依頼する</button>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- 料金・注意事項 -->
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white rounded-2xl p-6 shadow-md border border-blue-100">
-                    <h3 class="font-bold text-blue-900 mb-4 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
-                        スポット手続き料金（目安）
-                    </h3>
-                    <div class="space-y-3 text-sm">
-                        <div class="flex justify-between items-center py-2 border-b border-gray-100"><span class="text-gray-700">雇用保険 資格取得届</span><span class="font-bold text-blue-900">5,000円〜</span></div>
-                        <div class="flex justify-between items-center py-2 border-b border-gray-100"><span class="text-gray-700">雇用保険 資格喪失届（離職票なし）</span><span class="font-bold text-blue-900">5,000円〜</span></div>
-                        <div class="flex justify-between items-center py-2 border-b border-gray-100"><span class="text-gray-700">雇用保険 資格喪失届（離職票あり）</span><span class="font-bold text-blue-900">10,000円〜</span></div>
-                        <div class="flex justify-between items-center py-2 border-b border-gray-100"><span class="text-gray-700">社会保険 資格取得届</span><span class="font-bold text-blue-900">5,000円〜</span></div>
-                        <div class="flex justify-between items-center py-2"><span class="text-gray-700">社会保険 資格喪失届</span><span class="font-bold text-blue-900">5,000円〜</span></div>
-                    </div>
-                    <p class="text-xs text-gray-400 mt-4">※税込価格。複数件同時依頼の場合は割引があります。詳細はお見積もりいたします。</p>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow-md border border-orange-100">
-                    <h3 class="font-bold text-blue-900 mb-4 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
-                        ご依頼の流れ
-                    </h3>
-                    <ol class="space-y-3 text-sm text-gray-700">
-                        <li class="flex items-start gap-3"><span class="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span><span>フォームに必要事項を入力し送信</span></li>
-                        <li class="flex items-start gap-3"><span class="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span><span>担当者より内容確認・お見積りのご連絡（1営業日以内）</span></li>
-                        <li class="flex items-start gap-3"><span class="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span><span>ご承認後、手続き代行報酬のお振り込み</span></li>
-                        <li class="flex items-start gap-3"><span class="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span><span>入金確認後、電子申請にて手続き代行</span></li>
-                        <li class="flex items-start gap-3"><span class="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">5</span><span>手続き完了後、結果をメール・郵送にてご報告</span></li>
-                    </ol>
-                </div>
-            </div>
-
-        </div>
+        <section id="page-spot" class="hidden" style="min-height:80vh;">
+            <iframe
+                id="spot-iframe"
+                src="./tetsuzuki_v2.html"
+                style="width:100%; height:100vh; border:none; display:block;"
+                title="手続き依頼フォーム"
+                loading="lazy"
+            ></iframe>
         </section>
+
 
         <!-- SOLUTIONS PAGE (Dynamic) -->
         <!-- ===== キャンペーンページ ===== -->
@@ -3358,7 +3444,7 @@
 
                 <!-- パンくず -->
                 <div class="flex items-center gap-2 text-sm text-gray-500 mb-8">
-                    <button onclick="showPage('home')" class="hover:text-blue-700 transition">ホーム</button>
+                    <button onclick="App.showPage('home')" class="hover:text-blue-700 transition">ホーム</button>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                     <span class="text-orange-600 font-bold">キャンペーン</span>
                 </div>
@@ -3457,7 +3543,7 @@
                     <p class="text-gray-600 text-base mt-6 font-bold">
                         ※ まずはお気軽にお問い合わせください　相談は完全無料です
                     </p>
-                    <button onclick="showPage('home')" class="mt-6 text-sm text-gray-400 hover:text-blue-700 underline transition">← ホームに戻る</button>
+                    <button onclick="App.showPage('home')" class="mt-6 text-sm text-gray-400 hover:text-blue-700 underline transition">← ホームに戻る</button>
                 </div>
 
             </div>
@@ -3469,12 +3555,42 @@
                 <div class="mt-16 text-center border-t pt-12">
                     <p class="text-gray-600 mb-6 italic">貴社の状況に合わせた具体的なアドバイスが可能です</p>
                     <div class="flex flex-col md:flex-row justify-center gap-5">
-                        <button onclick="showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-10 rounded-xl transition shadow-lg">無料で専門家に相談する</button>
-                        <button onclick="showPage('home')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-4 px-10 rounded-xl transition">ホームに戻る</button>
+                        <button onclick="App.showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-10 rounded-xl transition shadow-lg">無料で専門家に相談する</button>
+                        <button onclick="App.showPage('home')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-4 px-10 rounded-xl transition">ホームに戻る</button>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Solutions Templates: JSからの動的生成用 -->
+        <template id="tmpl-solution">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="text-5xl md:text-6xl js-icon"></div>
+                <h2 class="text-2xl md:text-4xl font-bold text-blue-900 js-title"></h2>
+            </div>
+            <!-- 解決策の内容に合わせたメインイメージ画像 -->
+            <div class="mb-10 rounded-[2rem] overflow-hidden shadow-2xl border border-gray-100 bg-blue-50 relative aspect-[16/7]">
+                <img src="" alt="" class="w-full h-full object-cover js-image opacity-0 transition-opacity duration-700" onload="this.classList.remove('opacity-0')">
+            </div>
+            <p class="text-lg text-gray-700 mb-12 leading-relaxed js-description"></p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12 js-steps-container">
+                <!-- ここに tmpl-solution-step が挿入される -->
+            </div>
+            <div class="bg-gradient-to-r from-blue-50 to-orange-50 border-l-4 border-blue-900 p-8 md:p-10 rounded-r-2xl">
+                <h4 class="font-bold text-blue-900 mb-3 flex items-center gap-2 text-lg"><span>💡</span> 神植からのアドバイス</h4>
+                <p class="text-gray-700 leading-relaxed js-point"></p>
+            </div>
+        </template>
+
+        <template id="tmpl-solution-step">
+            <div class="flex gap-4 p-6 md:p-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl border border-gray-200 shadow-sm">
+                <div class="flex-shrink-0 w-10 h-10 bg-blue-900 text-white rounded-full flex items-center justify-center font-bold text-lg js-step-number"></div>
+                <div>
+                    <h4 class="font-bold text-blue-900 mb-2 text-lg js-step-title"></h4>
+                    <p class="text-sm text-gray-600 leading-relaxed js-step-desc"></p>
+                </div>
+            </div>
+        </template>
 
         <!-- 助成金診断ページ -->
         <section id="page-subsidy-sim" class="py-16 md:py-24 bg-gray-50 hidden">
@@ -3557,13 +3673,7 @@
                 <div>
                     <div class="flex items-center gap-3 mb-6">
                         <div class="w-16 h-16">
-                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                                <ellipse cx="100" cy="100" rx="95" ry="75" fill="#FDB913"/>
-                                <rect x="50" y="40" width="20" height="120" rx="10" fill="#2E5BA5"/>
-                                <path d="M 70 70 L 145 35" stroke="#2E5BA5" stroke-width="20" stroke-linecap="round" fill="none"/>
-                                <path d="M 70 100 L 145 165" stroke="#2E5BA5" stroke-width="20" stroke-linecap="round" fill="none"/>
-                                <circle cx="60" cy="50" r="25" fill="#C8102E"/>
-                            </svg>
+                            <img src="./logo.png" alt="カミウエ社会保険労務士事務所 ロゴ" class="w-full h-full object-contain">
                         </div>
                         <div><h3 class="font-bold text-lg">カミウエ社会保険労務士事務所</h3></div>
                     </div>
@@ -3572,24 +3682,25 @@
                 <div>
                     <h4 class="font-bold mb-4 text-lg">メニュー</h4>
                     <ul class="space-y-3 text-sm text-blue-100">
-                        <li><button onclick="showPage('home')" class="hover:text-white transition">ホーム</button></li>
-                        <li><button onclick="showPage('services')" class="hover:text-white transition">サービス・料金</button></li>
-                        <li><button onclick="showPage('about')" class="hover:text-white transition">事務所紹介</button></li>
-                        <li><button onclick="showPage('links')" class="hover:text-white transition">関連リンク</button></li>
-                        <li><button onclick="showPage('faq')" class="hover:text-white transition">よくある質問</button></li>
-                        <li><button onclick="showPage('contact')" class="hover:text-white transition">お問い合わせ</button></li>
+                        <li><button onclick="App.showPage('home')" class="hover:text-white transition">ホーム</button></li>
+                        <li><button onclick="App.showPage('services')" class="hover:text-white transition">サービス・料金</button></li>
+                        <li><button onclick="App.showPage('about')" class="hover:text-white transition">事務所紹介</button></li>
+                        <li><button onclick="App.showPage('links')" class="hover:text-white transition">関連リンク</button></li>
+                        <li><button onclick="App.showPage('faq')" class="hover:text-white transition">よくある質問</button></li>
+                        <li><button onclick="App.showPage('contact')" class="hover:text-white transition">お問い合わせ</button></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold mb-4 text-lg">お役立ちツール</h4>
                     <ul class="space-y-3 text-sm text-blue-100">
-                        <li><button onclick="showPage('blog')" class="hover:text-white transition">📝 労務管理コラム</button></li>
-                        <li><button onclick="showPage('checkup')" class="hover:text-white transition">✅ 労務リスク診断</button></li>
-                        <li><button onclick="showPage('subsidy-sim')" class="hover:text-white transition">💰 助成金診断</button></li>
-                        <li><button onclick="showPage('salary-calc')" class="hover:text-white transition">🧮 給与計算ツール</button></li>
-                        <li><button onclick="showPage('price-sim')" class="hover:text-white transition text-amber-200 font-semibold">🧮 料金シミュレーター</button></li>
-                        <li><button onclick="showPage('download')" class="hover:text-white transition text-indigo-200 font-semibold">📥 無料資料ダウンロード</button></li>
-                        <li><button onclick="showPage('spot')" class="hover:text-white transition font-bold text-orange-300">📋 手続きを依頼する</button></li>
+                        <li><button onclick="App.showPage('blog')" class="hover:text-white transition">📝 労務管理コラム</button></li>
+                        <li><button onclick="App.showPage('checkup')" class="hover:text-white transition">✅ 労務リスク診断</button></li>
+                        <li><button onclick="App.showPage('subsidy-sim')" class="hover:text-white transition">💰 助成金診断</button></li>
+                        <li><button onclick="App.showPage('salary-calc')" class="hover:text-white transition">🧮 給与計算ツール</button></li>
+                        <li><button onclick="App.showPage('price-sim')" class="hover:text-white transition text-amber-200 font-semibold">🧮 料金シミュレーター</button></li>
+                        <li><button onclick="App.showPage('download')" class="hover:text-white transition text-indigo-200 font-semibold">📥 無料資料ダウンロード</button></li>
+                        <li><button onclick="App.showPage('campaign')" class="hover:text-white transition font-bold text-red-300">🎁 キャンペーン情報</button></li>
+                        <li><button onclick="App.showPage('spot')" class="hover:text-white transition font-bold text-orange-300">📋 手続き依頼フォーム</button></li>
                     </ul>
                 </div>
                 <div>
@@ -3673,6 +3784,9 @@
 
 <script src="./price-simulator.js" defer></script>
 <script src="./salary-calc.js" defer></script>
+<!-- スポット手続きフォームロジックは tetsuzuki_v2.html に移行済み -->
+<!-- 無料資料ダウンロードロジック -->
+<script src="./download.js" defer></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -3683,135 +3797,185 @@
 <script src="./script.js"></script>
 <script src="./hero-slider.js" defer></script>
 
-<!-- ===== YouTube セクション スクリプト（ホーム用＋専用ページ用） ===== -->
+<!-- FAQ アコーディオン機能の追加 -->
 <script>
-(function () {
-  var API_KEY    = 'AIzaSyBtuFKMfSuvHBJi9mA2ECNY-O3y4hayxPE';
-  var CHANNEL_ID = 'UCN0gus5F7Hdi0bzQJJ0NLVw';
-  var CHANNEL_URL = 'https://www.youtube.com/channel/' + CHANNEL_ID;
-  var TIMEOUT_MS = 8000; // 8秒でタイムアウト
-
-  var _cache = null;
-
-  function fmtDate(iso) {
-    var d = new Date(iso);
-    return d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日';
-  }
-  function esc(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  // タイムアウト付きfetch（APIキー制限やネットワーク遅延で無限待ちにならない）
-  // referrerPolicy: 'origin' でkamiue.comのオリジンをリファラーとして送信し、
-  // APIキーのHTTPリファラー制限（kamiue.com/*）を確実に通過させる
-  function apiFetch(url) {
-    var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    var timer = controller
-      ? setTimeout(function(){ controller.abort(); }, TIMEOUT_MS)
-      : null;
-    var opts = {
-      referrerPolicy: 'origin',
-      signal: controller ? controller.signal : undefined
-    };
-    return fetch(url, opts)
-      .then(function(r) {
-        if (timer) clearTimeout(timer);
-        if (!r.ok) throw new Error('HTTP ' + r.status + ' ' + r.statusText);
-        return r.json();
-      })
-      .catch(function(err) {
-        if (timer) clearTimeout(timer);
-        // AbortError もここで確実にcatchされ、errHTMLへ流れる
-        throw err;
-      });
-  }
-
-  function buildCard(item) {
-    var sn    = item.snippet;
-    var vid   = sn.resourceId.videoId;
-    var thumb = (sn.thumbnails.maxres||sn.thumbnails.high||sn.thumbnails.medium||sn.thumbnails.default||{}).url||'';
-    var title = esc(sn.title);
-    var date  = fmtDate(sn.publishedAt);
-    return '<a href="https://www.youtube.com/watch?v='+esc(vid)+'" target="_blank" rel="noopener noreferrer"'+
-      ' class="block bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md group">'+
-      '<div class="relative w-full overflow-hidden" style="aspect-ratio:16/9;background:#0f0f0f;">'+
-        '<img src="'+esc(thumb)+'" alt="'+title+'" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">'+
-        '<div class="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors duration-200">'+
-          '<div class="w-12 h-12 bg-red-600/85 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-200">'+
-            '<svg class="w-5 h-5 text-white ml-1" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>'+
-          '</div>'+
-        '</div>'+
-      '</div>'+
-      '<div class="p-4">'+
-        '<p class="text-sm font-semibold text-gray-800 leading-snug line-clamp-2 min-h-[2.8em]">'+title+'</p>'+
-        '<p class="text-xs text-gray-400 mt-2">'+date+'</p>'+
-      '</div>'+
-    '</a>';
-  }
-
-  function errHTML() {
-    return '<div style="grid-column:1/-1" class="text-center py-10 text-gray-400 text-sm">'+
-      '動画の読み込みに失敗しました。<br>'+
-      '<a href="'+esc(CHANNEL_URL)+'" target="_blank" rel="noopener" class="text-red-600 font-semibold hover:underline mt-2 inline-block">YouTubeチャンネルを直接ご覧ください →</a>'+
-    '</div>';
-  }
-
-  function fetchVideos() {
-    if (_cache) return Promise.resolve(_cache);
-    return apiFetch(
-      'https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id='+CHANNEL_ID+'&key='+API_KEY
-    ).then(function(d) {
-      if (!d.items || !d.items.length) throw new Error('チャンネルが見つかりません');
-      var uploadsId = d.items[0].contentDetails.relatedPlaylists.uploads;
-      return apiFetch(
-        'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId='+uploadsId+'&maxResults=50&key='+API_KEY
-      );
-    }).then(function(d) {
-      _cache = d.items || [];
-      return _cache;
-    });
-  }
-
-  function renderGrid(grid, items, max) {
-    var slice = items.slice(0, max);
-    if (!slice.length) {
-      grid.innerHTML = '<div style="grid-column:1/-1" class="text-center py-8 text-gray-400 text-sm">現在、公開動画はありません。</div>';
-      return;
+    /**
+     * FAQの回答の表示・非表示を切り替える
+     * @param {number} id - 質問のインデックス番号
+     */
+    function toggleFaq(id) {
+        const ans = document.getElementById('faq-ans-' + id);
+        const icon = document.getElementById('faq-icon-' + id);
+        if (ans) {
+            ans.classList.toggle('hidden');
+        }
+        if (icon) {
+            // アイコンを180度回転させる（Tailwind CSSのクラスを使用）
+            icon.classList.toggle('rotate-180');
+        }
     }
-    grid.innerHTML = slice.map(buildCard).join('');
-  }
 
-  // ホームセクション用（最新6件）
-  function loadHomeYT() {
-    var grid = document.getElementById('home-yt-grid');
-    if (!grid) return;
-    fetchVideos()
-      .then(function(items) { renderGrid(grid, items, 6); })
-      .catch(function(err) {
-        console.warn('[YT-home]', err.name, err.message);
-        grid.innerHTML = errHTML();
-      });
-  }
+    /**
+     * FAQのタグフィルタリング
+     * @param {string} tag - フィルタリングするタグ
+     */
+    let currentFaqTag = 'all';
 
-  // 専用ページ用（最新12件）、初回のみAPIを叩く
-  var _pageLoaded = false;
-  window.loadYouTubePage = function() {
-    var grid = document.getElementById('yt-grid-page');
-    if (!grid) return;
-    if (_pageLoaded) return;
-    _pageLoaded = true;
-    fetchVideos()
-      .then(function(items) { renderGrid(grid, items, 12); })
-      .catch(function(err) {
-        console.warn('[YT-page]', err.name, err.message);
-        grid.innerHTML = errHTML();
-        _pageLoaded = false; // 失敗時はリトライ可能にする
-      });
-  };
+    function filterFaq(tag) {
+        currentFaqTag = tag;
 
-  // ホームは即時読み込み
-  loadHomeYT();
-}());
+        // ボタンのスタイル更新
+        const btns = document.querySelectorAll('.faq-filter-btn');
+        btns.forEach(btn => {
+            const isTarget = btn.getAttribute('data-tag') === tag;
+            btn.classList.toggle('bg-blue-900', isTarget);
+            btn.classList.toggle('text-white', isTarget);
+            btn.classList.toggle('border-blue-900', isTarget);
+            btn.classList.toggle('bg-white', !isTarget);
+            btn.classList.toggle('text-gray-600', !isTarget);
+            btn.classList.toggle('border-gray-200', !isTarget);
+        });
+
+        updateFaqVisibility();
+    }
+
+    /**
+     * FAQ リアルタイム検索
+     */
+    function handleFaqSearch() {
+        const input = document.getElementById('faq-search-input');
+        const clearBtn = document.getElementById('faq-search-clear');
+        
+        if (input.value.length > 0) {
+            clearBtn.classList.remove('hidden');
+        } else {
+            clearBtn.classList.add('hidden');
+        }
+        
+        updateFaqVisibility();
+    }
+
+    /**
+     * 検索のクリア
+     */
+    function clearFaqSearch() {
+        const input = document.getElementById('faq-search-input');
+        input.value = '';
+        handleFaqSearch();
+    }
+
+    /**
+     * タグと検索キーワードの両方を考慮して表示を更新
+     */
+    function updateFaqVisibility() {
+        const query = document.getElementById('faq-search-input').value.toLowerCase().trim();
+        const faqItems = document.querySelectorAll('[data-faq-item]');
+        const noResultsMessage = document.getElementById('faq-no-results');
+        let visibleItemsCount = 0;
+        
+        faqItems.forEach(item => {
+            // タグの判定
+            const tags = item.getAttribute('data-tags').split(' ');
+            const tagMatch = currentFaqTag === 'all' || tags.includes(currentFaqTag);
+
+            // 質問と回答のテキストを結合して検索対象とする
+            const questionText = item.querySelector('.flex-1 .font-black').textContent.toLowerCase();
+            const answerText = item.querySelector('.px-7.pb-8.pt-2.ml-14 p')?.textContent.toLowerCase() || '';
+            const fullText = questionText + ' ' + answerText;
+
+            
+            // テキスト検索の判定 (質問と回答の両方を対象)
+            const text = item.innerText.toLowerCase();
+            const searchMatch = !query || text.includes(query);
+            
+            const isVisible = tagMatch && searchMatch;
+            item.classList.toggle('hidden', !isVisible);
+            if (isVisible) {
+                visibleItemsCount++;
+            }
+        });
+
+        // カテゴリヘッダーの表示切り替え（空になったカテゴリを隠す）
+        document.querySelectorAll('.faq-category-group').forEach(group => {
+            const hasVisible = group.querySelectorAll('[data-faq-item]:not(.hidden)').length > 0;
+            group.classList.toggle('hidden', !hasVisible);
+        });
+
+        // 検索結果なしメッセージの表示切り替え
+        if (visibleItemsCount === 0) {
+            noResultsMessage.classList.remove('hidden');
+        } else {
+            noResultsMessage.classList.add('hidden');
+        }
+    }
+</script>
+
+<!-- ===== YouTube セクション スクリプト（ホーム用＋専用ページ用） ===== -->
+<script src="./youtube-loader.js" defer></script>
+
+<!-- ===== spot iframe 連携：タブ番号の受け渡し ===== -->
+<script>
+(function() {
+    // App.showPage('spot', tabIndex) 呼び出し時に
+    // iframeへ postMessage でタブ番号を渡す
+    var _originalShowPage = null;
+
+    // script.js の App オブジェクトが読み込まれてから上書きする
+    document.addEventListener('DOMContentLoaded', function() {
+        // App が定義されるまで少し待つ（script.js defer対策）
+        var waitForApp = setInterval(function() {
+            if (typeof App !== 'undefined' && typeof App.showPage === 'function') {
+                clearInterval(waitForApp);
+                _originalShowPage = App.showPage.bind(App);
+
+                App.showPage = function(pageName, tabIndex) {
+                    _originalShowPage(pageName, tabIndex);
+
+                    if (pageName === 'spot') {
+                        var iframe = document.getElementById('spot-iframe');
+                        if (!iframe) return;
+
+                        // iframeが読み込み済みなら即postMessage、未ならload後に送る
+                        var sendMsg = function() {
+                            try {
+                                iframe.contentWindow.postMessage(
+                                    { type: 'SPOT_TAB', tabIndex: tabIndex != null ? tabIndex : 0 },
+                                    '*'
+                                );
+                            } catch(e) {}
+                        };
+
+                        if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+                            sendMsg();
+                        } else {
+                            iframe.addEventListener('load', sendMsg, { once: true });
+                        }
+
+                        // iframeの高さをコンテンツに合わせてリサイズ
+                        iframe.addEventListener('load', function() {
+                            try {
+                                var h = iframe.contentDocument.body.scrollHeight;
+                                if (h > 400) iframe.style.height = h + 'px';
+                            } catch(e) {
+                                iframe.style.height = '100vh';
+                            }
+                        }, { once: true });
+                    }
+                };
+            }
+        }, 100);
+    });
+
+    // iframeからの高さ更新メッセージを受信
+    window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'IFRAME_HEIGHT') {
+            var iframe = document.getElementById('spot-iframe');
+            if (iframe && e.data.height > 400) {
+                iframe.style.height = e.data.height + 'px';
+            }
+        }
+    });
+})();
 </script>
 
 </body>
