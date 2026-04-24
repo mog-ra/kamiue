@@ -286,138 +286,131 @@
      スクリプト（</body>直前に設置）
      ===================================================== -->
 <script>
-(function () {
-  /* ===== ★設定：ここだけ変更 ===== */
-  var API_KEY      = 'AIzaSyBtuFKMfSuvHBJi9mA2ECNY-O3y4hayxPE';          // ← Google Cloud で取得したAPIキーを貼り付け
-  var CHANNEL_ID   = 'UCN0gus5F7Hdi0bzQJJ0NLVw'; // チャンネルID（変更不要）
-  var MAX_RESULTS  = 6;                        // 表示する動画数（最大50）
-  /* ================================ */
+(async function () {
+  /**
+   * ==============================================================
+   * 設定項目
+   * セキュリティのため、Google Cloud Consoleにて「HTTPリファラー」の制限
+   * (kamiue.com/*) を設定することを強くお勧めします。
+   * ==============================================================
+   */
+  const CONFIG = {
+    API_KEY: 'AIzaSyBtuFKMfSuvHBJi9mA2ECNY-O3y4hayxPE',
+    CHANNEL_ID: 'UCN0gus5F7Hdi0bzQJJ0NLVw',
+    MAX_RESULTS: 6,
+    BASE_URL: 'https://www.googleapis.com/youtube/v3'
+  };
 
-  var CHANNEL_URL = 'https://www.youtube.com/channel/' + CHANNEL_ID;
-  var grid = document.getElementById('yt-grid');
+  const CHANNEL_URL = `https://www.youtube.com/channel/${CONFIG.CHANNEL_ID}`;
+  const grid = document.getElementById('yt-grid');
 
   /* ---- ユーティリティ ---- */
-  function fmtDate(iso) {
-    var d = new Date(iso);
-    return d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日';
-  }
-  function fmtViews(n) {
-    n = parseInt(n, 10) || 0;
-    if (n >= 10000) return (Math.floor(n / 1000) / 10).toFixed(0) + '万回視聴';
-    if (n >= 1000)  return Math.floor(n / 100) / 10 + 'K回視聴';
-    return n.toLocaleString('ja-JP') + '回視聴';
-  }
-  function esc(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-  function showErr(msg) {
-    grid.innerHTML = '<div class="yt-state">' + msg + '</div>';
-  }
+  const fmtDate = (iso) => {
+    const d = new Date(iso);
+    return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+  };
+
+  const fmtViews = (n) => {
+    const num = parseInt(n, 10) || 0;
+    if (num >= 10000) return `${(Math.floor(num / 1000) / 10).toFixed(0)}万回視聴`;
+    if (num >= 1000)  return `${Math.floor(num / 100) / 10}K回視聴`;
+    return `${num.toLocaleString('ja-JP')}回視聴`;
+  };
+
+  const esc = (s) => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+  const showErr = (msg) => {
+    grid.innerHTML = `<div class="yt-state">${msg}</div>`;
+  };
 
   /* ---- API呼び出し ---- */
-  function apiFetch(url) {
-    return fetch(url).then(function (r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    });
-  }
-
-  /* ---- 1: uploads プレイリストID取得 ---- */
-  function getUploadsId() {
-    return apiFetch(
-      'https://www.googleapis.com/youtube/v3/channels' +
-      '?part=contentDetails&id=' + CHANNEL_ID + '&key=' + API_KEY
-    ).then(function (d) {
-      if (!d.items || !d.items.length) throw new Error('チャンネルが見つかりません');
-      return d.items[0].contentDetails.relatedPlaylists.uploads;
-    });
-  }
-
-  /* ---- 2: プレイリストから動画リスト取得 ---- */
-  function getVideos(uploadsId) {
-    return apiFetch(
-      'https://www.googleapis.com/youtube/v3/playlistItems' +
-      '?part=snippet&playlistId=' + uploadsId +
-      '&maxResults=' + MAX_RESULTS + '&key=' + API_KEY
-    ).then(function (d) {
-      return (d.items || []).map(function (item) {
-        return { id: item.snippet.resourceId.videoId, snippet: item.snippet };
-      });
-    });
-  }
-
-  /* ---- 3: 視聴回数取得 ---- */
-  function attachStats(videos) {
-    var ids = videos.map(function (v) { return v.id; }).join(',');
-    return apiFetch(
-      'https://www.googleapis.com/youtube/v3/videos' +
-      '?part=statistics&id=' + ids + '&key=' + API_KEY
-    ).then(function (d) {
-      var map = {};
-      (d.items || []).forEach(function (item) { map[item.id] = item.statistics; });
-      return videos.map(function (v) {
-        v.statistics = map[v.id] || {};
-        return v;
-      });
-    });
-  }
-
-  /* ---- 4: DOM に描画 ---- */
-  function render(videos) {
-    if (!videos.length) {
-      showErr('現在、公開されている動画はありません。<br><a href="' + esc(CHANNEL_URL) + '" target="_blank" rel="noopener">チャンネルを確認する</a>');
-      return;
+  const apiFetch = async (endpoint, params = {}) => {
+    const query = new URLSearchParams({ ...params, key: CONFIG.API_KEY }).toString();
+    const response = await fetch(`${CONFIG.BASE_URL}/${endpoint}?${query}`);
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error('[YouTube API Error]', errorData);
+      throw new Error(errorData.error?.message || `HTTP ${response.status}`);
     }
-    var html = videos.map(function (v) {
-      var sn     = v.snippet;
-      var thumb  = (sn.thumbnails.maxres || sn.thumbnails.high || sn.thumbnails.medium || sn.thumbnails.default || {}).url || '';
-      var views  = v.statistics.viewCount ? fmtViews(v.statistics.viewCount) : '';
-      var title  = esc(sn.title);
-      var date   = fmtDate(sn.publishedAt);
-      var vUrl   = 'https://www.youtube.com/watch?v=' + v.id;
-
-      return '<a href="' + esc(vUrl) + '" target="_blank" rel="noopener noreferrer" class="yt-card">' +
-        '<div class="yt-thumb-box">' +
-          '<img src="' + esc(thumb) + '" alt="' + title + '" loading="lazy">' +
-          '<div class="yt-play-overlay">' +
-            '<div class="yt-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="yt-card-body">' +
-          '<div class="yt-vtitle">' + title + '</div>' +
-          '<div class="yt-meta">' +
-            '<span>' + date + '</span>' +
-            (views ? '<span class="yt-meta-sep">·</span><span>' + views + '</span>' : '') +
-          '</div>' +
-        '</div>' +
-      '</a>';
-    }).join('');
-    grid.innerHTML = html;
-  }
+    return response.json();
+  };
 
   /* ---- メイン処理 ---- */
-  if (API_KEY === 'YOUR_API_KEY') {
-    /* APIキー未設定時：フォールバック表示 */
-    showErr(
-      '※ APIキーを設定してください。<br>' +
-      '<a href="https://console.cloud.google.com/" target="_blank" rel="noopener">Google Cloud Console</a> でキーを取得し、<br>' +
-      'スクリプト内の <code>YOUR_API_KEY</code> を置き換えてください。'
-    );
-    return;
-  }
-
-  getUploadsId()
-    .then(getVideos)
-    .then(attachStats)
-    .then(render)
-    .catch(function (err) {
-      console.error('[KamiueYT] エラー:', err);
-      showErr(
-        '動画の読み込みに失敗しました。<br>' +
-        '<a href="' + esc(CHANNEL_URL) + '" target="_blank" rel="noopener">YouTubeチャンネルを直接ご覧ください →</a>'
-      );
+  try {
+    // 1: uploads プレイリストID取得
+    const channelData = await apiFetch('channels', {
+      part: 'contentDetails',
+      id: CONFIG.CHANNEL_ID
     });
-}());
+
+    if (!channelData.items?.length) throw new Error('チャンネルが見つかりません');
+    const uploadsId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
+
+    // 2: プレイリストから動画リスト取得
+    const playlistData = await apiFetch('playlistItems', {
+      part: 'snippet',
+      playlistId: uploadsId,
+      maxResults: CONFIG.MAX_RESULTS
+    });
+
+    const videos = (playlistData.items || []).map(item => ({
+      id: item.snippet.resourceId.videoId,
+      snippet: item.snippet
+    }));
+
+    if (!videos.length) {
+      showErr(`現在、公開されている動画はありません。<br><a href="${esc(CHANNEL_URL)}" target="_blank" rel="noopener">チャンネルを確認する</a>`);
+      return;
+    }
+
+    // 3: 視聴回数取得
+    const videoIds = videos.map(v => v.id).join(',');
+    const statsData = await apiFetch('videos', {
+      part: 'statistics',
+      id: videoIds
+    });
+
+    const statsMap = {};
+    (statsData.items || []).forEach(item => { statsMap[item.id] = item.statistics; });
+
+    // 4: DOM に描画
+    const html = videos.map(v => {
+      const sn = v.snippet;
+      const stats = statsMap[v.id] || {};
+      const thumb = (sn.thumbnails.maxres || sn.thumbnails.high || sn.thumbnails.medium || sn.thumbnails.default || {}).url || '';
+      const views = stats.viewCount ? fmtViews(stats.viewCount) : '';
+      const title = esc(sn.title);
+      const date = fmtDate(sn.publishedAt);
+      const vUrl = `https://www.youtube.com/watch?v=${v.id}`;
+
+      return `
+        <a href="${esc(vUrl)}" target="_blank" rel="noopener noreferrer" class="yt-card">
+          <div class="yt-thumb-box">
+            <img src="${esc(thumb)}" alt="${title}" loading="lazy">
+            <div class="yt-play-overlay">
+              <div class="yt-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+          </div>
+          <div class="yt-card-body">
+            <div class="yt-vtitle">${title}</div>
+            <div class="yt-meta">
+              <span>${date}</span>
+              ${views ? `<span class="yt-meta-sep">·</span><span>${views}</span>` : ''}
+            </div>
+          </div>
+        </a>`;
+    }).join('');
+
+    grid.innerHTML = html;
+
+  } catch (err) {
+    console.error('[KamiueYT] エラー:', err);
+    showErr(
+      `動画の読み込みに失敗しました。<br><a href="${esc(CHANNEL_URL)}" target="_blank" rel="noopener">YouTubeチャンネルを直接ご覧ください →</a>`
+    );
+  }
+})();
 </script>
 <!-- =====================================================
      スクリプト終わり
