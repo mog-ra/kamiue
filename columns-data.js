@@ -87,7 +87,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     助成金の要件・金額は年度ごとに変わります。特に2025年度のキャリアアップ助成金は、重点支援対象者かどうかで受給額が倍近く変わります。「去年聞いた話」で動くと要件を満たさないケースが多い。最新情報をもとに、貴社に最適な組み合わせをご提案します。まず一度ご相談ください。
   </p>
 </div>
@@ -169,7 +169,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     残業代トラブルの多くは「知らなかった」では済まされません。労働基準法は強行法規のため、就業規則や雇用契約書に違法な内容を記載していても無効となり、法定どおりの支払い義務が発生します。月1回の給与計算時に、労働時間の集計方法と残業代計算ロジックを必ず確認しましょう。
   </p>
 </div>
@@ -262,7 +262,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     36協定は「とりあえず出しておけばいい」書類ではありません。実際の労働時間が協定の上限を超えた場合、協定があっても法違反になります。毎月の労働時間を集計し、協定の上限に近づいたら早めにアラートを上げる仕組みを整えましょう。更新時期が近づいたら必ずご連絡ください。
   </p>
 </div>
@@ -399,7 +399,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     システム選定よりも「現行の就業規則・労働時間ルールを整理すること」の方が重要です。システムは就業規則を忠実に再現するツール。ルールが曖昧なままシステムを入れると、設定が複雑になり結局使いこなせないケースが多い。導入前に一度、就業規則の見直しをセットで実施することをお勧めします。
   </p>
 </div>
@@ -500,7 +500,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     最低賃金違反は「知らなかった」では許されません。違反した場合は50万円以下の罰金が科されます。特に今回の＋65円は過去最大の引き上げ幅で、長年同じ時給で雇用しているパート・アルバイトの方がいる場合は即座に確認が必要です。また、来年以降も引き上げが続く見込みのため、賃金体系と業務改善助成金の活用を今から計画的に組み合わせることが経営防衛の鍵です。
   </p>
 </div>
@@ -603,7 +603,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     法的整備（雇用契約・社会保険・就業規則周知）と職場環境づくりは、どちらか一方では不十分です。「法的には問題ない」が「雰囲気が合わなくて辞めた」というケースが実際に多い。採用後3ヶ月間の伴走支援として、雇用契約の整備から面談シートの設計まで一括でサポートします。
   </p>
 </div>
@@ -666,7 +666,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     就業規則の見直しは「問題が起きてから」では遅い。特に懲戒解雇やハラスメント対応の場面では、整備された就業規則が会社を守る唯一の盾になります。「最後に見直したのがいつか思い出せない」という場合は、今すぐ点検のタイミングです。現状の就業規則を持参いただければ、無料でチェックします。
   </p>
 </div>
@@ -755,7 +755,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     2026年10月の「106万円の壁」撤廃は、パート・アルバイトを多く雇用する企業には大きなコスト増要因です。今から新たに加入対象となる従業員数と会社負担増を試算し、キャリアアップ助成金（短時間労働者労働時間延長支援コース）等の活用も含めた対応策を立てることが重要です。まずは現状把握と試算からご相談ください。
   </p>
 </div>
@@ -854,7 +854,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     2025年の育児介護休業法改正は過去最大級の改正です。特に10月施行の「柔軟な働き方措置の義務化」は、就業規則の改定・労使協定の締結・労基署への届出という一連の手続きが必要で、対応漏れが起きやすい。「とりあえず後で」では間に合いません。今すぐ現状確認と就業規則の見直しを進めましょう。一括サポートします。
   </p>
 </div>
@@ -943,7 +943,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     「調査が来てから慌てる」のではなく、「普段から整備しておく」ことが最大の対策です。当事務所では年1回の「労務監査」サービスで、労基署調査を想定した書類点検と改善提案を行っています。問題が小さいうちに発見・修正することが、リスクを最小化する唯一の方法です。
   </p>
 </div>
@@ -1026,7 +1026,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     テレワーク規程の整備は「導入してから」ではなく「導入前」が理想です。後から整備しようとすると、すでに慣習化したルールを変更するのに従業員の抵抗が生まれることも。これからテレワーク導入を検討している企業は、就業規則・テレワーク規程・勤怠システムを同時に整備することをお勧めします。
   </p>
 </div>
@@ -1090,7 +1090,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     「人的資本経営」は難しく聞こえますが、本質は「従業員を大切にしている事実を、数値と仕組みで証明する」ことです。離職率の計測から始め、就業規則・評価制度・育成制度を少しずつ整えるだけで、採用力・定着力が確実に変わります。どこから手をつければいいか迷ったら、ぜひご相談ください。
   </p>
 </div>
@@ -1147,7 +1147,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     子育て支援金は「知らなかった」では済まされません。給与明細に新項目が増えるため、従業員からの問い合わせが急増します。事前の説明会と試算表の配布で不安を最小限に抑えましょう。負担増をカバーする助成金活用や賃金制度見直しもセットでご相談ください。
   </p>
 </div>
@@ -1211,7 +1211,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     50人未満企業は外部委託が現実的です。地域産業保健センターの活用や低コストツールを選べば負担は最小限。義務化を機に「メンタルヘルス不調の未然防止」と「職場環境改善」に活かしてください。実施計画から結果活用まで一括サポートします。
   </p>
 </div>
@@ -1266,7 +1266,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     カスハラは「顧客だから仕方ない」では済みません。従業員のメンタルヘルス悪化・離職・労災リスクを防ぐため、就業規則改定とマニュアル整備を今すぐ進めましょう。条文例提供・研修資料作成・外部窓口提携まで一括サポートします。早期対応が企業防衛の鍵です。
   </p>
 </div>
@@ -1316,7 +1316,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     撤廃後は「週20時間の壁」にシフト。対象者数と負担増を今すぐ試算し、助成金活用やシフト再設計を計画的に進めましょう。パート定着率向上のチャンスにもなります。試算・規程改定・申請支援までお任せください。
   </p>
 </div>
@@ -1377,7 +1377,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     法定雇用率達成は「数」だけでなく「質」が重要。特例子会社設立や助成金を活用し、インクルーシブな職場づくりを進めましょう。診断・計画策定から採用支援まで一括でお手伝いします。
   </p>
 </div>
@@ -1434,7 +1434,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     規制強化は「2024年問題」の延長線上。36協定の見直しと並行してシフト・休日体制を再構築しましょう。業界特有の課題に即した就業規則改定と助成金活用で、負担を最小限に抑えつつ法令遵守を実現します。
   </p>
 </div>
@@ -1473,7 +1473,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     初任給引き上げだけでは持続しません。ベースアップ＋賞与設計＋福利厚生（第三の賃上げ）を組み合わせ、トータルリワードで人材を確保しましょう。制度設計から運用まで伴走します。
   </p>
 </div>
@@ -1523,7 +1523,7 @@ const COLUMNS = [
 
 <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
   <p class="text-amber-900 text-sm leading-relaxed">
-    <span class="font-black text-base">💡 社労士からのアドバイス</span><br><br>
+    <span class="font-black text-base">💡 神植からのアドバイス</span><br><br>
     化学物質管理は安全衛生だけでなく、営業秘密保護も重要です。リスクアセスメントの見直しと測定体制整備を今すぐ進めましょう。専門家による現場診断と規程整備で効率的に対応できます。
   </p>
 </div>
@@ -1619,7 +1619,9 @@ function showArticle(id) {
 function renderHomeColumns() {
     const grid = document.getElementById('home-columns-grid');
     if (!grid) return;
-    const latest = [...COLUMNS].sort((a,b) => b.isNew - a.isNew).slice(0, 3);
+    // IDが新しい順（降順）にソートして最新3件を取得
+    const latest = [...COLUMNS].sort((a, b) => b.id - a.id).slice(0, 3);
+    
     grid.innerHTML = latest.map((col, idx) => `
         <div class="home-column-card" style="animation-delay:${idx * 0.1}s">
             <div class="${CAT_COLOR[col.category]?.header || 'card-header-助成金'} h-32 flex items-center justify-center relative cursor-pointer" onclick="showArticle(${col.id})">
