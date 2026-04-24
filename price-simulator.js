@@ -23,7 +23,7 @@
     const ADV_PLANS = {
         standard: { name: '顧問契約（スタンダード）', base: 25000, per_emp: 600,  included: 5, unit: '/月' },
         full:     { name: 'フルサポート契約',         base: 37000, per_emp: 1400, included: 5, unit: '/月' },
-        startup:  { name: '創業パックプラン',         base: 180000, per_emp: 4000, included: 3, unit: '/6か月', isLump: true },
+        startup:  { name: '創業パックプラン',         base: 180000, per_emp: 4000, included: 5, unit: '/6か月', isLump: true },
     };
 
     /** 顧問契約 オプション */

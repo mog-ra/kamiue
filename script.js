@@ -8,7 +8,7 @@ const App = {
         validPages: [
             'home','services','about','links','faq','contact','solutions','blog',
             'checkup','subsidy-sim','salary-calc','download','dl-thankyou',
-            'price-sim','spot','article-detail','youtube','campaign'
+            'price-sim','article-detail','youtube','campaign'
         ],
         solutions: {
             'subsidy':    { icon: '💰', title: '助成金を活用したい',           description: '返済不要の助成金は、企業の成長を加速させる貴重な財源です。雇用維持、設備投資、教育訓練など、最新の2025年度改正に対応した最適な制度をご提案。煩雑な申請プロセスをプロに任せることで、受給可能性を最大化します。', image: './subsidy.webp', steps: [{title:'精密無料診断',desc:'ヒアリングに基づき、キャリアアップ助成金や業務改善助成金など、受給可能な制度を網羅的にリストアップします。'},{title:'戦略的計画策定',desc:'「いつ、誰を、どう雇用するか」など、受給要件を満たすための社内規定の整備や事業計画を専門家が立案します。'},{title:'完全代行申請',desc:'労働局やハローワークへの膨大な提出書類作成と窓口対応を全て代行。不備による不支給リスクを徹底排除します。'},{title:'継続的フォロー',desc:'受給後の実施報告や、年度ごとに変わる最新の助成金情報の提供を行い、中長期的な資金活用をサポートします。'}], point: '弊所は完全成功報酬型を採用。着手金不要で、受給が確定するまで費用は一切発生しません。攻めの経営をバックアップします。' },
@@ -24,6 +24,12 @@ const App = {
     // ページ表示制御・ルーティング
     // =============================================
     showPage(pageId, tabIdx, skipHashUpdate = false) {
+        // 外部ファイル（新しい手続き依頼フォーム）への遷移対応
+        if (pageId === 'tetsuzuki_v2' || pageId === 'spot') {
+            window.location.href = 'tetsuzuki_v2.html' + (tabIdx ? '?tab=' + tabIdx : '');
+            return;
+        }
+
         if (!this.state.validPages.includes(pageId)) pageId = 'home';
 
         if (!skipHashUpdate && pageId) {
@@ -77,15 +83,25 @@ const App = {
                 sCalc();
             }, 50);
         }
-        if (pageId === 'spot' && typeof spotSwitchTab === 'function') {
-            setTimeout(() => spotSwitchTab(parseInt(tabIdx || 0)), 50);
-        }
         if (pageId === 'blog' && typeof renderBlogGrid === 'function') {
             renderBlogGrid('all');
             setTimeout(() => { if (typeof initSearch === 'function') initSearch(); }, 0);
         }
         if (pageId === 'youtube' && typeof loadYouTubePage === 'function') {
             loadYouTubePage();
+        }
+        if (pageId === 'subsidy-sim' && typeof initSubsidyDiagnosis === 'function') {
+            setTimeout(() => initSubsidyDiagnosis(), 50);
+        }
+    },
+
+    triggerSubsidyDiagnosis() {
+        const fn = window.runSubsidyDiagnosis;
+        if (typeof fn === 'function') {
+            fn();
+        } else {
+            alert('診断プログラムを準備中です。ページを再読み込みするか、しばらく経ってから再度お試しください。');
+            console.error('runSubsidyDiagnosis function not found in global scope or App object.');
         }
     },
 

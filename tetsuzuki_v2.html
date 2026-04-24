@@ -7,6 +7,7 @@
     <meta name="description" content="社会保険・雇用保険・労働保険の手続き代行依頼フォーム。顧問先・スポット両対応。">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
     <style>
         :root {
             --blue-deep: #1e3a8a;
@@ -310,8 +311,83 @@
 
 <body>
 
+<!-- ========== HEADER ========== -->
+<header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <button onclick="App.showPage('home')" class="flex items-center gap-3 hover:opacity-80 transition">
+            <div class="w-16 h-16">
+                <img src="./logo.png" alt="カミウエ社会保険労務士事務所 ロゴ" class="w-full h-full object-contain">
+            </div>
+            <div>
+                <span class="block text-lg font-bold text-blue-900 leading-tight">カミウエ社会保険労務士事務所</span>
+                <span class="block text-xs text-gray-500">仙台の社労士 | KAMIUE SR OFFICE</span>
+            </div>
+        </button>
+        <nav class="hidden md:flex gap-2 lg:gap-3 items-center text-sm font-medium">
+            <button type="button" id="nav-home" onclick="App.showPage('home')" class="nav-main-link">ホーム</button>
+            <button type="button" id="nav-services" onclick="App.showPage('services')" class="nav-main-link">サービス</button>
+            <button type="button" id="nav-about" onclick="App.showPage('about')" class="nav-main-link">事務所紹介</button>
+            <div class="relative group">
+                <button type="button" class="nav-main-link flex items-center gap-1 group-hover:bg-blue-50 group-hover:text-blue-900 active-tab" aria-haspopup="true">
+                    お役立ちコンテンツ
+                    <svg class="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="hidden group-hover:block absolute top-full left-0 z-50 w-56 pt-2">
+                    <div class="bg-white rounded-lg shadow-xl border border-gray-200 py-2">
+                        <button type="button" onclick="App.showPage('blog')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">📝 労務管理コラム</button>
+                        <button type="button" onclick="App.showPage('checkup')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">✅ 労務リスク診断</button>
+                        <button type="button" onclick="App.showPage('subsidy-sim')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">💰 助成金診断</button>
+                        <button type="button" onclick="App.showPage('salary-calc')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm text-gray-700">🧮 給与計算ツール</button>
+                        <button type="button" onclick="App.showPage('price-sim')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-semibold text-amber-800">🧮 料金シミュレーター</button>
+                        <button type="button" onclick="App.showPage('download')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-semibold text-indigo-800">📥 無料資料ダウンロード</button>
+                        <hr class="my-1 border-gray-100">
+                        <button type="button" onclick="App.showPage('campaign')" class="nav-submenu-item w-full text-left px-4 py-2.5 text-sm font-bold text-red-700">🎁 キャンペーン情報</button>
+                        <button type="button" onclick="App.showPage('spot')" class="nav-submenu-item nav-submenu-item--accent w-full text-left px-4 py-2.5 text-sm font-bold text-orange-800 active-tab">📋 手続き依頼フォーム</button>
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="nav-links" onclick="App.showPage('links')" class="nav-main-link">関連リンク</button>
+            <button type="button" id="nav-faq" onclick="App.showPage('faq')" class="nav-main-link">よくある質問</button>
+            <button type="button" id="nav-contact" onclick="App.showPage('contact')" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2.5 rounded-lg font-bold shadow-md transition duration-200 hover:from-orange-600 hover:to-orange-700 hover:scale-[1.02]">お問い合わせ</button>
+        </nav>
+        <div class="md:hidden flex items-center gap-1">
+            <a href="tel:07010471625" class="flex items-center gap-1.5 bg-orange-500 text-white text-xs font-bold px-3 py-2.5 rounded-lg shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+                無料相談
+            </a>
+            <button type="button" class="text-blue-900 p-2 rounded-lg" onclick="App.toggleMobileMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-4 space-y-1 shadow-inner">
+        <button type="button" onclick="App.showPage('home')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">ホーム</button>
+        <button type="button" onclick="App.showPage('services')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">サービス・料金</button>
+        <button type="button" onclick="App.showPage('about')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">事務所紹介</button>
+        <div class="pl-2 pt-1">
+            <p class="text-xs text-gray-500 font-bold py-2 px-3">お役立ちコンテンツ</p>
+            <button type="button" onclick="App.showPage('blog')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">📝 労務管理コラム</button>
+            <button type="button" onclick="App.showPage('checkup')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">✅ 労務リスク診断</button>
+            <button type="button" onclick="App.showPage('subsidy-sim')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">💰 助成金診断</button>
+            <button type="button" onclick="App.showPage('salary-calc')" class="mobile-nav-item block w-full py-2.5 text-left text-sm text-gray-800 rounded-lg px-3">🧮 給与計算ツール</button>
+            <button type="button" onclick="App.showPage('price-sim')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-semibold text-amber-800">🧮 料金シミュレーター</button>
+            <button type="button" onclick="App.showPage('download')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-semibold text-indigo-800">📥 無料資料ダウンロード</button>
+            <button type="button" onclick="App.showPage('campaign')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-bold text-red-700">🎁 キャンペーン情報</button>
+            <button type="button" onclick="App.showPage('spot')" class="mobile-nav-item block w-full py-2.5 text-left text-sm rounded-lg px-3 font-bold text-orange-800 bg-orange-50">📋 手続き依頼フォーム</button>
+        </div>
+        <button type="button" onclick="App.showPage('links')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">関連リンク</button>
+        <button type="button" onclick="App.showPage('faq')" class="mobile-nav-item block w-full py-3 text-left font-medium text-gray-800 rounded-lg px-3">よくある質問</button>
+        <button type="button" onclick="App.showPage('contact')" class="mobile-nav-item mobile-nav-item--cta block w-full py-3 text-left font-bold rounded-lg px-3 text-orange-700">お問い合わせ</button>
+    </div>
+</header>
+
 <!-- ========== MAIN ========== -->
-<main style="background: linear-gradient(135deg,#f0f9ff 0%,#e8f4fd 50%,#f8faff 100%); min-height:100vh; padding: 32px 0 80px;">
+<main style="background: linear-gradient(135deg,#f0f9ff 0%,#e8f4fd 50%,#f8faff 100%); min-height:calc(100vh - 72px); padding: 48px 0 80px;">
 <div class="container mx-auto px-4 max-w-5xl">
 
     <!-- タイトル -->
@@ -1246,15 +1322,44 @@
 </div><!-- /container -->
 </main>
 
+<!-- ========== FOOTER ========== -->
+<footer class="bg-blue-900 text-white py-8">
+    <div class="container mx-auto px-4 text-center text-sm text-blue-200">
+        <p class="font-bold text-white mb-1">カミウエ社会保険労務士事務所</p>
+        <p>〒983-0005 宮城県仙台市宮城野区福室字田中東二番25-6</p>
+        <p class="mt-1">TEL: <a href="tel:07010471625" class="hover:text-white transition">070-1047-1625</a>　平日 9:00〜17:00</p>
+        <p class="mt-3 text-xs text-blue-300">&copy; 2025 カミウエ社会保険労務士事務所 All Rights Reserved.</p>
+    </div>
+</footer>
+
 
 <!-- ========== JavaScript ========== -->
 <script>
+// ===== 共通ナビゲーション制御 =====
+const App = {
+    showPage(pageId) {
+        if (pageId === 'spot' || pageId === 'tetsuzuki_v2') {
+            this.closeMobileMenu();
+            return;
+        }
+        window.location.href = 'index.html#' + pageId;
+    },
+    toggleMobileMenu() {
+        const mm = document.getElementById('mobile-menu');
+        if (mm) mm.classList.toggle('hidden');
+    },
+    closeMobileMenu() {
+        const mm = document.getElementById('mobile-menu');
+        if (mm) mm.classList.add('hidden');
+    }
+};
+
 // ===== サイト設定 =====
 const SITE_CONFIG = {
     EMAIL: 'sr.kamiue@gmail.com',
     FORMSPREE: { BASE_URL: 'https://formspree.io/f/', ID: 'YOUR_FORMSPREE_ID' },
     // ▼ GAS Web App URL（デプロイ後に差し替え）
-    GAS_URL: 'https://script.google.com/macros/s/YOUR_GAS_DEPLOYMENT_ID/exec'
+    GAS_URL: 'https://script.google.com/macros/s/AKfycbxOp-1ZC40dNtxJxGNWHqB0hXfFrIwJotpgvSrQiFNURGL0eHmBVwB6OWnNzltrhMUX/exec'
 };
 
 // ===== 状態管理 =====
@@ -1760,44 +1865,6 @@ function resetAll() {
     switchMainCat('spot');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-</script>
-
-<!-- ===== iframe 連携：親ページとの通信 ===== -->
-<script>
-(function() {
-    // ① 親ページから { type:'SPOT_TAB', tabIndex:N } を受け取ってタブ切替
-    window.addEventListener('message', function(e) {
-        if (e.data && e.data.type === 'SPOT_TAB') {
-            var idx = parseInt(e.data.tabIndex, 10) || 0;
-            // スポット側タブが対象（0〜3）
-            if (idx >= 0 && idx <= 3) {
-                // カテゴリをスポットに切り替えてからタブを選択
-                if (typeof switchMainCat === 'function') switchMainCat('spot');
-                if (typeof switchSpotTab === 'function') switchSpotTab(idx);
-            }
-            // ページ先頭へスクロール
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    });
-
-    // ② コンテンツの高さが変わるたびに親へ通知（iframe高さ自動調整）
-    function notifyHeight() {
-        var h = document.body.scrollHeight;
-        try {
-            window.parent.postMessage({ type: 'IFRAME_HEIGHT', height: h }, '*');
-        } catch(e) {}
-    }
-
-    // ページ読み込み完了時・フォーム操作時に通知
-    window.addEventListener('load', notifyHeight);
-    // DOM変化を監視（タブ切替・フォーム展開など）
-    if (typeof ResizeObserver !== 'undefined') {
-        new ResizeObserver(notifyHeight).observe(document.body);
-    } else {
-        // フォールバック：定期チェック（古いブラウザ用）
-        setInterval(notifyHeight, 800);
-    }
-})();
 </script>
 
 </body>

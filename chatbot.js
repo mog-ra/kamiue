@@ -20,11 +20,13 @@
         subsidy: {
             msg: "助成金・補助金のご相談ですね！\n\n現在、以下の助成金が特に注目されています：\n\n✅ **キャリアアップ助成金**（正社員化コース）\n✅ **業務改善助成金**（賃上げ支援）\n✅ **両立支援等助成金**（育児・介護対応）\n\nお客様の状況に合った助成金を無料で診断します！",
             options: [
-                { label: "📋 助成金の詳細を教えてほしい",   next: "subsidy_detail" },
+                { label: " 助成金シミュレーターを試す",   next: "subsidy_sim_page" },
+                { label: "📋 助成金の詳細・メリット",       next: "subsidy_detail" },
                 { label: "🔍 自社が使える助成金を診断したい", next: "subsidy_diag" },
                 { label: "📅 無料相談を予約したい",           next: "cta_final"    },
             ]
         },
+        subsidy_sim_page: { msg: "助成金シミュレーターへ移動します。", redirect: "subsidy-sim" },
         subsidy_detail: {
             msg: "助成金は要件を満たせば**返済不要**でもらえる公的資金です。\n\n当事務所では申請から受給まで完全サポート。\n成功報酬型なので初期費用ゼロで始められます。\n\n昨年度の実績：支給総額 約2,800万円（顧問先合計）",
             cta: true
@@ -57,28 +59,33 @@
         payroll: {
             msg: "給与計算の外注・アウトソーシングをお考えですね！\n\n毎月の給与計算、社会保険の手続き、年末調整…これらをまるごとお任せいただけます。\n\n**顧問契約（月25,000円〜）**に含まれる給与計算サービス：",
             options: [
+                { label: "🧮 給与計算ツール（手取り計算）", next: "salary_calc_page" },
                 { label: "📊 給与計算サービスの詳細",     next: "payroll_detail" },
-                { label: "💰 料金・プランを確認したい",   next: "payroll_price"  },
+                { label: "💰 顧問料・代行料金の試算",     next: "price_sim_page"  },
                 { label: "📅 無料相談を予約したい",       next: "cta_final"      },
             ]
         },
+        salary_calc_page: { msg: "給与計算ツールへ移動します。", redirect: "salary-calc" },
+        price_sim_page:   { msg: "料金シミュレーターへ移動します。", redirect: "price-sim" },
         payroll_detail: {
             msg: "給与計算サービスでは以下をすべて対応します：\n\n✅ 毎月の給与・賞与計算\n✅ 社会保険・雇用保険の手続き\n✅ 住民税の特別徴収対応\n✅ 年末調整・法定調書作成\n✅ 給与明細の電子配信\n\nクラウドシステムを活用し、正確・迅速に対応します。",
             cta: true
         },
         payroll_price: {
-            msg: "給与計算の料金目安：\n\n👥 〜5名：月額 **15,000円〜**\n👥 6〜10名：月額 **20,000円〜**\n👥 11〜20名：月額 **28,000円〜**\n\n※顧問契約の場合、労務相談・各種手続きも含まれます。\n詳細はお気軽にご相談ください。",
+            msg: "給与計算の料金目安：\n\n👥 〜5名：月額 **12,000円〜**\n👥 6〜10名：月額 **16,000円〜**\n👥 11〜20名：月額 **24,000円〜**\n\n※顧問契約の場合、労務相談・各種手続きも含まれます。\n詳細はお気軽にご相談ください。",
             cta: true
         },
         trouble: {
             msg: "労務トラブルのご相談ですね。\n\nどのような状況でしょうか？",
             options: [
-                { label: "😡 残業代・未払い賃金のトラブル",         next: "trouble_wage"      },
+                { label: "🔍 労務健全性診断を受ける",         next: "checkup_page"      },
+                { label: "� 残業代・未払い賃金のトラブル",         next: "trouble_wage"      },
                 { label: "👋 解雇・退職勧奨に関するトラブル",       next: "trouble_dismiss"   },
                 { label: "😰 ハラスメント問題",                     next: "trouble_harass"    },
                 { label: "📋 就業規則を見直したい",                 next: "trouble_rules"     },
             ]
         },
+        checkup_page: { msg: "労務健全性診断ページへ移動します。", redirect: "checkup" },
         trouble_wage: {
             msg: "未払い残業代・賃金トラブルは早急な対応が重要です。\n\n時効は**2年〜3年**で、放置すると遡及請求リスクが高まります。\n\n労働基準監督署の調査が入る前に、専門家に相談することをお勧めします。\n\n初回60分の無料相談で状況を確認します。",
             cta: true
@@ -99,7 +106,7 @@
             ]
         },
         rules_price: {
-            msg: "就業規則の作成・見直し料金：\n\n📋 新規作成：**80,000円〜**\n🔄 改訂・見直し：**50,000円〜**\n📑 付属規程（育児・介護等）：**30,000円〜/本**\n\n顧問契約のお客様は割引あり。\n法改正対応も含めて年1回の見直しをお勧めします。",
+            msg: "就業規則の作成・見直し料金：\n\n📋 新規作成：**80,000円〜**\n🔄 改訂・見直し：**40,000円〜**\n📑 付属規程（育児・介護等）：**30,000円〜/本**\n\n顧問契約のお客様は割引あり。\n法改正対応も含めて年1回の見直しをお勧めします。",
             cta: true
         },
         startup: {
@@ -140,12 +147,16 @@
             options: [
                 { label: "💼 サービス・料金を詳しく見る",   next: "services_page" },
                 { label: "📋 入退社手続きを今すぐ依頼",     next: "spot_page"     },
+                { label: "📝 労務コラムを読む",             next: "blog_page"     },
+                { label: "▶ YouTubeチャンネル",            next: "youtube_page"  },
                 { label: "❓ よくある質問を見る",            next: "faq_page"      },
                 { label: "📅 無料相談を予約する",            next: "cta_final"     },
             ]
         },
         services_page: { msg: "サービス・料金ページへ移動します。",    redirect: "services" },
-        spot_page:     { msg: "スポット手続き依頼ページへ移動します。", redirect: "spot"     },
+        spot_page:     { msg: "スポット手続き依頼ページへ移動します。", redirect: "tetsuzuki_v2" },
+        blog_page:     { msg: "労務コラムページへ移動します。",       redirect: "blog"     },
+        youtube_page:  { msg: "YouTube動画一覧へ移動します。",       redirect: "youtube"  },
         faq_page:      { msg: "よくある質問ページへ移動します。",       redirect: "faq"      },
         cta_final: {
             msg: "初回60分の無料相談では、貴社の状況をじっくりヒアリングし、最適な解決策をご提案します。\n\nお気軽にどうぞ！",
@@ -284,7 +295,7 @@
         b.textContent = btn.label;
         b.onclick = function() {
             chatClose();
-            showPage(btn.action);
+            App.showPage(btn.action);
         };
         wrap.appendChild(b);
         area.appendChild(wrap);
@@ -293,7 +304,7 @@
 
     window.chatGoContact = function() {
         chatClose();
-        showPage('contact');
+        App.showPage('contact');
     };
 
     function startFlow(key) {
@@ -305,7 +316,7 @@
             addMsg('bot', flow.msg);
             setTimeout(() => {
                 if (flow.redirect) {
-                    setTimeout(() => { chatClose(); showPage(flow.redirect); }, 600);
+                    setTimeout(() => { chatClose(); App.showPage(flow.redirect); }, 600);
                     return;
                 }
                 if (flow.special_btn) addSpecialBtn(flow.special_btn);
@@ -324,7 +335,7 @@
             addMsg('bot', flow.msg);
             setTimeout(() => {
                 if (flow.redirect) {
-                    setTimeout(() => { chatClose(); showPage(flow.redirect); }, 600);
+                    setTimeout(() => { chatClose(); App.showPage(flow.redirect); }, 600);
                     return;
                 }
                 if (flow.special_btn) addSpecialBtn(flow.special_btn);
