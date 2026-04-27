@@ -45,6 +45,9 @@
         </div>
     </header>
 
+    <!-- index.html から動的に読み込むためのメインコンテナ -->
+    <section id="page-salary-calc" class="hidden" style="min-height:80vh;">
+
     <!-- ======= HERO BAND ======= -->
     <div class="hero-band">
         <div style="max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1;">
@@ -532,6 +535,8 @@
             <span id="pdf-footer-date"></span>
         </div>
     </div>
+
+    </section> <!-- ここで閉じることで、入力パネルやPDFレイヤーを含む全体が index.html に読み込まれます -->
 
     <script>
     /* ===== 定数 ===== */

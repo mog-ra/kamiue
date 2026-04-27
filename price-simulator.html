@@ -92,6 +92,20 @@
                             <h3 class="font-black text-blue-900 text-lg">ベースプランを選択</h3>
                         </div>
                         <div class="space-y-3" id="adv-base-plans">
+                            <label class="sim-plan-card flex items-start gap-4 p-5 rounded-2xl border-2 cursor-pointer transition" data-plan="dxlight">
+                                <input type="radio" name="adv-base" value="dxlight" onchange="simCalc()" class="mt-1 accent-blue-800 w-4 h-4 flex-shrink-0">
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between flex-wrap gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-black text-blue-900">DX・ライト顧問</span>
+                                            <span class="bg-blue-900 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">5名以下限定</span>
+                                        </div>
+                                        <span class="text-amber-600 font-black text-sm" id="adv-dxlight-price">10,000円/月</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">チャット・メールによる労務相談・クラウド人事労務ソフト導入支援・法改正情報配信</p>
+                                    <p class="text-[10px] text-blue-700 font-bold mt-1">※従業員5名以下の事業所様限定プラン</p>
+                                </div>
+                            </label>
                             <label class="sim-plan-card flex items-start gap-4 p-5 rounded-2xl border-2 cursor-pointer transition" data-plan="standard">
                                 <input type="radio" name="adv-base" value="standard" checked onchange="simCalc()" class="mt-1 accent-blue-800 w-4 h-4 flex-shrink-0">
                                 <div class="flex-1">
@@ -125,7 +139,7 @@
                                             <span class="font-black text-blue-900">創業パックプラン</span>
                                             <span class="bg-blue-700 text-white text-xs px-2 py-0.5 rounded-full font-bold">6か月</span>
                                         </div>
-                                        <span class="text-amber-600 font-black text-sm">180,000円〜/6か月</span>
+                                        <span class="text-amber-600 font-black text-sm" id="adv-startup-price">180,000円〜/6か月</span>
                                     </div>
                                     <p class="text-xs text-gray-500 mt-1">就業規則作成・社会保険新規適用・給与計算代行・助成金コンサル込み</p>
                                     <p class="text-xs text-green-600 font-bold mt-1">✓ 給与計算はプランに含まれます</p>

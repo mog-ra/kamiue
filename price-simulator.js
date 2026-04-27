@@ -21,6 +21,7 @@
 
     /** 顧問契約 ベースプラン */
     const ADV_PLANS = {
+        dxlight:  { name: 'DX・ライト顧問',         base: 10000, per_emp: 0,    included: 5, unit: '/月' },
         standard: { name: '顧問契約（スタンダード）', base: 25000, per_emp: 600,  included: 5, unit: '/月' },
         full:     { name: 'フルサポート契約',         base: 37000, per_emp: 1400, included: 5, unit: '/月' },
         startup:  { name: '創業パックプラン',         base: 180000, per_emp: 4000, included: 5, unit: '/6か月', isLump: true },
@@ -104,6 +105,7 @@
 
         // プランに含まれるオプション
         const PLAN_INCLUDED_OPTS = {
+            dxlight:  [],
             standard: [],
             full:     ['payroll'],
             startup:  ['payroll'],
@@ -231,6 +233,39 @@
         }
         document.getElementById('adv-monthly-total-sub').textContent = '¥' + fmt(isStartup ? baseAmt : monthlyTotal) + '〜';
         document.getElementById('adv-annual-cost').textContent       = '¥' + fmt(annualTotal) + '〜';
+
+        // DX・ライト顧問限定の特典・警告表示
+        const resultHeader = document.getElementById('adv-total-monthly')?.closest('.px-7');
+        if (planKey === 'dxlight') {
+            // 特典テキスト
+            let benefitEl = document.getElementById('sim-dxlight-benefit');
+            if (!benefitEl) {
+                benefitEl = document.createElement('div');
+                benefitEl.id = 'sim-dxlight-benefit';
+                benefitEl.className = 'mt-3 p-3 bg-blue-800/50 border border-blue-400/30 rounded-xl text-blue-100 text-[10px] font-bold leading-tight';
+                benefitEl.innerHTML = '💡 DX・ライト顧問限定特典：<br>各種スポット業務に「会員割引」が適用されます。';
+                resultHeader?.appendChild(benefitEl);
+            }
+            benefitEl.classList.remove('hidden');
+
+            // 人数制限警告 (5名超過時)
+            let warningEl = document.getElementById('sim-dxlight-warning');
+            if (emp > 5) {
+                if (!warningEl) {
+                    warningEl = document.createElement('div');
+                    warningEl.id = 'sim-dxlight-warning';
+                    warningEl.className = 'mt-2 p-3 bg-red-900/40 border border-red-500/50 rounded-xl text-red-200 text-[10px] font-bold leading-tight';
+                    warningEl.innerHTML = '⚠️ DX・ライト顧問は5名以下の限定プランです。<br>6名以上の場合はスタンダード以上をご検討ください。';
+                    resultHeader?.appendChild(warningEl);
+                }
+                warningEl.classList.remove('hidden');
+            } else if (warningEl) {
+                warningEl.classList.add('hidden');
+            }
+        } else {
+            document.getElementById('sim-dxlight-benefit')?.classList.add('hidden');
+            document.getElementById('sim-dxlight-warning')?.classList.add('hidden');
+        }
 
         // 内訳テーブル更新
         const bdEl = document.getElementById('adv-breakdown');
@@ -395,16 +430,66 @@
                 const o = ADV_OPTIONS[cb.value];
                 if (o) opts.push(o.name);
             });
+
+            // 各プランの業務内容の定義
+            const PLAN_DETAILS = {
+                dxlight: [
+                    'チャット・メールによる労務相談',
+                    'クラウド人事労務ソフトの初期導入支援',
+                    '最新の法改正・助成金情報の定期配信',
+                    '各種スポット業務の「会員割引」適用'
+                ],
+                standard: [
+                    '人事労務に関する随時相談（メール・電話）',
+                    '法改正情報の定期提供',
+                    '入退社等の社会保険手続き代行',
+                    '36協定等の労使協定作成・届出'
+                ],
+                full: [
+                    '顧問契約（スタンダード）の全サービス',
+                    '毎月の給与計算代行',
+                    'WEB給与明細システム（利用料込）',
+                    '年末調整業務サポート'
+                ],
+                startup: [
+                    '就業規則作成・社会保険新規適用',
+                    '給与計算代行（6か月）・ソフト導入支援',
+                    '助成金コンサル・申請代行込み'
+                ]
+            };
+            const details = PLAN_DETAILS[planKey] || [];
+
+            // DX・ライト顧問特有のテキスト
+            let dxExtra = '';
+            if (planKey === 'dxlight') {
+                dxExtra += `
+                <div style="margin-top:1rem;padding:12px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;font-size:0.8rem;color:#0369a1;font-weight:700;">
+                    💡 DX・ライト顧問限定特典：各種スポット業務に「会員割引」が適用されます。
+                </div>`;
+                dxExtra += `
+                <div style="margin-top:0.5rem;padding:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:0.8rem;color:#15803d;font-weight:700;">
+                    ✅ クラウド人事労務ソフトの初期導入・設定支援が含まれています。
+                </div>`;
+                if (parseInt(emp) > 5) {
+                    dxExtra += `
+                    <div style="margin-top:0.5rem;padding:12px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;font-size:0.8rem;color:#b91c1c;font-weight:700;">
+                        ⚠️ DX・ライト顧問は5名以下の限定プランです。6名以上の場合はスタンダード以上をご検討ください。
+                    </div>`;
+                }
+            }
+
             content = `
             <h2 style="font-size:1.4rem;font-weight:900;color:#1e3a8a;margin-bottom:0.5rem">顧問契約 概算見積もり</h2>
             <p style="color:#6b7280;font-size:0.85rem;margin-bottom:1.5rem">作成日: ${now}　※概算です。正式見積りは無料相談にてご提示いたします。</p>
             <table style="width:100%;border-collapse:collapse;margin-bottom:1rem">
               <tr style="background:#eff6ff"><td style="padding:8px 12px;font-weight:700;width:40%">プラン</td><td style="padding:8px 12px">${plan.name}</td></tr>
+              <tr><td style="padding:8px 12px;font-weight:700;background:#f9fafb">業務内容</td><td style="padding:8px 12px;font-size:0.85rem;line-height:1.6">${details.map(d => '・' + d).join('<br>')}</td></tr>
               <tr><td style="padding:8px 12px;font-weight:700;background:#f9fafb">従業員数</td><td style="padding:8px 12px">${emp}名</td></tr>
               <tr style="background:#eff6ff"><td style="padding:8px 12px;font-weight:700">月額概算</td><td style="padding:8px 12px;font-weight:900;color:#1e3a8a;font-size:1.2rem">${total}${plan.isLump ? '（6か月分）' : '/月（税抜）'}</td></tr>
               <tr><td style="padding:8px 12px;font-weight:700;background:#f9fafb">年間概算コスト</td><td style="padding:8px 12px;font-weight:900;color:#1e3a8a">${annual}〜（税抜）</td></tr>
               ${opts.length ? `<tr style="background:#eff6ff"><td style="padding:8px 12px;font-weight:700">追加オプション</td><td style="padding:8px 12px">${opts.join('<br>')}</td></tr>` : ''}
-            </table>`;
+            </table>
+            ${dxExtra}`;
         } else {
             const total      = document.getElementById('spot-total-price')?.textContent || '¥0';
             const scaleLabel = { small: '〜10名', mid: '11〜30名', large: '31名以上' };

@@ -177,13 +177,21 @@ function getBonusTaxRate(prevTaxable, deps) {
  * sCalc() は入力値変化のたびにリアルタイムで呼び出される。
  */
 function sCalc() {
+    const salaryEl = document.getElementById('s-salary');
+    const modeEl = document.querySelector('input[name="s-mode"]:checked');
+    const prefEl = document.getElementById('s-pref');
+    const industryEl = document.getElementById('s-industry');
+
+    // 必須要素が揃っていない（読み込み中）場合は処理を中断
+    if (!salaryEl || !modeEl || !prefEl || !industryEl) return;
+
     /* --- 入力値取得 --- */
-    const salary      = parseInt(document.getElementById('s-salary').value,       10) || 0;
-    const isBonus     = document.querySelector('input[name="s-mode"]:checked').value === 'bonus';
-    const pref        = document.getElementById('s-pref').value;
+    const salary      = parseInt(salaryEl.value, 10) || 0;
+    const isBonus     = modeEl.value === 'bonus';
+    const pref        = prefEl.value;
     const kaigo       = document.getElementById('s-kaigo').checked;
     const deps        = document.getElementById('s-deps').value;
-    const industry    = document.getElementById('s-industry').value;
+    const industry    = industryEl.value;
     const residentTax = isBonus ? 0 : (parseInt(document.getElementById('s-resident-tax').value, 10) || 0);
 
     /* --- 標準報酬月額（実務上は等級テーブルを使用） --- */
@@ -546,33 +554,4 @@ function exportToPDF() {
         .from(layer)
         .save()
         .then(() => { layer.style.display = 'none'; });
-}
-
-/* ============================================================
-   14. 初期化
-   ============================================================ */
-document.addEventListener('DOMContentLoaded', () => {
-    /* 日付表示 */
-    const dateEl = document.getElementById('current-date');
-    if (dateEl) {
-        const d = new Date();
-        dateEl.textContent =
-            `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日 現在`;
-    }
-
-    /* 初期計算 */
-    sCalc();
-});
-
-// salary-calc.js の末尾
-function initSalaryCalc() {
-    // 2025年度料率の適用やイベントリスナーの登録処理
-    console.log("給与計算ツール初期化完了");
-}
-
-// 念のため両方で動くようにしておく
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSalaryCalc);
-} else {
-    initSalaryCalc();
 }
