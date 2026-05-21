@@ -65,11 +65,11 @@
                         </div>
                         <div class="mb-4">
                             <div class="flex justify-between items-end mb-2">
-                                <span class="text-gray-500 text-sm">従業員数（役員除く）</span>
-                                <span class="text-3xl font-black text-blue-900" id="adv-emp-display">5</span>
+                                <span class="text-gray-500 text-sm">従業員数（役員込み）</span>
+                                <span class="text-3xl font-black text-blue-900" id="adv-emp-display">4</span>
                                 <span class="text-gray-500 text-sm mb-1">名</span>
                             </div>
-                            <input type="range" id="adv-emp-slider" min="1" max="100" value="5" step="1"
+                            <input type="range" id="adv-emp-slider" min="1" max="100" value="4" step="1"
                                 oninput="simCalc()"
                                 class="w-full h-2 rounded-full appearance-none cursor-pointer sim-slider">
                             <div class="flex justify-between text-xs text-gray-400 mt-1">
@@ -92,57 +92,29 @@
                             <h3 class="font-black text-blue-900 text-lg">ベースプランを選択</h3>
                         </div>
                         <div class="space-y-3" id="adv-base-plans">
-                            <label class="sim-plan-card flex items-start gap-4 p-5 rounded-2xl border-2 cursor-pointer transition" data-plan="dxlight">
-                                <input type="radio" name="adv-base" value="dxlight" onchange="simCalc()" class="mt-1 accent-blue-800 w-4 h-4 flex-shrink-0">
+                            <!-- 正規顧問プラン -->
+                            <label class="sim-plan-card flex items-start gap-4 p-5 rounded-2xl border-2 cursor-pointer transition" data-plan="seisiki">
+                                <input type="radio" name="adv-base" value="seisiki" checked onchange="simCalc()" class="mt-1 accent-blue-800 w-4 h-4 flex-shrink-0">
                                 <div class="flex-1">
                                     <div class="flex items-center justify-between flex-wrap gap-2">
                                         <div class="flex items-center gap-2">
-                                            <span class="font-black text-blue-900">DX・ライト顧問</span>
-                                            <span class="bg-blue-900 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">5名以下限定</span>
-                                        </div>
-                                        <span class="text-amber-600 font-black text-sm" id="adv-dxlight-price">10,000円/月</span>
-                                    </div>
-                                    <p class="text-xs text-gray-500 mt-1">チャット・メールによる労務相談・クラウド人事労務ソフト導入支援・法改正情報配信</p>
-                                    <p class="text-[10px] text-blue-700 font-bold mt-1">※従業員5名以下の事業所様限定プラン</p>
-                                </div>
-                            </label>
-                            <label class="sim-plan-card flex items-start gap-4 p-5 rounded-2xl border-2 cursor-pointer transition" data-plan="standard">
-                                <input type="radio" name="adv-base" value="standard" checked onchange="simCalc()" class="mt-1 accent-blue-800 w-4 h-4 flex-shrink-0">
-                                <div class="flex-1">
-                                    <div class="flex items-center justify-between flex-wrap gap-2">
-                                        <span class="font-black text-blue-900">顧問契約（スタンダード）</span>
-                                        <span class="text-amber-600 font-black text-sm" id="adv-std-price">25,000円〜/月</span>
-                                    </div>
-                                    <p class="text-xs text-gray-500 mt-1">随時相談・法改正情報提供・社会保険手続き代行・36協定作成届出</p>
-                                </div>
-                            </label>
-                            <label class="sim-plan-card flex items-start gap-4 p-5 rounded-2xl border-2 cursor-pointer transition" data-plan="full">
-                                <input type="radio" name="adv-base" value="full" onchange="simCalc()" class="mt-1 accent-blue-800 w-4 h-4 flex-shrink-0">
-                                <div class="flex-1">
-                                    <div class="flex items-center justify-between flex-wrap gap-2">
-                                        <div class="flex items-center gap-2">
-                                            <span class="font-black text-blue-900">フルサポート契約</span>
+                                            <span class="font-black text-blue-900">正規顧問</span>
                                             <span class="bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">おすすめ</span>
                                         </div>
-                                        <span class="text-amber-600 font-black text-sm" id="adv-full-price">37,000円〜/月</span>
+                                        <span class="text-amber-600 font-black text-sm" id="adv-seisiki-price">20,000円〜/月</span>
                                     </div>
-                                    <p class="text-xs text-gray-500 mt-1">スタンダード全内容＋給与計算代行・WEB給与明細</p>
-                                    <p class="text-xs text-green-600 font-bold mt-1">✓ 給与計算代行はプランに含まれます</p>
-                                    <p class="text-xs text-gray-400 mt-0.5">※年末調整は別途オプション（全プラン共通）</p>
+                                    <p class="text-xs text-gray-500 mt-1">手続き代行＋労務相談。人事労務に関する随時相談・社会保険手続き代行・36協定等の作成・届出</p>
                                 </div>
                             </label>
-                            <label class="sim-plan-card flex items-start gap-4 p-5 rounded-2xl border-2 cursor-pointer transition" data-plan="startup">
-                                <input type="radio" name="adv-base" value="startup" onchange="simCalc()" class="mt-1 accent-blue-800 w-4 h-4 flex-shrink-0">
+                            <!-- 相談顧問プラン -->
+                            <label class="sim-plan-card flex items-start gap-4 p-5 rounded-2xl border-2 cursor-pointer transition" data-plan="soudan">
+                                <input type="radio" name="adv-base" value="soudan" onchange="simCalc()" class="mt-1 accent-blue-800 w-4 h-4 flex-shrink-0">
                                 <div class="flex-1">
                                     <div class="flex items-center justify-between flex-wrap gap-2">
-                                        <div class="flex items-center gap-2">
-                                            <span class="font-black text-blue-900">創業パックプラン</span>
-                                            <span class="bg-blue-700 text-white text-xs px-2 py-0.5 rounded-full font-bold">6か月</span>
-                                        </div>
-                                        <span class="text-amber-600 font-black text-sm" id="adv-startup-price">180,000円〜/6か月</span>
+                                        <span class="font-black text-blue-900">相談顧問</span>
+                                        <span class="text-amber-600 font-black text-sm" id="adv-soudan-price">10,000円〜/月</span>
                                     </div>
-                                    <p class="text-xs text-gray-500 mt-1">就業規則作成・社会保険新規適用・給与計算代行・助成金コンサル込み</p>
-                                    <p class="text-xs text-green-600 font-bold mt-1">✓ 給与計算はプランに含まれます</p>
+                                    <p class="text-xs text-gray-500 mt-1">労務相談のみ。法改正情報提供・人事労務相談。手続きは対象外です。</p>
                                 </div>
                             </label>
                         </div>
@@ -157,7 +129,7 @@
                         </div>
                         <div class="flex items-center gap-2 mb-4 px-3 py-2 bg-blue-50 rounded-xl border border-blue-100">
                             <svg class="w-4 h-4 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
-                            <p class="text-xs text-blue-700">フルサポート・創業パックで選択済みのオプションはプラン料金に含まれています。追加費用はかかりません。</p>
+                            <p class="text-xs text-blue-700">オプションはベースプランに加えて追加できます。</p>
                         </div>
                         <div class="space-y-3" id="adv-options">
                             <!-- 給与計算 -->
@@ -166,7 +138,7 @@
                                 <div class="flex-1">
                                     <div class="flex items-center justify-between flex-wrap gap-2">
                                         <span class="font-bold text-gray-800 text-sm">給与計算代行</span>
-                                        <span class="text-blue-700 font-black text-sm" id="opt-payroll-price">+12,000円〜/月</span>
+                                        <span class="text-blue-700 font-black text-sm" id="opt-payroll-price">+15,000円〜/月</span>
                                     </div>
                                     <p class="text-xs text-gray-400 mt-0.5">毎月の給与計算・振込データ作成。従業員数によって変動。</p>
                                 </div>
@@ -258,6 +230,14 @@
                             <!-- JSで動的生成 -->
                         </div>
 
+                        <!-- 1人あたり単価 -->
+                        <div class="px-7 py-4 bg-white/5 border-b border-white/10">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-blue-200">1人あたり月額</span>
+                                <span class="text-yellow-300 font-black text-lg" id="adv-per-emp-price">¥5,000/人</span>
+                            </div>
+                        </div>
+
                         <!-- 従業員数バッジ -->
                         <div class="px-7 py-4 bg-white/5 border-b border-white/10">
                             <div class="flex items-center justify-between text-sm">
@@ -290,6 +270,10 @@
                             </button>
                         </div>
                         <p class="text-center text-blue-300/60 text-xs pb-4">※概算です。正式見積りは無料相談にて</p>
+                        <div class="px-7 py-4 border-t border-white/10 space-y-2">
+                            <p class="text-blue-300 text-xs leading-relaxed">※表示価格はすべて税別です。</p>
+                            <p class="text-blue-300 text-xs leading-relaxed">※従業員数には役員を含みます。パート・アルバイトのカウント方法については別途ご相談ください。</p>
+                        </div>
                     </div>
                 </div>
             </div><!-- /grid -->

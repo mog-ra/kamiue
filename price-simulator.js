@@ -19,18 +19,16 @@
     // データ定義
     // =============================================
 
-    /** 顧問契約 ベースプラン */
+    /** 顧問契約 ベースプラン - 新料金モデル */
     const ADV_PLANS = {
-        dxlight:  { name: 'DX・ライト顧問',         base: 10000, per_emp: 0,    included: 5, unit: '/月' },
-        standard: { name: '顧問契約（スタンダード）', base: 25000, per_emp: 600,  included: 5, unit: '/月' },
-        full:     { name: 'フルサポート契約',         base: 37000, per_emp: 1400, included: 5, unit: '/月' },
-        startup:  { name: '創業パックプラン',         base: 180000, per_emp: 4000, included: 5, unit: '/6か月', isLump: true },
+        seisiki:  { name: '正規顧問（手続き＋労務相談）', base: 20000, per_emp: 1000, included: 4, unit: '/月' },
+        soudan:   { name: '相談顧問（労務相談のみ）',     base: 10000, per_emp: 500,  included: 4, unit: '/月' },
     };
 
     /** 顧問契約 オプション */
     const ADV_OPTIONS = {
-        payroll:    { name: '給与計算代行',          base: 12000, per_emp: 800,  included: 5 },
-        yearend:    { name: '年末調整代行',           base: 15000, per_emp: 500,  included: 5, isAnnual: true },
+        payroll:    { name: '給与計算代行',          base: 15000, per_emp: 1000, included: 4 },
+        yearend:    { name: '年末調整代行',           base: 15000, per_emp: 500,  included: 4, isAnnual: true },
         rules:      { name: '就業規則 作成・見直し',  fixed: 80000 },
         subsidy:    { name: '助成金申請代行',         fixed: 0, note: '成功報酬20%' },
         attendance: { name: 'クラウド勤怠導入支援',   fixed: 50000 },
@@ -98,17 +96,15 @@
         updateSliderColor();
         updateEmpChips(emp);
 
-        const planKey  = document.querySelector('input[name="adv-base"]:checked')?.value || 'standard';
+        const planKey  = document.querySelector('input[name="adv-base"]:checked')?.value || 'seisiki';
         const plan     = ADV_PLANS[planKey];
         const extraEmp = Math.max(0, emp - plan.included);
         const baseAmt  = plan.base + extraEmp * plan.per_emp;
 
         // プランに含まれるオプション
         const PLAN_INCLUDED_OPTS = {
-            dxlight:  [],
-            standard: [],
-            full:     ['payroll'],
-            startup:  ['payroll'],
+            seisiki:  [],
+            soudan:   [],
         };
         const includedOpts = PLAN_INCLUDED_OPTS[planKey] || [];
 
@@ -147,8 +143,8 @@
             const p   = ADV_PLANS[k];
             const ea  = Math.max(0, emp - p.included);
             const amt = p.base + ea * p.per_emp;
-            const el  = document.getElementById('adv-' + (k === 'standard' ? 'std' : k) + '-price');
-            if (el) el.textContent = fmt(amt) + (k === 'startup' ? '円〜/6か月' : '円〜/月');
+            const el  = document.getElementById('adv-' + k + '-price');
+            if (el) el.textContent = fmt(amt) + '円〜' + p.unit;
         });
 
         // オプション集計と内訳生成
@@ -212,60 +208,27 @@
         }
 
         // 月額・年額合計の計算
-        const isStartup    = planKey === 'startup';
-        const monthlyBase  = isStartup ? 0 : baseAmt;
+        const monthlyBase  = baseAmt;
         const monthlyTotal = monthlyBase + monthlyOptions;
-        const annualTotal  = isStartup
-            ? baseAmt + monthlyOptions * 6 + annualOptions + fixedOptions
-            : monthlyTotal * 12 + annualOptions + fixedOptions;
+        const annualTotal  = monthlyTotal * 12 + annualOptions + fixedOptions;
+
+        // 1人あたり単価の計算
+        const perEmpPrice = emp > 0 ? Math.round(monthlyTotal / emp) : 0;
+        const perEmpEl = document.getElementById('adv-per-emp-price');
+        if (perEmpEl) {
+            perEmpEl.textContent = '¥' + fmt(perEmpPrice) + '/人';
+        }
 
         // 結果パネルの表示更新
         const mainEl = document.getElementById('adv-total-monthly');
         const unitEl = document.getElementById('adv-total-unit');
-        if (isStartup) {
-            mainEl.textContent = '¥' + fmt(baseAmt);
-            unitEl.textContent = '/6か月（税抜）';
-            document.getElementById('adv-startup-note').classList.remove('hidden');
-        } else {
-            mainEl.textContent = '¥' + fmt(monthlyTotal);
-            unitEl.textContent = '/月（税抜）';
-            document.getElementById('adv-startup-note').classList.add('hidden');
-        }
-        document.getElementById('adv-monthly-total-sub').textContent = '¥' + fmt(isStartup ? baseAmt : monthlyTotal) + '〜';
+        mainEl.textContent = '¥' + fmt(monthlyTotal);
+        unitEl.textContent = '/月（税抜）';
+        document.getElementById('adv-startup-note')?.classList.add('hidden');
+        document.getElementById('adv-monthly-total-sub').textContent = '¥' + fmt(monthlyTotal) + '〜';
         document.getElementById('adv-annual-cost').textContent       = '¥' + fmt(annualTotal) + '〜';
 
-        // DX・ライト顧問限定の特典・警告表示
-        const resultHeader = document.getElementById('adv-total-monthly')?.closest('.px-7');
-        if (planKey === 'dxlight') {
-            // 特典テキスト
-            let benefitEl = document.getElementById('sim-dxlight-benefit');
-            if (!benefitEl) {
-                benefitEl = document.createElement('div');
-                benefitEl.id = 'sim-dxlight-benefit';
-                benefitEl.className = 'mt-3 p-3 bg-blue-800/50 border border-blue-400/30 rounded-xl text-blue-100 text-[10px] font-bold leading-tight';
-                benefitEl.innerHTML = '💡 DX・ライト顧問限定特典：<br>各種スポット業務に「会員割引」が適用されます。';
-                resultHeader?.appendChild(benefitEl);
-            }
-            benefitEl.classList.remove('hidden');
 
-            // 人数制限警告 (5名超過時)
-            let warningEl = document.getElementById('sim-dxlight-warning');
-            if (emp > 5) {
-                if (!warningEl) {
-                    warningEl = document.createElement('div');
-                    warningEl.id = 'sim-dxlight-warning';
-                    warningEl.className = 'mt-2 p-3 bg-red-900/40 border border-red-500/50 rounded-xl text-red-200 text-[10px] font-bold leading-tight';
-                    warningEl.innerHTML = '⚠️ DX・ライト顧問は5名以下の限定プランです。<br>6名以上の場合はスタンダード以上をご検討ください。';
-                    resultHeader?.appendChild(warningEl);
-                }
-                warningEl.classList.remove('hidden');
-            } else if (warningEl) {
-                warningEl.classList.add('hidden');
-            }
-        } else {
-            document.getElementById('sim-dxlight-benefit')?.classList.add('hidden');
-            document.getElementById('sim-dxlight-warning')?.classList.add('hidden');
-        }
 
         // 内訳テーブル更新
         const bdEl = document.getElementById('adv-breakdown');
@@ -433,50 +396,21 @@
 
             // 各プランの業務内容の定義
             const PLAN_DETAILS = {
-                dxlight: [
-                    'チャット・メールによる労務相談',
-                    'クラウド人事労務ソフトの初期導入支援',
-                    '最新の法改正・助成金情報の定期配信',
-                    '各種スポット業務の「会員割引」適用'
-                ],
-                standard: [
+                seisiki: [
                     '人事労務に関する随時相談（メール・電話）',
-                    '法改正情報の定期提供',
                     '入退社等の社会保険手続き代行',
-                    '36協定等の労使協定作成・届出'
+                    '36協定等の労使協定作成・届出',
+                    '法改正情報の定期提供'
                 ],
-                full: [
-                    '顧問契約（スタンダード）の全サービス',
-                    '毎月の給与計算代行',
-                    'WEB給与明細システム（利用料込）',
-                    '年末調整業務サポート'
-                ],
-                startup: [
-                    '就業規則作成・社会保険新規適用',
-                    '給与計算代行（6か月）・ソフト導入支援',
-                    '助成金コンサル・申請代行込み'
+                soudan: [
+                    '労務相談（メール・電話対応）',
+                    '法改正情報の定期提供',
+                    '※手続きは対象外'
                 ]
             };
             const details = PLAN_DETAILS[planKey] || [];
 
-            // DX・ライト顧問特有のテキスト
             let dxExtra = '';
-            if (planKey === 'dxlight') {
-                dxExtra += `
-                <div style="margin-top:1rem;padding:12px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;font-size:0.8rem;color:#0369a1;font-weight:700;">
-                    💡 DX・ライト顧問限定特典：各種スポット業務に「会員割引」が適用されます。
-                </div>`;
-                dxExtra += `
-                <div style="margin-top:0.5rem;padding:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:0.8rem;color:#15803d;font-weight:700;">
-                    ✅ クラウド人事労務ソフトの初期導入・設定支援が含まれています。
-                </div>`;
-                if (parseInt(emp) > 5) {
-                    dxExtra += `
-                    <div style="margin-top:0.5rem;padding:12px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;font-size:0.8rem;color:#b91c1c;font-weight:700;">
-                        ⚠️ DX・ライト顧問は5名以下の限定プランです。6名以上の場合はスタンダード以上をご検討ください。
-                    </div>`;
-                }
-            }
 
             content = `
             <h2 style="font-size:1.4rem;font-weight:900;color:#1e3a8a;margin-bottom:0.5rem">顧問契約 概算見積もり</h2>
